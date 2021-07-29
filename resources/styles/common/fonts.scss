@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+@font-face {
+  font-family: 'Volante';
+  font-weight: bold;
+  font-style: bold;
+  src: url('../fonts/Volante-Bold.otf');
+}
+.header-logo {
+  font-family: 'Volante' !important;
+  font-size: 50px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+// TODO: move to tailwindcss
+.header-nav {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#mega-menu-primary_navigation > li > .mega-menu-link {
+  font-weight: 600 !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}

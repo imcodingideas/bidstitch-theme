@@ -4,7 +4,7 @@
 
       <div class="flex space-x-4 w-full justify-between h-full items-center">
         <div class="">
-          <a class="brand" href="{{ home_url('/') }}">
+          <a class="brand header-logo text-black" href="{{ home_url('/') }}">
             {{ $siteName }}
           </a>
         </div>
@@ -17,13 +17,13 @@
         </div>
       </div>
       <div class=" flex space-x-4 justify-between h-full items-center">
-        
-      <nav class="nav-primary">
-        @if (has_nav_menu('primary_navigation'))
-          {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
-        @endif
-      </nav>
-      @include('partials.header-icons')
+
+        <nav class="nav-primary">
+          @if (has_nav_menu('primary_navigation'))
+            {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
+          @endif
+        </nav>
+        @include('partials.header-icons')
       </div>
     </div>
   </div>
