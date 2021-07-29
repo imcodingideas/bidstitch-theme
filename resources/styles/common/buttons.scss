@@ -1,0 +1,9 @@
+.btn {
+  @apply inline-flex items-center border shadow-sm font-medium rounded  focus:outline-none focus:ring-2 focus:ring-offset-2;
+  &--small {
+    @apply text-xs px-2.5 py-1.5;
+  }
+  &--black {
+    @apply text-white bg-black border-gray-700 hover:bg-gray-50 focus:ring-indigo-500;
+  }
+}

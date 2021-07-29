@@ -1,4 +1,4 @@
-<div class="max-w-3xl mx-auto">
+<div class="">
 
   <a class="sr-only focus:not-sr-only" href="#main">
     {{ __('Skip to content') }}
