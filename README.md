@@ -12,6 +12,11 @@ yarn build
 
 # Development
 
+Add to wp-config.php
+
+`define('WP_ENV', 'development');`
+
+
 Add your local url to webpack.mix.js and then:
 
 ```
