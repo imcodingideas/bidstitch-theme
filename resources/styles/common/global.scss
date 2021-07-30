@@ -1,7 +1,10 @@
-body {
-  @apply font-sans;
+/* footer always on bottom*/
+html {
+  height: 100%;
 }
 
-.brand {
-  @apply text-3xl font-medium text-indigo-500;
+body {
+  min-height: 100%; 
+  display: flex;
+  flex-direction: column; 
 }
