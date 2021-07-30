@@ -6,7 +6,7 @@
 
   @include('partials.header')
 
-    <main id="main" class="py-8 prose main max-w-6xl mx-auto flex-1">
+    <main id="main" class="py-8 main max-w-6xl mx-auto flex-1">
       @yield('content')
     </main>
 
