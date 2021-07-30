@@ -25,7 +25,7 @@
 |
 */
 
-collect(['helpers', 'setup', 'filters', 'admin', 'woocommerce'])->each(
+collect(['helpers', 'setup', 'filters', 'admin', 'woocommerce', 'acf'])->each(
     function ($file) {
         if (!locate_template($file = "app/{$file}.php", true, true)) {
             wp_die(
