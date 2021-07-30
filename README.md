@@ -25,3 +25,10 @@ yarn start
 Add its widget in sidebar-header for ajax search capabilities
 
 https://wordpress.org/plugins/ajax-search-for-woocommerce/#installation
+
+# Packages
+
+Composer 
+
+- log1x/navi: menu
+- generoi/sage-woocommerce: woocommerce

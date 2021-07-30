@@ -12,11 +12,11 @@
           @include('partials.header-search')
         </div>
         <div class="flex space-x-4 h-full items-center">
-          @include('partials.header-buttons')
+          @include('partials.header-navigation')
           @include('partials.header-avatar')
         </div>
       </div>
-      <div class=" flex space-x-4 justify-between h-full items-center">
+      <div class="flex space-x-4 justify-between h-full items-center">
 
         <nav class="nav-primary">
           @if (has_nav_menu('primary_navigation'))

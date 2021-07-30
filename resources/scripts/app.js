@@ -1,14 +1,6 @@
 /**
  * External Dependencies
  */
-import 'jquery';
+import headerNavigation from './header-navigation';
+headerNavigation();
 
-$(() => {
-  console.log('Hello world');
-  // header-avatar
-  $('#header-avatar').mouseenter(() => {
-    $('#header-avatar-menu').removeClass('hidden');
-  }).mouseleave(() => {
-    $('#header-avatar-menu').addClass('hidden');
-  });
-});
