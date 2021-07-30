@@ -19,7 +19,7 @@
               <ul class="relative">
                 @foreach ($item->children as $child)
                   <li class="block w-full px-4 py-2 hover:bg-gray-100 focus:shadow-outline transition duration-300 ease-in-out {{ $child->classes ?? '' }} {{ $child->active ? 'active' : '' }}">
-                    <a class="block w-max font-medium text-gray-700 whitespace-no-wrap focus:outline-none hover:text-gray-900 focus:text-gray-900 " href="{{ $child->url }}" target="{{ $item->target }}">
+                    <a class="block w-max font-medium text-gray-700 whitespace-no-wrap focus:outline-none hover:text-gray-900 focus:text-gray-900 " href="{{ $child->url }}" target="{{ $child->target }}">
                       {{ $child->label }}
                     </a>
                   </li>
