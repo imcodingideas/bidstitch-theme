@@ -194,8 +194,23 @@ add_action('widgets_init', function () {
         'name' => __('Header', 'sage'),
         'id' => 'sidebar-header'
     ] + $config);
+
+    $configFooter = [
+        'before_widget' => '<section class="widget %1$s %2$s">',
+        'after_widget' => '</section>',
+        'before_title' => '<h3 class="font-semibold text-gray-300">',
+        'after_title' => '</h3>'
+    ];
     register_sidebar([
-        'name' => __('Footer', 'sage'),
-        'id' => 'sidebar-footer'
-    ] + $config);
+        'name' => __('Footer 1', 'sage'),
+        'id' => 'sidebar-footer-1'
+    ] + $configFooter);
+    register_sidebar([
+        'name' => __('Footer 2', 'sage'),
+        'id' => 'sidebar-footer-2'
+    ] + $configFooter);
+    register_sidebar([
+        'name' => __('Footer 3', 'sage'),
+        'id' => 'sidebar-footer-3'
+    ] + $configFooter);
 });
