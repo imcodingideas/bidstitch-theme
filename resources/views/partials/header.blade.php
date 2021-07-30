@@ -9,7 +9,7 @@
           </a>
         </div>
         <div class="flex h-full items-center">
-          {!! get_search_form(false) !!}
+          @include('partials.header-search')
         </div>
         <div class="flex space-x-4 h-full items-center">
           @include('partials.header-buttons')
