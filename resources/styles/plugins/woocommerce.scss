@@ -1,0 +1,11 @@
+// single page thumbnails
+.woocommerce div.product div.images .flex-control-thumbs {
+  margin-top: 15px;
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+}
+
+.woocommerce div.product div.images .flex-control-thumbs li {
+  width: 100%;
+}

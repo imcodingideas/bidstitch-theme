@@ -8,7 +8,7 @@
             {{ $siteName }}
           </a>
         </div>
-        <div class="flex h-full items-center">
+        <div class="flex h-full items-center flex-1">
           @include('partials.header-search')
         </div>
         <div class="flex space-x-4 h-full items-center">
