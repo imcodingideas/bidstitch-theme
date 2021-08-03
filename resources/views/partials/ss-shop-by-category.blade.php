@@ -1,3 +1,4 @@
+{{-- TODO: transform to blade + composer --}}
 <section class="ss-shop-by-category py-12" id="new_home_category_button">
   <div class="container">
     <div class="wrapper-section">

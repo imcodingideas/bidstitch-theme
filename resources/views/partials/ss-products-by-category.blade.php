@@ -1,3 +1,4 @@
+{{-- TODO: transform to blade + composer --}}
 <section class="ss-products-by-category" id="home_products_most_favorited">
   <div class="wrapper-section">
     <div class="inner-section">

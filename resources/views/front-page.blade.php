@@ -5,6 +5,6 @@
   @include('partials.home-banner')
   @include('partials.ss-shop-by-category')
   {{-- @include('partials.ss-products-by-category') --}}
-  @include('partials.singe_product_notice')
+  @include('partials.single-product-notice')
   @endwhile
 @endsection
