@@ -1,0 +1,16 @@
+// siderbar, example: /my-account/orders/
+.woocommerce-MyAccount-navigation-link {
+  padding: 12px 0;
+  margin-bottom: 0px;
+  a {
+    font-weight: 600;
+    color: #000000;
+  }
+}
+
+// prose fixes
+.prose {
+  li.dokan-single-seller::before {
+    display: none !important;
+  }
+}
