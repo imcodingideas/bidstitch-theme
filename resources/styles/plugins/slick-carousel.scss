@@ -30,7 +30,7 @@ $slick-dot-size: 10px !default;
  .slick-dots {
      bottom: -1rem;
  }
- @include media-breakpoint-up(lg) {
+ @screen lg {
      .slick-prev {
          left: -1.5rem;
      }
