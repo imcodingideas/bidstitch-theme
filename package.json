@@ -41,5 +41,8 @@
   },
   "peerDependencies": {
     "jquery": "^3.5.1"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.3.3"
   }
 }
