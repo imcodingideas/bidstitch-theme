@@ -6,4 +6,7 @@
   &--black {
     @apply text-white bg-black;
   }
+  &--white {
+    @apply bg-white border-black text-gray-700;
+  }
 }

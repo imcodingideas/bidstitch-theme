@@ -1,0 +1,41 @@
+// Import Slick Carousel
+// Make font paths relative
+$slick-font-path: '~slick-carousel/slick/fonts/';
+$slick-loader-path: '~slick-carousel/slick/';
+// $slick-arrow-color: theme-color('primary');
+// $slick-dot-color: theme-color('primary');
+$slick-dot-size: 10px !default;
+
+@import '~slick-carousel/slick/slick.scss';
+@import '~slick-carousel/slick/slick-theme.scss';
+
+// Resize/reposition arrows
+ .slick-prev,
+ .slick-next {
+     height: 1.5rem;
+     width: 1.5rem;
+     &:before {
+         font-size: 1.5rem;
+         line-height: 1;
+     }
+ }
+ .slick-prev {
+     left: -1rem;
+ }
+
+ .slick-next {
+     right: -1rem;
+ }
+
+ .slick-dots {
+     bottom: -1rem;
+ }
+ @include media-breakpoint-up(lg) {
+     .slick-prev {
+         left: -1.5rem;
+     }
+
+     .slick-next {
+         right: -1.5rem;
+     }
+ }
