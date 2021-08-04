@@ -3,6 +3,7 @@ module.exports = {
     content: [
       './app/**/*.php',
       './resources/**/*.{php,vue,js}',
+      './dokan/**/*.php'
     ],
   },
   darkMode: false, // or 'media' or 'class'
