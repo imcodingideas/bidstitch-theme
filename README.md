@@ -91,6 +91,18 @@ paypal-woocommerce
 
 paypal-for-woocommerce-multi-account-management
 
+### WooCommerce Simple Auction
+
+woocommerce-simple-auctions
+
+### WOOF - WooCommerce Products Filter
+
+woocommerce-products-filter
+
+### YITH WooCommerce Wishlist Premium
+
+yith-woocommerce-wishlist-premium
+
 ## Wp cli
 
 Activate in order:
