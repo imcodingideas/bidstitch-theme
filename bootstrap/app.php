@@ -25,7 +25,7 @@
 |
 */
 
-collect(['helpers', 'setup', 'filters', 'admin', 'woocommerce', 'acf', 'notifications'])->each(
+collect(['helpers', 'setup', 'filters', 'admin', 'woocommerce', 'acf', 'notifications', 'dokan_custom_functions', 'dokan_external_assets'])->each(
     function ($file) {
         if (!locate_template($file = "app/{$file}.php", true, true)) {
             wp_die(
