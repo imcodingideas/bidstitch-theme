@@ -87,3 +87,52 @@ function dokan_get_store_rating($seller_id)
     }
     return $html;
 }
+
+// used in vendor info 
+function dokan_get_following( $follower_id ) {
+
+	global $wpdb;
+	$count_following = 0;
+
+	$following = $wpdb->get_results(
+		$wpdb->prepare(
+			"select id"
+			. " from {$wpdb->prefix}dokan_follow_store_followers"
+			. " where follower_id = %d"
+			. "     and unfollowed_at is null",
+			$follower_id
+		),
+		OBJECT_K
+	);
+
+	if ( !empty( $following ) ) {
+		$count_following = count($following);
+	}
+
+	return $count_following;
+}
+
+
+// get_followers by seller_id
+function dokan_get_followers( $seller_id ) {
+
+	global $wpdb;
+	$count_followers = 0;
+
+	$followers = $wpdb->get_results(
+		$wpdb->prepare(
+			"select id"
+			. " from {$wpdb->prefix}dokan_follow_store_followers"
+			. " where vendor_id = %d"
+			. "     and unfollowed_at is null",
+			$seller_id
+		),
+		OBJECT_K
+	);
+
+	if ( !empty( $followers ) ) {
+		$count_followers = count($followers);
+	}
+
+	return $count_followers;
+}
