@@ -4,30 +4,47 @@
  */
 
 // used in: dokan store-header
-// todo: cache in a transient
+// todo: cache duration as parameter
 function get_comment_all_store($vendor_id)
 {
-    global $wpdb;
-    $array_post = [];
-    $products = $wpdb->get_results(
-        "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'product' AND post_author = $vendor_id AND post_status = 'publish' "
-    );
-    if (!empty($products)) {
-        foreach ($products as $product_val) {
-            $array_post[] = $product_val->ID;
+    $bidstitch_post_comments = [];
+    if (
+        false ===
+        ($bidstitch_post_comments = get_transient(
+            "bidstitch_post_comments_$vendor_id"
+        ))
+    ) {
+        global $wpdb;
+        $array_post = [];
+        $products = $wpdb->get_results(
+            "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'product' AND post_author = $vendor_id AND post_status = 'publish' "
+        );
+        if (!empty($products)) {
+            foreach ($products as $product_val) {
+                $array_post[] = $product_val->ID;
+            }
+            $string_post = implode(',', $array_post);
+            $request = "SELECT * FROM $wpdb->comments";
+            $request .= " JOIN $wpdb->posts ON ID = comment_post_ID";
+            $request .=
+                " WHERE comment_approved = '1' AND post_status = 'publish' AND post_password =''";
+            $request .= " AND comment_post_ID IN ($string_post)";
+            $request .= ' ORDER BY comment_date DESC ';
+            $bidstitch_post_comments = $wpdb->get_results($request);
         }
-        $string_post = implode(',', $array_post);
-        $request = "SELECT * FROM $wpdb->comments";
-        $request .= " JOIN $wpdb->posts ON ID = comment_post_ID";
-        $request .=
-            " WHERE comment_approved = '1' AND post_status = 'publish' AND post_password =''";
-        $request .= " AND comment_post_ID IN ($string_post)";
-        $request .= ' ORDER BY comment_date DESC ';
-        $comments = $wpdb->get_results($request);
-        return $comments;
-    } else {
-        return [];
+        /* MINUTE_IN_SECONDS  = 60 (seconds) */
+        /* HOUR_IN_SECONDS    = 60 * MINUTE_IN_SECONDS */
+        /* DAY_IN_SECONDS     = 24 * HOUR_IN_SECONDS */
+        /* WEEK_IN_SECONDS    = 7 * DAY_IN_SECONDS */
+        /* MONTH_IN_SECONDS   = 30 * DAY_IN_SECONDS */
+        /* YEAR_IN_SECONDS    = 365 * DAY_IN_SECONDS */
+        set_transient(
+            "bidstitch_post_comments_$vendor_id",
+            $bidstitch_post_comments,
+            MINUTE_IN_SECONDS
+        );
     }
+    return $bidstitch_post_comments;
 }
 
 // used in: dokan store-header
@@ -89,55 +106,72 @@ function dokan_get_store_rating($seller_id)
     return $html;
 }
 
-// used in vendor info 
-// todo: don't fetch all results, query for count
-// todo: cache in a transient
-function dokan_get_following( $follower_id ) {
+// used in vendor info
+// todo: cache duration as parameter
+function dokan_get_following($follower_id)
+{
+    $bidstitch_vendor_following = 0;
+    if (
+        false ===
+        ($bidstitch_vendor_following = get_transient(
+            "bidstitch_vendor_following_$follower_id"
+        ))
+    ) {
+        global $wpdb;
 
-	global $wpdb;
-	$count_following = 0;
+        $bidstitch_vendor_following = $wpdb->get_var(
+            $wpdb->prepare(
+                "select count(*) from {$wpdb->prefix}dokan_follow_store_followers where follower_id = %d and unfollowed_at is null",
+                $follower_id
+            )
+        );
 
-	$following = $wpdb->get_results(
-		$wpdb->prepare(
-			"select id"
-			. " from {$wpdb->prefix}dokan_follow_store_followers"
-			. " where follower_id = %d"
-			. "     and unfollowed_at is null",
-			$follower_id
-		),
-		OBJECT_K
-	);
-
-	if ( !empty( $following ) ) {
-		$count_following = count($following);
-	}
-
-	return $count_following;
+        /* MINUTE_IN_SECONDS  = 60 (seconds) */
+        /* HOUR_IN_SECONDS    = 60 * MINUTE_IN_SECONDS */
+        /* DAY_IN_SECONDS     = 24 * HOUR_IN_SECONDS */
+        /* WEEK_IN_SECONDS    = 7 * DAY_IN_SECONDS */
+        /* MONTH_IN_SECONDS   = 30 * DAY_IN_SECONDS */
+        /* YEAR_IN_SECONDS    = 365 * DAY_IN_SECONDS */
+        set_transient(
+            'bidstitch_vendor_following_$follower_id',
+            $bidstitch_vendor_following,
+            MINUTE_IN_SECONDS
+        );
+    }
+    return $bidstitch_vendor_following;
 }
 
-
 // get_followers by seller_id
-// todo: don't fetch all results, query for count
-// todo: add transient
-function dokan_get_followers( $seller_id ) {
+// todo: cache duration as parameter
+function dokan_get_followers($seller_id)
+{
+    $bidstitch_count_followers = 0;
+    if (
+        false ===
+        ($bidstitch_count_followers = get_transient(
+            "bidstitch_count_followers_$seller_id"
+        ))
+    ) {
+        global $wpdb;
+        $count_followers = 0;
+        $bidstitch_count_followers = $wpdb->get_var(
+            $wpdb->prepare(
+                "select count(*) from {$wpdb->prefix}dokan_follow_store_followers  where vendor_id = %d and unfollowed_at is null",
+                $seller_id
+            )
+        );
+        /* MINUTE_IN_SECONDS  = 60 (seconds) */
+        /* HOUR_IN_SECONDS    = 60 * MINUTE_IN_SECONDS */
+        /* DAY_IN_SECONDS     = 24 * HOUR_IN_SECONDS */
+        /* WEEK_IN_SECONDS    = 7 * DAY_IN_SECONDS */
+        /* MONTH_IN_SECONDS   = 30 * DAY_IN_SECONDS */
+        /* YEAR_IN_SECONDS    = 365 * DAY_IN_SECONDS */
+        set_transient(
+            "bidstitch_count_followers_$seller_id",
+            $bidstitch_count_followers,
+            MINUTE_IN_SECONDS
+        );
+    }
 
-	global $wpdb;
-	$count_followers = 0;
-
-	$followers = $wpdb->get_results(
-		$wpdb->prepare(
-			"select id"
-			. " from {$wpdb->prefix}dokan_follow_store_followers"
-			. " where vendor_id = %d"
-			. "     and unfollowed_at is null",
-			$seller_id
-		),
-		OBJECT_K
-	);
-
-	if ( !empty( $followers ) ) {
-		$count_followers = count($followers);
-	}
-
-	return $count_followers;
+    return $bidstitch_count_followers;
 }
