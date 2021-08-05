@@ -24,7 +24,9 @@
   </div>
   <div class="flex items-center space-x-5">
     @if (is_user_logged_in())
-      dokan_follow_store_get_template( 'follow-button', $args_btn_follow );
+      @php
+        dokan_follow_store_get_template( 'follow-button', $args_btn_follow );
+      @endphp
     @else
       <a href="{{ home_url('/log-in') }}" class="btn btn--white px-8 py-2 uppercase">{{ _e('Follow Store', 'sage') }}</a>
     @endif

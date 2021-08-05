@@ -53,7 +53,7 @@ class VendorInfo extends Composer
             'label_unfollow' => $btn_labels['unfollow'],
             'vendor_id' => $user_id,
             'status' => $status,
-            'button_classes' => 'btn btn--white px-8 py-2 uppercase',
+            'button_classes' => 'btn btn--white px-8 py-2 uppercase dokan-follow-store-button vender_action_btn',
             'is_logged_in' => $customer_id,
         ];
 

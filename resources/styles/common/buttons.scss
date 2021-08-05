@@ -4,9 +4,9 @@
     @apply text-xs px-2.5 py-1.5;
   }
   &--black {
-    @apply text-white bg-black;
+    @apply text-white bg-black hover:bg-white hover:text-gray-700;
   }
   &--white {
-    @apply bg-white border-black text-gray-700;
+    @apply bg-white border-black text-gray-700 hover:bg-black hover:text-gray-300;
   }
 }

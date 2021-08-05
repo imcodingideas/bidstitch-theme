@@ -57,6 +57,7 @@ $vendor_name = $vendor->display_name;
 $address = $store_info['address'];
 /* TODO: this gives error $country = $split[count(explode(" ", $address))-1]; */
 $countrycode = $address['country'];
+$countryname = WC()->countries->countries[$countrycode] ?? $countrycode;
 $vendor_profile_link = get_field('user_profile','option');
 $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id='.$vendor_id : '#';
 ?>
@@ -72,9 +73,9 @@ $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id=
 			<?php } ?>
 
 			<div class="profile-info-summery-wrapper dokan-clearfix">
-				<div class="row">
+				<div class="row py-12">
 					<div class="lg:flex max-w-screen-xl mx-auto profile-info-summery relative row">
-						<div class="profile-info-summery-left large-6 medium-12 small-12">
+						<div class="flex space-x-10">
 							<div class="profile-info-head">
 								<div class="profile-img <?php echo esc_attr( $profile_img_class ); ?>">
 									<img src="<?php echo esc_url( $store_user->get_avatar() ) ?>"
@@ -86,7 +87,7 @@ $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id=
 								<?php } ?>
 							</div>
 
-							<div class="profile-info">
+							<div class="profile-info flex flex-col space-y-2">
 								<?php if ( ! empty( $store_user->get_shop_name() ) && 'default' !== $profile_layout ) { ?>
 									<h1 class="store-name"><?php echo esc_html( $store_user->get_shop_name() ); ?> <?php if($founder == "true"){ echo '<svg version="1.1" id="Capa_1" class="userbadges goldfill" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 267.5 267.5" style="enable-background:new 0 0 267.5 267.5;" xml:space="preserve"><path d="M256.975,100.34c0.041,0.736-0.013,1.485-0.198,2.229l-16.5,66c-0.832,3.325-3.812,5.663-7.238,5.681l-99,0.5
@@ -100,11 +101,16 @@ $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id=
 	c0,4.142,3.358,7.5,7.5,7.5h194c4.142,0,7.5-3.358,7.5-7.5V198.25z"/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>';} if($igverified == "true"){ echo '<svg id="Layer_1" class="userbadges" enable-background="new 0 0 511.375 511.375" height="512" viewBox="0 0 511.375 511.375" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m511.375 255.687-57.89-64.273 9.064-86.045-84.65-17.921-43.18-75.011-79.031 35.32-79.031-35.32-43.18 75.011-84.65 17.921 9.063 86.045-57.89 64.273 57.889 64.273-9.063 86.045 84.65 17.921 43.18 75.011 79.031-35.321 79.031 35.321 43.18-75.011 84.65-17.921-9.064-86.045zm-148.497-55.985-128.345 143.792-89.186-89.186 21.213-21.213 66.734 66.734 107.203-120.104z"/></g></svg>';}?></h1>
 									<p class="vendorshophandle"> <a href="<?php echo $vendor_profile_link; ?>"><?php echo $vendor_name; ?></a></p>
 								<?php } ?>
-								<div class="dokan-store-rating mb-show dokan-store-rating-mb">
+								<div class="dokan-store-rating mb-show dokan-store-rating-mb ml-6">
 									<?php echo wp_kses_post( dokan_get_store_rating( $store_user->get_id() ) ); ?>
 								</div>
-								<div class="dokan-store-action-header desktop-show">
-									<p><button data-store_id="1" class="dokan-store-support-btn dokan-btn dokan-btn-theme dokan-btn-sm user_logged">Send Message <i class="fab fa-telegram-plane"></i></button></p>
+								<div class="hidden items-center md:flex space-x-4">
+									<p>
+									<button data-store_id="1" class="btn btn--white dokan-store-support-btn flex items-center px-8 py-2 space-x-3 uppercase user_logged">
+										<span class="fab fa-telegram-plane"></span>
+										<span class="">Send Message</span>
+									</button>
+									</p>
 									<?php 
 									if (is_user_logged_in()){
 										$customer_id = get_current_user_id();
@@ -119,14 +125,12 @@ $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id=
 											$label_current = $btn_labels['follow'];
 										}
 
-										$button_classes = array( 'dokan-btn', 'dokan-btn-theme', 'dokan-follow-store-button far fa-heart', 'vender_action_btn' );
-
 										$args_btn_follow = array(
 											'label_current'  => $label_current,
 											'label_unfollow' => $btn_labels['unfollow'],
 											'vendor_id'      => $vendor_id,
 											'status'         => $status,
-											'button_classes' => implode( ' ', $button_classes ),
+											'button_classes' => 'btn btn--white px-8 py-2 uppercase dokan-follow-store-button vender_action_btn',
 											'is_logged_in'   => $customer_id,
 										);
 										dokan_follow_store_get_template( 'follow-button', $args_btn_follow );
@@ -138,49 +142,16 @@ $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id=
 									<?php echo $dokan_store_des; ?>
 								</div>
 								
+								<?php if($countryname): ?>
 									<div class="dokan-store-address">
 										<p class="dokan-store-address-label"><?php echo _e('Location','flatsome-child'); ?></p>
 										<p class="dokan-store-address-info"></i>
 											<?php // TOOD: this gives error: echo $country; ?>
-											<?php echo  WC()->countries->countries[$countrycode]; ?>
-								
+											<?php echo $countryname; ?>
 										</p>
 									</div>                                   
-							
-								<div class="dokan-store-action-header mb-show dokan-store-action-header-mb">
-									<p><a href="<?php echo dokan_get_navigation_url( 'inbox' ) ?>"><i class="fab fa-telegram-plane"></i></a></p>
-									<?php 
-									if (is_user_logged_in()){
-										$customer_id = get_current_user_id();
-										$status = null;
-
-										$btn_labels = dokan_follow_store_button_labels();
-
-										if ( dokan_follow_store_is_following_store( $vendor_id, $customer_id ) ) {
-											$label_current = $btn_labels['following'];
-											$status = 'following';
-										} else {
-											$label_current = $btn_labels['follow'];
-										}
-
-										$button_classes = array( 'dokan-btn', 'dokan-btn-theme', 'dokan-follow-store-button far fa-heart', 'vender_action_btn' );
-
-										$args_btn_follow = array(
-											'label_current'  => $label_current,
-											'label_unfollow' => $btn_labels['unfollow'],
-											'vendor_id'      => $vendor_id,
-											'status'         => $status,
-											'button_classes' => implode( ' ', $button_classes ),
-											'is_logged_in'   => $customer_id,
-										);
-										dokan_follow_store_get_template( 'follow-button', $args_btn_follow );
-									}else{ ?>
-										<p><a href="<?php echo home_url('/log-in'); ?>" class="login_btn vender_action_btn" ><i class="far fa-heart"></i></a></p>
-									<?php	} ?>
-								</div>
-								<div class="dokan-store-rating desktop-show 1111">
-									<?php echo wp_kses_post( dokan_get_store_rating( $store_user->get_id() ) ); ?>
-								</div>
+								<?php endif ?>
+								
 							</div> <!-- .profile-info -->
 						</div><!-- profile-info-summery-left -->
 						<div class="profile-info-summery-right large-6 medium-12 small-12">
