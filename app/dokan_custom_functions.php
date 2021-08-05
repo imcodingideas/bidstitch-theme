@@ -4,6 +4,7 @@
  */
 
 // used in: dokan store-header
+// todo: cache in a transient
 function get_comment_all_store($vendor_id)
 {
     global $wpdb;
@@ -89,6 +90,8 @@ function dokan_get_store_rating($seller_id)
 }
 
 // used in vendor info 
+// todo: don't fetch all results, query for count
+// todo: cache in a transient
 function dokan_get_following( $follower_id ) {
 
 	global $wpdb;
@@ -114,6 +117,8 @@ function dokan_get_following( $follower_id ) {
 
 
 // get_followers by seller_id
+// todo: don't fetch all results, query for count
+// todo: add transient
 function dokan_get_followers( $seller_id ) {
 
 	global $wpdb;
