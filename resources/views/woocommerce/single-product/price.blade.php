@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 {{-- changed: --}}
-<div class="price-wrapper font-bold text-lg tracking-wider uppercase text-black">
-  <p class="price product-price-title">{{ _e('Price', 'sage') }}</p>
-  <p class="price product-page-price {{ $classes }}">
+<div class="price-wrapper font-bold text-lg tracking-wider uppercase text-black mt-6">
+  <p class="product-price-title">{{ _e('Price', 'sage') }}</p>
+  <p class="product-page-price {{ $classes }}">
     {!! $price_html !!}
     <span class="woocommerce-price-chart">{{ $currency }}</span>
   </p>

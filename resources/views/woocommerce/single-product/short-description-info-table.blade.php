@@ -1,5 +1,5 @@
-<div class="info-wrapper">
-  <table class="info-table font-semibold text-center tracking-wider uppercase">
+<div class="info-wrapper mt-6">
+  <table class="info-table font-semibold text-center tracking-wider uppercase w-full">
     <tr class="info-taxonomy-title bg-black text-white">
 
       @if ($terms_size)
@@ -32,7 +32,7 @@
     </tr>
   </table>
 
-  <table class="info-table font-semibold text-center tracking-wider uppercase">
+  <table class="info-table font-semibold text-center tracking-wider uppercase w-full mt-6">
     <tr class="info-taxonomy-title bg-black text-white">
       @if ($tees_tip)
         <th class="p-1 border border-white text-center">Pit to pit</th>
