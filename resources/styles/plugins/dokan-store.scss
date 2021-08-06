@@ -1,12 +1,33 @@
 // TODO: use tailwind instead
+//
 // containers:
-
 .dokan-store-wrap {
   .header-seller,
   .seller-items,
   .dokan-store-products-filter-area {
     @apply max-w-screen-xl mx-auto;
   }
+}
+
+// buttons
+input[type='submit'].dokan-btn-theme,
+a.dokan-btn-theme,
+.dokan-btn-theme,
+.dokan-product-edit
+  header.dokan-dashboard-header
+  h1.entry-title
+  a.view-product {
+  color: #fff;
+  background-color: #111111;
+  border-color: #111111;
+}
+
+input[type='submit'].dokan-btn-theme:hover,
+a.dokan-btn-theme:hover,
+.dokan-btn-theme:hover {
+  color: #fff;
+  background-color: #111111;
+  border-color: #111111;
 }
 
 /*style singe store page*/
