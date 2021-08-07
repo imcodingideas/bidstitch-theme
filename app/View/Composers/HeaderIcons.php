@@ -29,9 +29,8 @@ class HeaderIcons extends Composer
                 'option'
             ),
             'notifications_count' => $this->notifications_count(),
-            'cart' => function_exists('wc_get_cart_url')
-                ? wc_get_cart_url()
-                : '',
+            'cart_url' => wc_get_cart_url(),
+            'cart_count' => WC()->cart->cart_contents_count,
         ];
     }
     public function notifications_count()
