@@ -37,6 +37,7 @@ collect([
     'dokan-external-assets',
     'dokan-plugin-simple-auctions',
     'clean-dashboard',
+    'ofw-bell-notifications'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(
