@@ -1,0 +1,6 @@
+.footer__col {
+  @apply flex w-full justify-center md:items-center md:space-x-6 md:mr-6 md:w-auto md:justify-start;
+  &:last-child {
+    @apply md:mr-0;
+  }
+}

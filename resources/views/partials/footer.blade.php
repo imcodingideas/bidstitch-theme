@@ -1,26 +1,17 @@
-<footer class="content-info bg-gray-800 text-gray-400" aria-labelledby="footer-heading">
-  <h2 id="footer-heading" class="sr-only">Footer</h2>
-  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
-    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 md:justify-between">
-
-      <div class="">
-        @if (is_active_sidebar('sidebar-footer-1'))
-          @php dynamic_sidebar('sidebar-footer-1') @endphp
-        @endif
+<footer class="bg-black py-4">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-wrap space-y-6 md:flex-nowrap md:items-center md:space-y-0">
+      @if (has_nav_menu('footer_navigation'))
+        <div class="footer__col">
+          @include('partials.footer-navigation')
+        </div>
+      @endif
+      <div class="footer__col md:ml-auto">
+        @include('partials.footer-icons')
       </div>
-
-      <div class="">
-        @if (is_active_sidebar('sidebar-footer-2'))
-          @php dynamic_sidebar('sidebar-footer-2') @endphp
-        @endif
+      <div class="footer__col">
+        @include('partials.footer-copyright')
       </div>
-
-      <div class="">
-        @if (is_active_sidebar('sidebar-footer-3'))
-          @php dynamic_sidebar('sidebar-footer-3') @endphp
-        @endif
-      </div>
-        
     </div>
   </div>
 </footer>
