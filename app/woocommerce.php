@@ -65,3 +65,9 @@ add_action(
     },
     10
 );
+
+// remove "sale" icon
+add_filter('woocommerce_sale_flash', function () {
+    return false;
+});
+
