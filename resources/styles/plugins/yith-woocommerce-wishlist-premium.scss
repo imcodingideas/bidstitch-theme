@@ -1,0 +1,22 @@
+.woocommerce .yith-wcwl-add-to-wishlist {
+  position: absolute;
+  margin: 0;
+  top: 10px;
+  left: unset;
+  right: 10px;
+  i {
+    height: 20px;
+  }
+  .fa-heart-o:before {
+    font-size: 20px;
+  }
+
+  .delete_item,
+  .add_to_wishlist:hover {
+    color: #f70104;
+  }
+
+  .delete_item:hover {
+    opacity: 0.7;
+  }
+}

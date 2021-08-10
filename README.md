@@ -103,6 +103,20 @@ woocommerce-products-filter 2.2.5.4
 
 yith-woocommerce-wishlist-premium
 
+This one displays the heart over images to mark them as favorites. 
+
+Add to wishlist options
+
+- Enable "Show "Add to wishlist" in loop 
+- Position "on top of the image"
+
+Wishlist page options
+
+- Select page to add favorites
+- Add shortcode in such page `[yith_wcwl_wishlist]`
+- Remove "Share wishlist"
+
+
 ### Others
 
 May not be essential
@@ -110,7 +124,6 @@ May not be essential
 - safe-svg 1.9.9
 - user-switching 1.5.7
 - wpdiscuz 7.2.2
-- wp-favorite-posts 1.6.8
 - wp-user-avatar custom
 - yith-woocommerce-wishlist-premium 3.0.23
 
