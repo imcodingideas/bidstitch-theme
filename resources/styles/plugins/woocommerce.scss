@@ -30,3 +30,57 @@
     @apply btn btn--black uppercase py-1 px-2 w-full flex justify-center rounded;
   }
 }
+
+// shop sidebar
+.shop-sidebar {
+  .widget_product_categories {
+    > h3 {
+      // title
+      display: none;
+    }
+  }
+  .product-categories {
+    letter-spacing: 0.025em;
+    & > .cat-item {
+      margin-bottom: 0.5rem;
+      > a {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      .children {
+        margin-left: 1rem;
+        font-size: 1.1rem;
+      }
+
+      // toggle:
+      display: block;
+      position: relative;
+      &::after {
+        cursor: pointer;
+        display: block;
+        position: absolute;
+        content: '';
+        top: 0;
+        right: 0;
+        transform: rotate(0deg);
+        transition: all 0.25s ease-in;
+        background-image: url(../images/chevron-down.svg);
+        width: 24px;
+        height: 24px;
+        background-repeat: no-repeat;
+        color: gray;
+      }
+
+      // toggle rotate
+      &:not(.current-cat-parent) {
+        .children {
+          display: none;
+        }
+        &::after {
+          transform: rotate(180deg);
+          transition: all 0.25s ease-out;
+        }
+      }
+    }
+  }
+}

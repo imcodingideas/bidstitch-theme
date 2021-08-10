@@ -15,6 +15,9 @@ the readme will list any important changes.
 --}}
 
 @extends('layouts.app')
+@section('sidebar')
+  @php dynamic_sidebar('shop-sidebar') @endphp
+@endsection
 
 @section('content')
   @php

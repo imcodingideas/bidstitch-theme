@@ -195,6 +195,11 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-header'
     ] + $config);
 
+    register_sidebar([
+        'name' => __('Shop sidebar', 'sage'),
+        'id' => 'shop-sidebar'
+    ] + $config);
+
     $configFooter = [
         'before_widget' => '<section class="widget %1$s %2$s">',
         'after_widget' => '</section>',

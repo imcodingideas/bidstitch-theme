@@ -6,15 +6,24 @@
 
   @include('partials.header')
 
+  @hasSection('sidebar')
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 xl:space-x-8 py-8 max-w-6xl mx-auto flex-1 w-full">
+      <div class="md:w-3/12">
+        <aside class="shop-sidebar">
+          @yield('sidebar')
+        </aside>
+      </div>
+      <div class="md:w-9/12">
+        <main id="main" class="main">
+          @yield('content')
+        </main>
+      </div>
+    </div>
+  @else
     <main id="main" class="py-8 main max-w-6xl mx-auto flex-1 w-full">
       @yield('content')
     </main>
-
-    @hasSection('sidebar')
-      <aside class="sidebar">
-        @yield('sidebar')
-      </aside>
-    @endif
+  @endif
 
   @include('partials.footer')
 </div>
