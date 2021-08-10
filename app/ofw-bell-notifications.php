@@ -1,5 +1,7 @@
 <?php
 
+// TODO: it would be awesome having functions in its namespace instead of prefixing. Check setup.php
+
 add_action('angelleye_offer_for_woocommerce_before_email_send', 'bidstitch_aeofw_before_email_send', 10, 2);
 
 /**
