@@ -1,0 +1,37 @@
+body.woocommerce-shop .main {
+  // hide stuff
+  .woocommerce-breadcrumb,
+  .woocommerce-products-header,
+  .add_to_cart_button {
+    display: none;
+  }
+  // title
+  .woocommerce-loop-product__title {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  // price
+  .woocommerce-Price-amount {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    color: #111;
+  }
+  // name
+  .name-store {
+    color: gray;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+  }
+  // showing 1 of xx results
+  .woocommerce-result-count {
+    line-height: 42px;
+  }
+}

@@ -50,3 +50,18 @@ function custom_cart_button_text()
     return __('Buy it now -  ' . $currency_symbol . $price, 'woocommerce');
 }
 
+// add shop name after title
+add_action(
+    'woocommerce_shop_loop_item_title',
+    function () {
+        if (!function_exists('dokan_get_store_info')) {
+            return;
+        }
+        $vendor_id = get_post_field('post_author', get_the_id());
+        $store_info = dokan_get_store_info($vendor_id); // Get the store data
+        $url = dokan_get_store_url($vendor_id);
+        $store_name = $store_info['store_name'];
+        echo "<div class='store-wrapper'><a href='$url' class='link-to'><p class='name-store'>$store_name</p> </a></div>";
+    },
+    10
+);
