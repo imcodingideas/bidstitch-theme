@@ -25,19 +25,29 @@
 |
 */
 
-collect(['helpers', 'setup', 'filters', 'admin', 'woocommerce', 'acf', 'notifications', 'dokan-custom-functions', 'dokan-external-assets', 'dokan-plugin-simple-auctions'])->each(
-    function ($file) {
-        if (!locate_template($file = "app/{$file}.php", true, true)) {
-            wp_die(
-                /* translators: %s is replaced with the relative file path */
-                sprintf(
-                    __('Error locating <code>%s</code> for inclusion.', 'sage'),
-                    $file
-                )
-            );
-        }
+collect([
+    'helpers',
+    'setup',
+    'filters',
+    'admin',
+    'woocommerce',
+    'acf',
+    'notifications',
+    'dokan-custom-functions',
+    'dokan-external-assets',
+    'dokan-plugin-simple-auctions',
+    'clean-dashboard',
+])->each(function ($file) {
+    if (!locate_template($file = "app/{$file}.php", true, true)) {
+        wp_die(
+            /* translators: %s is replaced with the relative file path */
+            sprintf(
+                __('Error locating <code>%s</code> for inclusion.', 'sage'),
+                $file
+            )
+        );
     }
-);
+});
 
 /*
 |--------------------------------------------------------------------------
