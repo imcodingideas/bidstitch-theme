@@ -19,4 +19,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-the_title( '<h1 class="product_title entry-title text-xl font-bold md:text-2xl lg:text-3xl">', '</h1>' );
+// changed:
+the_title( '<h1 class="product_title entry-title text-xl font-bold md:text-2xl lg:text-3xl mr-12">', '</h1>' );
+
+// changed:
+if (class_exists('YITH_WCWL_Shortcode')) {
+  // plugin: yith-woocommerce-wishlist-premium
+  echo YITH_WCWL_Shortcode::add_to_wishlist([]);
+}
