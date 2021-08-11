@@ -56,8 +56,12 @@ $vendor = new WP_User($vendor_id);
 $vendor_name = $vendor->display_name;
 $address = $store_info['address'];
 /* TODO: this gives error $country = $split[count(explode(" ", $address))-1]; */
-$countrycode = $address['country'];
-$countryname = WC()->countries->countries[$countrycode] ?? $countrycode;
+/* TODO: improve this lines */
+$countryname = '';
+$countrycode = $address['country'] ?? false;
+if($countrycode)
+	$countryname = WC()->countries->countries[$countrycode] ?? $countrycode;
+
 $vendor_profile_link = get_field('user_profile','option');
 $vendor_profile_link = !empty($vendor_profile_link) ? $vendor_profile_link.'?id='.$vendor_id : '#';
 ?>
