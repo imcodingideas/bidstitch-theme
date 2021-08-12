@@ -13,6 +13,5 @@
   {{-- shipping --}}
   @include('woocommerce.single-product-accordion-shipping')
   {{-- offers --}}
-  {{-- todo: I need an example to debug this: --}}
-  {{-- @include('woocommerce.single-product-accordion-offers') --}}
+  @include('woocommerce.single-product-accordion-offers')
 </div>

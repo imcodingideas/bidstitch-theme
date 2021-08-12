@@ -32,7 +32,9 @@ class SingleProductAccordionOffers extends Composer
         $is_auction = $this->check_product_is_auction($product_id);
         $current_user_id = get_current_user_id();
         $author_product_id = get_the_author_meta('ID');
-        return is_user_logged_in() && !$is_auction && $current_user_id == $author_product_id;
+        return is_user_logged_in() &&
+            !$is_auction &&
+            $current_user_id == $author_product_id;
     }
     public function check_product_is_auction($product_id)
     {
@@ -82,7 +84,7 @@ class SingleProductAccordionOffers extends Composer
                     'offer_price_per',
                     true
                 );
-                $vendor = new WP_User($author_id);
+                $vendor = new \WP_User($author_id);
                 $store_info = dokan_get_store_info($author_id);
                 $post_status = get_post_status();
 
@@ -90,6 +92,9 @@ class SingleProductAccordionOffers extends Composer
                 $user_profile_link = !empty($user_profile_link)
                     ? $user_profile_link . '?id=' . $author_id
                     : '#';
+                $time_elapsed_string = $this->time_elapsed_string(
+                    get_the_date()
+                );
                 $offers[] = compact(
                     'id_offer',
                     'author_id',
@@ -100,11 +105,43 @@ class SingleProductAccordionOffers extends Composer
                     'store_info',
                     'post_status',
                     'user_profile_link',
-                    'user_profile_link'
+                    'user_profile_link',
+                    'time_elapsed_string'
                 );
             }
         }
         wp_reset_postdata();
         return $offers;
+    }
+    public function time_elapsed_string($datetime, $full = false)
+    {
+        $now = new \DateTime();
+        $ago = new \DateTime($datetime);
+        $diff = $now->diff($ago);
+
+        $diff->w = floor($diff->d / 7);
+        $diff->d -= $diff->w * 7;
+
+        $string = [
+            'y' => 'year',
+            'm' => 'month',
+            'w' => 'week',
+            'd' => 'day',
+            'h' => 'hour',
+            'i' => 'minute',
+            's' => 'second',
+        ];
+        foreach ($string as $k => &$v) {
+            if ($diff->$k) {
+                $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+            } else {
+                unset($string[$k]);
+            }
+        }
+
+        if (!$full) {
+            $string = array_slice($string, 0, 1);
+        }
+        return $string ? implode(', ', $string) . ' ago' : 'just now';
     }
 }
