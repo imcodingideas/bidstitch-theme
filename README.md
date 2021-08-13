@@ -85,15 +85,15 @@ woocommerce-simple-auctions customized, based on 1.2.40
 
 ### Paypal Woocommerce
 
-paypal-woocommerce
+paypal-woocommerce 2.5.11
 
 ### Paypal Multi Account
 
-paypal-for-woocommerce-multi-account-management
+paypal-for-woocommerce-multi-account-management 3.1.0
 
 ### WooCommerce Simple Auction
 
-woocommerce-simple-auctions
+woocommerce-simple-auctions ( git )
 
 ### WOOF - WooCommerce Products Filter
 
@@ -101,7 +101,7 @@ woocommerce-products-filter 2.2.5.4
 
 ### YITH WooCommerce Wishlist Premium
 
-yith-woocommerce-wishlist-premium
+yith-woocommerce-wishlist-premium 3.0.23
 
 This one displays the heart over images to mark them as favorites. 
 
@@ -125,7 +125,6 @@ May not be essential
 - user-switching 1.5.7
 - wpdiscuz 7.2.2
 - wp-user-avatar custom
-- yith-woocommerce-wishlist-premium 3.0.23
 
 ## Wp cli
 
