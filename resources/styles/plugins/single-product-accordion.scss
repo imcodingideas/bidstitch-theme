@@ -27,4 +27,69 @@
       }
     }
   }
+  // offers
+  &__tab-offers {
+    p {
+      margin: 0;
+    }
+    .make_offer_item {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .make_offer_item:not(:first-child) {
+      border-top: 1px solid #eee;
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .avatar_offer {
+      img {
+        margin: 0 !important;
+        border-radius: 2px;
+      }
+    }
+
+    .info_offer {
+      flex-grow: 1;
+      padding: 0 10px;
+      line-height: 1.5;
+      a {
+        text-decoration: none;
+        color: #2e70b1;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+    }
+
+    .action_offer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 0;
+      box-shadow: none;
+    }
+    .div-loadmore {
+      display: none;
+    }
+    .decline,
+    .accept {
+      color: white;
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 4px;
+      margin: 0 8px;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .accept {
+      background-color: forestgreen;
+    }
+    .decline {
+      background-color: crimson;
+    }
+  }
 }
