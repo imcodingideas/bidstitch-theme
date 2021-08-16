@@ -37,7 +37,8 @@ collect([
     'dokan-external-assets',
     'dokan-plugin-simple-auctions',
     'clean-dashboard',
-    'ofw-bell-notifications'
+    'ofw-bell-notifications',
+    'shipping-rates-editor'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(

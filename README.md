@@ -165,3 +165,23 @@ wp plugin deactivate bidstitchtools
 wp plugin deactivate custom-post-type-ui
 wp plugin deactivate advanced-custom-fields-pro
 ```
+
+
+### Required changes in plugin dokan pro for "shipping rates editor"
+
+To allow overriding dashboard/settings/shipping add these filters:
+
+**file: includes/Settings.php L281**
+
+```
+echo apply_filters('dokan_shipping_zones_editor', $this->load_shipping_content());
+```
+
+Add a filter to remove js that registers vue:
+
+**file: includes/Assets.php L173**
+
+```
+
+return apply_filters('dokan_shipping_zones_editor_scripts', $scripts);
+```

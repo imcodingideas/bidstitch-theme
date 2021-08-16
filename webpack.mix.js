@@ -25,10 +25,10 @@ mix
   });
 
 mix
-  .js('resources/scripts/app.js', 'scripts')
+  .js('resources/scripts/app.js', 'scripts').vue({ version: 3 })
   .js('resources/scripts/customizer.js', 'scripts')
   .blocks('resources/scripts/editor.js', 'scripts')
-  .autoload({ jquery: ['$', 'window.jQuery'] });
+  .autoload({jquery: ['$', 'window.jQuery']});
 
 mix
   .copyDirectory('resources/images', 'public/images')
