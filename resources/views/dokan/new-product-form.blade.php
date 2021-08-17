@@ -103,6 +103,8 @@
             @endphp
           </div>
         @endif
+        
+        @include('dokan.new-product-field-condition')
 
         <div class="dokan-form-group">
           <label for="product_tag" class="form-label">{{ _e('Tags', 'dokan-lite') }}</label>
