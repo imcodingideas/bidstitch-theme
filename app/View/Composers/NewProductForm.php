@@ -29,23 +29,13 @@ class NewProductForm extends Composer
             'on' === $can_create_tags
                 ? __('Select tags/Add tags', 'dokan-lite')
                 : __('Select product tags', 'dokan-lite');
-        $posted_img = dokan_posted_input('feat_image_id');
-        $posted_img_url = $hide_instruction = '';
-        $hide_img_wrap = 'dokan-hide';
         $post_content = isset($post_data['post_content'])
             ? $post_data['post_content']
             : '';
 
-        if (!empty($posted_img)) {
-            $posted_img = empty($posted_img) ? 0 : $posted_img;
-            $posted_img_url = wp_get_attachment_url($posted_img);
-            $hide_instruction = 'dokan-hide';
-            $hide_img_wrap = '';
-        }
         $dokan_is_seller_enabled = dokan_is_seller_enabled(
             get_current_user_id()
         );
-        $gallery_items = $this->gallery();
         $category_args = $this->category_args();
         $drop_down_category = $this->drop_down_category();
         $display_create_and_add_new_button = $this->display_create_and_add_new_button();
@@ -53,45 +43,11 @@ class NewProductForm extends Composer
         return compact(
             'can_create_tags',
             'tags_placeholder',
-            'posted_img',
-            'posted_img_url',
-            'hide_img_wrap',
             'post_content',
-            'posted_img',
-            'posted_img_url',
-            'hide_instruction',
-            'hide_img_wrap',
             'dokan_is_seller_enabled',
-            'gallery_items',
             'category_args',
             'display_create_and_add_new_button'
         );
-    }
-    function gallery()
-    {
-        $items = [];
-        if (isset($post_data['product_image_gallery'])) {
-            $product_images = $post_data['product_image_gallery'];
-            $gallery = explode(',', $product_images);
-
-            if ($gallery) {
-                foreach ($gallery as $image_id) {
-                    if (empty($image_id)) {
-                        continue;
-                    }
-
-                    $attachment_image = wp_get_attachment_image_src(
-                        $image_id,
-                        'thumbnail'
-                    );
-                    $items[] = [
-                        'id' => $image_id,
-                        'url' => $attachment_image[0],
-                    ];
-                }
-            }
-        }
-        return $items;
     }
     function category_args()
     {
