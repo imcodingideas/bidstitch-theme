@@ -12,6 +12,12 @@ module.exports = {
       ...theme('colors'),
        DEFAULT: theme('colors.gray.200', 'currentColor'),
     }),
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '2rem',
+      },
+    },
     extend: {
       colors: {},
     },
