@@ -8,6 +8,8 @@
 
       <div class="content-half-part dokan-product-meta">
 
+      @include('dokan.new-product-field-name')
+
         <div class="dokan-form-group">
           <div class="dokan-form-group dokan-clearfix dokan-price-container">
             <div class="content-half-part">
