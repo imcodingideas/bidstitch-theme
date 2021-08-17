@@ -23,7 +23,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+      margin: ['first', 'last'],
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
