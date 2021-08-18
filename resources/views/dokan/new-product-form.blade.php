@@ -3,39 +3,35 @@
   <form class="dokan-form-container" method="post">
 
     <div class="product-edit-container dokan-clearfix">
+      <div class="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4">
+        <div class="xl:w-1/3">
+          @include('dokan.new-product-field-name')
+          @include('dokan.new-product-field-condition')
+          @include('dokan.new-product-field-category')
+          @include('dokan.new-product-field-pit-to-pit')
+          @include('dokan.new-product-field-length')
+        </div>
 
-      @include('dokan.new-product-field-images')
-
-      <div class="content-half-part dokan-product-meta">
-
-      @include('dokan.new-product-field-name')
-
-      @include('dokan.new-product-field-price')
-
-      @include('dokan.new-product-field-excerpt')
-
-      @include('dokan.new-product-field-category')
-
-        @include('dokan.new-product-field-condition')
-
-        @include('dokan.new-product-field-size')
-
-        @include('dokan.new-product-field-color')
-
-        @include('dokan.new-product-field-pit-to-pit')
-
-        @include('dokan.new-product-field-length')
-
-        @include('dokan.new-product-field-tag-type')
-
-        @include('dokan.new-product-field-stitching')
-
-        @include('dokan.new-product-field-tags')
-
+        <div class="xl:w-1/3">
+          @include('dokan.new-product-field-size')
+          @include('dokan.new-product-field-color')
+          @include('dokan.new-product-field-tag-type')
+          @include('dokan.new-product-field-stitching')
+        </div>
+        <div class="xl:w-1/3">
+          @include('dokan.new-product-field-images')
+        </div>
       </div>
+
+      <div class="dokan-product-meta">
+        @include('dokan.new-product-field-excerpt')
+        @include('dokan.new-product-field-tags')
+        @include('dokan.new-product-field-price')
+      </div>
+
     </div>
 
-        @include('dokan.new-product-field-description')
+    @include('dokan.new-product-field-description')
 
     @php do_action( 'dokan_new_product_form' ) @endphp
 
