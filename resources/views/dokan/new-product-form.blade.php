@@ -8,7 +8,7 @@
   <form class="dokan-form-container mt-6" method="post" id="new-product-form">
 
     <div class="product-edit-container dokan-clearfix">
-      <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-5 lg:space-y-0 lg:space-x-4">
+      <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0  lg:space-x-4">
         <div class="flex flex-col lg:w-1/3 space-y-4 lg:space-y-5">
           @include('dokan.new-product-field-name')
           @include('dokan.new-product-field-condition')
@@ -39,6 +39,7 @@
 
     @php do_action( 'dokan_new_product_form' ) @endphp
 
+    <input type="hidden" name="post_excerpt"/>
     <div class="mt-4">
       @php wp_nonce_field( 'dokan_add_new_product', 'dokan_add_new_product_nonce' ) @endphp
       <button type="submit" name="add_product" class="btn btn--white btn--md mt-6" value="create_new">
