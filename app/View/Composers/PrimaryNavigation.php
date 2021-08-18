@@ -14,6 +14,7 @@ class PrimaryNavigation extends Composer
      */
     protected static $views = [
         'partials.header-primary-navigation',
+        'partials.sidenav-primary-navigation',
     ];
 
     /**

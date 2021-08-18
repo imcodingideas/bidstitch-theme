@@ -12,7 +12,10 @@ class MyAccountNavigation extends Composer
      *
      * @var array
      */
-    protected static $views = ['partials.myaccount-navigation'];
+    protected static $views = [
+        'partials.header-myaccount-navigation',
+        'partials.sidenav-myaccount-navigation',
+    ];
 
     /**
      * Data to be passed to view before rendering.
