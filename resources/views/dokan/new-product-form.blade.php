@@ -1,8 +1,11 @@
 @if ($dokan_is_seller_enabled)
+{{-- When category is modified these are modified: --}}
+{{-- - subcategory --}} 
+{{-- - sizes --}}
 
   <h2 class="h3">Listing details</h2>
 
-  <form class="dokan-form-container mt-6" method="post">
+  <form class="dokan-form-container mt-6" method="post" id="new-product-form">
 
     <div class="product-edit-container dokan-clearfix">
       <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-5 lg:space-y-0 lg:space-x-4">
@@ -10,9 +13,6 @@
           @include('dokan.new-product-field-name')
           @include('dokan.new-product-field-condition')
           @include('dokan.new-product-field-category')
-          <div class="">
-            todo: subcategory
-          </div>
           @include('dokan.new-product-field-pit-to-pit')
           @include('dokan.new-product-field-length')
         </div>

@@ -38,7 +38,8 @@ collect([
     'dokan-plugin-simple-auctions',
     'clean-dashboard',
     'ofw-bell-notifications',
-    'shipping-rates-editor'
+    'shipping-rates-editor',
+    'new-product-form'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(

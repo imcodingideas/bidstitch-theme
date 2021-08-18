@@ -1,13 +1,25 @@
 @if (dokan_get_option('product_category_style', 'dokan_selling', 'single') == 'single')
-  <div class="">
-    <label class="form-label h4">{{ _e('Category', 'dokan-lite') }}</label>
-    @php wp_dropdown_categories( apply_filters( 'dokan_product_cat_dropdown_args', $category_args ) ) @endphp
+  <div class="dokan-form-group category">
+    <label for="product_cat" class="form-label">{{ _e('Category', 'dokan-lite') }}</label><br>
+    <select name="product_cat" id="product_cat" class="product_cat dokan-form-control dokan-select2" tabindex="-1" aria-hidden="true" placeholder="{{ _e('Select a category', 'dokan-lite') }}">
+      <option value="">{{ _e('Select a category', 'dokan-lite') }}</option>
+      @if (!empty($category_args))
+        @foreach ($category_args as $term)
+          <option value="{{ $term->term_id }}" slug="{{ $term->slug }}">{{ $term->name }}</option>
+        @endforeach
+      @endif
+    </select>
+  </div>
+  <div class="dokan-form-group subcate">
+    <label for="product_sub_cat" class="form-label">{{ _e('SubCategory', 'dokan-lite') }}</label><br>
+    <select name="product_cat_sub" id="product_cat_sub" class="product_cat_sub dokan-form-control dokan-select2" tabindex="-1" aria-hidden="true" placeholder="{{ _e('Select a sub category', 'dokan-lite') }}" data-slug="true">
+      <option value="">{{ _e('Select a sub category', 'dokan-lite') }}</option>
+    </select>
   </div>
 @elseif ( dokan_get_option( 'product_category_style', 'dokan_selling', 'single' ) == 'multiple' )
-  <div class="">
-    <label class="form-label">{{ _e('Category', 'dokan-lite') }}</label>
+  <div class="dokan-form-group">
     @php
-      echo str_replace('<select', '<select data-placeholder="' . esc_attr__('Select product category', 'dokan-lite') . '" multiple="multiple" ', $drop_down_category); // phpcs:ignore WordPress.XSS.EscapeOutput.OutputNotEscaped
+      echo str_replace('<select', '<select data-placeholder="' . esc_attr__('Select a category', 'dokan-lite') . '" multiple="multiple" ', $drop_down_category);
     @endphp
   </div>
 @endif

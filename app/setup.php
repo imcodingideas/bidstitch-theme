@@ -16,6 +16,11 @@ use function Roots\asset;
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('sage/app.js', asset('scripts/app.js')->uri(), ['jquery'], null, true);
 
+    // localize script
+    wp_localize_script('sage/app.js', 'bidstitchSettings', [
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+    ]);
+
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }

@@ -29,20 +29,21 @@ class NewProductFieldCategory extends Composer
 
     function category_args()
     {
-        $selected_cat = dokan_posted_input('product_cat');
-        $category_args = [
-            'show_option_none' => __('- Select a category -', 'dokan-lite'),
-            'hierarchical' => 1,
-            'hide_empty' => 0,
-            'name' => 'product_cat',
-            'id' => 'product_cat',
+        $category_args = get_terms([
             'taxonomy' => 'product_cat',
-            'title_li' => '',
-            'class' => 'product_cat dokan-form-control dokan-select2',
-            'exclude' => '',
-            'selected' => $selected_cat,
-            'walker' => new TaxonomyDropdown(),
-        ];
+            'hide_empty' => false,
+            'parent' => 0,
+            'orderby' => 'meta_value_num',
+            'order' => 'ASC',
+            'meta_key' => 'meta_value_num',
+            'meta_query' => [
+                [
+                    'key' => 'meta_value_num',
+                    'value' => [''],
+                    'compare' => 'NOT IN',
+                ],
+            ],
+        ]);
         return $category_args;
     }
     function drop_down_category()

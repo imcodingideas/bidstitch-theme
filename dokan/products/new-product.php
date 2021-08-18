@@ -28,7 +28,8 @@
              *
              *  @since 2.4
              */
-            do_action( 'dokan_dashboard_content_before' );
+            /* change: remove sidebar */
+            /* do_action( 'dokan_dashboard_content_before' ); */
             do_action( 'dokan_before_new_product_content_area' );
         ?>
 
