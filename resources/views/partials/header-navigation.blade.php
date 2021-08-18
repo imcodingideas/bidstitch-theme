@@ -1,34 +1,29 @@
 @if ($navigation)
-  <ul class="flex flex-wrap md:ml-auto items-center text-base justify-center font-title font-semibold space-x-2">
-    @foreach ($navigation as $item)
-      <li class="navigation relative inline-block {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }} {{ $item->children ? 'navigation__has-submenu' : '' }}">
-        <a href="{{ $item->url }}" target="{{ $item->target }}" class="btn btn--small btn--black" data-id="{{ $item->dbId }}">
-          <span class="flex-shrink-0">
-            {{ $item->label }}
-          </span>
-          @if ($item->children)
-            <svg fill="currentColor" viewBox="0 0 20 20" class="flex-shrink-0 w-4 h-4 ml-1">
-              <path class="navigation__arrow transition duration-150 ease-in-out origin-center transform" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-          @endif
-        </a>
+  <nav class="h-full -mx-2 lg:-mx-4">
+    <ul class="flex h-full">
+      @foreach ($navigation as $item)
         @if ($item->children)
-          <div style="display:none" class="navigation__submenu absolute right-0 z-10 pt-2 transition duration-150 ease-in ease-out transform -translate-y-3 scale-95 opacity-0 ">
-            <div class="relative py-1 bg-white border border-gray-200 rounded-md shadow-xl">
-              <div class="absolute right-0 top-0 w-4 h-4 origin-center transform rotate-45 -translate-x-5 -translate-y-2 bg-white border-t border-l border-gray-200 rounded-sm pointer-events-none"></div>
-              <ul class="relative">
-                @foreach ($item->children as $child)
-                  <li class="block w-full px-4 py-2 hover:bg-gray-100 focus:shadow-outline transition duration-300 ease-in-out {{ $child->classes ?? '' }} {{ $child->active ? 'active' : '' }}">
-                    <a class="block w-max font-medium text-gray-700 whitespace-no-wrap focus:outline-none hover:text-gray-900 focus:text-gray-900 " href="{{ $child->url }}" target="{{ $child->target }}">
-                      {{ $child->label }}
-                    </a>
-                  </li>
-                @endforeach
-              </ul>
-            </div>
-          </div>
+          <li class="h-full relative group navigation__dropdown">
+            <button
+              class="h-full flex items-center text-sm font-bold relative uppercase focus:outline-none px-2 lg:px-4 navigation__dropdown__toggle {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
+              <span>{{ $item->label }}</span>
+              <svg class="text-gray-400 ml-1 h-3 w-3 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512">
+                <path fill="currentColor"
+                  d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" />
+              </svg>
+            </button>
+            <x-dropdown-navigation :navigation="$item->children" type="center" />
+          </li>
+        @else
+          <li class="h-full">
+            <a href="{{ $item->url }}" target="{{ $item->target }}"
+              class="h-full flex items-center text-sm font-bold relative uppercase px-2 lg:px-4 {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
+              {{ $item->label }}
+            </a>
+          </li>
         @endif
-      </li>
-    @endforeach
-  </ul>
+      @endforeach
+    </ul>
+  </nav>
 @endif
