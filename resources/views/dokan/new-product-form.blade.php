@@ -30,19 +30,12 @@
 
         @include('dokan.new-product-field-stitching')
 
-        <div class="dokan-form-group">
-          <label for="product_tag" class="form-label">{{ _e('Tags', 'dokan-lite') }}</label>
-          <select multiple="multiple" placeholder="{{ $tags_placeholder }}" name="product_tag[]" id="product_tag_search" class="product_tag_search product_tags dokan-form-control dokan-select2" data-placeholder="{{ $tags_placeholder }}"></select>
-        </div>
+        @include('dokan.new-product-field-tags')
 
-        @php do_action( 'dokan_new_product_after_product_tags' ) @endphp
       </div>
     </div>
 
-    <div class="dokan-form-group">
-      <label for="post_content" class="control-label">{{ _e('Description', 'dokan-lite') }} <i class="fa fa-question-circle tips" data-title="{{ esc_attr_e('Add your product description', 'dokan-lite') }}" aria-hidden="true"></i></label>
-      @php wp_editor( htmlspecialchars_decode( $post_content, ENT_QUOTES ), 'post_content', array('editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ) @endphp
-    </div>
+        @include('dokan.new-product-field-description')
 
     @php do_action( 'dokan_new_product_form' ) @endphp
 
