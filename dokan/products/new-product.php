@@ -46,8 +46,8 @@
             ?>
 
             <header class="dokan-dashboard-header dokan-clearfix">
-                <h1 class="entry-title">
-                    <?php esc_html_e( 'Add New Product', 'dokan-lite' ); ?>
+                <h1 class="entry-title h1">
+                    <?php esc_html_e( 'Add a new listing', 'dokan-lite' ); ?>
                 </h1>
             </header><!-- .entry-header -->
 
@@ -63,7 +63,7 @@
 
                         <?php } ?>
                     </div>
-                <?php } ?>
+               <?php } ?>
 
                 <?php if ( isset( $get_data['created_product'] ) ): ?>
                     <div class="dokan-alert dokan-alert-success">

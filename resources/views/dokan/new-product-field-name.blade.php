@@ -1,5 +1,5 @@
-<div class="dokan-form-group">
-  <label for="tees_length" class="form-label">
+<div class="">
+  <label for="tees_length" class="form-label h4">
     {{ _e('Title', 'dokan-lite') }}
     <span class="text-red-500">(required)</span>
   </label>

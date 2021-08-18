@@ -1,4 +1,4 @@
-  <div class="dokan-form-group condition">
+  <div class=" condition">
     <label for="product_condition" class="form-label">
       {{ _e('Condition', 'dokan-lite') }}
       <span class="text-red-500">(required)</span>
