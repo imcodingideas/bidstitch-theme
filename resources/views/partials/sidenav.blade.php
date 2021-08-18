@@ -18,7 +18,7 @@
           </svg>
         </button>
       </div>
-      <div class="h-screen overflow-y-auto w-full">
+      <div class="h-screen relative overflow-y-auto w-full">
         <nav>
           <ul>
             @if (has_nav_menu('myaccount_navigation') && is_user_logged_in())
