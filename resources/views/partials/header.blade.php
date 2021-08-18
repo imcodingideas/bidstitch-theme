@@ -1,30 +1,39 @@
-<header class="banner">
-  <div class="shadow-lg">
-    <div class="flex flex-col space-y-5 py-5 max-w-6xl mx-auto">
-
-      <div class="flex space-x-4 w-full justify-between h-full items-center">
-        <div class="">
-          <a class="brand header-logo text-black" href="{{ home_url('/') }}">
-            {{ $siteName }}
-          </a>
-        </div>
-        <div class="flex h-full items-center flex-1">
-          @include('partials.header-search')
-        </div>
-        <div class="flex space-x-4 h-full items-center">
+<header class="sticky top-0 bg-white z-30">
+  <div class="border-b">
+    <div class="container flex justify-between items-center h-16 lg:h-20 lg:justify-start">
+      <h1 class="header-logo text-xl lg:text-3xl text-black leading-none tracking-widest">
+        <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
+      </h1>
+      @include('partials.header-search')
+      <div class="hidden lg:flex h-full ml-auto">
+        @if (has_nav_menu('header_navigation'))
           @include('partials.header-navigation')
+        @endif
+      </div>
+      @if (has_nav_menu('myaccount_navigation') && is_user_logged_in())
+        <div class="h-full relative hidden ml-4 lg:flex lg:items-center navigation__dropdown">
           @include('partials.header-avatar')
+          @include('partials.header-myaccount-navigation')
         </div>
+      @endif
+      @include('partials.sidenav')
+    </div>
+  </div>
+  <div class="border-b">
+    <div class="container flex items-center h-12 justify-between">
+      @if (has_nav_menu('primary_navigation'))
+        @include('partials.header-primary-navigation')
+      @endif
+      <div class="flex lg:hidden h-full">
+        @if (has_nav_menu('header_navigation'))
+          @include('partials.header-navigation')
+        @endif
       </div>
-      <div class="flex space-x-4 justify-between h-full items-center">
-
-        <nav class="nav-primary">
-          @if (has_nav_menu('primary_navigation'))
-            {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav', 'echo' => false]) !!}
-          @endif
-        </nav>
+      @if (is_user_logged_in())
         @include('partials.header-icons')
-      </div>
+      @else
+        @include('partials.header-register-navigation')
+      @endif
     </div>
   </div>
 </header>
