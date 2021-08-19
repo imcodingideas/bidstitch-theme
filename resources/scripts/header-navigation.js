@@ -12,6 +12,8 @@ export default function() {
       navigationDropdownToggle: '.navigation__dropdown__toggle'
     };
 
+    let isMobile = () => window.innerWidth < 1024
+
     // Handle sidenav display click toggle
     $(domNodes.sidenavToggle).click(function() {
       $(domNodes.sidenavToggleOpen).toggleClass('opacity-0');
@@ -25,15 +27,21 @@ export default function() {
 
     // Handle navigation dropdown click toggle
     $(domNodes.navigationDropdownToggle).click(function() {
+      // Only add click event listener for mobile devices
+      isMobile() &&
       $(this).next(domNodes.navigationDropdownMenu).fadeToggle('fast');
     });
 
     // Handle navigation dropdown hover toggle
     $(domNodes.navigationDropdown).hover(
       function() {
+        // Only add hover event listener for desktop devices
+        !isMobile() && 
         $(this).find(domNodes.navigationDropdownMenu).fadeIn('fast')
       },
       function() {
+        // Only add hover event listener for desktop devices
+        !isMobile() && 
         $(this).find(domNodes.navigationDropdownMenu).fadeOut('fast')
       }
     );

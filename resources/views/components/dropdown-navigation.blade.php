@@ -5,13 +5,13 @@
     @foreach ($navigation as $item)
       <div class="border-b last:border-b-0 border-gray-200">
         <a href="{{ $item->url }}" target="{{ $item->target }}"
-          class="hover:bg-gray-100 block p-3 text-sm text-black font-bold {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
+          class="transition-colors hover:bg-gray-100 block p-3 text-sm text-black font-bold {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
           {{ $item->label }}
         </a>
         @if ($item->children)
           @foreach ($item->children as $child)
             <a href="{{ $child->url }}" target="{{ $child->target }}"
-              class="hover:bg-gray-100 block p-3 text-sm text-gray-700 font-medium {{ $child->classes ?? '' }} {{ $child->active ? 'active' : '' }}">
+              class="transition-colors hover:bg-gray-100 block p-3 text-sm text-gray-700 font-medium {{ $child->classes ?? '' }} {{ $child->active ? 'active' : '' }}">
               {{ $child->label }}
             </a>
           @endforeach
