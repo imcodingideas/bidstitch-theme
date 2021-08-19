@@ -67,7 +67,7 @@ dokan-pro 3.3.3
 
 ### Offers for Woocommerce
 
-offers-for-woocommerce 2.3.5
+offers-for-woocommerce 2.3.6
 
 ### Offers for Woocommerce Dokan
 
