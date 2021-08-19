@@ -5,7 +5,7 @@ namespace App\View\Composers;
 use Roots\Acorn\View\Composer;
 use Log1x\Navi\Facades\Navi;
 
-class MyAccountNavigation extends Composer
+class PrimaryNavigation extends Composer
 {
     /**
      * List of views served by this composer.
@@ -13,8 +13,8 @@ class MyAccountNavigation extends Composer
      * @var array
      */
     protected static $views = [
-        'partials.header-myaccount-navigation',
-        'partials.sidenav-myaccount-navigation',
+        'partials.header-primary-navigation',
+        'partials.sidenav-primary-navigation',
     ];
 
     /**
@@ -36,7 +36,7 @@ class MyAccountNavigation extends Composer
      */
     public function navigation()
     {
-        $navigation = Navi::build('myaccount_navigation');
+        $navigation = Navi::build('primary_navigation');
 
         if ($navigation->isEmpty()) {
             return;

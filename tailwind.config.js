@@ -8,12 +8,25 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    borderColor: theme => ({
+      ...theme('colors'),
+       DEFAULT: theme('colors.gray.200', 'currentColor'),
+    }),
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '2rem',
+      },
+    },
     extend: {
       colors: {},
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['last'],
+      margin: ['first', 'last'],
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),

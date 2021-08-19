@@ -1,37 +1,42 @@
 import 'jquery';
 export default function() {
-  jQuery(document).ready(function($) {
-    // submenu
-    $('.navigation__has-submenu').hover(
+  jQuery(document).on('ready', function() {
+    const domNodes = {
+      sidenav: '.sidenav',
+      sidenavToggle: '.sidenav__toggle',
+      sidenavToggleOpen: '.sidenav__toggle--open',
+      sidenavDropdownToggle: '.sidenav__dropdown__toggle',
+      sidenavDropdownMenu: '.sidenav__dropdown__menu',
+      navigationDropdown: '.navigation__dropdown',
+      navigationDropdownMenu: '.navigation__dropdown__menu',
+      navigationDropdownToggle: '.navigation__dropdown__toggle'
+    };
+
+    // Handle sidenav display click toggle
+    $(domNodes.sidenavToggle).click(function() {
+      $(domNodes.sidenavToggleOpen).toggleClass('opacity-0');
+      $(domNodes.sidenav).fadeToggle('fast');
+    });
+
+    // Handle sidenav dropdown click toggle
+    $(domNodes.sidenavDropdownToggle).click(function() {
+      $(this).next(domNodes.sidenavDropdown).slideToggle('fast');
+    });
+
+    // Handle navigation dropdown click toggle
+    $(domNodes.navigationDropdownToggle).click(function() {
+      $(this).next(domNodes.navigationDropdownMenu).fadeToggle('fast');
+    });
+
+    // Handle navigation dropdown hover toggle
+    $(domNodes.navigationDropdown).hover(
       function() {
-        $(this)
-          .find('.navigation__submenu')
-          .show()
-          .removeClass('-translate-y-3 scale-95 opacity-0')
-          .addClass('translate-y-0 scale-100 opacity-100');
-        $(this)
-          .find('.navigation__arrow')
-          .addClass('rotate-180');
+        $(this).find(domNodes.navigationDropdownMenu).fadeIn('fast')
       },
       function() {
-        $(this)
-          .find('.navigation__submenu')
-          .hide()
-          .removeClass('translate-y-0 scale-100 opacity-100')
-          .addClass('-translate-y-3 scale-95 opacity-0');
-
-        $(this)
-          .find('.navigation__arrow')
-          .removeClass('rotate-180');
+        $(this).find(domNodes.navigationDropdownMenu).fadeOut('fast')
       }
     );
-
-  // avatar
-  $('#header-avatar').mouseenter(() => {
-    $('#header-avatar-menu').removeClass('hidden');
-  }).mouseleave(() => {
-    $('#header-avatar-menu').addClass('hidden');
-  });
   });
 }
 

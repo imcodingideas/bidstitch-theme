@@ -16,7 +16,6 @@ Add to wp-config.php
 
 `define('WP_ENV', 'development');`
 
-
 Add your local url to webpack.mix.js and then:
 
 ```
@@ -54,11 +53,6 @@ Add its widget in sidebar-header for ajax search capabilities
 
 https://wordpress.org/plugins/ajax-search-for-woocommerce/#installation
 
-### mega menu
-
-megamenu 2.9.4
-megamenu-pro 2.2.2
-
 ### Woocommerce
 
 woocommerce 5.5.1
@@ -81,7 +75,7 @@ offers-for-woocommerce-dokan 1.0.0
 
 ### Auctions for Woocommerce
 
-woocommerce-simple-auctions customized, based on 1.2.40 
+woocommerce-simple-auctions customized, based on 1.2.40
 
 ### Paypal Woocommerce
 
@@ -103,11 +97,11 @@ woocommerce-products-filter 2.2.5.4
 
 yith-woocommerce-wishlist-premium 3.0.23
 
-This one displays the heart over images to mark them as favorites. 
+This one displays the heart over images to mark them as favorites.
 
 Add to wishlist options
 
-- Enable "Show "Add to wishlist" in loop 
+- Enable "Show "Add to wishlist" in loop
 - Position "on top of the image"
 
 Wishlist page options
@@ -115,7 +109,6 @@ Wishlist page options
 - Select page to add favorites
 - Add shortcode in such page `[yith_wcwl_wishlist]`
 - Remove "Share wishlist"
-
 
 ### Others
 
@@ -135,8 +128,6 @@ wp plugin activate advanced-custom-fields-pro
 wp plugin activate custom-post-type-ui
 wp plugin activate bidstitchtools
 wp plugin activate ajax-search-for-woocommerce
-wp plugin activate megamenu
-wp plugin activate megamenu-pro
 wp plugin activate woocommerce
 wp plugin activate dokan-lite
 wp plugin activate dokan-pro
@@ -158,14 +149,11 @@ wp plugin deactivate offers-for-woocommerce
 wp plugin deactivate dokan-lite
 wp plugin deactivate dokan-pro
 wp plugin deactivate woocommerce
-wp plugin deactivate megamenu-pro
-wp plugin deactivate megamenu
 wp plugin deactivate ajax-search-for-woocommerce
 wp plugin deactivate bidstitchtools
 wp plugin deactivate custom-post-type-ui
 wp plugin deactivate advanced-custom-fields-pro
 ```
-
 
 ### Required changes in plugin dokan pro for "shipping rates editor"
 

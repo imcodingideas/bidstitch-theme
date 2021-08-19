@@ -8,8 +8,7 @@
   src: url('../fonts/Volante-Bold.otf');
 }
 .header-logo {
-  font-family: 'Volante' !important;
-  font-size: 50px !important;
+  font-family: 'Volante';
 }
 
 h1,
@@ -22,15 +21,6 @@ h6 {
 }
 
 // TODO: move to tailwindcss
-.header-nav {
-  font-family: 'Montserrat', sans-serif;
-}
-
-#mega-menu-primary_navigation > li > .mega-menu-link {
-  font-weight: 600 !important;
-  font-family: 'Montserrat', sans-serif !important;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
 }

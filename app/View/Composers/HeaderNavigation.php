@@ -12,7 +12,10 @@ class HeaderNavigation extends Composer
      *
      * @var array
      */
-    protected static $views = ['partials.header-navigation'];
+    protected static $views = [
+        'partials.header-navigation',
+        'partials.sidenav-navigation',
+    ];
 
     /**
      * Data to be passed to view before rendering.
