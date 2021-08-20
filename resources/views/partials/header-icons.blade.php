@@ -28,7 +28,7 @@
 
   @if ($notifications)
     <li>
-      <a href="{{ $notifications }}" title="notifications" class="relative">
+      <a href="{{ $notifications }}" title="notifications" class="relative block">
         <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="far" data-icon="bell" role="img"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
           <path fill="currentColor"
@@ -44,7 +44,7 @@
   @endif
 
   @if ($cart_url)
-    <li id="cart-menu-item" class="relative">
+    <li id="cart-menu-item" class="relative block">
       <a href="{{ $cart_url }}" title="cart" class="">
         <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-cart" role="img"
           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
