@@ -1,5 +1,6 @@
 .btn {
   @apply inline-flex items-center border shadow-sm font-medium rounded focus:outline-none uppercase font-bold;
+  text-decoration: none !important;
   &--md {
     @apply px-8 py-2;
   }
