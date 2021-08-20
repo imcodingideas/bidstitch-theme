@@ -35,7 +35,7 @@
                 <div class="dec decline-offer-link">
                   <button class="decline woocommerce-offer-post-action-link woocommerce-offer-post-action-link-decline" data-target="{{ $id_offer }}">
                     <div class="div-loadmore">
-                      <i class="fas fa-spinner fa-spin"></i>
+                        <img class="w-4" src="@asset('images/ajax-loader.gif')" alt="spinner"/>
                     </div>
                     {{ _e('DECLINE', 'sage') }}
                   </button>
@@ -43,7 +43,7 @@
                 <div class="acc accept-offer-link">
                   <button class="accept woocommerce-offer-post-action-link woocommerce-offer-post-action-link-accept" data-target="{{ $id_offer }}">
                     <div class="div-loadmore">
-                      <i class="fas fa-spinner fa-spin"></i>
+                      <img class="w-4" src="@asset('images/ajax-loader.gif')" alt="spinner"/>
                     </div>
                     {{ _e('ACCEPT', 'sage') }}
                   </button>

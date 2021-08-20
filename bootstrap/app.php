@@ -34,7 +34,6 @@ collect([
     'acf',
     'notifications',
     'dokan-custom-functions',
-    'dokan-external-assets',
     'dokan-plugin-simple-auctions',
     'clean-dashboard',
     'ofw-bell-notifications',

@@ -18,14 +18,19 @@
   <div class="hidden items-center md:flex space-x-4">
     <p>
       <button data-store_id="1" class="btn btn--white dokan-store-support-btn flex items-center px-8 py-2 space-x-3 uppercase user_logged">
-        <span class="fab fa-telegram-plane"></span>
+        <img class="w-4" src="@asset('images/telegram-plane-brands.svg')" alt="plane"/>
         <span class="">Send Message</span>
       </button>
     </p>
+
     @if (is_user_logged_in())
       @php dokan_follow_store_get_template( 'follow-button', $args_btn_follow ) @endphp
     @else
-      <p><a href="{{  home_url('/log-in') }}" class="login_btn vender_action_btn" ><i class="far fa-heart"></i></a></p>
+      <p>
+        <a href="{{  home_url('/log-in') }}" class="login_btn vender_action_btn">
+          <img class="w-4" src="@asset('images/heart-regular.svg')" alt="heart"/>
+        </a>
+      </p>
     @endif
   </div>
   <div class="dokan-store-des">
