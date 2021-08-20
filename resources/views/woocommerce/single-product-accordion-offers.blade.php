@@ -32,23 +32,7 @@
 
             <div class="btn action_offer">
               @if ($post_status == 'publish')
-                <div class="dec decline-offer-link">
-                  <button class="decline woocommerce-offer-post-action-link woocommerce-offer-post-action-link-decline" data-target="{{ $id_offer }}">
-                    <div class="div-loadmore">
-                        <img class="w-4" src="@asset('images/ajax-loader.gif')" alt="spinner"/>
-                    </div>
-                    {{ _e('DECLINE', 'sage') }}
-                  </button>
-                </div>
-                <div class="acc accept-offer-link">
-                  <button class="accept woocommerce-offer-post-action-link woocommerce-offer-post-action-link-accept" data-target="{{ $id_offer }}">
-                    <div class="div-loadmore">
-                      <img class="w-4" src="@asset('images/ajax-loader.gif')" alt="spinner"/>
-                    </div>
-                    {{ _e('ACCEPT', 'sage') }}
-                  </button>
-                </div>
-
+                @include('woocommerce.single-product-accordion-offers-accept-decline-offer')
               @elseif ($post_status == 'accepted-offer')
                 <div class="acc">
                   <div class="woocommerce-offer-post-status-grid-icon accepted" title="{{ _e('Offer Status: Accepted', 'sage') }}">{{ _e('Accepted', 'sage') }}</div>
