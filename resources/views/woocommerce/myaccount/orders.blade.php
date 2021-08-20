@@ -26,12 +26,10 @@ do_action('woocommerce_before_account_orders', $has_orders);
     {{ _e('Order history', 'sage') }}
   </h1>
   @if ($has_orders)
-    <div>
-      <div class="grid gap-y-12">
-        @foreach ($customer_orders->orders as $customer_order)
-          @include('woocommerce.myaccount.orders-item')
-        @endforeach
-      </div>
+    <div class="grid gap-y-12">
+      @foreach ($customer_orders->orders as $customer_order)
+        @include('woocommerce.myaccount.orders-item')
+      @endforeach
     </div>
 
     @php do_action('woocommerce_before_account_orders_pagination') @endphp

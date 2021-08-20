@@ -1,4 +1,4 @@
-<table class="mt-4 w-full text-gray-500 sm:mt-6">
+<table class="w-full text-gray-500">
   <caption class="sr-only">
     {{ _e('Products', 'sage') }}
   </caption>
