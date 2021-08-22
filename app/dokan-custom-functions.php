@@ -71,8 +71,10 @@ function dokan_get_store_rating($seller_id)
 
     $rating = $vendor->get_rating($vendor->id);
     if (empty($all_comments)) {
-        $html =
-            '<p><i class="fa fa-star"></i>' .
+        $star = get_template_directory_uri().'/public/images/star-solid.svg';
+        $html = 
+            '<p class="flex items-center">' .
+            "<img src='$star' class='w-4 mr-2 inline-block'>".
             __(' No ratings found yet!', 'dokan-lite') .
             '</p>';
     } else {

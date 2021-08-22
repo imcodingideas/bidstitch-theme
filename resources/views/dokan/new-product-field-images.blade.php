@@ -3,7 +3,7 @@
     <div class="dokan-feat-image-upload">
       <div class="instruction-inside {{ $hide_instruction }}">
         <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="{{ $posted_img }}">
-        <i class="fa fa-cloud-upload"></i>
+        <img class="w-28 mx-auto mb-2" src="@asset('images/cloud-upload-alt-solid.svg')" alt="upload"/>
         <a href="#" class="dokan-feat-image-btn dokan-btn">{{ _e('Upload Product Image', 'dokan-lite') }}</a>
       </div>
 
@@ -27,7 +27,9 @@
             @endforeach
           @endif
           <li class="add-image add-product-images tips" data-title="{{ _e('Add gallery image', 'dokan-lite') }}">
-            <a href="#" class="add-product-images"><i class="fa fa-plus" aria-hidden="true"></i></a>
+            <a href="#" class="add-product-images flex justify-center">
+              <img class="w-4" src="@asset('images/plus-solid.svg')" alt="plus"/>
+            </a>
           </li>
         </ul>
         <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="">
