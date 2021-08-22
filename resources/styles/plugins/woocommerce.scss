@@ -10,6 +10,12 @@
   width: 100%;
 }
 
+.woocommerce-page img {
+  &.order__product__img {
+    @apply h-16 w-16;
+  }
+}
+
 // mini cart
 .woocommerce-mini-cart {
   &__remove {

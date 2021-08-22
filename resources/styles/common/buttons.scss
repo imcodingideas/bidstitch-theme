@@ -4,13 +4,13 @@
   &--md {
     @apply px-8 py-2;
   }
-  &--small {
-    @apply text-xs px-2.5 py-1.5;
+  &--sm {
+    @apply text-sm px-2.5 py-1.5;
   }
   &--black {
-    @apply text-white bg-black hover:bg-white hover:text-gray-700;
+    @apply text-white bg-black hover:bg-opacity-80;
   }
   &--white {
-    @apply bg-white border-black text-gray-700 hover:bg-black hover:text-gray-300;
+    @apply bg-white border border-gray-300 text-gray-700 hover:bg-gray-50;
   }
 }
