@@ -51,6 +51,7 @@ class ShopByCategory extends Composer
                 $categories[] = [
                     'link' => get_term_link($category),
                     'name' => $category->name,
+                    'image' => wp_get_attachment_url(get_woocommerce_term_meta( $category->term_id, 'thumbnail_id', true )),
                     'string_category' => $string_category,
                 ];
             }
