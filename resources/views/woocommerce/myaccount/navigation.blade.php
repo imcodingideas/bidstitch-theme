@@ -29,7 +29,8 @@ the readme will list any important changes.
               {{ $navigation[0]->label }}
             @endif
           </span>
-          <img aria-hidden="true" focusable="false" class="text-gray-400 ml-2 h-3 w-3 group-hover:text-gray-500"
+          <img aria-hidden="true" focusable="false"
+            class="transition-opacity opacity-60 ml-2 h-3 w-3 group-hover:opacity-80"
             src="@asset('images/chevron-down.svg')" alt="chevron-down" />
         </button>
         <x-dropdown-navigation :navigation="$navigation" type="left" />

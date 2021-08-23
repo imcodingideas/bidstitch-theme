@@ -7,7 +7,8 @@
             <button
               class="h-full flex items-center text-sm font-bold relative uppercase focus:outline-none px-2 lg:px-4 navigation__dropdown__toggle {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
               <span>{{ $item->label }}</span>
-              <img aria-hidden="true" focusable="false" class="text-gray-400 ml-2 h-3 w-3 group-hover:text-gray-500"
+              <img aria-hidden="true" focusable="false"
+                class="transition-opacity opacity-60 ml-2 h-3 w-3 group-hover:opacity-80"
                 src="@asset('images/chevron-down.svg')" alt="chevron-down" />
             </button>
             <x-dropdown-navigation :navigation="$item->children" type="center" />

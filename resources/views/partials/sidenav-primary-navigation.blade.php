@@ -5,7 +5,8 @@
         <button
           class="w-full p-4 flex items-center justify-between text-left mr-2 font-bold uppercase focus:outline-none sidenav__dropdown__toggle {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
           <span class="mr-2">{{ $item->label }}</span>
-          <img aria-hidden="true" focusable="false" class="text-gray-400 ml-2 h-3 w-3 group-hover:text-gray-500"
+          <img aria-hidden="true" focusable="false"
+            class="transition-opacity opacity-60 ml-2 h-3 w-3 group-hover:opacity-80"
             src="@asset('images/chevron-down.svg')" alt="chevron-down" />
         </button>
         <ul class="sidenav__dropdown__menu hidden bg-gray-50">
