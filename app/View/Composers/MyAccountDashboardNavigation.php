@@ -58,7 +58,7 @@ class MyAccountDashboardNavigation extends Composer
                 'url' => esc_url(wc_get_account_endpoint_url($endpoint)),
                 'classes' => $classes,
                 'active' => $is_active,
-                // Set childdren to support Log1x/Navi menu instances
+                // Set children to support Log1x/Navi menu instances
                 'children' => [],
                 // Set default target to support Log1x/Navi menu instances
                 'target' => ''
