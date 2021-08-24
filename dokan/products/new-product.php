@@ -80,11 +80,19 @@
                 /* change */
                 /* $can_create_tags  = dokan_get_option( 'product_vendors_can_create_tags', 'dokan_selling' ); */
                 /* $tags_placeholder = 'on' === $can_create_tags ? __( 'Select tags/Add tags', 'dokan-lite' ) : __( 'Select product tags', 'dokan-lite' ); */
+                
 
                 if ( $can_sell ) {
                     // change
-                    echo \Roots\view('dokan.new-product-form')->render();
-                } else { ?>
+                    if ( dokan_is_seller_enabled( get_current_user_id() ) ) { 
+                        echo \Roots\view('dokan.new-product-form')->render();
+                    } else { ?>
+                        <div class="dokan-alert dokan-alert">
+                            <?php echo esc_html( dokan_seller_not_enabled_notice() ); ?>
+                        </div>
+                    <?php } ?>
+
+                <?php } else { ?>
 
                     <?php do_action( 'dokan_can_post_notice' ); ?>
 

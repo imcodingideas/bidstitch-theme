@@ -11,7 +11,7 @@ class NewProductFieldFeaturedImage extends Composer
      *
      * @var array
      */
-    protected static $views = ['dokan.new-product-field-images'];
+    protected static $views = ['dokan.new-product-field-imagesxxx'];
 
     /**
      * Data to be passed to view before rendering.
@@ -20,23 +20,17 @@ class NewProductFieldFeaturedImage extends Composer
      */
     public function with()
     {
-        $posted_img = dokan_posted_input('feat_image_id');
-        $posted_img_url = $hide_instruction = '';
-        $hide_img_wrap = 'dokan-hide';
-        $gallery_items = $this->gallery();
-
-        if (!empty($posted_img)) {
-            $posted_img = empty($posted_img) ? 0 : $posted_img;
-            $posted_img_url = wp_get_attachment_url($posted_img);
-            $hide_instruction = 'dokan-hide';
-            $hide_img_wrap = '';
+        $feat_image_id = dokan_posted_input('feat_image_id');
+        if (!empty($feat_image_id)) {
+            $feat_image_url = wp_get_attachment_url($feat_image_id);
         }
+
+        $gallery_items = $this->gallery();
         return compact(
             'hide_instruction',
-            'posted_img',
-            'posted_img_url',
-            'hide_img_wrap',
-
+            'feat_image_id',
+            'feat_image_id_url',
+            'hide_feat_image',
             'gallery_items'
         );
     }

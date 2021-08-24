@@ -5,6 +5,6 @@
   </label>
   <div class="dokan-input-group">
     <span class="dokan-input-group-addon">{!! get_woocommerce_currency_symbol() !!}</span>
-    <input class="dokan-form-control wc_input_price dokan-product-regular-price" name="_regular_price" placeholder="0.00" id="_regular_price" value="{{ dokan_posted_input('_regular_price') }}">
+    <input class="dokan-form-control wc_input_price dokan-product-regular-price" name="_regular_price" placeholder="0.00" id="_regular_price" value="{{ $_regular_price }}">
   </div>
 </div>

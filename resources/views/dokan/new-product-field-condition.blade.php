@@ -7,7 +7,7 @@
       <option value="">{{ _e('Select a condition', 'dokan-lite') }}</option>
       @if (!empty($terms_condition))
         @foreach ($terms_condition as $term)
-          <option value="{{ $term->term_id }}">{{ $term->name }}</option>
+          <option {{ $term->term_id == $product_condition ? 'selected' : '' }} value="{{ $term->term_id }}">{{ $term->name }}</option>
         @endforeach
       @endif
     </select>

@@ -1,15 +1,15 @@
 <div class="content-half-part featured-image">
   <div class="featured-image">
     <div class="dokan-feat-image-upload">
-      <div class="instruction-inside {{ $hide_instruction }}">
-        <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="{{ $posted_img }}">
-        <img class="w-28 mx-auto mb-2" src="@asset('images/cloud-upload-alt-solid.svg')" alt="upload"/>
+      <div class="instruction-inside">
+        <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="{{ $feat_image_id }}">
+        <img class="w-28 mx-auto mb-2" src="@asset('images/cloud-upload-alt-solid.svg')" alt="upload" />
         <a href="#" class="dokan-feat-image-btn dokan-btn">{{ _e('Upload Product Image', 'dokan-lite') }}</a>
       </div>
 
-      <div class="image-wrap {{ $hide_img_wrap }}">
+      <div class="image-wrap {{ empty($feat_image_url) ? 'hidden' : '' }}">
         <a class="close dokan-remove-feat-image">&times;</a>
-        <img src="{{ $posted_img_url }}" alt="">
+        <img src="{{ $feat_image_url }}" alt="">
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
           @endif
           <li class="add-image add-product-images tips" data-title="{{ _e('Add gallery image', 'dokan-lite') }}">
             <a href="#" class="add-product-images flex justify-center">
-              <img class="w-4" src="@asset('images/plus-solid.svg')" alt="plus"/>
+              <img class="w-4" src="@asset('images/plus-solid.svg')" alt="plus" />
             </a>
           </li>
         </ul>

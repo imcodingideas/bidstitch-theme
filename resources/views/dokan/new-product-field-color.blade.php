@@ -4,7 +4,7 @@
       <option value="">{{ _e('Select a Color', 'dokan-lite') }}</option>
       @if (!empty($terms_color))
         @foreach ($terms_color as $term)
-          <option value="{{ $term->term_id }}">{{ $term->name }}</option>
+          <option {{ $term->term_id == $product_color ? 'selected' : '' }} value="{{ $term->term_id }}">{{ $term->name }}</option>
         @endforeach
       @endif
     </select>
