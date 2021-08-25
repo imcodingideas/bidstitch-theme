@@ -100,9 +100,14 @@ Requires
 
 ### Auctions for Woocommerce
 
-This plugin comes from codecanyon 
+woocommerce-simple-auctions 2.0.4
 
-woocommerce-simple-auctions customized, based on 1.2.40
+WooCommerce Simple Auctions plugin enables you to create professional auction website or Ebay clone with regular, proxy, sealed (silent) and reverse auctions along with your normal products.
+
+https://codecanyon.net/item/woocommerce-simple-auctions-wordpress-auctions/6811382 
+
+* This plugin was previously customized, based on 1.2.40
+* Custom functionality is in process of being migrated
 
 ### Paypal Woocommerce
 
@@ -111,10 +116,6 @@ paypal-woocommerce 2.5.11
 ### Paypal Multi Account
 
 paypal-for-woocommerce-multi-account-management 3.1.0
-
-### WooCommerce Simple Auction
-
-woocommerce-simple-auctions ( git )
 
 ### WOOF - WooCommerce Products Filter
 
