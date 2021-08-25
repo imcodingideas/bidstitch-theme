@@ -71,3 +71,40 @@ add_filter('woocommerce_sale_flash', function () {
     return false;
 });
 
+// update dashboard menu items
+add_filter('woocommerce_account_menu_items', function ($items) {
+    $new_items = $items;
+
+    foreach($new_items as $endpoint => $data) {
+        switch ($endpoint) {
+            // remove unwanted items
+            case 'customer-logout':
+            case 'downloads':
+            case 'support-tickets':
+                unset($new_items[$endpoint]);
+                break;
+
+            // update existing items
+            case 'dashboard':
+                $new_items[$endpoint] = __('My Account', 'txtdomain');
+                break;
+            case 'orders':
+                $new_items[$endpoint] = __('Purchase History', 'txtdomain');
+                break;
+            case 'following':
+                $new_items[$endpoint] = __('Following', 'txtdomain');
+                break;
+            case 'edit-account':
+                $new_items[$endpoint] = __('Account Settings', 'txtdomain');
+                break;
+                
+            default:
+                break;
+        }
+    }
+
+    return $new_items;
+}, 11, 1);
+
+// remove my account nav
+remove_action('woocommerce_account_navigation', 'woocommerce_account_navigation');
