@@ -18,6 +18,6 @@
       @foreach ($subcategory_terms as $term)
         <option {{ $term->term_id == $product_cat_sub ? 'selected' : '' }} value="{{ $term->term_id }}" slug="{{ $term->slug }}">{{ $term->name }}</option>
       @endforeach
+    @endif
   </select>
-  @endif
 </div>

@@ -98,6 +98,8 @@ class EditProductForm extends Composer
             $product_condition = dokan_posted_input('product_condition');
             $product_cat = dokan_posted_input('product_cat');
             $product_cat_sub = dokan_posted_input('product_cat_sub');
+            $product_size = dokan_posted_input('product_size');
+            $product_color = dokan_posted_input('product_color');
             $tees_tip = dokan_posted_input('tees_tip ');
             $tees_length = dokan_posted_input('tees_length ');
             $tees_tag_type = dokan_posted_input('tees_tag_type ');
