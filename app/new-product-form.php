@@ -120,8 +120,7 @@ function saveproductdata($product_id, $postdata)
         wp_set_post_terms(
             $product_id,
             $postdata['product_size'],
-            'product_size',
-            true
+            'product_size'
         );
     }
 
@@ -129,16 +128,14 @@ function saveproductdata($product_id, $postdata)
         wp_set_post_terms(
             $product_id,
             $postdata['product_color'],
-            'product_color',
-            true
+            'product_color'
         );
     }
     if (!empty($postdata['product_condition'])) {
         wp_set_post_terms(
             $product_id,
             $postdata['product_condition'],
-            'product_condition',
-            true
+            'product_condition'
         );
     }
 }

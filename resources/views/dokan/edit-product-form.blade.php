@@ -33,10 +33,22 @@
     </div>
   </div>
 
-  @php do_action( 'dokan_new_product_form' ) @endphp
+  @php do_action( 'dokan_new_product_form', $post, $post_id )@endphp
+  {{-- @php do_action( 'dokan_product_edit_after_main', $post, $post_id )@endphp --}}
+  {{-- @php do_action( 'dokan_product_edit_after_inventory_variants', $post, $post_id )@endphp --}}
+  <input type="hidden" name="_enable_reviews" value="" />
+  <input type="hidden" name="_stock_status" value="" />
+  <input type="hidden" name="_sku" value="" />
+
+  @if ($post_id)
+    @php do_action( 'dokan_product_edit_after_options', $post_id )@endphp
+  @endif
+  @php wp_nonce_field( 'dokan_edit_product', 'dokan_edit_product_nonce' )@endphp
 
   <input type="hidden" name="post_excerpt" />
   <div class="submit-save-pro">
+    <input type="hidden" name="dokan_product_id" id="dokan-edit-product-id" value="{{ $post_id }}" />
+    <input type="hidden" id="product_type" name="product_type" value="simple">
     <input type="hidden" id="_stock" name="_stock" value="<?php echo $_stock; ?>">
     <input type="hidden" id="_manage_stock" name="_manage_stock" value="<?php echo $_manage_stock; ?>">
     <input type="hidden" id="_backorders" name="_backorders" value="<?php echo $_backorders; ?>">

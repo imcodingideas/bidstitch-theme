@@ -24,7 +24,6 @@ class EditProductForm extends Composer
     public function with()
     {
         global $post;
-
         if (isset($post->ID) && $post->ID && 'product' == $post->post_type) {
             $post_id = $post->ID;
             $post_title = $post->post_title;
@@ -61,10 +60,10 @@ class EditProductForm extends Composer
             $product_size = $term_condition ? $term_condition[0] : '';
 
             // current color
-            $term_condition = wp_get_post_terms($post_id, 'product_color', [
+            $term_color = wp_get_post_terms($post_id, 'product_color', [
                 'fields' => 'ids',
             ]);
-            $product_color = $term_condition ? $term_condition[0] : '';
+            $product_color = $term_color ? $term_color[0] : '';
 
             // other fields
             $tees_tip = get_post_meta($post_id, 'tees_tip', true);
@@ -87,7 +86,12 @@ class EditProductForm extends Composer
             $_stock = get_post_meta($post_id, '_stock', true);
             $_manage_stock = get_post_meta($post_id, '_manage_stock', true);
             $_backorders = get_post_meta($post_id, '_backorders', true);
+            $_enable_reviews = get_post_meta($post_id, '_enable_reviews', true);
+            $_stock_status = get_post_meta($post_id, '_stock_status', true);
+            $_sku = get_post_meta($post_id, '_sku', true);
         } else {
+            $post_id = null;
+            $post = null;
             // when page is new product
             $post_title = dokan_posted_input('post_title');
             $post_content = dokan_posted_input('post_content');
@@ -112,6 +116,9 @@ class EditProductForm extends Composer
             $_stock = '';
             $_manage_stock = '';
             $_backorders = '';
+            $_enable_reviews = '';
+            $_stock_status = '';
+            $_sku = '';
         }
 
         // condition terms
@@ -162,7 +169,12 @@ class EditProductForm extends Composer
             'gallery_items',
             '_stock',
             '_manage_stock',
-            '_backorders'
+            '_backorders',
+            '_enable_reviews',
+            '_stock_status',
+            '_sku',
+            'post',
+            'post_id'
         );
     }
 
