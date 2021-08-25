@@ -67,13 +67,40 @@ dokan-pro 3.3.3
 
 ### Offers for Woocommerce
 
-offers-for-woocommerce 2.3.6
+offers-for-woocommerce 2.3.8
+
+https://github.com/angelleye/offers-for-woocommerce
+
+update: 
+
+```
+git clone git@github.com:angelleye/offers-for-woocommerce.git
+wp plugin deactivate offers-for-woocommerce
+wp plugin activate offers-for-woocommerce
+```
 
 ### Offers for Woocommerce Dokan
 
 offers-for-woocommerce-dokan 1.0.0
 
+https://github.com/angelleye/offers-for-woocommerce-dokan
+
+Update:
+
+```
+git clone git@github.com:angelleye/offers-for-woocommerce-dokan.git
+wp plugin deactivate offers-for-woocommerce-dokan
+wp plugin activate offers-for-woocommerce-dokan
+```
+
+Requires
+
+- Offers For Woocommerce
+- WooCommerce Simple Auction
+
 ### Auctions for Woocommerce
+
+This plugin comes from codecanyon 
 
 woocommerce-simple-auctions customized, based on 1.2.40
 
@@ -110,12 +137,18 @@ Wishlist page options
 - Add shortcode in such page `[yith_wcwl_wishlist]`
 - Remove "Share wishlist"
 
+### User Switching 
+
+Instant switching between user accounts in WordPress.
+Allows admin to switch to another user for support
+
+user-switching 1.5.7
+
 ### Others
 
 May not be essential
 
 - safe-svg 1.9.9
-- user-switching 1.5.7
 - wpdiscuz 7.2.2
 - wp-user-avatar custom
 
