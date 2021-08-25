@@ -32,6 +32,7 @@ collect([
     'admin',
     'woocommerce',
     'acf',
+    'dokan',
     'dokan-custom-functions',
     'dokan-plugin-simple-auctions',
     'clean-dashboard',
