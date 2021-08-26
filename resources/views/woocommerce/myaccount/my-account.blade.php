@@ -1,5 +1,4 @@
-{{-- 
-My Account page
+{{-- My Account page
 
 This template can be overridden by copying it to yourtheme/woocommerce/myaccount/my-account.php.
 
@@ -11,23 +10,6 @@ the readme will list any important changes.
 
 @see     https://docs.woocommerce.com/document/template-structure/
 @package WooCommerce\Templates
-@version 3.5.0 
---}}
+@version 3.5.0 --}}
 
-<div class="bg-gray-100">
-  <div class="lg:container">
-    <div class="flex flex-wrap lg:flex-nowrap min-h-screen">
-      <div class="w-full lg:w-72 lg:border-r relative">
-        <div class="hidden lg:block bg-white right-0 w-screen h-screen absolute"></div>
-        <div class="relative">
-          @if (is_user_logged_in())
-            @include('woocommerce.myaccount.navigation')
-          @endif
-        </div>
-      </div>
-      <div class="w-full mx-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-full lg:mx-0 p-8">
-        @php do_action('woocommerce_account_content') @endphp
-      </div>
-    </div>
-  </div>
-</div>
+@php do_action('woocommerce_account_content') @endphp
