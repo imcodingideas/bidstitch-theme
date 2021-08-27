@@ -112,7 +112,9 @@ class MiniCart extends Composer
                     'remove_link' => apply_filters(
                         'woocommerce_cart_item_remove_link',
                         sprintf(
-                            '<a href="%s" class="woocommerce-mini-cart__remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">&times;</a>',
+                            '<a href="%s" class="woocommerce-mini-cart__remove remove_from_cart_button" aria-label="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                            </a>',
                             esc_url(wc_get_cart_remove_url($cart_item_key)),
                             esc_attr__('Remove this item', 'woocommerce'),
                             esc_attr($product_id),
