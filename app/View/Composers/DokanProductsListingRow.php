@@ -62,7 +62,7 @@ class DokanProductsListingRow extends Composer
             ],
         ]);
 
-        return wp_kses($product->get_image('thumbnail'), $img_kses);
+        return wp_kses($product->get_image('thumbnail', ['class' => 'w-full h-full object-cover']), $img_kses);
     }
 
     function offers_enabled() {
