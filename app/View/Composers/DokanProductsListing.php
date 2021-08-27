@@ -112,8 +112,6 @@ class DokanProductsListing extends Composer
                 'format' => '?pagenum=%#%',
                 'add_args' => false,
                 'type' => 'array',
-                'prev_text' => _e('Prev', 'sage'),
-                'next_text' => _e('Next', 'sage')
             ]);
         }
 
