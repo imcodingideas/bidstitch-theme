@@ -5,7 +5,7 @@ namespace App\View\Composers;
 use Roots\Acorn\View\Composer;
 
 use function App\bidstitch_get_notification_description;
-use function App\bidstitch_get_notifications_for_user;
+use function App\bidstitch_get_unread_notifications_for_user;
 
 class HeaderNotifications extends Composer
 {
@@ -31,7 +31,7 @@ class HeaderNotifications extends Composer
     {
         $notifications = [];
         foreach (
-            bidstitch_get_notifications_for_user(get_current_user_id())
+            bidstitch_get_unread_notifications_for_user(get_current_user_id())
             as $notification
         ) {
             $post_object = get_post($notification->product_id);

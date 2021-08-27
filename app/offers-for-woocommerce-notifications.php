@@ -134,13 +134,26 @@ function bidstitch_get_notification_description($name)
     }
 }
 
-function bidstitch_get_notifications_for_user($user_id)
+function bidstitch_get_unread_notifications_for_user($user_id)
 {
     global $wpdb;
     $prefix = $wpdb->base_prefix;
     $query = $wpdb->prepare(
-        "select * from {$prefix}user_notifications where user_receieve_id = %d order by ID desc",
+        "select * from {$prefix}user_notifications where user_receieve_id = %d and status = 0 order by ID desc",
         $user_id
     );
     return $wpdb->get_results($query);
+}
+
+function bidstitch_get_unread_notifications_for_user_count($user_id)
+{
+    global $wpdb;
+    $prefix = $wpdb->base_prefix;
+
+    $query = $wpdb->prepare(
+        "select count(*) from {$prefix}user_notifications where user_receieve_id = %d and status = 0",
+        $user_id
+    );
+
+    return $wpdb->get_var($query);
 }

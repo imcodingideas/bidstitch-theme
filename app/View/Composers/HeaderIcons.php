@@ -28,27 +28,8 @@ class HeaderIcons extends Composer
                 'link_page_all_notification',
                 'option'
             ),
-            'notifications_count' => $this->notifications_count(),
             'cart_url' => wc_get_cart_url(),
             'cart_count' => WC()->cart->cart_contents_count,
         ];
-    }
-    public function notifications_count()
-    {
-        if (!is_user_logged_in()) {
-            return 0;
-        }
-
-        $user_id = get_current_user_id();
-        global $wpdb;
-        $query = $wpdb->get_row(
-            "SELECT count(*) as count FROM `{$wpdb->base_prefix}user_notifications` WHERE user_receieve_id = $user_id and status = 0"
-        );
-
-        if (isset($query->count)) {
-            return $query->count;
-        }
-
-        return 0;
     }
 }

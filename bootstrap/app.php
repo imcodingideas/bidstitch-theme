@@ -36,6 +36,7 @@ collect([
     'dokan-custom-functions',
     'clean-dashboard',
     'offers-for-woocommerce-notifications',
+    'offers-for-woocommerce-notifications-ajax',
     'shipping-rates-editor',
     'new-product-form'
 ])->each(function ($file) {
