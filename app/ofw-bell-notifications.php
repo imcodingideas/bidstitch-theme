@@ -56,7 +56,7 @@ add_action('angelleye_offer_for_woocommerce_before_email_send', function ( $offe
         }
     }
 
-}, 10, 2);
+}, 9, 2);
 
 /**
  * Get user_id by email.
