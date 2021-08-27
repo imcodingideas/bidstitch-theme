@@ -1,0 +1,1 @@
+<?php echo \Roots\view('dokan.products.products-listing', ['is_auction' => true])->render();
