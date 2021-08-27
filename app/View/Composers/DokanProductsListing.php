@@ -40,7 +40,7 @@ class DokanProductsListing extends Composer
         return dokan_get_navigation_url($is_auction ? 'new-auction-product' : 'new-product');
     }
 
-    function pagenum() {
+    function get_page_num_param() {
         return isset($_GET['pagenum']) ? absint($_GET['pagenum']) : 1;
     }
 
@@ -56,7 +56,7 @@ class DokanProductsListing extends Composer
         $is_auction = $this->is_auction();
         $user_id = get_current_user_id();
 
-        $pagenum = $this->pagenum();
+        $pagenum = $this->get_page_num_param();
         $post_statuses = $this->post_statuses();
         $get_data = wp_unslash($_GET);
 
@@ -98,7 +98,7 @@ class DokanProductsListing extends Composer
 
     public function pagination($product_query) {
         $is_auction = $this->is_auction();
-        $pagenum = $this->pagenum();
+        $pagenum = $this->get_page_num_param();
 
         $base_url = dokan_get_navigation_url($is_auction ? 'auction' : 'products');
 
