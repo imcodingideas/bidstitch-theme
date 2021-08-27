@@ -40,16 +40,15 @@ class HeaderIcons extends Composer
         }
 
         $user_id = get_current_user_id();
-        $notifications_count = 0;
         global $wpdb;
         $query = $wpdb->get_row(
-            "SELECT count(*) as count FROM `{$wpdb->base_prefix}user_notifications` WHERE user_receieve_id = $user_id and status = 0 Order by created_at DESC "
+            "SELECT count(*) as count FROM `{$wpdb->base_prefix}user_notifications` WHERE user_receieve_id = $user_id and status = 0"
         );
 
         if (isset($query->count)) {
-            $notifications_count = $query->count;
+            return $query->count;
         }
 
-        return $notifications_count;
+        return 0;
     }
 }

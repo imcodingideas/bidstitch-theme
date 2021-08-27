@@ -4,6 +4,9 @@ namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
 
+use function App\bidstitch_get_notification_description;
+use function App\bidstitch_get_notifications_for_user;
+
 class HeaderNotifications extends Composer
 {
     /**
@@ -21,34 +24,28 @@ class HeaderNotifications extends Composer
     public function with()
     {
         return [
-            'products' => [
-                [
-                    'title' => 'Offer declined',
-                    'text' =>
-                        'MSI Radeon RX Vega 56 8G Reference Graphics Card',
-                    'thumbnail' =>
-                        'https://bidstitchprod.s3.amazonaws.com/uploads/2021/07/9020_1024x1024@2x-220x220.jpg',
-                    'link' => '#',
-                    'isOffer' => false,
-                ],
-                [
-                    'title' => 'Offer accepted',
-                    'text' =>
-                        'Deadstock Toy Story 2 & 1 Double Feature 3D Movie Promo Disney Pixar T Shirt XL',
-                    'thumbnail' =>
-                        'https://bidstitchprod.s3.amazonaws.com/uploads/2021/07/9020_1024x1024@2x-220x220.jpg',
-                    'link' => '#',
-                    'isOffer' => false,
-                ],
-                [
-                    'title' => 'Offer declined ',
-                    'text' => 'Buffy the Vampire Slayer Tee',
-                    'thumbnail' =>
-                        'https://bidstitchprod.s3.amazonaws.com/uploads/2021/07/9020_1024x1024@2x-220x220.jpg',
-                    'link' => '#',
-                    'isOffer' => true,
-                ],
-            ],
+            'user_notifications' => $this->user_notifications(),
         ];
+    }
+    function user_notifications()
+    {
+        $notifications = bidstitch_get_notifications_for_user(
+            get_current_user_id()
+        );
+        return array_map(function ($notification) {
+            $product = get_post($notification->product_id);
+            return [
+                'title' => bidstitch_get_notification_description(
+                    $notification->detail_type
+                ),
+                'text' => $product->post_title,
+                'thumbnail' => get_the_post_thumbnail_url(
+                    $product->ID,
+                    'thumbnail'
+                ),
+                'link' => get_permalink($product->ID),
+                'isOffer' => $notification->type == 'offer',
+            ];
+        }, $notifications);
     }
 }

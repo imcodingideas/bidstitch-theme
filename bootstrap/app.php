@@ -34,10 +34,8 @@ collect([
     'acf',
     'dokan',
     'dokan-custom-functions',
-    'dokan-plugin-simple-auctions',
     'clean-dashboard',
     'offers-for-woocommerce-notifications',
-    'ofw-bell-notifications',
     'shipping-rates-editor',
     'new-product-form'
 ])->each(function ($file) {
