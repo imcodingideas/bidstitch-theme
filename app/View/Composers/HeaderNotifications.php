@@ -29,23 +29,27 @@ class HeaderNotifications extends Composer
     }
     function user_notifications()
     {
-        $notifications = bidstitch_get_notifications_for_user(
-            get_current_user_id()
-        );
-        return array_map(function ($notification) {
-            $product = get_post($notification->product_id);
-            return [
-                'title' => bidstitch_get_notification_description(
-                    $notification->detail_type
-                ),
-                'text' => $product->post_title,
-                'thumbnail' => get_the_post_thumbnail_url(
-                    $product->ID,
-                    'thumbnail'
-                ),
-                'link' => get_permalink($product->ID),
-                'isOffer' => $notification->type == 'offer',
-            ];
-        }, $notifications);
+        $notifications = [];
+        foreach (
+            bidstitch_get_notifications_for_user(get_current_user_id())
+            as $notification
+        ) {
+            $post_object = get_post($notification->product_id);
+            if ($post_object) {
+                $notifications[] = [
+                    'title' => bidstitch_get_notification_description(
+                        $notification->detail_type
+                    ),
+                    'text' => $post_object->post_title,
+                    'thumbnail' => get_the_post_thumbnail_url(
+                        $post_object->ID,
+                        'thumbnail'
+                    ),
+                    'link' => get_permalink($post_object->ID),
+                    'isOffer' => $notification->type == 'offer',
+                ];
+            }
+        }
+        return $notifications;
     }
 }
