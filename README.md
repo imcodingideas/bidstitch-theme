@@ -79,6 +79,11 @@ wp plugin deactivate offers-for-woocommerce
 wp plugin activate offers-for-woocommerce
 ```
 
+Configuration:
+
+- Form display type = lightbox
+
+
 ### Offers for Woocommerce Dokan
 
 offers-for-woocommerce-dokan 1.0.0
