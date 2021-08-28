@@ -25,7 +25,7 @@
             @endif
           @endforeach
         </ul>
-      @else
+        @else
         <a class="w-full px-6 py-3 flex items-center mr-2 font-bold uppercase {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}"
           href="{{ $item->url }}" target="{{ $item->target }}">{{ $item->label }}</a>
       @endif

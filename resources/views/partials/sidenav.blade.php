@@ -9,7 +9,7 @@
   <div class="fixed inset-0 z-40 hidden sidenav pr-20">
     <div class="fixed inset-0 bg-black bg-opacity-75 sidenav__toggle"></div>
     <div class="relative flex max-w-xs w-full bg-white">
-      <div class="container fixed top-4 left-0 right-0 flex justify-end">
+      <div class="container fixed top-2 left-0 right-0 flex justify-end">
         <button class="flex items-center justify-center h-8 w-8 focus:outline-none sidenav__toggle">
           <span class="sr-only">Close sidebar</span>
           <svg class="w-full text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -21,8 +21,20 @@
       <div class="h-screen relative overflow-y-auto w-full">
         <nav>
           <ul>
-            @if (has_nav_menu('myaccount_navigation') && is_user_logged_in())
-              @include('partials.sidenav-myaccount-navigation')
+            @if (is_user_logged_in())
+              @if (has_nav_menu('myaccount_navigation'))
+                @include('partials.sidenav-myaccount-navigation')
+              @endif
+              @else
+              <li class="border-b grid grid-cols-2">
+                <a class="w-full px-6 py-3 flex items-center mr-2 font-bold uppercase justify-center border-r"
+                  href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
+                <a class="w-full px-6 py-3 flex items-center mr-2 font-bold uppercase justify-center"
+                  href="{{ esc_url(wp_registration_url(home_url())) }}">{{ _e('Sign Up', 'sage') }}</a>
+              </li>
+            @endif
+            @if (has_nav_menu('header_navigation'))
+              @include('partials.sidenav-navigation')
             @endif
             @if (has_nav_menu('primary_navigation'))
               @include('partials.sidenav-primary-navigation')
