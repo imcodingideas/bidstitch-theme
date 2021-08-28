@@ -1,39 +1,50 @@
 <header class="sticky top-0 bg-white z-30">
   <div class="border-b">
-    <div class="container flex justify-between items-center h-16 lg:h-20 lg:justify-start">
-      <h1 class="header-logo text-xl lg:text-3xl text-black leading-none tracking-widest">
+    <div class="container flex justify-between items-center h-12 lg:h-20 lg:justify-start">
+      <h1 class="header-logo text-2xl lg:text-3xl text-black leading-none tracking-widest">
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
-      @include('partials.header-search')
-      <div class="hidden lg:flex h-full ml-auto">
-        @if (has_nav_menu('header_navigation'))
-          @include('partials.header-navigation')
+      <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0">
+        @include('partials.header-search')
+      </div>
+      <div class="h-full ml-auto flex">
+        @if (is_user_logged_in())
+          <div class="mr-4">
+            @include('partials.header-icons')
+          </div>
+          @if (has_nav_menu('myaccount_navigation'))
+            <div class="h-full relative items-center navigation__dropdown hidden lg:flex lg:h-full">
+              @include('partials.header-avatar')
+              @include('partials.header-myaccount-navigation')
+            </div>
+          @endif
+          @else
+          <div class="flex items-center space-x-2 mr-4 lg:space-x-4 lg:mr-0">
+            <a class="btn btn--black text-sm px-2 py-1 lg:px-3 lg:py-2"
+              href="{{ esc_url(wp_registration_url(home_url())) }}">{{ _e('Sign Up', 'sage') }}</a>
+            <a class="btn btn--white text-sm hidden px-2 py-1 lg:px-3 lg:py-2 lg:flex"
+              href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
+          </div>
         @endif
       </div>
-      @if (has_nav_menu('myaccount_navigation') && is_user_logged_in())
-        <div class="h-full relative hidden ml-4 lg:flex lg:items-center navigation__dropdown">
-          @include('partials.header-avatar')
-          @include('partials.header-myaccount-navigation')
-        </div>
-      @endif
       @include('partials.sidenav')
     </div>
   </div>
   <div class="border-b">
-    <div class="container flex items-center h-12 justify-between">
-      @if (has_nav_menu('primary_navigation'))
-        @include('partials.header-primary-navigation')
-      @endif
-      <div class="flex lg:hidden h-full">
-        @if (has_nav_menu('header_navigation'))
-          @include('partials.header-navigation')
-        @endif
+    <div class="container flex items-center h-10 lg:h-12">
+      <div class="h-full w-full">
+        <div class="h-full w-full flex items-center lg:hidden">
+          @include('partials.header-search')
+        </div>
+        <div class="hidden lg:flex lg:h-full lg:justify-between">
+          @if (has_nav_menu('primary_navigation'))
+            @include('partials.header-primary-navigation')
+          @endif
+          @if (has_nav_menu('header_navigation'))
+            @include('partials.header-navigation')
+          @endif
+        </div>
       </div>
-      @if (is_user_logged_in())
-        @include('partials.header-icons')
-      @else
-        @include('partials.header-register-navigation')
-      @endif
     </div>
   </div>
 </header>
