@@ -1,7 +1,7 @@
 <ul class="flex flex-col space-y-2 relative">
   @if (!empty($user_notifications))
     @foreach ($user_notifications as $user_notification)
-      <li class="border-b flex justify-between mb-2 pb-2">
+      <li class="border-b flex justify-between mb-2 pb-2" id="header-notifications__item-{{ $user_notification['id'] }}">
         <div class="w-3/12">
           <a href="{{ $user_notification['link'] }}">
             <img src="{!! $user_notification['thumbnail'] !!}" alt="thumbnail" />
@@ -21,7 +21,7 @@
             </div>
           @endif
         </div>
-        <div class="cursor-pointer">
+        <div class="cursor-pointer header-notifications__mark-as-read" data-id="{{ $user_notification['id'] }}">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>

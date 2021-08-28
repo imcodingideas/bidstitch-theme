@@ -157,3 +157,17 @@ function bidstitch_get_unread_notifications_for_user_count($user_id)
 
     return $wpdb->get_var($query);
 }
+
+// notification: mark as read
+function bidstitch_notification_mark_as_read($id)
+{
+    global $wpdb;
+    $prefix = $wpdb->base_prefix;
+    return $wpdb->update(
+        "{$prefix}user_notifications",
+        ['status' => 1],
+        ['id' => $id],
+        ['%d'],
+        ['%d']
+    );
+}
