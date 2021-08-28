@@ -108,3 +108,6 @@ add_filter('woocommerce_account_menu_items', function ($items) {
 
 // remove my account nav
 remove_action('woocommerce_account_navigation', 'woocommerce_account_navigation');
+
+// remove vendor registration from my account page
+remove_action( 'woocommerce_register_form', 'dokan_seller_reg_form_fields' );
