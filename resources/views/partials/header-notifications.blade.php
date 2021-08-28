@@ -1,4 +1,4 @@
-<ul class="flex flex-col space-y-2">
+<ul class="flex flex-col space-y-2 relative">
   @if (!empty($user_notifications))
     @foreach ($user_notifications as $user_notification)
       <li class="border-b flex justify-between mb-2 pb-2">

@@ -37,18 +37,25 @@ export default function () {
   }
 
   // on hover
+  let timeout;
+  let isVisible = false;
   const registerIconHover = () => {
-    let timeout;
     $("#header-notifications-icon").hover(() => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
-        $('#header-notifications').slideDown('fast');
-        fetchNotifications();
-      }, 50);
+        if (!isVisible) {
+          isVisible = true;
+          fetchNotifications();
+          $('#header-notifications').slideDown('fast');
+        }
+      });
     }, () => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
-        $('#header-notifications').slideUp('fast');
+        if (isVisible) {
+          isVisible = false;
+          $('#header-notifications').slideUp('fast');
+        }
       }, 500);
     });
   }
