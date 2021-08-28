@@ -1,0 +1,15 @@
+.navigation__dropdown {
+  .navigation__dropdown__menu {
+    @apply transition-all invisible opacity-0;
+  }
+  &:hover {
+    .navigation__dropdown__menu {
+      @apply lg:visible lg:opacity-100;
+    }
+  }
+  &--active {
+    .navigation__dropdown__menu {
+      @apply visible opacity-100;
+    }
+  }
+}

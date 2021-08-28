@@ -11,12 +11,10 @@ export default function() {
 
     // Handle dropdown close on outside click
     const handleDropdownOutsideClick = (e) => {
-      const targetNode = $('.navigation__dropdown__menu--active');
-      const parentNode = $(targetNode).parent(domNodes.navigationDropdown);
+      const targetNode = $('.navigation__dropdown--active');
 
-      if (!parentNode.is(e.target) && parentNode.has(e.target).length === 0) {
-        targetNode.fadeOut('fast');
-        targetNode.removeClass('navigation__dropdown__menu--active');
+      if (!targetNode.is(e.target) && targetNode.has(e.target).length === 0) {
+        targetNode.removeClass('navigation__dropdown--active');
 
         // Make sure to remove event listener
         return document.removeEventListener('click', handleDropdownOutsideClick);
@@ -27,39 +25,22 @@ export default function() {
     $(domNodes.navigationDropdownToggle).click(function() {
       // Only add click event listener for mobile devices
       if (isMobile()) {
-        const targetNode = $(this).next(domNodes.navigationDropdownMenu);
+        const targetNode = $(this).parent(domNodes.navigationDropdown);
 
         // Hide other open dropdowns
-        const currentNodes = $('.navigation__dropdown__menu--active').not(targetNode);
-        currentNodes.fadeOut('fast');
-        currentNodes.removeClass('navigation__dropdown__menu--active');
+        const currentNodes = $('.navigation__dropdown--active').not(targetNode);
+        currentNodes.removeClass('navigation__dropdown--active');
 
-        if (targetNode.hasClass('navigation__dropdown__menu--active')) {
-          targetNode.fadeOut('fast');
-          targetNode.removeClass('navigation__dropdown__menu--active');
+        if (targetNode.hasClass('navigation__dropdown--active')) {
+          targetNode.removeClass('navigation__dropdown--active');
         } else {
-          targetNode.fadeIn('fast');
-          targetNode.addClass('navigation__dropdown__menu--active');
+          targetNode.addClass('navigation__dropdown--active');
 
           // Add close event listeners
           document.addEventListener('click', handleDropdownOutsideClick);
         }
       }
     });
-
-    // Handle navigation dropdown hover toggle
-    $(domNodes.navigationDropdown).hover(
-      function() {
-        // Only add hover event listener for desktop devices
-        !isMobile() && 
-        $(this).find(domNodes.navigationDropdownMenu).fadeIn('fast')
-      },
-      function() {
-        // Only add hover event listener for desktop devices
-        !isMobile() && 
-        $(this).find(domNodes.navigationDropdownMenu).fadeOut('fast')
-      }
-    );
   });
 }
 

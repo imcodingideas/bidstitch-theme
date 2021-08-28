@@ -1,6 +1,6 @@
 @if ($navigation)
   <div
-    {{ $attributes->merge(['class' => 'z-50 absolute top-full w-44 bg-white border hidden navigation__dropdown__menu ' . $type]) }}
+    {{ $attributes->merge(['class' => "z-50 absolute top-full w-44 bg-white border navigation__dropdown__menu $type"]) }}
     role="menu" tabindex="-1">
     @foreach ($navigation as $item)
       <div class="border-b last:border-b-0 border-gray-200">
