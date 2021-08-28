@@ -38,6 +38,8 @@ class HeaderNotifications extends Composer
             if ($post_object) {
                 $notifications[] = [
                     'id' => $notification->id,
+                    'product_id' => $notification->product_id,
+                    'id_offer' => $notification->id_offer,
                     'title' => bidstitch_get_notification_description(
                         $notification->detail_type
                     ),

@@ -35,7 +35,10 @@ export default function () {
       },
       function (response) {
         $('#header-notifications').html(response);
+        // this has to be registered here, doesn't exist on first render
         registerMarkNotificationAsReadOnClick();
+        registerAccept();
+        registerDecline();
       }
     );
   }
@@ -88,6 +91,48 @@ export default function () {
         $(`#header-notifications__item-${id}`).fadeOut('slow');
         // send post request
         markAsReadAjax(id)
+      }
+    )
+  }
+
+  // accept
+  const registerAccept = () => {
+    $('.header-notifications__accept').click(
+      (event) => {
+        setAsLoading();
+        const target = $(event.currentTarget).data('target')
+        $.post(
+          // localized global variable
+          bidstitchSettings.ajaxUrl,
+          {
+            'action': 'approveOfferFromGrid',
+            'targetID': target
+          },
+          function (response) {
+            fetchNotificationsContent();
+          }
+        );
+      }
+    )
+  }
+
+  // decline
+  const registerDecline = () => {
+    $('.header-notifications__decline').click(
+      (event) => {
+        setAsLoading();
+        const target = $(event.currentTarget).data('target')
+        $.post(
+          // localized global variable
+          bidstitchSettings.ajaxUrl,
+          {
+            'action': 'declineOfferFromGrid',
+            'targetID': target
+          },
+          function (response) {
+            fetchNotificationsContent();
+          }
+        );
       }
     )
   }
