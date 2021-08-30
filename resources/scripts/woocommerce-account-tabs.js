@@ -1,28 +1,68 @@
+import jQuery from 'jquery';
 export default function () {
-let tabsContainer = document.querySelector("#tabs");
+  jQuery(document).ready(function($) {
+    const domNodes = {
+      tabsItem: '.account__tabs__item',
+      tabsToggle: '.account__tabs__toggle',
+      tabsContent: '.account__tabs__content'
+    };
 
-let tabTogglers = tabsContainer.querySelectorAll("#tabs a");
+    const classList = {
+      activeItemClass: 'block',
+      inactiveItemClass: 'hidden',
+      activeToggleClass: 'bg-white',
+      inactiveToggleClass: 'bg-gray-100',
+    };
 
-console.log(tabTogglers);
+    function handleHashChange() {
+      // scroll to top
+      $('html, body').animate({ scrollTop: 0 }, 300);
 
-tabTogglers.forEach(function(toggler) {
-  toggler.addEventListener("click", function(e) {
-    e.preventDefault();
-
-    let tabName = this.getAttribute("href");
-
-    let tabContents = document.querySelector("#tab-contents");
-
-    for (let i = 0; i < tabContents.children.length; i++) {
-      
-      tabTogglers[i].parentElement.classList.remove("border-t", "border-r", "border-l", "-mb-px", "bg-white");  tabContents.children[i].classList.remove("hidden");
-      if ("#" + tabContents.children[i].id === tabName) {
-        continue;
+      const sectionId = window.location.hash;
+  
+      if (sectionId) {
+        $(domNodes.tabsToggle).each(function() {
+          if ($(this).attr('href') === sectionId) {
+            return handleTabChange.bind(this)();
+          }
+        });
       }
-      tabContents.children[i].classList.add("hidden");
-      
     }
-    e.target.parentElement.classList.add( "bg-white");
+
+    function handleTabChange (e) {
+      if (e) e.preventDefault();
+
+      const targetSelector = $(this).attr('href');
+      const targetItemNode = $(`${targetSelector}${domNodes.tabsItem}`);
+
+      // do nothing if same tab is clicked
+      if (targetItemNode.hasClass(classList.activeItemClass)) return;
+
+      targetItemNode.siblings()
+        .removeClass(classList.activeItemClass)
+        .addClass(classList.inactiveItemClass);
+      targetItemNode
+        .removeClass(classList.inactiveItemClass)
+        .addClass(classList.activeItemClass);
+      
+      $(this).siblings()
+        .addClass(classList.inactiveToggleClass)
+        .removeClass(classList.activeToggleClass);
+      $(this)
+        .addClass(classList.activeToggleClass)
+        .removeClass(classList.inactiveToggleClass);
+    }
+
+    // set active tab on click
+    $(domNodes.tabsToggle).click(function(e) {
+      e.preventDefault();
+      window.location.hash = $(this).attr('href');
+    });
+
+    // set default tab based on hash
+    handleHashChange();
+
+    // change tabs on hash change
+    $(window).on('hashchange', handleHashChange);
   });
-});
 }
