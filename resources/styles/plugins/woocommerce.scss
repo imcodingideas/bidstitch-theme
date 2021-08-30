@@ -23,6 +23,7 @@
   }
 }
 
+.woocommerce form.login,
 .woocommerce form.register {
-  @apply border-none p-0;
+  @apply border-none p-0 m-0;
 }

@@ -29,7 +29,7 @@
       </div>
     @else
       <div class="bg-gray-100 min-h-screen">
-        <div class="container py-8">
+        <div class="container">
           @yield('content')
         </div>
       </div>
