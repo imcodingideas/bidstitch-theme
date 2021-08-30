@@ -67,7 +67,7 @@ dokan-pro 3.3.3
 
 ### Offers for Woocommerce
 
-offers-for-woocommerce 2.3.8
+offers-for-woocommerce 2.3.10
 
 https://github.com/angelleye/offers-for-woocommerce
 
