@@ -108,3 +108,12 @@ add_filter('woocommerce_account_menu_items', function ($items) {
 
 // remove my account nav
 remove_action('woocommerce_account_navigation', 'woocommerce_account_navigation');
+
+// update woocommerce registration privacy policy template
+remove_action('woocommerce_register_form', 'wc_registration_privacy_policy_text', 20);
+function bidstitch_registration_policy_text() {
+    echo '<div class="text-sm">';
+	wc_privacy_policy_text('registration');
+	echo '</div>';
+}
+add_action('woocommerce_register_form', 'bidstitch_registration_policy_text', 20);
