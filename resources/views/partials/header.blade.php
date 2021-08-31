@@ -5,7 +5,9 @@
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
       <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0">
-        @include('partials.header-search')
+        @if (is_active_sidebar('sidebar-header'))
+          @php dynamic_sidebar('sidebar-header') @endphp
+        @endif
       </div>
       <div class="h-full ml-auto flex">
         @if (is_user_logged_in())
@@ -18,12 +20,10 @@
               @include('partials.header-myaccount-navigation')
             </div>
           @endif
-          @else
+        @else
           <div class="flex items-center space-x-2 mr-4 lg:space-x-4 lg:mr-0">
-            <a class="btn btn--black text-sm px-2 py-1 lg:px-3 lg:py-2"
-              href="{{ esc_url(wp_registration_url(home_url())) }}">{{ _e('Sign Up', 'sage') }}</a>
-            <a class="btn btn--white text-sm hidden px-2 py-1 lg:px-3 lg:py-2 lg:flex"
-              href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
+            <a class="btn btn--black text-sm px-2 py-1 lg:px-3 lg:py-2" href="{{ esc_url(wp_registration_url(home_url())) }}">{{ _e('Sign Up', 'sage') }}</a>
+            <a class="btn btn--white text-sm hidden px-2 py-1 lg:px-3 lg:py-2 lg:flex" href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
           </div>
         @endif
       </div>
@@ -34,7 +34,9 @@
     <div class="container flex items-center h-10 lg:h-12">
       <div class="h-full w-full">
         <div class="h-full w-full flex items-center lg:hidden">
-          @include('partials.header-search')
+          @if (is_active_sidebar('sidebar-header'))
+            @php dynamic_sidebar('sidebar-header') @endphp
+          @endif
         </div>
         <div class="hidden lg:flex lg:h-full lg:justify-between">
           @if (has_nav_menu('primary_navigation'))
