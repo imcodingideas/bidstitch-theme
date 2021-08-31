@@ -102,7 +102,85 @@ function bidstitch_get_unread_notifications_for_user($user_id)
         "select * from {$prefix}user_notifications where user_receieve_id = %d and status = 0 order by ID desc",
         $user_id
     );
-    return $wpdb->get_results($query);
+    $results = $wpdb->get_results($query);
+
+    $notifications = [];
+    foreach ($results as $notification) {
+        $post_object = get_post($notification->product_id);
+        if ($post_object) {
+            $notifications[] = [
+                'id' => $notification->id,
+                'product_id' => $notification->product_id,
+                'id_offer' => $notification->id_offer,
+                'title' => bidstitch_get_notification_description(
+                    $notification->detail_type
+                ),
+                'text' => $post_object->post_title,
+                'thumbnail' => get_the_post_thumbnail_url(
+                    $post_object->ID,
+                    'thumbnail'
+                ),
+                'link' => get_permalink($post_object->ID),
+                'isOffer' => $notification->type == 'offer',
+            ];
+        }
+    }
+    return $notifications;
+}
+
+function bidstitch_get_notifications_for_user($user_id, $items_per_page, $page)
+{
+    global $wpdb;
+    $prefix = $wpdb->base_prefix;
+    $offset = $page * $items_per_page - $items_per_page;
+
+    // total
+    $queryTotal = $wpdb->prepare(
+        "select count(1) from {$prefix}user_notifications where user_receieve_id = %d",
+        $user_id
+    );
+    $total = $wpdb->get_var($queryTotal);
+    $pages = ceil($total / $items_per_page);
+
+    // results
+    $query = $wpdb->prepare(
+        "select * from {$prefix}user_notifications where user_receieve_id = %d order by ID desc limit %d,%d",
+        $user_id,
+        $offset,
+        $items_per_page
+    );
+    $results = $wpdb->get_results($query);
+
+    $notifications = [];
+    $dateFormat = get_option('date_format');
+    foreach ($results as $notification) {
+        $post_object = get_post($notification->product_id);
+        if ($post_object) {
+            $notifications[] = [
+                'id' => $notification->id,
+                'product_id' => $notification->product_id,
+                'id_offer' => $notification->id_offer,
+                'title' => bidstitch_get_notification_description(
+                    $notification->detail_type
+                ),
+                'text' => $post_object->post_title,
+                'thumbnail' => get_the_post_thumbnail_url(
+                    $post_object->ID,
+                    'thumbnail'
+                ),
+                'link' => get_permalink($post_object->ID),
+                'isOffer' => $notification->type == 'offer',
+                'status' => $notification->status,
+                'date' => date_i18n($dateFormat, $notification->created_at),
+                'time' => date_format(date_create($notification->created_at), 'H:i:s'),
+            ];
+        }
+    }
+    return [
+        'data' => $notifications,
+        'pages' => $pages,
+        'page' => $page,
+    ];
 }
 
 function bidstitch_get_unread_notifications_for_user_count($user_id)

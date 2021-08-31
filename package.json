@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.3.3",
+    "alpinejs": "^3.2.4",
     "vue": "3"
   }
 }

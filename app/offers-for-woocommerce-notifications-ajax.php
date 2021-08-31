@@ -27,3 +27,27 @@ add_action('wp_ajax_notification_mark_as_read', function () {
     bidstitch_notification_mark_as_read($id);
     wp_die();
 });
+
+// get notifications
+add_action('wp_ajax_notifications_get', function () {
+    $perPage = $_POST['perPage'] ?? 10;
+    $page = $_POST['page'] ?? 1;
+    echo json_encode(
+        bidstitch_get_notifications_for_user(
+            get_current_user_id(),
+            $perPage,
+            $page
+        )
+    );
+    wp_die();
+});
+
+// get single notification
+add_action('wp_ajax_notification_get', function () {
+    $id = $_POST['id'];
+    if (!$id) {
+        wp_die();
+    }
+    echo json_encode(bidstitch_get_notification($id));
+    wp_die();
+});

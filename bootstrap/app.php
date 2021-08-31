@@ -37,6 +37,7 @@ collect([
     'clean-dashboard',
     'offers-for-woocommerce-notifications',
     'offers-for-woocommerce-notifications-ajax',
+    'offers-for-woocommerce-notifications-page',
     'shipping-rates-editor',
     'new-product-form'
 ])->each(function ($file) {

@@ -2,3 +2,6 @@
 .dummy * {
   outline: 1px dashed #ff00007a;
 }
+
+// alpine:
+[x-cloak] { display: none !important; }
