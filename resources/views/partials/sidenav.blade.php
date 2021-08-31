@@ -25,12 +25,12 @@
               @if (has_nav_menu('myaccount_navigation'))
                 @include('partials.sidenav-myaccount-navigation')
               @endif
-              @else
+            @else
               <li class="border-b grid grid-cols-2">
                 <a class="w-full px-6 py-3 flex items-center mr-2 font-bold uppercase justify-center border-r"
                   href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
                 <a class="w-full px-6 py-3 flex items-center mr-2 font-bold uppercase justify-center"
-                  href="{{ esc_url(wp_registration_url(home_url())) }}">{{ _e('Sign Up', 'sage') }}</a>
+                  href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id')) . '#register') }}">{{ _e('Sign Up', 'sage') }}</a>
               </li>
             @endif
             @if (has_nav_menu('header_navigation'))

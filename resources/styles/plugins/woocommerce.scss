@@ -22,3 +22,8 @@
     @apply btn btn--black uppercase py-1 px-2 w-full flex justify-center rounded;
   }
 }
+
+.woocommerce form.login,
+.woocommerce form.register {
+  @apply border-none p-0 m-0;
+}

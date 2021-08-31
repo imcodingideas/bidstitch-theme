@@ -1,0 +1,1 @@
+<?php echo \Roots\view('dokan.seller-registration-form')->render();
