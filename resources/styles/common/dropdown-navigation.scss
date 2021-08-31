@@ -1,6 +1,10 @@
 .navigation__dropdown {
   .navigation__dropdown__menu {
-    @apply transition-all invisible opacity-0;
+    @apply transition-all invisible opacity-0 overflow-y-auto;
+    max-height: calc(100vh - 9.5rem);
+    @media (min-width: 1024px) {
+      max-height: calc(100vh - 12rem);
+    }
   }
   &:hover {
     .navigation__dropdown__menu {
