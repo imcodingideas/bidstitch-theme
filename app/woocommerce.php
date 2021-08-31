@@ -117,3 +117,18 @@ function bidstitch_registration_policy_text() {
 	echo '</div>';
 }
 add_action('woocommerce_register_form', 'bidstitch_registration_policy_text', 20);
+
+// remove add to cart button
+add_action(
+    'woocommerce_after_shop_loop_item',
+    'woocommerce_remove_add_to_cart_buttons',
+    1
+);
+function woocommerce_remove_add_to_cart_buttons()
+{
+    remove_action(
+        'woocommerce_after_shop_loop_item',
+        'woocommerce_template_loop_add_to_cart'
+    );
+}
+
