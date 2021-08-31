@@ -212,3 +212,7 @@ Add a filter to remove js that registers vue:
 
 return apply_filters('dokan_shipping_zones_editor_scripts', $scripts);
 ```
+
+## Custom shortcodes
+
+- Notifications page: [bidstitch_notifications]
