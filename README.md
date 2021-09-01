@@ -4,12 +4,13 @@ Based in: https://github.com/roots/sage version 10
 
 # System requirements
 
-Elastic search
+Elasticsearch 5.0+ (max version supported: 7.9)
 
 
 ```
 # Test elastic working in port 9200:
-curl -X GET "localhost:9200/_cat/nodes?v&pretty"
+curl -X GET "http://localhost:9200/_cat/nodes?v&pretty"
+curl -X GET 'http://localhost:9200/_cat/indices?v'
 ```
 
 # Install
