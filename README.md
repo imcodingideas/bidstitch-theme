@@ -182,6 +182,8 @@ Settings:
 
 - Then add a regular search box to the site, it should work
 
+There's a special elasticpress search proxy to speed up autosuggest: /wp-content/themes/bidstitch/elasticproxy/search.php?s=vintage
+
 ### Others
 
 May not be essential
