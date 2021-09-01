@@ -38,6 +38,8 @@ add_filter('woocommerce_product_add_to_cart_text', 'custom_cart_button_text');
 function custom_cart_button_text()
 {
     global $product;
+    if(!$product)
+        return;
     $id = get_the_ID();
     $price = $product->get_price();
 

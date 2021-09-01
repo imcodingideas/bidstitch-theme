@@ -2,6 +2,16 @@
 
 Based in: https://github.com/roots/sage version 10
 
+# System requirements
+
+Elastic search
+
+
+```
+# Test elastic working in port 9200:
+curl -X GET "localhost:9200/_cat/nodes?v&pretty"
+```
+
 # Install
 
 ```
@@ -150,6 +160,27 @@ Allows admin to switch to another user for support
 
 user-switching 1.5.7
 
+### Elastic press
+
+elasticpress 3.6.2
+
+https://github.com/10up/ElasticPress
+
+Install:
+
+- using wp-cli run: `wp elasticpress index`
+
+Settings: 
+
+/wp-admin/admin.php?page=elasticpress
+
+- server: http://localhost:9200
+- autosuggest: 
+    - selector: #search_input
+    - endpoint: https://siteurl/wp-json/elasticpress/autosuggest (custom)
+
+- Then add a regular search box to the site, it should work
+
 ### Others
 
 May not be essential
@@ -216,3 +247,5 @@ return apply_filters('dokan_shipping_zones_editor_scripts', $scripts);
 ## Custom shortcodes
 
 - Notifications page: [bidstitch_notifications]
+
+

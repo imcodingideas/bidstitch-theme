@@ -4,7 +4,7 @@
       <h1 class="header-logo text-2xl lg:text-3xl text-black leading-none tracking-widest">
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
-      <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0">
+      <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0 w-full">
         @if (is_active_sidebar('sidebar-header'))
           @php dynamic_sidebar('sidebar-header') @endphp
         @endif
