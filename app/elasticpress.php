@@ -13,6 +13,7 @@ add_action('rest_api_init', function () {
     register_rest_route('elasticpress', '/autosuggest/', [
         'methods' => \WP_REST_Server::CREATABLE,
         'callback' => 'ep_autosuggest',
+        'permission_callback' => '__return_true',
     ]);
 });
 
