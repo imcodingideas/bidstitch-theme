@@ -137,13 +137,15 @@ export default function () {
     )
   }
 
+  // fetch notifications every x seconds
+  // localized var app/setup.php
+  if (bidstitchSettings && bidstitchSettings.isLoggedIn){
+
   // load
   registerIconHover();
   fetchNotificationsCount();
 
-  // fetch notifications every x seconds
-  // localized var app/setup.php
-  if (bidstitchSettings && bidstitchSettings.isLoggedIn)
     window.setInterval(fetchNotificationsCount, 30000);
+  }
 }
 
