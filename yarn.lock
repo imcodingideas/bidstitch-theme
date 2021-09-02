@@ -1338,6 +1338,13 @@
   dependencies:
     "@vue/shared" "3.2.3"
 
+"@vue/reactivity@^3.0.2":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.2.6.tgz#b8993fa6f48545178e588e25a9c9431a1c1b7d50"
+  integrity sha512-8vIDD2wpCnYisNNZjmcIj+Rixn0uhZNY3G1vzlgdVdLygeRSuFjkmnZk6WwvGzUWpKfnG0e/NUySM3mVi59hAA==
+  dependencies:
+    "@vue/shared" "3.2.6"
+
 "@vue/runtime-core@3.2.3":
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/@vue/runtime-core/-/runtime-core-3.2.3.tgz#6f34ec620d6d75c255a1e75e64a4b6f90a4a2039"
@@ -1359,6 +1366,11 @@
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.3.tgz#89e338a5524450c876d3512b4cc6ba80a4205e2c"
   integrity sha512-1f8kyoabSgoga0E89itGIoaCo2Ayr6i6jQq/kHhhYrrBxoK7LNNwuWQghW0k/bapimyIzQiN891XzquYP78aqg==
+
+"@vue/shared@3.2.6":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.2.6.tgz#2c22bae88fe2b7b59fa68a9c9c4cd60bae2c1794"
+  integrity sha512-uwX0Qs2e6kdF+WmxwuxJxOnKs/wEkMArtYpHSm7W+VY/23Tl8syMRyjnzEeXrNCAP0/8HZxEGkHJsjPEDNRuHw==
 
 "@webassemblyjs/ast@1.11.0":
   version "1.11.0"
@@ -1648,6 +1660,13 @@ alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+
+alpinejs@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.2.4.tgz#04dbda9df483cd686d3f0d183a074c5c98060810"
+  integrity sha512-nUHI7QarOyqFX1vKTP5MC54yBFh9/J+YyxE50aP3lb6aZGxwX0HIPGVuAwy2SXQFP45P4/jKHv1LOuvRp/etiQ==
+  dependencies:
+    "@vue/reactivity" "^3.0.2"
 
 ansi-colors@^4.1.1:
   version "4.1.1"

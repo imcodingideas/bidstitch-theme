@@ -4,8 +4,10 @@
       <h1 class="header-logo text-2xl lg:text-3xl text-black leading-none tracking-widest">
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
-      <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0">
-        @include('partials.header-search')
+      <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0 w-full">
+        @if (is_active_sidebar('sidebar-header'))
+          @php dynamic_sidebar('sidebar-header') @endphp
+        @endif
       </div>
       <div class="h-full ml-auto flex">
         @if (is_user_logged_in())
@@ -34,7 +36,9 @@
     <div class="container flex items-center h-10 lg:h-12">
       <div class="h-full w-full">
         <div class="h-full w-full flex items-center lg:hidden">
-          @include('partials.header-search')
+          @if (is_active_sidebar('sidebar-header'))
+            @php dynamic_sidebar('sidebar-header') @endphp
+          @endif
         </div>
         <div class="hidden lg:flex lg:h-full lg:justify-between">
           @if (has_nav_menu('primary_navigation'))

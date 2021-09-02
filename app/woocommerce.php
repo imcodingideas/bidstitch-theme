@@ -38,6 +38,8 @@ add_filter('woocommerce_product_add_to_cart_text', 'custom_cart_button_text');
 function custom_cart_button_text()
 {
     global $product;
+    if(!$product)
+        return;
     $id = get_the_ID();
     $price = $product->get_price();
 
@@ -117,3 +119,18 @@ function bidstitch_registration_policy_text() {
 	echo '</div>';
 }
 add_action('woocommerce_register_form', 'bidstitch_registration_policy_text', 20);
+
+// remove add to cart button
+add_action(
+    'woocommerce_after_shop_loop_item',
+    'woocommerce_remove_add_to_cart_buttons',
+    1
+);
+function woocommerce_remove_add_to_cart_buttons()
+{
+    remove_action(
+        'woocommerce_after_shop_loop_item',
+        'woocommerce_template_loop_add_to_cart'
+    );
+}
+

@@ -1,0 +1,15 @@
+version: "3.8"
+
+volumes: 
+  elastic:
+    name: elastic
+    
+services:
+  elastic:
+    image: elasticsearch:6.8.18
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+
