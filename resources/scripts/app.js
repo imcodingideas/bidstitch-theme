@@ -11,6 +11,7 @@ import singleProductAccordion from './single-product-accordion';
 import shippingRatesEditor from './shipping-rates-editor';
 import newProductForm from './new-product-form';
 import headerNotifications from './header-notifications';
+import vendorOnboardingForm from './vendor-onboarding-form';
 
 headerNavigation();
 dropdownNavigation();
@@ -22,3 +23,4 @@ singleProductAccordion();
 shippingRatesEditor();
 newProductForm();
 headerNotifications();
+vendorOnboardingForm();
