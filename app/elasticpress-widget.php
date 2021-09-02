@@ -18,9 +18,7 @@ class ElasticpressSearchWidget extends \WP_Widget
 
     public function widget($args, $instance)
     {
-        echo \Roots\view('widgets/elasticpress-search-widget', [
-            'hello' => 'world',
-        ])->render();
+        echo \Roots\view('widgets/elasticpress-search-widget')->render();
     }
 }
 
