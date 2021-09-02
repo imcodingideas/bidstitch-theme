@@ -2,6 +2,8 @@
 
 // read https://weichie.com/blog/curl-api-calls-with-php/
 
+error_reporting(E_ERROR | E_PARSE);
+
 function callUrl($method, $url, $data)
 {
     $curl = curl_init();
