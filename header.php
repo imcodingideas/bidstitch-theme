@@ -27,4 +27,4 @@
 
     <?php echo \Roots\view('partials.header')->render(); ?>
 
-    <main id="main" class="pb-8 main mx-auto flex-1 w-full">
+    <main id="main" class="main mx-auto flex-1 w-full">
