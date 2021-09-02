@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Widgets;
 
 class ElasticpressSearchWidget extends \WP_Widget
 {
@@ -21,7 +21,3 @@ class ElasticpressSearchWidget extends \WP_Widget
         echo \Roots\view('widgets/elasticpress-search-widget')->render();
     }
 }
-
-add_action('widgets_init', function () {
-    register_widget('App\ElasticpressSearchWidget');
-});

@@ -42,7 +42,7 @@ collect([
     'offers-for-woocommerce-notifications-page',
     'shipping-rates-editor',
     'new-product-form',
-    'elasticpress-widget'
+    'elasticpress'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(
