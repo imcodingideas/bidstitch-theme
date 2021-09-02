@@ -86,16 +86,16 @@ add_filter('woocommerce_account_menu_items', function ($items) {
 
             // update existing items
             case 'dashboard':
-                $new_items[$endpoint] = __('My Account', 'txtdomain');
+                $new_items[$endpoint] = __('My Account', 'sage');
                 break;
             case 'orders':
-                $new_items[$endpoint] = __('Purchase History', 'txtdomain');
+                $new_items[$endpoint] = __('Purchase History', 'sage');
                 break;
             case 'following':
-                $new_items[$endpoint] = __('Following', 'txtdomain');
+                $new_items[$endpoint] = __('Following', 'sage');
                 break;
             case 'edit-account':
-                $new_items[$endpoint] = __('Account Settings', 'txtdomain');
+                $new_items[$endpoint] = __('Account Settings', 'sage');
                 break;
                 
             default:
