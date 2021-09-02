@@ -11,14 +11,9 @@
           <div class="font-semibold tracking-wide"> {!! $user_notification['title'] !!} </div>
           <div class="mt-2 text-sm"> {!! $user_notification['text'] !!} </div>
           @if ($user_notification['isOffer'])
-            <div class="flex">
-              <button data-target="{{ $user_notification['id_offer'] }}" type="button" class="header-notifications__accept inline-flex items-center px-3 py-1 border border-transparent shadow-sm text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Accept
-              </button>
-              <button data-target="{{ $user_notification['id_offer'] }}" type="button" class="header-notifications__decline ml-3 inline-flex items-center px-3 py-1 border border-gray-300 shadow-sm text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Decline
-              </button>
-            </div>
+            <a href="{{ $offers_link }}" class="header-notifications__decline ml-3 inline-flex justify-center items-center px-3 py-1 border border-gray-300 shadow-sm text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Manage offers
+            </a>
           @endif
         </div>
         <div class="cursor-pointer header-notifications__mark-as-read" data-id="{{ $user_notification['id'] }}">

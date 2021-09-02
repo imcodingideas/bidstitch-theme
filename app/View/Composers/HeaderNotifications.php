@@ -25,6 +25,7 @@ class HeaderNotifications extends Composer
     {
         return [
             'user_notifications' => $this->user_notifications(),
+            'offers_link' => dokan_get_navigation_url('woocommerce_offer')
         ];
     }
     function user_notifications()
