@@ -56,14 +56,6 @@ custom-post-type-ui 1.9.2
 
 bidstitchtools custom: 0.1.1
 
-### Fibosearch in header
-
-ajax-search-for-woocommerce 1.13.0
-
-Add its widget in sidebar-header for ajax search capabilities
-
-https://wordpress.org/plugins/ajax-search-for-woocommerce/#installation
-
 ### Woocommerce
 
 woocommerce 5.5.1
@@ -176,13 +168,18 @@ Settings:
 /wp-admin/admin.php?page=elasticpress
 
 - server: http://localhost:9200
-- autosuggest: 
-    - selector: #search_input
-    - endpoint: https://siteurl/wp-json/elasticpress/autosuggest (custom)
 
-- Then add a regular search box to the site, it should work
+Widgets: 
 
-There's a special elasticpress search proxy to speed up autosuggest: /wp-content/themes/bidstitch/elasticproxy/search.php?s=vintage
+Add widget: 'Elasticpress custom search widget'
+
+This widget makes use of a special proxy files to speed up autosuggest: 
+
+You can test it like this:
+
+```
+/wp-content/themes/bidstitch/elasticproxy/search.php?s=vintage
+```
 
 ### Others
 
