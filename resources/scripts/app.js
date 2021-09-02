@@ -12,6 +12,8 @@ import shippingRatesEditor from './shipping-rates-editor';
 import newProductForm from './new-product-form';
 import headerNotifications from './header-notifications';
 import notificationsPage from './notifications-page';
+import vendorOnboardingForm from './vendor-onboarding-form';
+
 headerNavigation();
 dropdownNavigation();
 homeSlider();
@@ -23,3 +25,4 @@ shippingRatesEditor();
 newProductForm();
 headerNotifications();
 notificationsPage();
+vendorOnboardingForm();
