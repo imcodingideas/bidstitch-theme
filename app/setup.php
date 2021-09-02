@@ -22,6 +22,7 @@ add_action('wp_enqueue_scripts', function () {
         'isLoggedIn' => is_user_logged_in(),
         'themeUrl' => get_template_directory_uri(),
         'siteUrl' => get_option('home'),
+        'restNonce' => wp_create_nonce('wp_rest'),
     ]);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {

@@ -14,6 +14,7 @@ import newProductForm from './new-product-form';
 import headerNotifications from './header-notifications';
 import notificationsPage from './notifications-page';
 import elasticpressSearchWidget from './elasticpress-search-widget';
+import vendorOnboardingForm from './vendor-onboarding-form';
 headerNavigation();
 dropdownNavigation();
 homeSlider();
@@ -26,6 +27,7 @@ newProductForm();
 headerNotifications();
 notificationsPage();
 elasticpressSearchWidget();
+vendorOnboardingForm();
 
 // load alpine at the end
 Alpine.start();

@@ -35,6 +35,7 @@ collect([
     'acf',
     'dokan',
     'dokan-custom-functions',
+    'onboarding-setup-wizard',
     'clean-dashboard',
     'offers-for-woocommerce-notifications',
     'offers-for-woocommerce-notifications-ajax',
