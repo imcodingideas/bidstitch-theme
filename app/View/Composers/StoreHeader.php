@@ -84,6 +84,9 @@ class StoreHeader extends Composer
 
         //pho
         $all_comments = get_comment_all_store($store_user->id);
+        if (empty($all_comments)) {
+            $all_comments = [];
+        }
 
         //pho
         $dokan_store_des = isset($store_info['vendor_biography'])
@@ -168,6 +171,7 @@ class StoreHeader extends Composer
     }
     function args_btn_follow($vendor_id)
     {
+        $args_btn_follow = [];
         if (is_user_logged_in()) {
             $customer_id = get_current_user_id();
             $status = null;
