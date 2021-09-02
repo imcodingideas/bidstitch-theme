@@ -159,10 +159,6 @@ elasticpress 3.6.2
 
 https://github.com/10up/ElasticPress
 
-Install:
-
-- using wp-cli run: `wp elasticpress index`
-
 Settings: 
 
 /wp-admin/admin.php?page=elasticpress
@@ -197,7 +193,6 @@ Activate in order:
 wp plugin activate advanced-custom-fields-pro
 wp plugin activate custom-post-type-ui
 wp plugin activate bidstitchtools
-wp plugin activate ajax-search-for-woocommerce
 wp plugin activate woocommerce
 wp plugin activate dokan-lite
 wp plugin activate dokan-pro
@@ -206,11 +201,13 @@ wp plugin activate offers-for-woocommerce-dokan
 wp plugin activate woocommerce-simple-auctions
 wp plugin activate paypal-woocommerce
 wp plugin activate paypal-for-woocommerce-multi-account-management
+wp plugin activate elasticpress
 ```
 
 Deactivate in order:
 
 ```
+wp plugin activate elasticpress
 wp plugin deactivate paypal-for-woocommerce-multi-account-management
 wp plugin deactivate paypal-woocommerce
 wp plugin deactivate woocommerce-simple-auctions
@@ -219,7 +216,6 @@ wp plugin deactivate offers-for-woocommerce
 wp plugin deactivate dokan-lite
 wp plugin deactivate dokan-pro
 wp plugin deactivate woocommerce
-wp plugin deactivate ajax-search-for-woocommerce
 wp plugin deactivate bidstitchtools
 wp plugin deactivate custom-post-type-ui
 wp plugin deactivate advanced-custom-fields-pro
@@ -243,6 +239,14 @@ Add a filter to remove js that registers vue:
 
 return apply_filters('dokan_shipping_zones_editor_scripts', $scripts);
 ```
+
+### Fix: Error in plugin dokan-lite
+
+This error makes elastic indexing fail: dokan-lite/templates/store-lists.php
+
+fix: line 4 should check if $post exists:
+
+$pagination_base = empty($post)? '': str_replace( $post->ID, '%#%', esc_url( get_pagenum_link( $post->ID ) ) );
 
 ## Custom shortcodes
 
