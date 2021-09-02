@@ -20,6 +20,8 @@ add_action('wp_enqueue_scripts', function () {
     wp_localize_script('sage/app.js', 'bidstitchSettings', [
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'isLoggedIn' => is_user_logged_in(),
+        'themeUrl' => get_template_directory_uri(),
+        'siteUrl' => get_option('home'),
     ]);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {

@@ -56,10 +56,17 @@ function searchProduct($search)
     $products = [];
     foreach ($response->hits->hits as $item) {
         /* $products[] = $item->_source; */
+        $price = '';
+        if (count($item->_source->meta->_price) > 0) {
+            $price = '$'.$item->_source->meta->_price[0]->value;
+        } else {
+            continue;
+        }
         $products[] = [
             'id' => $item->_source->ID,
             'title' => $item->_source->post_title,
             'url' => $item->_source->permalink,
+            'price' => $price,
         ];
     }
 
