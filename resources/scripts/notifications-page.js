@@ -1,4 +1,3 @@
-import Alpine from 'alpinejs'
 export default function () {
 
     window.notificationsPageData = function () {
@@ -39,6 +38,4 @@ export default function () {
             },
         }
     }
-
-    Alpine.start();
 }

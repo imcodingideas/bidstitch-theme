@@ -1,6 +1,7 @@
 /**
  * External Dependencies
  */
+import Alpine from 'alpinejs'
 import headerNavigation from './header-navigation';
 import dropdownNavigation from './dropdown-navigation';
 import homeSlider from './home-slider';
@@ -23,3 +24,6 @@ shippingRatesEditor();
 newProductForm();
 headerNotifications();
 notificationsPage();
+
+// load alpine at the end
+Alpine.start();
