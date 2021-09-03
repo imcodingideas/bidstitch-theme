@@ -1,7 +1,5 @@
-import 'jquery';
-// note: bidstitch_settings registered in app/setup.php 
 export default function () {
-  if (!document.getElementById('new-product-form'))
+  if (!document.getElementById('product-field-category-subcategory-size'))
     return;
 
   jQuery(document).ready(function ($) {
@@ -19,6 +17,8 @@ export default function () {
       $("#product_size").select2("destroy");
 
 
+      // set loading
+      $('.product-field-category-subcategory-size__loading-sub').show();
       $.ajax({
         type: 'POST',
         url: bidstitchSettings.ajaxUrl,
@@ -31,9 +31,11 @@ export default function () {
           $.each(response, function () {
             $("#product_cat_sub").append('<option value="' + this.id + '" slug="' + this.slug + '">' + this.name + '</option>');
           });
+          $('.product-field-category-subcategory-size__loading-sub').hide();
         }
       });
 
+      $('.product-field-category-subcategory-size__loading-size').fadeIn();
       $.ajax({
         type: 'POST',
         url: bidstitchSettings.ajaxUrl,
@@ -46,6 +48,7 @@ export default function () {
           $.each(response, function () {
             $("#product_size").append('<option value="' + this.id + '" slug="' + this.slug + '">' + this.name + '</option>');
           });
+          $('.product-field-category-subcategory-size__loading-size').hide();
         }
       });
 

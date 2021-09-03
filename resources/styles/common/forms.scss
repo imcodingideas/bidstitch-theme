@@ -1,3 +1,8 @@
 .form-label {
-  @apply font-bold uppercase;
+  @apply font-bold uppercase block;
+}
+
+.select2-container--open .select2-dropdown--below {
+  // fix excessive margin 
+  margin-top: 0 !important;
 }
