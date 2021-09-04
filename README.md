@@ -252,4 +252,15 @@ $pagination_base = empty($post)? '': str_replace( $post->ID, '%#%', esc_url( get
 
 - Notifications page: [bidstitch_notifications]
 
+## Backup script
+
+An example script to backup and fetch from staging:
+
+```
+REMOTE_IP=
+REMOTE_SYS_USER=
+ssh $REMOTE_SYS_USER@$REMOTE_IP "cd ~/webapps/bidstitch-stag/public/ && wp db export db.sql && tar -czf backup.tgz db.sql wp-content/plugins"
+rsync -avz $REMOTE_SYS_USER@$REMOTE_IP:~/webapps/bidstitch-stag/public/backup.tgz ./
+```
+
 
