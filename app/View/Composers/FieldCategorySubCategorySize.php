@@ -24,18 +24,20 @@ class FieldCategorySubCategorySize extends Composer
         if (isset($post->ID) && $post->ID && 'product' == $post->post_type) {
             $post_id = $post->ID;
 
-            // current category
-            $term_category = wp_get_post_terms($post_id, 'product_cat', [
-                'fields' => 'ids',
-            ]);
-            $product_cat = $term_category ? $term_category[0] : '';
+            // get terms
+            $terms = wp_get_post_terms($post_id, 'product_cat');
 
-            // current subcategory
-            $product_cat_sub = null;
-            foreach ($term_category as $term) {
-                $term_object = get_term($term, 'product_cat');
-                if ($term_object->parent != 0) {
-                    $product_cat_sub = $term->term_id;
+            // loop categories. those with parents are subcategories
+            $product_cat = '';
+            $product_cat_sub = '';
+
+            if ($terms && is_array($terms)) {
+                foreach ($terms as $term) {
+                    if ($term->parent) {
+                        $product_cat_sub = $term->term_id;
+                    } else {
+                        $product_cat = $term->term_id;
+                    }
                 }
             }
 

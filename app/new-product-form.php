@@ -7,6 +7,7 @@
  */
 
 // ajax endpoint: subcategories
+
 function get_a_child_category()
 {
     $category_slug = $_POST['category_slug'];
@@ -138,4 +139,22 @@ function saveproductdata($product_id, $postdata)
             'product_condition'
         );
     }
+
+    // category and subcategory
+    if (!empty($postdata['product_cat']) && !empty($postdata['product_cat_sub'])) {
+        $categories = [ 
+                $postdata['product_cat'], 
+                $postdata['product_cat_sub'] 
+            ];
+        
+        \Illuminate\Support\Facades\Log::debug('cat',$categories);
+
+        wp_set_post_terms(
+            $product_id,
+            $categories,
+            'product_cat'
+        );
+    }
+
+
 }
