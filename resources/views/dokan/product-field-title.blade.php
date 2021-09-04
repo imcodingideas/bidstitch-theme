@@ -6,9 +6,9 @@ if ($post) {
 }
 @endphp
 <div class="">
-  <label for="tees_length" class="form-label">
+  <label for="post_title" class="form-label">
     {{ _e('Title', 'dokan-lite') }}
     <span class="text-red-500">(required)</span>
   </label>
-  <input class="dokan-form-control" name="post_title" id="post-title" placeholder="{{ _e('Product name', 'dokan-lite') }}" value="{{ $post_title }}">
+  <input required class="dokan-form-control" name="post_title" id="post-title" placeholder="{{ _e('Product name', 'dokan-lite') }}" value="{{ $post_title }}">
 </div>

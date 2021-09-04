@@ -235,7 +235,7 @@ do_action( 'dokan_edit_auction_product_content_before' );
                                     <div class="dokan-form-group">
                                         <label class="dokan-control-label" for="_auction_item_condition"><?php _e( 'Item condition', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <select name="_auction_item_condition" class="dokan-form-control" id="_auction_item_condition">
+                                            <select required required name="_auction_item_condition" class="dokan-form-control" id="_auction_item_condition">
                                                 <option value="new" <?php echo ( $_auction_item_condition == 'new' ) ? 'selected' : '' ?>><?php _e( 'New', 'dokan' ) ?></option>
                                                 <option value="used" <?php echo ( $_auction_item_condition == 'used' ) ? 'selected' : '' ?>><?php _e( 'Used', 'dokan' ) ?></option>
                                             </select>
@@ -286,7 +286,7 @@ do_action( 'dokan_edit_auction_product_content_before' );
                                         <div class="dokan-form-group">
                                             <div class="dokan-input-group">
                                                 <span class="dokan-input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                <input class="wc_input_price dokan-form-control" name="_auction_start_price" id="_auction_start_price" type="text" placeholder="<?php echo wc_format_localized_price('9.99'); ?>" value="<?php echo wc_format_localized_price( $_auction_start_price ); ?>" style="width: 97%;">
+                                                <input required class="wc_input_price dokan-form-control" name="_auction_start_price" id="_auction_start_price" type="text" placeholder="<?php echo wc_format_localized_price('9.99'); ?>" value="<?php echo wc_format_localized_price( $_auction_start_price ); ?>" style="width: 97%;">
                                             </div>
                                         </div>
                                     </div>
@@ -298,7 +298,7 @@ do_action( 'dokan_edit_auction_product_content_before' );
                                         <div class="dokan-form-group">
                                             <div class="dokan-input-group">
                                                 <span class="dokan-input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                <input class="wc_input_price dokan-form-control" name="_auction_bid_increment" id="_auction_bid_increment" type="text" placeholder="<?php echo wc_format_localized_price('9.99') ?>" value="<?php echo wc_format_localized_price( $_auction_bid_increment ); ?>">
+                                                <input required class="wc_input_price dokan-form-control" name="_auction_bid_increment" id="_auction_bid_increment" type="text" placeholder="<?php echo wc_format_localized_price('9.99') ?>" value="<?php echo wc_format_localized_price( $_auction_bid_increment ); ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -333,14 +333,14 @@ do_action( 'dokan_edit_auction_product_content_before' );
                                     <div class="content-half-part dokan-auction-dates-from">
                                         <label class="dokan-control-label" for="_auction_dates_from"><?php _e( 'Auction Start date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_auction_dates_from" type="text" value="<?php echo $_auction_dates_from; ?>" style="width: 97%;" readonly>
+                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_auction_dates_from" type="text" value="<?php echo $_auction_dates_from; ?>" style="width: 97%;" readonly>
                                         </div>
                                     </div>
 
                                     <div class="content-half-part dokan-auction-dates-to">
                                         <label class="dokan-control-label" for="_auction_dates_to"><?php _e( 'Auction End date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_auction_dates_to" type="text" value="<?php echo $_auction_dates_to; ?>" readonly>
+                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_auction_dates_to" type="text" value="<?php echo $_auction_dates_to; ?>" readonly>
                                         </div>
                                     </div>
                                 </div>

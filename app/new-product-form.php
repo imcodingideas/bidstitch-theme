@@ -147,8 +147,6 @@ function saveproductdata($product_id, $postdata)
                 $postdata['product_cat_sub'] 
             ];
         
-        \Illuminate\Support\Facades\Log::debug('cat',$categories);
-
         wp_set_post_terms(
             $product_id,
             $categories,

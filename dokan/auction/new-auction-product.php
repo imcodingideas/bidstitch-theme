@@ -84,12 +84,12 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
 
                                 <?php // change ?>
                                 <div class="">
-                                    <?php echo \Roots\view('dokan.product-field-title')->render(); ?>
+                                    <?php echo \Roots\view('dokan.product-field-title', [ 'post'=>null ])->render(); ?>
                                 </div>
 
                                 <?php // change ?>
                                 <div class="mt-6">
-                                    <?php echo \Roots\view('dokan.product-field-excerpt')->render(); ?>
+                                    <?php echo \Roots\view('dokan.product-field-excerpt', [ 'post'=>null ])->render(); ?>
                                 </div>
 
                                 <?php // change ?>
@@ -121,20 +121,20 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                         <?php // change ?>
                         <div class="md:flex w-full md:space-x-6 bg-white p-4 mt-6">
                             <div class="flex-1 flex-col space-y-6">
-                                <?php echo \Roots\view('dokan.product-field-category-subcategory-size')->render(); ?>
-                                <?php echo \Roots\view('dokan.product-field-color')->render(); ?>
+                                <?php echo \Roots\view('dokan.product-field-category-subcategory-size', [ 'post'=>null ])->render(); ?>
+                                <?php echo \Roots\view('dokan.product-field-color', [ 'post'=>null ])->render(); ?>
                             </div>
                             <div class="flex-1 flex-col space-y-6">
-                                <?php echo \Roots\view('dokan.product-field-pit-to-pit')->render(); ?>
-                                <?php echo \Roots\view('dokan.product-field-tag-type')->render(); ?>
-                                <?php echo \Roots\view('dokan.product-field-length')->render(); ?>
-                                <?php echo \Roots\view('dokan.product-field-stitching')->render(); ?>
+                                <?php echo \Roots\view('dokan.product-field-pit-to-pit', [ 'post'=>null ])->render(); ?>
+                                <?php echo \Roots\view('dokan.product-field-tag-type', [ 'post'=>null ])->render(); ?>
+                                <?php echo \Roots\view('dokan.product-field-length', [ 'post'=>null ])->render(); ?>
+                                <?php echo \Roots\view('dokan.product-field-stitching', [ 'post'=>null ])->render(); ?>
                             </div>
                         </div> 
 
                         <?php // change ?>
                         <div class="mt-6">
-                            <?php echo \Roots\view('dokan.new-product-field-description', [ 'post_content' => Dokan_Template_Auction::$post_content ])->render(); ?>
+                            <?php echo \Roots\view('dokan.product-field-description', ['post'=>null])->render(); ?>
                         </div>
 
                         <?php // change ?>
@@ -153,7 +153,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     <div class="content-half-part dokan-auction-item-condition">
                                         <label class="dokan-control-label form-label" for="_auction_item_condition"><?php _e( 'Item condition', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <select name="_auction_item_condition" class="dokan-form-control" id="_auction_item_condition">
+                                            <select required name="_auction_item_condition" class="dokan-form-control" id="_auction_item_condition">
                                                 <option value="new"><?php _e( 'New', 'dokan' ) ?></option>
                                                 <option value="used"><?php _e( 'Used', 'dokan' ) ?></option>
                                             </select>
@@ -200,7 +200,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                         <div class="dokan-form-group">
                                             <div class="dokan-input-group">
                                                 <span class="dokan-input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                                <input class="wc_input_price dokan-form-control" name="_auction_start_price" id="_auction_start_price" type="text" placeholder="<?php echo wc_format_localized_price('9.99'); ?>" value="" style="width: 97%;">
+                                                <input required class="wc_input_price dokan-form-control" name="_auction_start_price" id="_auction_start_price" type="text" placeholder="<?php echo wc_format_localized_price('9.99'); ?>" value="" style="width: 97%;">
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +210,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                         <div class="dokan-form-group">
                                             <div class="dokan-input-group">
                                                 <span class="dokan-input-group-addon"><?php echo get_woocommerce_currency_symbol(); ?></span>
-                                               <input class="wc_input_price dokan-form-control" name="_auction_bid_increment" id="_auction_bid_increment" type="text" placeholder="<?php echo wc_format_localized_price('9.99'); ?>" value="">
+                                               <input required class="wc_input_price dokan-form-control" name="_auction_bid_increment" id="_auction_bid_increment" type="text" placeholder="<?php echo wc_format_localized_price('9.99'); ?>" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -244,14 +244,14 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     <div class="content-half-part dokan-auction-dates-from">
                                         <label class="dokan-control-label form-label" for="_auction_dates_from"><?php _e( 'Auction Start date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_auction_dates_from" type="text" value="" style="width: 97%;" readonly>
+                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_auction_dates_from" type="text" value="" style="width: 97%;" readonly>
                                         </div>
                                     </div>
 
                                     <div class="content-half-part dokan-auction-dates-to">
                                         <label class="dokan-control-label form-label" for="_auction_dates_to"><?php _e( 'Auction End date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_auction_dates_to" type="text" value="" readonly>
+                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_auction_dates_to" type="text" value="" readonly>
                                         </div>
                                     </div>
 
