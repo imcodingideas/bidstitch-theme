@@ -11,7 +11,7 @@ class FieldCategorySubCategorySize extends Composer
      *
      * @var array
      */
-    protected static $views = ['dokan.product-field-category-subcategory-size'];
+    protected static $views = ['dokan.product-fields.category-subcategory-size'];
 
     /**
      * Data to be passed to view before rendering.

@@ -1,3 +1,10 @@
+@php
+  if (!empty($post)) {
+    $_regular_price = get_post_meta($post_id, '_regular_price', true);
+  } else {
+    $_regular_price = dokan_posted_input('_regular_price ');
+  }
+@endphp
 <div class="">
   <label for="_regular_price" class="form-label">
     {{ _e('Price', 'dokan-lite') }}
