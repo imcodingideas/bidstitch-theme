@@ -1,6 +1,6 @@
 @php
-if (!empty($post_id)) {
-    $tees_length = get_post_meta($post_id, 'tees_length', true);
+if (!empty($post)) {
+    $tees_length = get_post_meta($post->ID, 'tees_length', true);
 } else {
     $tees_length = dokan_posted_input('tees_length');
 }

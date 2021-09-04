@@ -1,7 +1,7 @@
 @php
-if (!empty($post_id)) {
+if (!empty($post)) {
     // current color
-    $term_color = wp_get_post_terms($post_id, 'product_color', [
+    $term_color = wp_get_post_terms($post->ID, 'product_color', [
         'fields' => 'ids',
     ]);
     $product_color = $term_color ? $term_color[0] : '';

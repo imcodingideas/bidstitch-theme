@@ -1,6 +1,6 @@
 @php
-if (!empty($post_id)) {
-    $tees_stitching = get_post_meta($post_id, 'tees_stitching', true);
+if (!empty($post)) {
+    $tees_stitching = get_post_meta($post->ID, 'tees_stitching', true);
 } else {
     $tees_stitching = dokan_posted_input('tees_stitching');
 }

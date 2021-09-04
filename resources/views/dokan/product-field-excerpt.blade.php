@@ -1,5 +1,5 @@
 @php
-if (!empty($post_id)) {
+if (!empty($post)) {
     $post_excerpt = $post->post_excerpt;
 } else {
     $post_excerpt = dokan_posted_input('post_excerpt');

@@ -1,5 +1,5 @@
 @php
-if (!empty($post_id)) {
+if ($post) {
     $post_title = $post->post_title;
 } else {
     $post_title = dokan_posted_input('post_title');

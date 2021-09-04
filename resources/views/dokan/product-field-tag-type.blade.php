@@ -1,6 +1,6 @@
 @php
-if (!empty($post_id)) {
-    $tees_tag_type = get_post_meta($post_id, 'tees_tag_type', true);
+if (!empty($post)) {
+    $tees_tag_type = get_post_meta($post->ID, 'tees_tag_type', true);
 } else {
     $tees_tag_type = dokan_posted_input('tees_tag_type');
 }
