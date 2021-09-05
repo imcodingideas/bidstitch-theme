@@ -7,16 +7,34 @@
       <h1 class="text-4xl font-extrabold tracking-tight text-white text-center sm:text-5xl lg:text-6xl">Dealer Spotlight</h1>
     </div>
   </div>
+  <section class="overflow-hidden">
+    <div class="relative max-w-7xl bg-white mx-auto pt-20 pb-12 px-4 sm:px-6 lg:px-8 lg:py-20 shadow-2xl">
+      <div class="relative lg:flex lg:items-center">
+        <div class="hidden lg:block lg:flex-shrink-0">
+          <img class="h-64 w-64 rounded-full xl:h-80 xl:w-80" src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/cropped-insta-copy.png" alt="">
+        </div>
+        <div class="relative lg:ml-10">
+          
+          <img class="absolute top-0 left-0 transform -translate-x-8 -translate-y-24 h-36 w-36 text-indigo-200 opacity-50" src="@asset('images/testimonial.svg')" alt="dealer spotlight"/>
+          <blockquote class="relative">
+            <div class="text-xl leading-9 font-medium text-gray-900">
+                <h3 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Sustainability is a key part of the business.</h3>
+              <p>
+                Ken Segurie- when we see broken pieces we want to fix things. We want to make a modification of something that has fallen apart. For example, I was working on a dress today that was a 50’s knit dress. I repaired the holes with embroidery threads. You’re pretty much adding to the story of the piece as it goes through your hands. It’s an incredible feeling.
+              </p>
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="bg-white overflow-hidden">
     <div class="relative max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
       <div class="hidden lg:block bg-gray-50 absolute top-0 bottom-0 left-3/4 w-screen"></div>
       <div class="mx-auto text-base max-w-prose lg:grid lg:grid-cols-2 lg:gap-8 lg:max-w-none">
         <div>
-          <h3 class="mt-2 text-3xl leading-8 inline-block font-extrabold tracking-tight text-gray-900 sm:text-4xl">Flying Apple Vintage</h3> <a href="#" class="inline-block">
-            <svg class="h-5 w-5 text-gray-400" x-description="Heroicon name: solid/external-link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-  <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-  <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-  </svg>
+          <h3 class="mt-2 text-3xl leading-8 inline-block font-extrabold tracking-tight text-gray-900 sm:text-4xl">Flying Apple Vintage</h3> <a href="/store/flyingapplevintage/" class="inline-block">
+  <img class="h-5 w-5 text-gray-400" src="@asset('images/newlink.svg')" alt="new link"/>
           </a>
         </div>
       </div>
@@ -28,23 +46,23 @@
                     alt="image">
             </div>
             <div class="w-full col-span-2 row-span-2 rounded">
-                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/FAV-1.jpg"
+                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/favpic.jpeg"
                     alt="image">
             </div>
             <div class="w-full rounded shadow-lg rounded-lg">
-                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/FAV-1.jpg"
+                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/FAV-4-1.jpg"
                     alt="image">
             </div>
             <div class="w-full rounded shadow-lg rounded-lg">
-                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/FAV-1.jpg"
+                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/favpic-3.jpg"
                     alt="image">
             </div>
             <div class="w-full rounded shadow-lg rounded-lg">
-                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/FAV-1.jpg"
+                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/favpic-4.jpg"
                     alt="image">
             </div>
             <div class="w-full rounded shadow-lg rounded-lg">
-                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/FAV-1.jpg"
+                <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/fav-pic-4.jpg"
                     alt="image">
             </div>
         </div>
@@ -142,26 +160,3 @@ The funny thing is we would buy the promotional camel cigarette jackets. That wa
       </div>
     </div>
   </div>
-  <section class="overflow-hidden">
-    <div class="relative max-w-7xl bg-white mx-auto pt-20 pb-12 px-4 sm:px-6 lg:px-8 lg:py-20 shadow-2xl">
-      <div class="relative lg:flex lg:items-center">
-        <div class="hidden lg:block lg:flex-shrink-0">
-          <img class="h-64 w-64 rounded-full xl:h-80 xl:w-80" src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/03/cropped-insta-copy.png" alt="">
-        </div>
-  
-        <div class="relative lg:ml-10">
-          <svg class="absolute top-0 left-0 transform -translate-x-8 -translate-y-24 h-36 w-36 text-indigo-200 opacity-50" stroke="currentColor" fill="none" viewBox="0 0 144 144" aria-hidden="true">
-            <path stroke-width="2" d="M41.485 15C17.753 31.753 1 59.208 1 89.455c0 24.664 14.891 39.09 32.109 39.09 16.287 0 28.386-13.03 28.386-28.387 0-15.356-10.703-26.524-24.663-26.524-2.792 0-6.515.465-7.446.93 2.327-15.821 17.218-34.435 32.11-43.742L41.485 15zm80.04 0c-23.268 16.753-40.02 44.208-40.02 74.455 0 24.664 14.891 39.09 32.109 39.09 15.822 0 28.386-13.03 28.386-28.387 0-15.356-11.168-26.524-25.129-26.524-2.792 0-6.049.465-6.98.93 2.327-15.821 16.753-34.435 31.644-43.742L121.525 15z" />
-          </svg>
-          <blockquote class="relative">
-            <div class="text-xl leading-9 font-medium text-gray-900">
-                <h3 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">Sustainability is a key part of the business.</h3>
-              <p>
-                Ken Segurie- when we see broken pieces we want to fix things. We want to make a modification of something that has fallen apart. For example, I was working on a dress today that was a 50’s knit dress. I repaired the holes with embroidery threads. You’re pretty much adding to the story of the piece as it goes through your hands. It’s an incredible feeling.
-              </p>
-            </div>
-          </blockquote>
-        </div>
-      </div>
-    </div>
-  </section>
