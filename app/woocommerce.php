@@ -134,3 +134,39 @@ function woocommerce_remove_add_to_cart_buttons()
     );
 }
 
+// remove payment from order review
+remove_action('woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20);
+
+//remove login before checkout
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10);
+
+//remove coupon before checkout
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
+
+// remove terms on checkout
+remove_action('woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
+remove_action('woocommerce_checkout_terms_and_conditions', 'wc_terms_and_conditions_page_content', 30);
+
+// remove form field attributes
+add_action('woocommerce_form_field_args', 'woocommerce_remove_form_field_attributes', 10, 3);
+function woocommerce_remove_form_field_attributes($args, $key, $value = null) {
+    $args['class'] = array_filter($args['class'], function($class) {
+        $excluded_class = [
+            'form-row-first',
+            'form-row-last',
+            'form-row-wide'
+        ];
+
+        return !in_array($class, $excluded_class);
+    });
+
+    $args['label_class'] = [];
+    $args['input_class'] = [];
+
+    return $args;
+}
+
+// dequeue selectWoo
+add_action('wp_enqueue_scripts', function() {
+    wp_dequeue_script('selectWoo');
+}, 11);

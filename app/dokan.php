@@ -74,3 +74,9 @@ function bidstitch_withdraw_methods($methods) {
     return $methods;
 }
 add_filter('dokan_withdraw_methods', 'bidstitch_withdraw_methods', 21, 1);
+
+// Disable save payment method on dokan stripe checkout
+function bidstitch_stripe_display_save_payment_method_checkbox($display_tokenization) {
+    return false;
+}
+add_filter('dokan_stripe_display_save_payment_method_checkbox', 'bidstitch_stripe_display_save_payment_method_checkbox', 21, 1);
