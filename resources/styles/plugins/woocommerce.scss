@@ -23,7 +23,67 @@
   }
 }
 
+// login form
 .woocommerce form.login,
 .woocommerce form.register {
   @apply border-none p-0 m-0;
+}
+
+// forms
+.woocommerce form .form-row {
+  @apply p-0 m-0 grid space-y-2;
+}
+
+.woocommerce form .form-row label {
+  @apply text-sm font-medium text-gray-700;
+}
+
+.woocommerce form .form-row input.input-text,
+.woocommerce form .form-row textarea,
+.woocommerce form .form-row select,
+// error
+.woocommerce form .form-row.woocommerce-invalid .select2-container,
+.woocommerce form .form-row.woocommerce-invalid input.input-text,
+.woocommerce form .form-row.woocommerce-invalid select,
+// success
+.woocommerce form .form-row.woocommerce-validated .select2-container,
+.woocommerce form .form-row.woocommerce-validated input.input-text,
+.woocommerce form .form-row.woocommerce-validated select {
+  @apply outline-none text-sm appearance-none w-full px-3 py-2 border border-gray-300 rounded-sm placeholder-gray-400 focus:outline-none focus:ring-black focus:border-black;
+}
+
+.woocommerce form .form-row input[type='checkbox'] {
+  @apply cursor-pointer h-4 w-4 text-black focus:ring-black border-gray-300 rounded-sm;
+}
+
+// checkout payment method
+#add_payment_method #payment,
+.woocommerce-cart #payment,
+.woocommerce-checkout #payment {
+  @apply bg-transparent rounded-none;
+}
+
+.wc-credit-card-form {
+  @apply grid space-y-3;
+}
+
+.wc-saved-payment-methods {
+  @apply mt-3;
+}
+
+.woocommerce form .form-row.woocommerce-SavedPaymentMethods-saveNew {
+  @apply flex items-center space-x-4 space-y-0;
+}
+
+// checkout button
+.woocommerce #payment #place_order,
+.woocommerce-page #payment #place_order {
+  @apply float-none;
+}
+
+// notices
+.woocommerce-error,
+.woocommerce-info,
+.woocommerce-message {
+  @apply bg-white rounded shadow overflow-hidden;
 }
