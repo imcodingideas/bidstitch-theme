@@ -32,18 +32,27 @@ class OrdersItemProducts extends Composer
 
         foreach($order->get_items() as $item_id => $item) {
             $product = $item->get_product();
-            
-            $vendor_id = $product->post->post_author;
-            $store = dokan_get_store_info($vendor_id);
 
-            $products[] = (object) [
+            $payload = [
                 'name' => $item->get_name(),
                 'total' => wc_price($item->get_total()),
-                'link' => $product->get_permalink(),
-                'thumbnail' => $product->get_image('thumbnail', ['class' => 'object-center object-cover rounded mr-6 order__product__img'], true),
-                'store_name' => $store['store_name'],
-                'store_link' => dokan_get_store_url($vendor_id),
+                'link' => '',
+                'thumbnail' => '',
+                'store_name' => '',
+                'store_link' => '',
             ];
+
+            if ($product) {
+                $vendor_id = $product->post->post_author;
+                $store = dokan_get_store_info($vendor_id);
+
+                $payload['link'] = $product->get_permalink();
+                $payload['thumbnail'] = $product->get_image('thumbnail', ['class' => 'object-center object-cover rounded mr-6 order__product__img'], true);
+                $payload['store_name'] = $store['store_name'];
+                $payload['store_link'] = dokan_get_store_url($vendor_id);
+            }
+    
+            $products[] = (object) $payload;
         }
 
         return $products;
