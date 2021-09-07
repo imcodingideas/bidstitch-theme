@@ -1,3 +1,5 @@
+const defaultTheme  = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: {
     content: [
@@ -17,6 +19,10 @@ module.exports = {
       padding: {
         DEFAULT: '2rem',
       },
+      screens: {
+        ...defaultTheme.screens,
+        '2xl': false,
+      }
     },
     extend: {
       colors: {},
