@@ -1,0 +1,1 @@
+<?php echo \Roots\view('woocommerce.checkout.form-checkout')->render();
