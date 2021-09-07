@@ -7,7 +7,7 @@
   @include('partials.header')
 
   @hasSection('sidebar')
-    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 xl:space-x-8 py-8 max-w-6xl mx-auto flex-1 w-full">
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 xl:space-x-8 container py-8">
       <div class="md:w-3/12">
         <aside class="shop-sidebar">
           @yield('sidebar')
@@ -20,7 +20,7 @@
       </div>
     </div>
   @else
-    <main id="main" class="py-8 main max-w-6xl mx-auto flex-1 w-full">
+    <main id="main" class="main container py-8">
       @yield('content')
     </main>
   @endif
