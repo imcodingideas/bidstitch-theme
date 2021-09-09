@@ -48,10 +48,13 @@ class ShopByCategory extends Composer
                     $count_tee != count($product_categories)
                         ? get_field('string_category')
                         : '';
-                $categories[] = [
+                    
+                $thumbnail_id = get_woocommerce_term_meta($category->term_id, 'thumbnail_id', true);
+                $categories[] = (object) [
                     'link' => get_term_link($category),
                     'name' => $category->name,
                     'string_category' => $string_category,
+                    'thumbnail' => wp_get_attachment_image_src($thumbnail_id, 'medium')[0],
                 ];
             }
         }
