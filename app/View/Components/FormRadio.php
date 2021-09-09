@@ -32,7 +32,7 @@ class FormRadio extends Component
     {
         $postdata = wc_clean($_POST);
 
-        $this->defaultValue = ($defaultValue && !empty($postdata[$defaultValue])) ? esc_attr(wp_unslash($postdata[$defaultValue])) : '';
+        $this->defaultValue = ($defaultValue && isset($postdata[$defaultValue]) && !empty($postdata[$defaultValue])) ? esc_attr(wp_unslash($postdata[$defaultValue])) : '';
         $this->isChecked = $isChecked === 'checked';
     }
 
