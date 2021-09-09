@@ -1,30 +1,33 @@
-{{-- Variables injected in home-banner composer --}}
-<section class="home-banner" id="home_banner">
-  <div class="full-width">
-    <div class="wrapper-section">
-      <div class="inner-section">
-        @if ($slides)
-          <div class="home-slider__slider">
-            @foreach ($slides as $slide)
-              @if ($slide['image'])
-              <div class="slider-home-page relative slider-{{ $slide['index'] }}" style="background-image: url('{{ $slide['image']['url'] }}');">
-                <img class="absolute h-full object-fill w-full" src="{{ $slide['image']['url'] }}" alt="slide" />
-                <div class="flex h-80 items-center justify-center relative">
-                  <div class="contents">
-                    {!! $slide['content'] !!}
-                  </div>
-                  @if ($slide['button'])
-                    <div class="">
-                      <a href="{{ $slide['link'] }}" class="btn btn--white px-8 py-1">{{ $slide['button'] }}</a>
-                    </div>
-                  @endif
+<section id="home_banner">
+  <div
+    class="px-0 mx-auto max-w-full lg:py-8 sm:px-8 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl">
+    @if ($slides)
+      <div class="home-slider__slider relative">
+        @foreach ($slides as $slide)
+          {{-- Empty wrapping element for slick slider --}}
+          <div>
+            <div class="grid grid-cols-12 gap-x-8 items-center">
+              <div
+                class="col-span-12 row-start-2 lg:row-start-auto lg:col-span-5 flex flex-col justify-center items-start space-y-5 p-8 sm:p-0">
+                <div class="grid space-y-3">
+                  {!! $slide['content'] !!}
                 </div>
+                @if ($slide['button'])
+                  <a href="{{ esc_attr($slide['link']) }}" class="btn btn--white btn--md">
+                    {{ $slide['button'] }}</a>
+                @endif
               </div>
-              @endif
-            @endforeach
+              <div
+                class="col-span-12 row-start-1 lg:row-start-auto lg:col-span-7 overflow-hidden relative w-full h-64 lg:h-96">
+                @if ($slide['image'])
+                  <img class="absolute top-0 left-0 h-full object-cover w-full" src="{{ $slide['image']['url'] }}"
+                    alt="slide" />
+                @endif
+              </div>
+            </div>
           </div>
-        @endif
+        @endforeach
       </div>
-    </div>
+    @endif
   </div>
 </section>

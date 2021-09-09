@@ -1,0 +1,24 @@
+.home-slider__arrow {
+  @apply absolute z-20 text-black top-32 lg:top-1/2 transform -translate-y-1/2 w-8 p-3 bg-white outline-none focus:outline-none;
+  &--prev {
+    @apply left-0;
+    @screen lg {
+      @apply -left-8;
+    }
+    @screen 2xl {
+      @apply -left-10;
+    }
+  }
+  &--next {
+    @apply right-0;
+    @screen lg {
+      @apply -right-8;
+    }
+    @screen 2xl {
+      @apply -right-10;
+    }
+  }
+  @screen lg {
+    @apply bg-transparent p-0 w-3;
+  }
+}
