@@ -352,4 +352,17 @@ ssh $REMOTE_SYS_USER@$REMOTE_IP "cd ~/webapps/bidstitch-stag/public/ && wp db ex
 rsync -avz $REMOTE_SYS_USER@$REMOTE_IP:~/webapps/bidstitch-stag/public/backup.tgz ./
 ```
 
+## Cron jobs
+
+Additional tasks that need to be triggered
+
+```
+
+# WordPress scheduled tasks (every 1 min)
+wp cron event run --due-now
+
+# ElasticPress reindexing (every 15min)
+wp elasticpress index
+
+```
 
