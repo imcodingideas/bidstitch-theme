@@ -114,8 +114,97 @@ WooCommerce Simple Auctions plugin enables you to create professional auction we
 
 https://codecanyon.net/item/woocommerce-simple-auctions-wordpress-auctions/6811382 
 
-* This plugin was previously customized, based on 1.2.40
-* Custom functionality is in process of being migrated
+* This plugin was previously customized (not anymore), based on 1.2.40
+
+Run cronjobs for simple auctions
+--------------------------------
+
+Documentation: https://wpgenie.org/woocommerce-simple-auctions/documentation/
+
+Native way is running via curl like this:
+
+
+```
+# every minute
+/usr/bin/curl -m 120 -s https://bidstitch.com/?auction-cron=check &>/dev/null
+
+# every day
+/usr/bin/curl -m 120 -s https://bidstitch.com/?auction-cron=mails &>/dev/null
+
+# every hour
+/usr/bin/curl -m 120 -s https://bidstitch.com/?auction-cron=relist &>/dev/null
+
+# every 30 minutes
+/usr/bin/curl -m 120 -s https://bidstitch.com/?auction-cron=closing-soon-email &>/dev/null
+
+```
+
+However, this has some drawbacks like:
+
+- Requires ignore_user_abort enabled for PHP (sometimes disabled for security reasons)
+- Operation can timeout
+
+An alternative way is running in console via wp-cli:
+
+
+```
+# every minute
+wp eval '$_REQUEST["auction-cron"] = "check"; (new WooCommerce_simple_auction())->simple_auctions_cron();'
+
+# every day
+wp eval '$_REQUEST["auction-cron"] = "mails"; (new WooCommerce_simple_auction())->simple_auctions_cron();'
+
+# every hour
+wp eval '$_REQUEST["auction-cron"] = "relist"; (new WooCommerce_simple_auction())->simple_auctions_cron();'
+
+# every 30 minutes
+wp eval '$_REQUEST["auction-cron"] = "closing-soon-emails"; (new WooCommerce_simple_auction())->simple_auctions_cron();'
+
+```
+
+possible structure for cronjobs:
+
+```
+# minute
+* * * * * cd path/to/public/dir && wp eval '$_REQUEST["auction-cron"] = "check"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+# every day
+0 0 * * * cd path/to/public/dir && wp eval '$_REQUEST["auction-cron"] = "mails"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+# every hour
+0 * * * * cd path/to/public/dir && wp eval '$_REQUEST["auction-cron"] = "relist"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+# every 30 min
+*/30 * * * * cd path/to/public/dir && wp eval '$_REQUEST["auction-cron"] = "closing-soon-emails"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+```
+
+
+required fixes woocommerce-simple-auctions 2.0.4
+------------------------------------------------
+
+
+Some errors appear in plugin when running cron jobs. Manual fixes:
+
+```
+
+// Trying to access array offset on value of type bool
+wp-content/plugins/woocommerce-simple-auctions/woocommerce-simple-auctions.php L3571
+// possible fix:
+if ( !empty($remind_to_pay_settings['enabled']) && $remind_to_pay_settings['enabled'] != 'yes' ) {
+
+// Trying to access array offset on value of type bool
+wp-content/plugins/woocommerce-simple-auctions/woocommerce-simple-auctions.php L3616
+// possible fix:
+$n_days              = empty($remind_to_pay_settings['interval'])?0:(int) $remind_to_pay_settings['interval'];
+
+// non numeric value encountered:
+wp-content/plugins/woocommerce-simple-auctions/woocommerce-simple-auctions.php L3625
+// possible fix:
+update_post_meta( $the_query->post->ID, '_number_of_sent_mails', $number_of_sent_mail?? 0 + 1 );
+
+```
+
 
 ### Paypal Woocommerce
 
