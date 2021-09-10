@@ -12,34 +12,45 @@
       </tr>
     </thead>
     <tbody class="border-b border-gray-200 divide-y divide-gray-200 text-sm sm:border-t">
-      @foreach ($products as $product)
-        <tr>
-          <td class="py-6 pr-8">
-            <div class="flex items-center">
-              {!! $product->thumbnail !!}
-              <div>
-                <div class="font-medium text-gray-900">{{ $product->name }}</div>
-                <div class="mt-1 sm:hidden">
-                  {!! $product->total !!}
+      @if ($products)
+        @foreach ($products as $product)
+          <tr>
+            <td class="py-6 pr-8">
+              <div class="flex items-center">
+                {!! $product->thumbnail !!}
+                <div>
+                  <div class="font-medium text-gray-900">{{ $product->name }}</div>
+                  <div class="mt-1 sm:hidden">
+                    {!! $product->total !!}
+                  </div>
                 </div>
               </div>
-            </div>
-          </td>
-          <td class="hidden py-6 pr-8 sm:table-cell">
-            {!! $product->total !!}
-          </td>
-          <td class="hidden py-6 pr-8 sm:table-cell">
-            <a href="{{ esc_url($product->store_link) }}">{{ $product->store_name }}</a>
-          </td>
-          <td class="py-6 font-medium text-right whitespace-nowrap">
-            <a href="{{ esc_url($product->link) }}" class="text-black underline tracking-wider">
-              {{ _e('View', 'sage') }}
-              <span class="hidden lg:inline">{{ _e('Product', 'sage') }}</span>
-              <span class="sr-only">, {{ $product->name }}</span>
-            </a>
-          </td>
-        </tr>
-      @endforeach
+            </td>
+            <td class="hidden py-6 pr-8 sm:table-cell">
+              {!! $product->total !!}
+            </td>
+            <td class="hidden py-6 pr-8 sm:table-cell">
+              <a href="{{ esc_url($product->store_link) }}">{{ $product->store_name }}</a>
+            </td>
+            <td class="py-6 font-medium text-right whitespace-nowrap">
+              <div class="grid space-y-2">
+                <a href="{{ esc_url($product->link) }}"
+                  class="btn btn--white text-xs text-center p-1 justify-center tracking-wider">
+                  <span>{{ _e('View Product', 'sage') }}</span>
+                  <span class="sr-only">, {{ $product->name }}</span>
+                </a>
+                @if ($product->message_button_data)
+                  <button
+                    class="btn btn--white text-xs text-center p-1 justify-center tracking-wider message__compose__button"
+                    data-message-receiver="{!! htmlspecialchars($product->message_button_data, ENT_QUOTES, 'UTF-8') !!}">
+                    {{ _e('Message Seller', 'sage') }}
+                  </button>
+                @endif
+              </div>
+            </td>
+          </tr>
+        @endforeach
+      @endif
     </tbody>
   </table>
 @endif

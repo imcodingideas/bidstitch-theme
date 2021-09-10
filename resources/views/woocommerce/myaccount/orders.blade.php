@@ -1,5 +1,4 @@
-{{-- 
-Orders
+{{-- Orders
 
 Shows orders on the account page.
 
@@ -13,8 +12,7 @@ the readme will list any important changes.
 
 @see https://docs.woocommerce.com/document/template-structure/
 @package WooCommerce\Templates
-@version 3.7.0 
---}}
+@version 3.7.0 --}}
 
 @php do_action('woocommerce_before_account_orders', $has_orders) @endphp
 
@@ -24,7 +22,7 @@ the readme will list any important changes.
   </h1>
 
   @if ($has_orders)
-    <div class="grid gap-y-12">
+    <div class="grid gap-y-12 sm:gap-y-16">
       @foreach ($customer_orders->orders as $customer_order)
         @include('woocommerce.myaccount.orders-item')
       @endforeach

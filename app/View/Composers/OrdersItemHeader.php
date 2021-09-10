@@ -28,7 +28,28 @@ class OrdersItemHeader extends Composer
             'order_total' => $order ? $this->order_total($order) : '',
             'order_link' => $order ? $this->order_link($order) : '',
             'product_count' => $order ? $this->product_count($order) : '',
+            'shipment_items' => $order ? $this->get_shipment_items($order) : '',
         ];
+    }
+
+    public function get_shipment_items($order) {
+        $shipment_items = dokan_pro()->shipment->get_shipping_tracking_info($order->id);
+        
+        if (empty($shipment_items)) return false;
+
+        $payload = [];
+
+        foreach($shipment_items as $shipping_item) {
+            $provider_label = isset($shipping_item->provider_label) ? $shipping_item->provider_label : '';
+            $number = isset($shipping_item->number) ? $shipping_item->number : '';
+
+            $payload[] = (object) [
+                'provider_label' => $provider_label,
+                'number' => $number,
+            ];
+        }
+
+        return $payload;
     }
 
     public function order_link($order) {
