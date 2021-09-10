@@ -49,12 +49,21 @@ class ShopByCategory extends Composer
                         ? get_field('string_category')
                         : '';
                     
-                $thumbnail_id = get_woocommerce_term_meta($category->term_id, 'thumbnail_id', true);
+                // thumbnail
+                $thumbnail_id = get_term_meta(
+                    $category->term_id,
+                    'thumbnail_id',
+                    true
+                );
+                $tumbnail_url = $thumbnail_id
+                    ? wp_get_attachment_image_src($thumbnail_id, 'medium')[0]
+                    : '';
+
                 $categories[] = (object) [
                     'link' => get_term_link($category),
                     'name' => $category->name,
                     'string_category' => $string_category,
-                    'thumbnail' => wp_get_attachment_image_src($thumbnail_id, 'medium')[0],
+                    'thumbnail' => $tumbnail_url,
                 ];
             }
         }
