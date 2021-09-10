@@ -17,6 +17,7 @@ import headerNotifications from './header-notifications';
 import notificationsPage from './notifications-page';
 import elasticpressSearchWidget from './elasticpress-search-widget';
 import vendorOnboardingForm from './vendor-onboarding-form';
+import talkjsMessageUser from './talkjs-message-user'
 
 headerNavigation();
 dropdownNavigation();
@@ -33,6 +34,7 @@ headerNotifications();
 notificationsPage();
 elasticpressSearchWidget();
 vendorOnboardingForm();
+talkjsMessageUser();
 
 // load alpine at the end
 Alpine.start();
