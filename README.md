@@ -366,3 +366,6 @@ wp elasticpress index
 
 ```
 
+## Migration from production
+
+To migrate from production to local or staging follow steps in README-MIGRATION.md
