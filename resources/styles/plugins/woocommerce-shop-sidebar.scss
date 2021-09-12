@@ -52,44 +52,63 @@
   }
 
   h4 {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-top: 1rem;
-    margin-top: 1.5rem;
-    letter-spacing: 0.025em;
-    &::after {
-      display: block;
-      content: '';
-      position: relative;
-      width: 40px;
-      height: 2px;
-      background-color: #eee;
-      margin-top: 0.5rem;
-    }
+    @apply text-lg uppercase font-bold mt-0 mb-2 tracking-wide;
   }
 
+  // woocomerce price slider
+  .widget_price_filter {
+    form {
+      @apply grid;
+    }
+    .price_slider_wrapper {
+      @apply mt-2 w-full;
+    }
+    .ui-slider-horizontal {
+      @apply bg-black mx-3;
+      .ui-slider-range {
+        @apply bg-gray-200;
+      }
+      .ui-slider-handle {
+        @apply bg-black h-6 w-6 bg-white border-4 -top-2 border-black -ml-3;
+      }
+    }
+    .price_slider_amount {
+      @apply text-sm;
+    }
+  }
   // plugin: woocommerce-products-filter
+  .woof_submit_search_form_container {
+    @apply clear-none grid grid-cols-2 gap-x-4 m-0;
+  }
+  .woof_container {
+    @apply m-0 p-0;
+  }
+  .woof_redraw_zone {
+    width: calc(100% - 5rem);
+    @apply hidden fixed bg-white top-0 left-0 p-8 overflow-y-auto h-screen max-w-xs space-y-8 z-50
+    md:block md:relative md:top-auto md:left-auto md:p-0 md:h-auto md:max-w-none md:overflow-hidden md:z-auto md:w-full;
+  }
   .widget-woof {
     h3 {
       // this title is useless
-      display: none;
+      @apply hidden;
+    }
+  }
+  .woof_list_label {
+    @apply flex flex-wrap items-start;
+    @apply -m-2 #{!important};
+    li {
+      @apply m-2 p-0 #{!important};
+      .woof_label_term:hover {
+        @apply bg-gray-600;
+      }
+      .woof_label_term.checked {
+        @apply bg-gray-800;
+      }
     }
   }
   .woof_label_term {
-    border-radius: 0.25rem;
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    padding: 3px 6px;
-    color: #4a4a4a;
-  }
-  .woof_submit_search_form {
-    background-color: #000000;
-    color: white;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border-radius: 0.25rem;
-    margin-top: 2rem;
+    min-width: 2rem;
+    @apply rounded-sm font-bold text-xs uppercase p-2 text-black w-auto h-auto m-0;
   }
 }
