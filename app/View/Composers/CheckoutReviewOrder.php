@@ -148,9 +148,9 @@ class CheckoutReviewOrder extends Composer
     }
 
     public function get_shipping() {
-        $has_shipping = WC()->session->get('chosen_shipping_methods')[0];
+        $has_shipping = WC()->session->get('chosen_shipping_methods');
 
-        if (!$has_shipping) return;
+        if (empty($has_shipping) || !$has_shipping) return false;
 
         return WC()->cart->get_cart_shipping_total();
     }
