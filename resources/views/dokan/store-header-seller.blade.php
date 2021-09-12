@@ -1,6 +1,6 @@
 <div class="row header-seller">
   <p>{{ $count_product }} {{ _e('Listings', 'sage') }} | {{ $store_total_sales }} {{ _e(' Sales', 'sage') }}</p>
-  <form class="dokan-ordering-product ajaxfilterform" method="get">
+  {{-- <form class="dokan-ordering-product ajaxfilterform" method="get">
     <select name="orderby" class="orderby" aria-label="{{ _e('Shop order', 'woocommerce') }}">
       @foreach ($catalog_orderby_options as $id => $name)
         <option value="{{ $id }}" {{ selected($orderby, $id) }}>{{ $name }}</option>
@@ -11,5 +11,5 @@
     @php
       wc_query_string_form_fields(null, ['orderby', 'submit', 'paged', 'product-page']);
     @endphp
-  </form>
+  </form> --}}
 </div>
