@@ -170,3 +170,36 @@ function woocommerce_remove_form_field_attributes($args, $key, $value = null) {
 add_action('wp_enqueue_scripts', function() {
     wp_dequeue_script('selectWoo');
 }, 11);
+
+// stripe payment method only available for subscriptions
+add_filter('woocommerce_available_payment_gateways', 'conditional_payment_gateways', 10, 1);
+function conditional_payment_gateways($available_gateway) {
+    // If is admin, do not filter
+    if (is_admin()) return $available_gateway;
+    
+    // If stripe is not enabled, do not filter
+    if (empty($available_gateway) || !isset($available_gateway['dokan-stripe-connect'])) return $available_gateway;
+
+    $is_subscription = false;
+
+    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        // Check if product is a subscription
+        $has_subscription_tax = has_term('product_pack', 'product_type', $cart_item['product_id']);
+
+        if ($has_subscription_tax) {
+            $is_subscription = true;
+            break;
+        }
+    }
+
+    // If is subscription purchase, only allow for stripe payment method
+    if ($is_subscription) {
+        return [
+            'dokan-stripe-connect' => $available_gateway['dokan-stripe-connect'],
+        ];
+    }
+
+    // If is not subscription, remove stripe as payment method
+    unset($available_gateway['dokan-stripe-connect']);
+    return $available_gateway;
+}
