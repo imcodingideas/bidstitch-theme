@@ -9,6 +9,7 @@ import woocommerceMiniCart from './woocommerce-mini-cart';
 import woocommerceShopSidebar from './woocommerce-shop-sidebar';
 import woocommerceAccountTabs from './woocommerce-account-tabs';
 import woocommerceCheckout from './woocommerce-checkout';
+import woocommerceProductsFilter from './woocommerce-products-filter'
 import singleProductAccordion from './single-product-accordion';
 import shippingRatesEditor from './shipping-rates-editor';
 import newProductForm from './new-product-form';
@@ -26,6 +27,7 @@ woocommerceMiniCart();
 woocommerceShopSidebar();
 woocommerceAccountTabs();
 woocommerceCheckout();
+woocommerceProductsFilter();
 singleProductAccordion();
 shippingRatesEditor();
 newProductForm();

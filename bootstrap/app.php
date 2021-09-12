@@ -32,6 +32,7 @@ collect([
     'admin',
     'woocommerce',
     'woocommerce-performance-improvements',
+    'woocommerce-products-filter',
     'acf',
     'dokan',
     'dokan-custom-functions',
