@@ -18,9 +18,7 @@ the readme will list any important changes.
 
 <div class="woocommerce-checkout-payment checkout__paymentmethod__wrapper" id="payment">
   {{-- Shipping Method --}}
-  <div class="p-4 lg:p-6 border-b">
-    @include('woocommerce.checkout.shipping')
-  </div>
+  @include('woocommerce.checkout.shipping')
 
   {{-- Payment Method --}}
   <div class="wc_payment_methods payment_methods methods">
