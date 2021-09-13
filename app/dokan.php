@@ -1,11 +1,10 @@
 <?php
-use \WeDevs\Dokan\Dashboard\Templates\Main;
 
-// remove dashboard nav
 add_action('init', function () {
-    $class_name = Main::class;
-
-    remove_action('dokan_dashboard_content_before', array($class_name, 'dashboard_side_navigation'));
+    // remove dashboard nav
+    remove_action('dokan_dashboard_content_before', [\WeDevs\Dokan\Dashboard\Templates\Main::class, 'dashboard_side_navigation']);
+    // remove profile progress
+    remove_action('dokan_settings_content_area_header', [dokan()->dashboard->templates->settings, 'render_settings_load_progressbar'], 20);
 }, 6);
 
 // update dashboard menu items
