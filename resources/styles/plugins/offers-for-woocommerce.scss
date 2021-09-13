@@ -22,3 +22,52 @@
     width: 100%;
   }
 }
+
+// offer form in product/single
+#lightbox_custom_ofwc_offer_form {
+  max-height: 720px;
+  [type='text'],
+  [type='email'],
+  textarea {
+    width: 100% !important;
+    border-radius: 3px;
+    border: 1px solid #ccc !important;
+  }
+  // fix border
+  span.angelleye-input-group-addon {
+    border-left: 1px solid #ccc;
+  }
+  .make-offer-form-intro h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: black;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  .make-offer-form-intro-text {
+    text-align: center;
+  }
+  label {
+    color: #333;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+}
+
+// fix space
+.woocommerce-make-offer-form-section:nth-of-type(1) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+// submit
+.woocommerce-make-offer-form-section-submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+// loader
+.offer-submit-loader {
+  margin-top: 1rem;
+}
