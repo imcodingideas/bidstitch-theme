@@ -118,10 +118,6 @@ class StoreHeader extends Composer
                 WC()->countries->countries[$countrycode] ?? $countrycode;
         }
 
-        $vendor_profile_link = get_field('user_profile', 'option');
-        $vendor_profile_link = !empty($vendor_profile_link)
-            ? $vendor_profile_link . '?id=' . $vendor_id
-            : '#';
         $store_user_id = $store_user->get_id();
 
         // store url
@@ -160,9 +156,7 @@ class StoreHeader extends Composer
             'store_user_id' => $store_user_id,
             'vendor_id' => $vendor_id,
             'vendor_name' => $vendor_name,
-            'vendor_profile_link' => $vendor_profile_link,
             'args_btn_follow' => $this->args_btn_follow($vendor_id),
-
             'dokan_get_store_url' => $dokan_get_store_url,
             'dokan_get_review_url' => $dokan_get_review_url,
             'dokan_get_store_url_class' => $dokan_get_store_url_class,
