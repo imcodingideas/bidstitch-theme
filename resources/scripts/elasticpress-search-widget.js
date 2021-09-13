@@ -2,7 +2,8 @@ export default function () {
 
     window.elasticpressSearchWidget = function () {
         return {
-            results: [],
+            tab: 'products',
+            results: {},
             search: '',
             hide: true,
             getData(searchExpression) {
@@ -16,7 +17,7 @@ export default function () {
                     .then(
                         (r) => {
                             // console.log(r);
-                            this.results = r
+                            this.results = r;
                         }
                     )
             },
