@@ -7,7 +7,7 @@
   @include('partials.header')
 
   @hasSection('sidebar')
-    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 xl:space-x-8 container py-8">
+    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-12 xl:space-x-16 container py-8">
       <div class="md:w-3/12">
         <aside class="shop-sidebar">
           @yield('sidebar')

@@ -33,5 +33,16 @@ body.woocommerce .main {
   // showing 1 of xx results
   .woocommerce-result-count {
     line-height: 42px;
+    @apply hidden;
+    @screen lg {
+      @apply block;
+    }
+  }
+  // order by
+  .woocommerce-ordering {
+    @apply w-full text-center;
+    @screen md {
+      @apply w-auto;
+    }
   }
 }
