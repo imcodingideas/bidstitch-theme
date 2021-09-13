@@ -13,8 +13,8 @@ the readme will list any important changes.
 @version 3.6.0 --}}
 
 <div class="grid space-y-6 p-4 lg:p-6">
-  <div class="grid space-y-6 woocommerce-shipping-fields">
-    @if ($needs_shipping_address)
+  @if ($needs_shipping_address)
+    <div class="grid space-y-6 woocommerce-shipping-fields">
       <div class="flex items-center space-x-4" id="ship-to-different-address">
         <x-form-checkbox
           class="checkout__shipping__input woocommerce-form__input woocommerce-form__input-checkbox input-checkbox"
@@ -37,8 +37,8 @@ the readme will list any important changes.
 
         @php do_action('woocommerce_after_checkout_shipping_form', $checkout) @endphp
       </div>
-    @endif
-  </div>
+    </div>
+  @endif
   <div class="grid space-y-3">
     <div class="w-full woocommerce-additional-fields">
       @php do_action('woocommerce_before_order_notes', $checkout) @endphp
