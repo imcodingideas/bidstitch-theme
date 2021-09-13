@@ -107,7 +107,7 @@ export default {
       const res = await axios.post(this.settings.ajaxUrl, formData);
       const data = res.data.data.data;
       return {
-        code: data.zone_locations[0].code,
+        code: data.zone_locations.length > 0 ? data.zone_locations[0].code : '',
         name: data.zone_name,
       };
     },
