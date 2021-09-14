@@ -106,8 +106,47 @@ class DashboardNavigation extends Composer
             ];
 
             $items[] = $item;
-
         }
+
+        // Wishlist
+        $wishlist_endpoint = YITH_WCWL()->get_wishlist_url();
+        $items[] = (object) [
+            'label' => __('Wishlist', 'sage'),
+            'url' => esc_url($wishlist_endpoint),
+            'classes' => '',
+            'active' => $wishlist_endpoint === $active_menu ? true : false,
+            // Set children to support Log1x/Navi menu instances
+            'children' => [],
+            // Set default target to support Log1x/Navi menu instances
+            'target' => ''
+        ];
+
+        
+        // Messages
+        $messages_endpoint = dokan_get_navigation_url('inbox');
+        $items[] = (object) [
+            'label' => __('Messages', 'sage'),
+            'url' => esc_url($messages_endpoint),
+            'classes' => '',
+            'active' => $messages_endpoint === $active_menu ? true : false,
+            // Set children to support Log1x/Navi menu instances
+            'children' => [],
+            // Set default target to support Log1x/Navi menu instances
+            'target' => ''
+        ];
+
+        // Following
+        $following_endpoint = dokan_get_navigation_url('following');
+        $items[] = (object) [
+            'label' => __('Following', 'sage'),
+            'url' => esc_url($following_endpoint),
+            'classes' => '',
+            'active' => $following_endpoint === $active_menu ? true : false,
+            // Set children to support Log1x/Navi menu instances
+            'children' => [],
+            // Set default target to support Log1x/Navi menu instances
+            'target' => ''
+        ];
 
         return $items;
     }
