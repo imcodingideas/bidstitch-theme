@@ -36,7 +36,7 @@ add_filter('dokan_get_dashboard_nav', function($items) {
         ],
         [
             'title' => __('Received Offers', 'sage'),
-            'url' => dokan_get_navigation_url('woocommerce-offer'),
+            'url' => dokan_get_navigation_url('woocommerce_offer'),
             'icon' => '',
             'pos' => 50,
         ],
