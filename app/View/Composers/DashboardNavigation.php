@@ -136,7 +136,7 @@ class DashboardNavigation extends Composer
         ];
 
         // Following
-        $following_endpoint = dokan_get_navigation_url('following');
+        $following_endpoint = wc_get_account_endpoint_url('following');
         $items[] = (object) [
             'label' => __('Following', 'sage'),
             'url' => esc_url($following_endpoint),
