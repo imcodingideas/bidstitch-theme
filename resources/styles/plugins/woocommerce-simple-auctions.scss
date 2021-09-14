@@ -1,0 +1,82 @@
+.auction-ajax-change {
+  // spacing
+  display: grid;
+  grid-gap: 1rem;
+  margin-top: 2rem;
+
+  // labels
+  .auction-condition,
+  .auction-time,
+  .auction-end {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .curent-bid {
+    font-weight: 300;
+  }
+
+  // auction
+  .auction-time-countdown {
+    color: #f70104;
+    font-weight: 600;
+    line-height: 24px;
+    letter-spacing: 0.05em;
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  // auction end
+  .auction-end {
+    line-height: 2;
+  }
+  .product-price-title {
+    display: none;
+  }
+
+  // buy now button
+  .buy-now {
+    display: none;
+  }
+  //bid
+  form.cart {
+    margin-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+  }
+  // watchlist
+  p.wsawl-link {
+    padding-bottom: 1rem;
+  }
+
+  // increase/decrease buttons
+  .quantity {
+    display: flex;
+    align-items: center;
+    .plus,
+    .minus {
+      font-size: 30px;
+      line-height: 1;
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      margin: 0 15px;
+      cursor: pointer;
+    }
+    // quantity
+    .qty {
+      min-width: 80px;
+    }
+  }
+}
+
+// auction
+.product-type-auction {
+  .buy-now {
+    display: none;
+  }
+}
+
