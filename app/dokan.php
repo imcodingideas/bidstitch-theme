@@ -79,3 +79,6 @@ function bidstitch_stripe_display_save_payment_method_checkbox($display_tokeniza
     return false;
 }
 add_filter('dokan_stripe_display_save_payment_method_checkbox', 'bidstitch_stripe_display_save_payment_method_checkbox', 21, 1);
+
+// Remove vendor dashboard button on my account page
+remove_action('woocommerce_account_dashboard', 'dokan_set_go_to_vendor_dashboard_btn');
