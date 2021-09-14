@@ -80,6 +80,7 @@ add_filter('woocommerce_account_menu_items', function ($items) {
         'edit-address' => __('Addresses', 'sage'),
         'orders' => __('Purchases', 'sage'),
         'offers' => __('Sent Offers', 'sage'),
+        'bids' => __('Sent Bids', 'sage'),
     ];
 
     return $items;
@@ -180,3 +181,13 @@ function conditional_payment_gateways($available_gateway) {
     unset($available_gateway['dokan-stripe-connect']);
     return $available_gateway;
 }
+
+// Register bids endpoint
+add_action('init', function() {
+	add_rewrite_endpoint('bids', EP_ROOT | EP_PAGES);
+});
+
+// Register woocommerce endpoint
+add_action('woocommerce_account_bids_endpoint', function() {
+    wc_get_template('myaccount/bids.php');
+});
