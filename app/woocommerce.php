@@ -75,37 +75,14 @@ add_filter('woocommerce_sale_flash', function () {
 
 // update dashboard menu items
 add_filter('woocommerce_account_menu_items', function ($items) {
-    $new_items = $items;
+    $items = [
+        'edit-account' => __('Account Settings', 'sage'),
+        'edit-address' => __('Addresses', 'sage'),
+        'orders' => __('Purchases', 'sage'),
+        'offers' => __('Sent Offers', 'sage'),
+    ];
 
-    foreach($new_items as $endpoint => $data) {
-        switch ($endpoint) {
-            // remove unwanted items
-            case 'customer-logout':
-            case 'downloads':
-            case 'support-tickets':
-                unset($new_items[$endpoint]);
-                break;
-
-            // update existing items
-            case 'dashboard':
-                $new_items[$endpoint] = __('My Account', 'sage');
-                break;
-            case 'orders':
-                $new_items[$endpoint] = __('Purchase History', 'sage');
-                break;
-            case 'following':
-                $new_items[$endpoint] = __('Following', 'sage');
-                break;
-            case 'edit-account':
-                $new_items[$endpoint] = __('Account Settings', 'sage');
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-    return $new_items;
+    return $items;
 }, 11, 1);
 
 // remove my account nav
