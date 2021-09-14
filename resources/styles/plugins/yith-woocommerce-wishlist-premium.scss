@@ -22,7 +22,11 @@
 }
 
 .single-product {
-  .yith-wcwl-add-to-wishlist {
-    @apply relative top-auto right-auto left-auto mt-2 mb-0;
+  .product {
+    > .entry-summary {
+      .yith-wcwl-add-to-wishlist {
+        @apply relative top-auto right-auto left-auto mt-2 mb-0;
+      }
+    }
   }
 }
