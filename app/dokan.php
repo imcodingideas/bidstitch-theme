@@ -9,50 +9,46 @@ add_action('init', function () {
 
 // update dashboard menu items
 add_filter('dokan_get_dashboard_nav', function($items) {
-    $new_items = $items;
-
-    // add new items
-    $new_items['shipping'] = [
-        'title' => __( 'Shipping', 'dokan'),
-        'url' => dokan_get_navigation_url('settings/shipping'),
-        'icon' => '',
+    $items = [
+        [
+            'title' => __('View Store', 'sage'),
+            'url' => dokan_get_store_url(get_current_user_id()),
+            'icon' => '',
+            'pos' => 10,
+        ],
+        [
+            'title' => __('Store Settings', 'sage'),
+            'url' => dokan_get_navigation_url('settings/store'),
+            'icon' => '',
+            'pos' => 20,
+        ],
+        [
+            'title' => __('Active Listings', 'sage'),
+            'url' => dokan_get_navigation_url('products'),
+            'icon' => '',
+            'pos' => 30,
+        ],
+        [
+            'title' => __('Sold Listings', 'sage'),
+            'url' => dokan_get_navigation_url('orders'),
+            'icon' => '',
+            'pos' => 40,
+        ],
+        [
+            'title' => __('Received Offers', 'sage'),
+            'url' => dokan_get_navigation_url('woocommerce-offer'),
+            'icon' => '',
+            'pos' => 50,
+        ],
+        [
+            'title' => __('Followers', 'sage'),
+            'url' => dokan_get_navigation_url('followers'),
+            'icon' => '',
+            'pos' => 60,
+        ],
     ];
 
-    foreach($new_items as $endpoint => $data) {
-        switch ($endpoint) {
-            // remove unwanted items
-            case 'coupons':
-            case 'reports':
-            case 'staffs':
-            case 'reviews':
-            case 'announcement':
-            case 'support':
-            case 'withdraw':
-            case 'auction':
-                unset($new_items[$endpoint]);
-                break;
-
-            // update existing items
-            case 'dashboard':
-                $new_items[$endpoint]['title'] = __( 'My Store', 'dokan');
-                break;
-            case 'settings':
-                $new_items[$endpoint]['title'] = __( 'Store Settings', 'dokan');
-                $new_items[$endpoint]['url'] = dokan_get_navigation_url('settings/store');
-                break;
-            case 'products':
-                $new_items[$endpoint]['title'] = __( 'Active Listings', 'dokan');
-                break;
-            case 'orders':
-                $new_items[$endpoint]['title'] = __( 'Sold Listings', 'dokan');
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    return $new_items;
+    return $items;
 }, 21, 1);
 
 // Override the dokan form field styling for payment methods
