@@ -34,7 +34,7 @@
         </span>
       </a>
       {{-- rendered with ajax, see resources/scripts/header-notifications.js --}}
-      <div id="header-notifications" class="absolute hidden top-6 right-0 w-72 z-10 bg-white p-4 shadow-lg rounded">
+      <div id="header-notifications" class="absolute hidden top-6 right-0 w-72 z-10 bg-white p-4 shadow-lg rounded overflow-y-auto">
         {{-- @include('partials.header-notifications') --}}
       </div>
     </li>

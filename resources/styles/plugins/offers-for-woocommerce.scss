@@ -22,3 +22,11 @@
     width: 100%;
   }
 }
+
+// notifications
+#header-notifications {
+  max-height: calc(100vh - 9.5rem);
+  @screen lg {
+    max-height: calc(100vh - 12rem);
+  }
+}
