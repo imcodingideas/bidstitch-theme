@@ -30,8 +30,8 @@ gunzip prod-db.sql.gz
 
 # import db
 wp db import prod-db.sql
-wp search-replace '//bidstitch.com'  '//bidstitchnew.localhost'
-wp search-replace '\/\/bidstitch.com'  '\/\/bidstitchnew.localhost'
+wp search-replace '//bidstitch.com'  '//bidstitch.com'
+wp search-replace '\/\/bidstitch.com'  '\/\/bidstitch.com'
 
 
 Configure
@@ -89,7 +89,7 @@ Fix navigation menus
 
 Remove "<span class" from items
 
-https://bidstitchnew.localhost/wp-admin/nav-menus.php
+https://bidstitch.com/wp-admin/nav-menus.php
 
 
 Create Header navigation right
@@ -97,11 +97,11 @@ Create Header navigation right
 
 wp menu create header-nav-right
 
-wp menu item add-custom header-nav-right 'Bid' 'https://bidstitchnew.localhost/shop/?swoof=1&orderby=date&buying_formats=1'
-wp menu item add-custom header-nav-right 'Buy' 'https://bidstitchnew.localhost/shop/?swoof=1&orderby=date&buying_formats=2'
+wp menu item add-custom header-nav-right 'Bid' 'https://bidstitch.com/shop/?swoof=1&orderby=date&buying_formats=1'
+wp menu item add-custom header-nav-right 'Buy' 'https://bidstitch.com/shop/?swoof=1&orderby=date&buying_formats=2'
 wp menu item add-custom header-nav-right 'Sell' '#'
-    wp menu item add-custom header-nav-right 'Add Buy It Now Listing' 'https://bidstitchnew.localhost/dashboard/new-product/'
-    wp menu item add-custom header-nav-right 'Add Auction Listing' 'https://bidstitchnew.localhost/dashboard/new-auction-product/'
+    wp menu item add-custom header-nav-right 'Add Buy It Now Listing' 'https://bidstitch.com/dashboard/new-product/'
+    wp menu item add-custom header-nav-right 'Add Auction Listing' 'https://bidstitch.com/dashboard/new-auction-product/'
 
 manually set hierarchy
 
@@ -114,17 +114,17 @@ Add my account navigation
 wp menu create my-account
 
 wp menu item add-custom my-account 'My Profile' '#'
-    wp menu item add-custom my-account 'My purchases' 'https://bidstitchnew.localhost/my-account/orders/'
-    wp menu item add-custom my-account 'Profile settings' 'https://bidstitchnew.localhost/my-account/edit-account/'
-    wp menu item add-custom my-account 'My Profile' 'https://bidstitchnew.localhost/my-account/edit-account/'
-    wp menu item add-custom my-account 'Cart' 'https://bidstitchnew.localhost/cart'
+    wp menu item add-custom my-account 'My purchases' 'https://bidstitch.com/my-account/orders/'
+    wp menu item add-custom my-account 'Profile settings' 'https://bidstitch.com/my-account/edit-account/'
+    wp menu item add-custom my-account 'My Profile' 'https://bidstitch.com/my-account/edit-account/'
+    wp menu item add-custom my-account 'Cart' 'https://bidstitch.com/cart'
 wp menu item add-custom my-account 'My Store' '#'
-    wp menu item add-custom my-account 'My sold listings' 'https://bidstitchnew.localhost/dashboard/orders/'
-    wp menu item add-custom my-account 'My Buy It Now Listings' 'https://bidstitchnew.localhost/dashboard/products/'
-    wp menu item add-custom my-account 'Subscription' 'https://bidstitchnew.localhost/dashboard/subscription/'
-    wp menu item add-custom my-account 'Store Settings' 'https://bidstitchnew.localhost/dashboard/settings/store/'
-    wp menu item add-custom my-account 'View my store' 'https://bidstitchnew.localhost/stores'
-wp menu item add-custom my-account 'Logout' 'https://bidstitchnew.localhost/my-account/customer-logout/?_wpnonce=ef9eb7f97d'
+    wp menu item add-custom my-account 'My sold listings' 'https://bidstitch.com/dashboard/orders/'
+    wp menu item add-custom my-account 'My Buy It Now Listings' 'https://bidstitch.com/dashboard/products/'
+    wp menu item add-custom my-account 'Subscription' 'https://bidstitch.com/dashboard/subscription/'
+    wp menu item add-custom my-account 'Store Settings' 'https://bidstitch.com/dashboard/settings/store/'
+    wp menu item add-custom my-account 'View my store' 'https://bidstitch.com/stores'
+wp menu item add-custom my-account 'Logout' 'https://bidstitch.com/my-account/customer-logout/?_wpnonce=ef9eb7f97d'
 
 manually set hierarchy
 set as my account navigation
@@ -132,7 +132,7 @@ set as my account navigation
 Add categories images
 ---------------------
 
-https://bidstitchnew.localhost/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product
+https://bidstitch.com/wp-admin/edit-tags.php?taxonomy=product_cat&post_type=product
 
 Add elastic search widget
 -----------------
@@ -147,8 +147,8 @@ Set page templates
 
 as "dashboard"
 
-https://bidstitchnew.localhost/dashboard/
-https://bidstitchnew.localhost/my-account/edit-account/
+https://bidstitch.com/dashboard/
+https://bidstitch.com/my-account/edit-account/
 
 
 

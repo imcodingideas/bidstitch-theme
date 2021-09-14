@@ -248,6 +248,11 @@ elasticpress 3.6.2
 
 https://github.com/10up/ElasticPress
 
+
+setup elasticpres version the first time with:
+
+`wp elasticpress index --setup`
+
 Settings: 
 
 /wp-admin/admin.php?page=elasticpress
@@ -265,6 +270,7 @@ You can test it like this:
 ```
 /wp-content/themes/bidstitch/elasticproxy/search.php?s=vintage
 ```
+
 
 ### Others
 
@@ -369,3 +375,25 @@ wp elasticpress index
 ## Migration from production
 
 To migrate from production to local or staging follow steps in README-MIGRATION.md
+
+## Crontab 
+
+This is the complete crontab:
+
+# scheduled events every minute
+* * * * * cd /home/bidstitch/webapps/bidstitch/public && wp cron event run --due-now >/dev/null 2>&1
+
+# reindex elasticpress 5min
+*/5 * * * * cd /home/bidstitch/webapps/bidstitch/public && wp elasticpress index >/dev/null 2>&1
+
+# minute
+* * * * * cd /home/bidstitch/webapps/bidstitch/public && wp eval '$_REQUEST["auction-cron"] = "check"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+# every day
+0 0 * * * cd /home/bidstitch/webapps/bidstitch/public && wp eval '$_REQUEST["auction-cron"] = "mails"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+# every hour
+0 * * * * cd /home/bidstitch/webapps/bidstitch/public && wp eval '$_REQUEST["auction-cron"] = "relist"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
+
+# every 30 min
+*/30 * * * * cd /home/bidstitch/webapps/bidstitch/public && wp eval '$_REQUEST["auction-cron"] = "closing-soon-emails"; (new WooCommerce_simple_auction())->simple_auctions_cron();' >/dev/null 2>&1
