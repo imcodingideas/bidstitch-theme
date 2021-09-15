@@ -41,7 +41,21 @@ class MyAccountNavigation extends Composer
         if ($navigation->isEmpty()) {
             return;
         }
+        
+        $payload = $navigation->toArray();
 
-        return $navigation->toArray();
+        // Logout
+        $payload[] = (object) [
+            'label' => __('Logout', 'sage'),
+            'url' => esc_url(wc_logout_url()),
+            'classes' => '',
+            'active' => false,
+            // Set children to support Log1x/Navi menu instances
+            'children' => [],
+            // Set default target to support Log1x/Navi menu instances
+            'target' => ''
+        ];
+
+        return $payload;
     }
 }
