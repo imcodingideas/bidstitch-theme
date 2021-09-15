@@ -208,11 +208,11 @@ update_post_meta( $the_query->post->ID, '_number_of_sent_mails', $number_of_sent
 
 ### Paypal Woocommerce
 
-paypal-woocommerce 2.5.11
+paypal-woocommerce 2.5.15
 
 ### Paypal Multi Account
 
-paypal-for-woocommerce-multi-account-management 3.1.0
+paypal-for-woocommerce-multi-account-management 3.1.3 
 
 ### WOOF - WooCommerce Products Filter
 
