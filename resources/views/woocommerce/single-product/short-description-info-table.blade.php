@@ -30,21 +30,21 @@
   @if ($tees_length)
     <div class="text-center bg-gray-100 grid align-start gap-y-1 p-3">
       <span class="font-bold text-sm">{{ _e('Length', 'sage') }}</span>
-      <span class="text-sm">{{ $tees_length[0]->name }}</span>
+      <span class="text-sm">{{ $tees_length }}</span>
     </div>
   @endif
 
   @if ($tees_tag_type)
     <div class="text-center bg-gray-100 grid align-start gap-y-1 p-3">
       <span class="font-bold text-sm">{{ _e('Tag Type', 'sage') }}</span>
-      <span class="text-sm">{{ $tees_tag_type[0]->name }}</span>
+      <span class="text-sm">{{ $tees_tag_type }}</span>
     </div>
   @endif
 
   @if ($tees_stitching)
     <div class="text-center bg-gray-100 grid align-start gap-y-1 p-3">
       <span class="font-bold text-sm">{{ _e('Stitching', 'sage') }}</span>
-      <span class="text-sm">{{ $tees_stitching[0]->name }}</span>
+      <span class="text-sm">{{ $tees_stitching }}</span>
     </div>
   @endif
 </div>
