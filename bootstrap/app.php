@@ -33,6 +33,7 @@ collect([
     'woocommerce',
     'woocommerce-performance-improvements',
     'woocommerce-products-filter',
+    'woocommerce-simple-auctions',
     'acf',
     'dokan',
     'dokan-custom-functions',
