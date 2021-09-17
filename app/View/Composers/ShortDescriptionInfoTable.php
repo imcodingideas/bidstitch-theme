@@ -32,7 +32,7 @@ class ShortDescriptionInfoTable extends Composer
             'tees_tip' => get_field('tees_tip'),
             'tees_length' => get_field('tees_length'),
             'tees_tag_type' => get_field('tees_tag_type'),
-            'tees_stitchig' => get_field('tees_stitching'),
+            'tees_stitching' => get_field('tees_stitching'),
         ];
     }
 }
