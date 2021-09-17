@@ -2,13 +2,13 @@
 $loop = new WP_Query($args);
 @endphp
 @if ($loop->have_posts())
-  <div class="auctions-ending-soon py-6 xl:py-12">
-    <div class="container mx-auto">
+  <div class="auctions-ending-soon py-8 lg:py-16">
+    <div class="container">
       <div class="auctions-ending-soon__title">
-        <h2 class="font-bold md:text-3xl singe_product_notice_content text-lg uppercase">Auctions ending soon</h2>
+        <h2 class="text-xl md:text-3xl font-bold uppercase">Auctions ending soon</h2>
       </div>
-      <div class="woocommerce mt-6">
-        <ul class="auctions-ending-soon__products products">
+      <div class="woocommerce mt-8">
+        <ul class="auctions-ending-soon__products products columns-4">
           @while ($loop->have_posts())
             @php
               $loop->the_post();
