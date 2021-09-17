@@ -8,7 +8,7 @@
           <div>
             <div class="grid grid-cols-12 gap-x-8 items-center">
               <div
-                class="col-span-12 row-start-2 lg:row-start-auto lg:col-span-5 flex flex-col justify-center items-start space-y-5 p-8 sm:p-0">
+                class="col-span-12 row-start-2 lg:row-start-auto lg:col-span-5 flex flex-col justify-center items-start space-y-5 p-8 md:px-0">
                 <div class="grid space-y-3">
                   {!! $slide['content'] !!}
                 </div>
@@ -18,10 +18,9 @@
                 @endif
               </div>
               <div
-                class="col-span-12 row-start-1 lg:row-start-auto lg:col-span-7 overflow-hidden relative w-full h-64 lg:h-96">
+                class="col-span-12 row-start-1 lg:row-start-auto lg:col-span-7 overflow-hidden relative w-full aspect-w-16 aspect-h-9 bg-gray-100">
                 @if ($slide['image'])
-                  <img class="absolute top-0 left-0 h-full object-cover w-full" src="{{ $slide['image']['url'] }}"
-                    alt="slide" />
+                  <img class="h-full w-full object-cover" src="{{ $slide['image']['url'] }}" alt="slide" />
                 @endif
               </div>
             </div>
