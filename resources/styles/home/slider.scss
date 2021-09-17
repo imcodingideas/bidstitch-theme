@@ -1,24 +1,31 @@
 .home-slider__arrow {
-  @apply absolute z-20 text-black top-32 lg:top-1/2 transform -translate-y-1/2 w-8 p-3 bg-white outline-none focus:outline-none;
+  padding-top: 56.25%;
+  @apply z-20 absolute -top-4 w-8 h-8 transform -translate-y-1/2 lg:top-1/2;
   &--prev {
     @apply left-0;
     @screen lg {
-      @apply -left-8;
+      @apply -left-10;
     }
     @screen 2xl {
-      @apply -left-10;
+      @apply -left-12;
     }
   }
   &--next {
     @apply right-0;
     @screen lg {
-      @apply -right-8;
+      @apply -right-10;
     }
     @screen 2xl {
-      @apply -right-10;
+      @apply -right-12;
     }
   }
   @screen lg {
-    @apply bg-transparent p-0 w-3;
+    @apply p-0;
+  }
+}
+.home-slider__arrow__button {
+  @apply absolute text-black w-8 h-8 bg-white outline-none focus:outline-none lg:relative flex items-center justify-center;
+  svg {
+    @apply w-3;
   }
 }
