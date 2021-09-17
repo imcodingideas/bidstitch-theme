@@ -68,7 +68,7 @@ do_action( 'dokan_edit_auction_product_content_before' );
             </span>
 
             <?php if ( $_visibility == 'hidden' ) { ?>
-            <span class="dokan-label dokan-label-default"><?php _e( 'Hidden', 'dokan' ); ?></span>
+            <span class="dokan-label dokan-label-default"><?php _e( 'hidden', 'dokan' ); ?></span>
             <?php } ?>
 
             <?php if ( $post->post_status == 'publish' ) { ?>
@@ -345,63 +345,7 @@ do_action( 'dokan_edit_auction_product_content_before' );
                                     </div>
                                 </div>
 
-                                <div class="dokan-clearfix"></div>
-
-                                <?php if ( time() > strtotime( $_auction_dates_to ) ): ?>
-                                <div class="dokan-auction-date-relist hidden">
-                                    <div class="content-half-part dokan-auction-dates-from">
-                                        <label class="dokan-control-label" for="_auction_dates_from"><?php _e( 'Relist Auction Start date', 'dokan' ); ?></label>
-                                        <div class="dokan-form-group">
-                                            <input class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_relist_auction_dates_from" type="text" value="<?php echo $_auction_dates_from; ?>" style="width: 97%;" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="content-half-part dokan-auction-dates-to">
-                                        <label class="dokan-control-label" for="_auction_dates_to"><?php _e( 'Relist Auction End date', 'dokan' ); ?></label>
-                                        <div class="dokan-form-group">
-                                            <input class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_relist_auction_dates_to" type="text" value="<?php echo $_auction_dates_to; ?>" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endif; ?>
-
-                                <div class="auction_relist_section hidden">
-                                    <div class="dokan-form-group dokan-auction-automatic-relist">
-                                        <div class="checkbox">
-                                            <label for="_auction_automatic_relist">
-                                                <input type="hidden" name="_auction_automatic_relist" value="no">
-                                                <input type="checkbox" name="_auction_automatic_relist" id="_auction_automatic_relist" value="yes" <?php checked( $_auction_automatic_relist, 'yes' ) ?>>
-                                                <?php _e( 'Enable automatic relisting for this auction', 'dokan' ); ?>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <?php if ( time() > strtotime( $_auction_dates_to ) ): ?>
-                                    <div class="dokan-form-group dokan-auction-automatic-relist">
-                                        <button class="dokan-auction-relist-button">Relist</button>
-                                    </div>
-                                    <?php endif; ?>
-
-                                    <div class="relist_options" style="display: none">
-                                        <div class="dokan-w3 dokan-auction-relist-fail-time">
-                                            <label class="dokan-control-label" for="_auction_relist_fail_time"><?php _e( 'Relist if fail after n hours', 'dokan' ); ?></label>
-                                            <div class="dokan-form-group">
-                                                <input class="dokan-form-control" name="_auction_relist_fail_time" id="_auction_relist_fail_time" type="number" value="<?php echo $_auction_relist_fail_time ?>">
-                                            </div>
-                                        </div>
-                                        <div class="dokan-w3 dokan-auction-relist-not-paid-time">
-                                            <label class="dokan-control-label" for="_auction_relist_not_paid_time"><?php _e( 'Relist if not paid after n hours', 'dokan' ); ?></label>
-                                            <div class="dokan-form-group">
-                                                <input class="dokan-form-control" name="_auction_relist_not_paid_time" id="_auction_relist_not_paid_time" type="number" value="<?php echo $_auction_relist_not_paid_time ?>">
-                                            </div>
-                                        </div>
-                                        <div class="dokan-w3 dokan-auction-relist-duration">
-                                            <label class="dokan-control-label" for="_auction_relist_duration"><?php _e( 'Relist auction duration in h', 'dokan' ); ?></label>
-                                            <div class="dokan-form-group">
-                                                <input class="dokan-form-control" name="_auction_relist_duration" id="_auction_relist_duration" type="number" value="<?php echo $_auction_relist_duration ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <?php // change: removed relisting options, have duplicate fields like: _auction_dates_from ?>
 
                             </div>
                         </div>
@@ -446,12 +390,6 @@ do_action( 'dokan_edit_auction_product_content_before' );
                                     </select>
                                 </div>
 
-                                <div class="dokan-clearfix"></div>
-
-                                <div class="dokan-form-group dokan-auction-post-content">
-                                    <label for="post_content" class="form-label"><?php _e( 'Description', 'dokan' ); ?></label>
-                                    <?php wp_editor( esc_textarea( $post->post_content ), 'post_content', array('editor_height' => 50, 'quicktags' => false, 'media_buttons' => false, 'teeny' => true, 'editor_class' => 'post_content') ); ?>
-                                </div>
                             </div>
                         </div><!-- .dokan-other-options -->
 
