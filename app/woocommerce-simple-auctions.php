@@ -6,7 +6,11 @@ add_action('woocommerce_init', function() {
     // remove auctions filtering
     remove_action('woocommerce_product_query', array($woocommerce_auctions, 'pre_get_posts'), 99, 2);
 
+    // update auctions filtering query
     add_action('woocommerce_product_query', 'bs_pre_get_posts', 999, 2);
+
+    // remove auction icon from single product loop
+    remove_action('woocommerce_before_shop_loop_item_title', array($woocommerce_auctions, 'add_auction_bage'), 60);
 });
 
 // from plugin: woocommerce-simple-auctions
