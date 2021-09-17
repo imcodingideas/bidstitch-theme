@@ -83,7 +83,7 @@ function searchVendor($search)
         json_encode([
             'query' => [
                 'match' => [
-                    'meta.dokan_store_name.raw' => [
+                    'meta.dokan_store_name.value' => [
                         'query' => $search,
                     ],
                 ],
