@@ -94,7 +94,7 @@
 .woocommerce button.button.alt, 
 .woocommerce input.button.alt {
   @apply 
-    inline-flex items-center border shadow-sm font-medium rounded focus:outline-none uppercase font-bold
-    text-white bg-black hover:bg-opacity-80
+    inline-flex items-center justify-center border shadow-sm font-medium rounded focus:outline-none uppercase font-bold
+    text-white bg-black hover:bg-black hover:bg-opacity-80
     px-4 py-2 md:px-8;
 }

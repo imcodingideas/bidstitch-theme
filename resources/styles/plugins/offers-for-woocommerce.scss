@@ -1,21 +1,7 @@
 // button in single
 .offers-for-woocommerce-add-to-cart-wrap {
   .offers-for-woocommerce-make-offer-button-single-product {
-    background-color: white !important;
-    border: 1px solid black !important;
-    color: black !important;
-    width: 100% !important;
-    text-transform: uppercase;
-    font-weight: 500;
-    font-size: 1rem !important;
-    padding: 10px !important;
-
-    margin: 10px 0 0 0 !important;
-    position: relative !important;
-    &:hover {
-      background-color: black !important;
-      color: white !important;
-    }
+    @apply relative py-2 m-0 w-full text-lg mt-4 #{!important};
   }
 
   .single_offer_button {
