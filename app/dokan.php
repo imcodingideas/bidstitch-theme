@@ -7,6 +7,12 @@ add_action('init', function () {
     remove_action('dokan_settings_content_area_header', [dokan()->dashboard->templates->settings, 'render_settings_load_progressbar'], 20);
 }, 6);
 
+// remove font-awesome
+add_action('wp_enqueue_scripts', function() {
+    wp_deregister_style('dokan-fontawesome');
+    wp_dequeue_style('dokan-fontawesome');
+}, 11);
+
 // update dashboard menu items
 add_filter('dokan_get_dashboard_nav', function($items) {
     $items = [

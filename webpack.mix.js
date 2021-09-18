@@ -32,6 +32,7 @@ mix
 
 mix
   .copyDirectory('resources/images', 'public/images')
+  .copyDirectory('node_modules/font-awesome/fonts', 'public/fonts')
   .copyDirectory('resources/fonts', 'public/fonts');
 
 mix
