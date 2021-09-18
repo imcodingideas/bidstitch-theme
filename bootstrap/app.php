@@ -34,6 +34,7 @@ collect([
     'woocommerce-performance-improvements',
     'woocommerce-products-filter',
     'woocommerce-simple-auctions',
+    'yith-woocommerce-wishlist',
     'acf',
     'dokan',
     'dokan-custom-functions',
