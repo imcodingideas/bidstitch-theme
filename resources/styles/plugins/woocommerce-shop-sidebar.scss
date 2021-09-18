@@ -85,8 +85,8 @@
   }
   .woof_redraw_zone {
     width: calc(100% - 5rem);
-    @apply hidden fixed bg-white top-0 left-0 p-8 overflow-y-auto h-screen max-w-xs space-y-8 z-50
-    md:block md:relative md:top-auto md:left-auto md:p-0 md:h-auto md:max-w-none md:overflow-hidden md:z-auto md:w-full;
+    @apply hidden fixed bg-white top-0 left-0 p-8 pb-24 overflow-y-auto h-screen max-w-xs space-y-8 z-50
+    md:block md:relative md:top-auto md:left-auto md:p-0 md:pb-0 md:h-auto md:max-w-none md:overflow-hidden md:z-auto md:w-full;
   }
   .widget-woof {
     h3 {
