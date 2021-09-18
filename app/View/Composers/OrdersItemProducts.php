@@ -51,10 +51,10 @@ class OrdersItemProducts extends Composer
             $payload = [
                 'name' => $item->get_name(),
                 'total' => wc_price($item->get_total()),
-                'link' => false,
+                'link' => '#',
                 'thumbnail' => false,
-                'store_name' => false,
-                'store_link' => false,
+                'store_name' => '-',
+                'store_link' => '#',
                 'message_button_data' => false
             ];
 
