@@ -39,7 +39,7 @@ class OnboardingSetupWizard extends SetupWizard {
 
         // Redirect if previous setup wizard
         if ($_GET['page'] === 'dokan-seller-setup') {
-            wp_safe_redirect(site_url());
+            wp_safe_redirect(site_url('?page=' . $this->slug));
             exit();
         }
         
