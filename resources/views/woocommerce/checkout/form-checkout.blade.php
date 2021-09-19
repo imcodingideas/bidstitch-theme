@@ -66,7 +66,7 @@ the readme will list any important changes.
               <h3 class="font-bold text-xl">{{ _e('Order Summary', 'sage') }}</h3>
 
               <div id="order_review" class="shadow bg-white rounded woocommerce-checkout-review-order">
-                @include('woocommerce.checkout.review-order')
+                @php do_action('woocommerce_checkout_order_review') @endphp
               </div>
             </div>
           </div>
