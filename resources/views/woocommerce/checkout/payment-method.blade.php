@@ -21,7 +21,7 @@ the readme will list any important changes.
         @foreach ($available_gateways as $gateway)
           <label
             class="cursor-pointer bg-white rounded border flex focus:outline-none items-center text-sm leading-none px-2 py-4 space-x-2 lg:space-x-4 lg:px-4">
-            <x-form-radio id="checkout__paymentmethod__content--{{ esc_attr($gateway->id) }}"
+            <x-form-radio id="payment_method_{{ esc_attr($gateway->id) }}"
               class="cursor-pointer checkout__paymentmethod__input checkout__paymentmethod__input--{{ esc_attr($gateway->id) }}"
               name="payment_method" value="{{ esc_attr($gateway->id) }}"
               data-order_button_text="{{ esc_attr($gateway->order_button_text) }}"
@@ -36,7 +36,7 @@ the readme will list any important changes.
         @foreach ($available_gateways as $gateway)
           @if ($gateway->has_fields() || $gateway->get_description())
             <div
-              class="w-full flex-col checkout__paymentmethod__content checkout__paymentmethod__content--{{ esc_attr($gateway->id) }} {{ $gateway->chosen ? 'fiex' : 'hidden' }}">
+              class="w-full flex-col checkout__paymentmethod__content payment_method_{{ esc_attr($gateway->id) }} {{ $gateway->chosen ? 'fiex' : 'hidden' }}">
               {!! $gateway->payment_fields() !!}
             </div>
           @endif
