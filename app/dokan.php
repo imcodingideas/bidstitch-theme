@@ -11,6 +11,26 @@ add_action('init', function () {
 add_action('wp_enqueue_scripts', function() {
     wp_deregister_style('dokan-fontawesome');
     wp_dequeue_style('dokan-fontawesome');
+
+    // remove font awesome from dokan-follow-store style depedencies
+    if (defined('DOKAN_FOLLOW_STORE_ASSETS') && defined('DOKAN_FOLLOW_STORE_VERSION')) {
+        wp_deregister_style('dokan-follow-store');
+
+        // Use minified libraries if SCRIPT_DEBUG is turned off
+        $suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
+        wp_register_style('dokan-follow-store', DOKAN_FOLLOW_STORE_ASSETS . '/css/follow-store' . $suffix . '.css', [], DOKAN_FOLLOW_STORE_VERSION);
+    }
+}, 11);
+
+// remove font-awesome from dokan-follow-store style depedencies
+add_action('wp_register_scripts', function() {
+    if (defined('DOKAN_FOLLOW_STORE_ASSETS') && defined('DOKAN_FOLLOW_STORE_VERSION')) {
+        wp_deregister_style('dokan-follow-store');
+
+        // Use minified libraries if SCRIPT_DEBUG is turned off
+        $suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
+        wp_register_style('dokan-follow-store', DOKAN_FOLLOW_STORE_ASSETS . '/css/follow-store' . $suffix . '.css', [], DOKAN_FOLLOW_STORE_VERSION);
+    }
 }, 11);
 
 // update dashboard menu items
