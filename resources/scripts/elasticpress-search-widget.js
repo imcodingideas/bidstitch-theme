@@ -28,6 +28,34 @@ export default function () {
                 else {
                     this.results = []
                 }
+            },
+            handleSubmit(e) {
+                e.preventDefault();
+
+                if (!this.tab) return;
+                if (!this.search.length) return;
+
+                let url;
+                
+                switch(this.tab) {
+                    case 'vendors':
+                        if (!bidstitchSettings.vendorUrl) return;
+                        url = new URL(bidstitchSettings.vendorUrl);
+
+                        url.searchParams.set('dokan_seller_search', this.search);
+
+                        break;
+                    case 'products':
+                        if (!bidstitchSettings.shopUrl) return;
+                        url = new URL(bidstitchSettings.shopUrl);
+
+                        url.searchParams.set('s', this.search);
+
+                        break;
+                }
+
+                if (!url) return;
+                window.location = url;
             }
         }
     }

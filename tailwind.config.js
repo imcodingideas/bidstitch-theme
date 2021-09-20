@@ -32,6 +32,7 @@ module.exports = {
     extend: {
       borderWidth: ['last'],
       margin: ['first', 'last'],
+      backgroundColor: ['even']
     },
   },
   plugins: [

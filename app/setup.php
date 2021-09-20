@@ -17,13 +17,30 @@ add_action('wp_enqueue_scripts', function () {
     wp_enqueue_script('sage/app.js', asset('scripts/app.js')->uri(), ['jquery'], null, true);
 
     // localize script
-    wp_localize_script('sage/app.js', 'bidstitchSettings', [
+    $script_args = [
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'isLoggedIn' => is_user_logged_in(),
         'themeUrl' => get_template_directory_uri(),
         'siteUrl' => get_option('home'),
         'restNonce' => wp_create_nonce('wp_rest'),
-    ]);
+        'vendorUrl' => '',
+        'shopUrl' => '',
+    ];
+
+    // dokan store URL
+    if (function_exists('dokan_get_option')) {
+        $slug = dokan_get_option('custom_store_url', 'dokan_general', 'store');
+        $url = home_url() . '/' . $slug;
+        $script_args['vendorUrl'] = $url;
+    }
+
+    // woocommerce shop URL
+    if (function_exists('wc_get_page_id')) {
+        $page_id = wc_get_page_id('shop');
+        $script_args['shopUrl'] = get_permalink($page_id);
+    }
+
+    wp_localize_script('sage/app.js', 'bidstitchSettings', $script_args);
 
     if (is_single() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
