@@ -110,6 +110,7 @@ class DokanProductsListingRow extends Composer
         global $post;
 
         $product = wc_get_product($post->ID);
+        if (empty($product)) return;
 
         $payload = [
             'title' => get_the_title(),
