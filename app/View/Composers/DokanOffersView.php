@@ -4,8 +4,6 @@ namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
 
-use WC_Product;
-
 class DokanOffersView extends Composer
 {
     /**
@@ -98,7 +96,7 @@ class DokanOffersView extends Composer
 
             $product_id = get_post_meta($offer_id, 'orig_offer_product_id', true);
 
-            $product = new WC_Product($product_id);
+            $product = wc_get_product($product_id);
             if (!$product || empty($product)) continue;
 
             $product_name = $product->get_name();
