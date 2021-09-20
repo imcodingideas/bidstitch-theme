@@ -110,30 +110,19 @@ class DokanProductsListingRow extends Composer
         global $post;
 
         $product = wc_get_product($post->ID);
-        if (empty($product)) return;
-
-        $payload = [
-            'title' => get_the_title(),
-            'thumbnail' => '',
-            'url' => '#',
-            'date' => get_the_date('F j, Y'),
-            'price' => '',
-            'highest_offer' => false,
-            'highest_bid' => false,
-            'starting_bid' => false,
-        ];
+        if (empty($product) || !$product) return false;
 
         $is_auction = $this->is_auction();
 
-        if ($product) {
-            $payload['thumbnail'] = $this->thumbnail($product);
-            $payload['url'] = esc_url($product->get_permalink($product->get_id()));
-            $payload['price'] = $product->get_price_html();
-            $payload['highest_offer'] = $this->offers_enabled() ? $this->highest_offer() : false;
-            $payload['highest_bid'] = $is_auction ? $this->highest_bid() : false;
-            $payload['starting_bid'] = $is_auction ? $this->starting_bid() : false;
-        }
-
-        return (object) $payload;
+        return (object) [
+            'title' => get_the_title(),
+            'thumbnail' => $this->thumbnail($product),
+            'url' => esc_url($product->get_permalink($product->get_id())),
+            'date' => get_the_date('F j, Y'),
+            'price' =>  $product->get_price_html(),
+            'highest_offer' => $this->offers_enabled() ? $this->highest_offer() : false,
+            'highest_bid' => $is_auction ? $this->highest_bid() : false,
+            'starting_bid' => $is_auction ? $this->starting_bid() : false,
+        ];
     }
 }
