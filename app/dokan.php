@@ -68,9 +68,21 @@ add_filter('dokan_get_dashboard_nav', function($items) {
 
 // Override the dokan form field styling for payment methods
 function bidstitch_withdraw_method_paypal($store_settings) {
-    $current_user = get_current_user();
+    $current_user = wp_get_current_user();
 
-    $email = isset($store_settings['payment']['paypal']['email']) ? esc_attr($store_settings['payment']['paypal']['email']) : $current_user->user_email;
+    $email = $current_user->user_email;
+
+    if (
+        isset($store_settings['payment'])
+    &&
+        isset($store_settings['payment']['paypal'])
+    &&
+        isset($store_settings['payment']['paypal']['email'])
+    &&
+        !empty($store_settings['payment']['paypal']['email'])
+    ) {
+        $email = esc_attr($store_settings['payment']['paypal']['email']);
+    }
 
     $view_args = [
         'email' => $email,
@@ -78,6 +90,7 @@ function bidstitch_withdraw_method_paypal($store_settings) {
     
     echo \Roots\view('dokan.withdraw-methods.paypal', $view_args)->render();
 }
+
 function bidstitch_withdraw_methods($methods) {
     $methods['paypal']['callback'] = 'bidstitch_withdraw_method_paypal';
 
