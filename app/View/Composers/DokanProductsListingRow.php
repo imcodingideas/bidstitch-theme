@@ -110,6 +110,7 @@ class DokanProductsListingRow extends Composer
         global $post;
 
         $product = wc_get_product($post->ID);
+        if (empty($product) || !$product) return false;
 
         $is_auction = $this->is_auction();
 
@@ -118,7 +119,7 @@ class DokanProductsListingRow extends Composer
             'thumbnail' => $this->thumbnail($product),
             'url' => esc_url($product->get_permalink($product->get_id())),
             'date' => get_the_date('F j, Y'),
-            'price' => $product->get_price_html(),
+            'price' =>  $product->get_price_html(),
             'highest_offer' => $this->offers_enabled() ? $this->highest_offer() : false,
             'highest_bid' => $is_auction ? $this->highest_bid() : false,
             'starting_bid' => $is_auction ? $this->starting_bid() : false,
