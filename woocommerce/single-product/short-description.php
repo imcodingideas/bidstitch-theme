@@ -1,1 +1,0 @@
-<?php echo \Roots\view('woocommerce.single-product.short-description')->render();
