@@ -34,7 +34,8 @@ class WoofActions extends Composer
             || $WOOF->is_isset_in_request_data('min_price') 
             || (class_exists('WOOF_EXT_TURBO_MODE') 
                 && isset($WOOF->settings['woof_turbo_mode']['enable']) 
-                && $WOOF->settings['woof_turbo_mode']['enable']);
+                && $WOOF->settings['woof_turbo_mode']['enable'])
+            || $WOOF->is_isset_in_request_data('s');
         
         if (!$show_button) return false;
 
