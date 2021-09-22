@@ -4,20 +4,19 @@ add_action('woocommerce_init', function() {
     if (!isset($woocommerce_auctions)) return;
 
     // remove auctions filtering
-    remove_action('woocommerce_product_query', array($woocommerce_auctions, 'pre_get_posts'), 99, 2);
-
-    // update auctions filtering query
-    add_action('woocommerce_product_query', 'bs_pre_get_posts', 999, 2);
+    remove_action('woocommerce_product_query', [$woocommerce_auctions, 'pre_get_posts'], 99, 2);
+    remove_filter('pre_get_posts', [$woocommerce_auctions, 'auction_arhive_pre_get_posts']);
 
     // remove auction icon from single product loop
-    remove_action('woocommerce_before_shop_loop_item_title', array($woocommerce_auctions, 'add_auction_bage'), 60);
+    remove_action('woocommerce_before_shop_loop_item_title', [$woocommerce_auctions, 'add_auction_bage'], 60);
 });
 
 // from plugin: woocommerce-simple-auctions
 // woocommerce-simple-auctions/woocommerce-simple-auctions.php
 // pre_get_posts
-function bs_pre_get_posts($q, $query) {
-    if (is_admin() || !$q->is_main_query()) return;
+add_action('pre_get_posts', 'bs_pre_get_posts', 99, 1);
+function bs_pre_get_posts($q) {
+    if (is_admin() || !$q->is_main_query() || $q->get('post_type') !== 'product') return;
 
     $simple_auctions_sealed_on = get_option('simple_auctions_sealed_on', 'no');
 
@@ -77,10 +76,17 @@ function bs_pre_get_posts($q, $query) {
         $meta_query = bs_get_meta_query($q);
 
         $meta_query[] = [
-            'key' => '_auction_dates_to',
-            'value' => date_i18n('Y-m-d H:i:s', false, true),
-            'type' => 'DATETIME',
-            'compare' => '>=',
+            'relation' => 'AND',
+            [
+                'key' => '_auction_dates_to',
+                'value' => current_time('Y-m-d H:i:s'),
+                'type' => 'DATETIME',
+                'compare' => '>=',
+            ],
+            [
+                'key' => '_auction_closed',
+                'compare' => 'NOT EXISTS',
+            ]
         ];
 
         $q->set('meta_query', $meta_query);
@@ -90,10 +96,33 @@ function bs_pre_get_posts($q, $query) {
         $meta_query = bs_get_meta_query($q);
 
         $meta_query[] = [
-            'key' => '_auction_dates_from',
-            'value' => date_i18n('Y-m-d H:i:s', false, true),
-            'type' => 'DATETIME',
-            'compare' => '<=',
+            'relation' => 'AND',
+            [
+                'key' => '_auction_dates_from',
+                'value' => current_time('Y-m-d H:i:s'),
+                'type' => 'DATETIME',
+                'compare' => '<=',
+            ],
+            [
+                'key' => '_auction_start',
+                'compare' => 'NOT EXISTS',
+            ]
+        ];
+
+        $q->set('meta_query', $meta_query);
+    }
+
+    function bs_set_current_auctions($q) {
+        $q->query['show_future_auctions'] = false;
+        $q->query['show_past_auctions'] = false;
+    }
+
+    function bs_set_current_bid($q) {
+        $meta_query = bs_get_meta_query($q);
+
+        $meta_query[] = [
+            'key' => '_auction_current_bid',
+            'compare' => 'EXISTS',
         ];
 
         $q->set('meta_query', $meta_query);
@@ -116,35 +145,28 @@ function bs_pre_get_posts($q, $query) {
             bs_set_post_type($q);
             bs_set_auction_tax($q);
             bs_set_auction_sealed($q, $simple_auctions_sealed_on);
+            bs_set_current_auctions($q);
+            bs_set_current_bid($q);
 
-            $q->query['show_future_auctions'] = false;
-            $q->query['show_past_auctions'] = false;
-
-            $q->set('meta_key', '_auction_current_bid');
-            $q->set('orderby', 'meta_value_num');
-            $q->set('order', 'ASC');
+            $q->set('orderby', 'meta._auction_current_bid.long');
+            $q->set('order', 'DESC');
   
             break;
         case 'bid_asc':
             bs_set_post_type($q);
             bs_set_auction_tax($q);
             bs_set_auction_sealed($q, $simple_auctions_sealed_on);
+            bs_set_current_auctions($q);
+            bs_set_current_bid($q);
 
-            $q->query['show_future_auctions'] = false;
-            $q->query['show_past_auctions'] = false;
-
-            $q->set('meta_key', '_auction_current_bid');
-            $q->set('orderby', 'meta_value_num');
-            $q->set('order', 'DESC');
+            $q->set('orderby', 'meta._auction_current_bid.long');
+            $q->set('order', 'ASC');
             break;
         case 'auction_end':
             bs_set_post_type($q);
             bs_set_auction_tax($q);
-            
-            $q->query['show_future_auctions'] = false;
-            $q->query['show_past_auctions'] = false;
+            bs_set_current_auctions($q);
 
-            $q->set('meta_key', '_auction_dates_to');
             $q->set('orderby', 'meta._auction_dates_to.datetime');
             $q->set('order', 'ASC');
             
@@ -152,28 +174,24 @@ function bs_pre_get_posts($q, $query) {
         case 'auction_started':
             bs_set_post_type($q);
             bs_set_auction_tax($q);
+            bs_set_current_auctions($q);
 
-            $q->query['show_future_auctions'] = false;
-            $q->query['show_past_auctions'] = false;
-
-            $q->set('meta_key', '_auction_dates_from');
             $q->set('orderby', 'meta._auction_dates_from.datetime');
-            $q->set('order', 'ASC');
+            $q->set('order', 'DESC');
 
             break;
         case 'auction_activity':
             bs_set_post_type($q);
             bs_set_auction_tax($q);
+            bs_set_current_auctions($q);
+            bs_set_current_bid($q);
 
-            $q->query['show_future_auctions'] = false;
-            $q->query['show_past_auctions'] = false;
-
-            $q->set('meta_key', '_auction_bid_count');
-            $q->set('orderby', 'meta_value_num');
+            $q->set('orderby', 'meta._auction_bid_count.long');
             $q->set('order', 'DESC');
 
             break;
     }
+    
 
     if (isset($q->query['show_past_auctions']) && $q->query['show_past_auctions'] == false) {
         bs_set_auction_past($q);
@@ -183,3 +201,22 @@ function bs_pre_get_posts($q, $query) {
         bs_set_auction_future($q);
     }
 }
+
+// from plugin: woocommerce-simple-auctions
+// woocommerce-simple-auctions/woocommerce-simple-auctions.php
+// auction_arhive_pre_get_posts
+add_filter('pre_get_posts', function($q) {
+    if (
+        isset($q->query['auction_arhive']) 
+        || (
+            !isset($q->query['auction_arhive']) 
+            && (
+                isset($q->query['post_type'])
+                && $q->query['post_type'] == 'product' 
+                && !$q->is_main_query()
+            ) 
+        )
+    ) {
+        bs_pre_get_posts($q);
+    }
+});
