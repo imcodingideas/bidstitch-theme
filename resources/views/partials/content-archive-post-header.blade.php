@@ -7,5 +7,5 @@
       </span>
     </div>
   @endif
-  <h2 class="text-sm md:text-lg font-bold">{{ $title }}</h2>
+  <h2 class="text-sm md:text-lg font-bold">{!! $title !!}</h2>
 </header>
