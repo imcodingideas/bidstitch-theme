@@ -14,3 +14,17 @@ namespace App;
 add_filter('excerpt_more', function () {
     return sprintf(' &hellip; <a href="%s">%s</a>', get_permalink(), __('Continued', 'sage'));
 });
+
+// show only posts on post listing search
+add_filter('pre_get_posts', function($q) {
+    if (is_admin() || !$q->is_main_query()) return;
+
+    if (is_home()) $q->set('post_type', 'post');
+}, 11, 1);
+
+// decrease excerpt length
+add_filter('excerpt_length', function($length) {
+    if (is_admin()) return $length;
+
+    return 32;
+});
