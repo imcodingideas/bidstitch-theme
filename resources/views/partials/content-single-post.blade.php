@@ -8,7 +8,7 @@
   @endif
   <div class="max-w-screen-sm mx-auto space-y-8">
     <header class="grid gap-y-8">
-      <h1 class="text-xl md:text-4xl font-bold">{{ $title }}</h1>
+      <h1 class="text-xl md:text-4xl font-bold">{!! $title !!}</h1>
 
       <div class="flex items-center space-x-4">
         <div class="flex space-x-4 items-center">
