@@ -17,9 +17,16 @@ add_filter('excerpt_more', function () {
 
 // show only posts on post listing search
 add_filter('pre_get_posts', function($q) {
-    if (is_admin() || !$q->is_main_query()) return;
+    if (is_admin() || !$q->is_main_query()) return $q;
 
-    if (is_home()) $q->set('post_type', 'post');
+    $search_query = $q->get('s');
+    if (empty($search_query)) return $q;
+
+    if (is_home() && !dokan_is_store_page()) {
+        $q->set('post_type', 'post');
+    }
+    
+    return $q;
 }, 11, 1);
 
 // decrease excerpt length
