@@ -153,18 +153,32 @@ function saveproductdata($product_id, $postdata)
             'product_cat'
         );
     }
+}
 
-    // enable stock management
-    update_post_meta(
-        $product_id,
-        '_manage_stock',
-        'yes'
-    );
+// Set default stock for new buy it now listings
+add_action('dokan_new_product_added', 'save_stock_data', 10, 2);
+function save_stock_data($product_id, $postdata) {
+    if (
+        !isset($postdata['_manage_stock']) 
+        || isset($postdata['_manage_stock']) && empty($postdata['_manage_stock']) 
+    ) {
+        // enable stock management
+        update_post_meta(
+            $product_id,
+            '_manage_stock',
+            'yes'
+        );
+    }
 
-    // set stock to quantity to 1
-    update_post_meta(
-        $product_id,
-        '_stock',
-        '1'
-    );
+    if (
+        !isset($postdata['_stock']) 
+        || isset($postdata['_stock']) && empty($postdata['_stock']) 
+    ) {
+        // set stock to quantity to 1
+        update_post_meta(
+            $product_id,
+            '_stock',
+            '1'
+        );
+    }
 }
