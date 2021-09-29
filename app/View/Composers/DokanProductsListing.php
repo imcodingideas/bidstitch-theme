@@ -66,6 +66,13 @@ class DokanProductsListing extends Composer
             'author' => $user_id,
             'post_status' => $post_statuses,
             'tax_query' => [],
+            'meta_query' => [
+                [
+                    'key' => '_stock_status',
+                    'value' => 'instock',
+                    'compare' => '='
+                ]
+            ]
         ];
 
         if ($is_auction) {
