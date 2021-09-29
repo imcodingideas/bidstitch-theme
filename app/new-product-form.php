@@ -154,5 +154,17 @@ function saveproductdata($product_id, $postdata)
         );
     }
 
+    // enable stock management
+    update_post_meta(
+        $product_id,
+        '_manage_stock',
+        'yes'
+    );
 
+    // set stock to quantity to 1
+    update_post_meta(
+        $product_id,
+        '_stock',
+        '1'
+    );
 }
