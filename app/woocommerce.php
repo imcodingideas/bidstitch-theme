@@ -192,7 +192,7 @@ add_action('woocommerce_account_bids_endpoint', function() {
     wc_get_template('myaccount/bids.php');
 });
 
-// decrease stock for buy it now listings if is stock is not managed
+// decrease stock for buy it now listings if stock is not managed
 add_action('woocommerce_checkout_order_processed', function($order_id) {
     $order = wc_get_order($order_id);
     if (empty($order)) return;
