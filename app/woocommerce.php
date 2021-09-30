@@ -191,3 +191,44 @@ add_action('init', function() {
 add_action('woocommerce_account_bids_endpoint', function() {
     wc_get_template('myaccount/bids.php');
 });
+
+// decrease stock for buy it now listings if stock is not managed
+add_action('woocommerce_checkout_order_processed', function($order_id) {
+    $order = wc_get_order($order_id);
+    if (empty($order)) return;
+
+    $order_items = $order->get_items();
+    if (empty($order_items)) return;
+
+    foreach ($order_items as $line_item) {
+        $product = $line_item->get_product();
+        if (empty($product)) continue;
+
+        // if is not simple product, move on
+        $product_type = $product->get_type();
+        if (empty($product_type)) continue;
+        
+        if ($product_type != 'simple') continue;
+
+        // check if product creator is admin
+        if (!isset($product->post) || !isset($product->post->post_author)) continue;
+        $author_id = $product->post->post_author;
+        if (empty($author_id)) continue;
+
+        $is_admin = user_can($author_id, 'manage_options');
+        if ($is_admin) continue;
+
+        // check if product has managed stock
+        $has_managed_stock = $product->get_manage_stock();
+        if ($has_managed_stock) continue;
+
+        // check if product is in stock
+        $stock_status = $product->get_stock_status();
+        if (empty($stock_status)) continue;
+
+        if ($stock_status == 'instock') {
+            $product->set_stock_status('outofstock');
+            $product->save();
+        }
+    }
+});
