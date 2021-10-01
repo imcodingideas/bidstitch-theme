@@ -186,16 +186,14 @@ a.dokan-btn-theme:hover,
 .dokan-single-store .dokan-store-tabs ul {
   margin-top: 20px;
   border: none;
+  @apply space-x-2 flex items-center;
+  @screen md {
+    @apply space-x-4;
+  }
 }
 .dokan-single-store .dokan-store-tabs ul li {
-  margin-right: 10px;
   border: none;
-}
-.dokan-single-store .dokan-store-tabs ul li a {
-  text-transform: uppercase;
-  text-align: center;
-  color: #111111;
-  font-weight: 600;
+  margin: 0;
 }
 .dokan-single-store .dokan-store-tabs ul li a.active {
   border: 1px solid #111111;
@@ -232,6 +230,12 @@ form.dokan-ordering-product {
 }
 .dokan-single-store .singe_product_notice {
   padding-top: 64px;
+}
+li.dokan-share-btn-wrap .dokan-share-btn {
+  margin:0;
+}
+.dokan-single-store .dokan-store-tabs ul li.dokan-store-follow-store-button-container {
+  margin:0; 
 }
 @media (max-width: 850px) {
   .dokan-store-custom-field {
