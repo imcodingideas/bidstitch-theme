@@ -27,21 +27,6 @@ class OrdersItemProducts extends Composer
         ];
     }
 
-    public function get_message_button_data($vendor_id = '') {
-        if(!$vendor_id || empty($vendor_id)) return false;
-
-        $store_user = dokan()->vendor->get($vendor_id);
-        if (!$store_user) return false;
-        
-        $payload = [
-            'id' => $store_user->get_id(),
-            'name' => !empty($store_user->get_shop_name()) ? $store_user->get_shop_name() : 'fakename',
-            'photoUrl' => esc_url(get_avatar_url($store_user->get_id())),
-        ];
-
-        return json_encode($payload);
-    }
-
     public function products($order) {
         $products = [];
 
@@ -55,7 +40,7 @@ class OrdersItemProducts extends Composer
                 'thumbnail' => false,
                 'store_name' => '-',
                 'store_link' => '#',
-                'message_button_data' => false
+                'store_id' => ''
             ];
 
             if ($product) {
@@ -66,7 +51,7 @@ class OrdersItemProducts extends Composer
                 $payload['thumbnail'] = $product->get_image('thumbnail', ['class' => 'object-center object-cover rounded mr-6 order__product__img'], true);
                 $payload['store_name'] = $store['store_name'];
                 $payload['store_link'] = dokan_get_store_url($vendor_id);
-                $payload['message_button_data'] = $vendor_id ? $this->get_message_button_data($vendor_id) : false;
+                $payload['store_id'] = $vendor_id;
             }
     
             $products[] = (object) $payload;
