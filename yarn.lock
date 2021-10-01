@@ -8266,6 +8266,11 @@ tailwindcss@^2.1.2:
     reduce-css-calc "^2.1.8"
     resolve "^1.20.0"
 
+talkjs@^0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/talkjs/-/talkjs-0.14.5.tgz#001832649da2a89727c96b57f437d23d08eb43a1"
+  integrity sha512-e40XkUaUjFJtRKw5sxaL1uTA2eWmxsdYoXG4s2UoGfU62dDYdeiK0QNbKEthLMRoMIldPzs4JsfM1y7j7aqCJQ==
+
 tapable@^2.1.1, tapable@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.0.tgz#5c373d281d9c672848213d0e037d1c4165ab426b"
