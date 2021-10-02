@@ -11,7 +11,7 @@ import handleMessageButton from './user-chat-button';
 import handleInbox from './user-chat-inbox';
 
 export default function() {
-    // check if user is logged in before initilizing
+    // check if user is logged in before initializing
     if (!bidstitchSettings.isLoggedIn) return;
 
     Talk.ready.then(function() {
