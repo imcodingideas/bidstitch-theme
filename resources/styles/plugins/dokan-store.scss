@@ -195,6 +195,17 @@ a.dokan-btn-theme:hover,
   border: none;
   margin: 0;
 }
+.dokan-single-store .dokan-store-tabs ul li a.dokan-btn-sm,
+.dokan-single-store .dokan-store-tabs ul li a.dokan-btn-sm:hover
+{
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #111111;
+  border-color: #111111;
+}
 .dokan-single-store .dokan-store-tabs ul li a.active {
   border: 1px solid #111111;
 }
