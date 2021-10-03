@@ -15,6 +15,9 @@ export default function () {
     };
 
     function handleHashChange() {
+      // prevent initiating if tabs do not exist
+      if ($(domNodes.tabsToggle).length === 0) return;
+
       // scroll to top
       $('html, body').animate({ scrollTop: 0 }, 300);
 
