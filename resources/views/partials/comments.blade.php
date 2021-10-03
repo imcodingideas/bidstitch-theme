@@ -1,39 +1,46 @@
-@if (! post_password_required())
-  <section id="comments" class="comments">
-    @if (have_comments())
-      <h2>
-        {!! sprintf(_nx('One response to &ldquo;%2$s&rdquo;', '%1$s responses to &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'sage'), number_format_i18n(get_comments_number()), '<span>' . get_the_title() . '</span>') !!}
-      </h2>
+@if (!$password_required)
+  <section id="comments" class="comments-area grid space-y-4 border-t pt-4 md:pt-8 relative">
+    @if ($has_comments)
+      <div class="grid space-y-1">
+        <h2 class="text-xl font-bold uppercase">{{ _e('Discussion', 'sage') }}</h2>
+      </div>
 
-      <ol class="comment-list">
-        {!! wp_list_comments(['style' => 'ol', 'short_ping' => true]) !!}
-      </ol>
+      <div class="comment-list">
+        {!! wp_list_comments($comment_list_args) !!}
+      </div>
 
-      @if (get_comment_pages_count() > 1 && get_option('page_comments'))
-        <nav>
-          <ul class="pager">
-            @if (get_previous_comments_link())
-              <li class="previous">
-                {!! get_previous_comments_link(__('&larr; Older comments', 'sage')) !!}
-              </li>
-            @endif
+      @if ($pagination)
+      <nav>
+        <ul class="pager">
+          @if ($pagination->prev_link)
+            <li class="previous">
+              {!! $pagination->prev_link !!}
+            </li>
+          @endif
 
-            @if (get_next_comments_link())
-              <li class="next">
-                {!! get_next_comments_link(__('Newer comments &rarr;', 'sage')) !!}
-              </li>
-            @endif
-          </ul>
-        </nav>
+          @if ($pagination->prev_next)
+          <li class="previous">
+            {!! $pagination->prev_next !!}
+          </li>
+        @endif
+        </ul>
+      </nav>
       @endif
+    @else
+    <div class="grid space-y-1">
+      <h2 class="text-xl font-bold uppercase">{{ _e('Discussion', 'sage') }}</h2>
+      <p>{{ _e('Be the first to leave a comment', 'sage') }}</p>
+    </div>
     @endif
 
-    @if (! comments_open() && get_comments_number() != '0' && post_type_supports(get_post_type(), 'comments'))
+    @if ($comments_closed_status)
       <x-alert type="warning">
         {!! __('Comments are closed.', 'sage') !!}
       </x-alert>
     @endif
 
-    @php(comment_form())
+    @php
+      comment_form($comment_form_args);
+    @endphp
   </section>
 @endif
