@@ -35,3 +35,20 @@ add_filter('excerpt_length', function($length) {
 
     return 32;
 });
+
+// remove "logged in as" message from comments
+add_filter('comment_form_logged_in', '__return_empty_string' );
+
+// set reply link to woocommerce login
+add_filter('comment_reply_link', function($link, $args) {
+    if (get_option('comment_registration') && !is_user_logged_in()) {
+        $link = sprintf(
+            '<a rel="nofollow" class="comment-reply-login" href="%s">%s</a>',
+            esc_url(get_permalink(get_option('woocommerce_myaccount_page_id')))
+        ,
+            $args['login_text']
+        );
+    }
+
+    return $link;
+}, 11, 2);

@@ -1,0 +1,48 @@
+.comment-reply-title {
+  @apply text-sm;
+  #cancel-comment-reply-link {
+    @apply ml-2;
+  }
+}
+
+.comment-respond {
+  @apply grid gap-y-2 bg-gray-50 rounded-sm relative mt-4 shadow;
+  .comment-reply-title {
+    @apply space-x-2;
+  }
+}
+
+.comment > .comment-respond {
+  @apply ml-11;
+}
+
+#cancel-comment-reply-link {
+    // theme button
+    @apply inline-flex items-center border shadow-sm font-medium rounded focus:outline-none uppercase font-bold;
+    // button black
+    @apply text-white bg-black hover:bg-opacity-80;
+    @apply cursor-pointer text-xs px-2 py-1;
+}
+.comment-form {
+  @apply space-y-3 p-3;
+
+  .form-submit .submit {
+    // theme button
+    @apply inline-flex items-center border shadow-sm font-medium rounded focus:outline-none uppercase font-bold;
+    // button small
+    @apply text-sm px-2.5 py-1.5;
+    // button black
+    @apply text-white bg-black hover:bg-opacity-80;
+    @apply cursor-pointer;
+  }
+
+  .comment-form-comment {
+    @apply grid;
+    label {
+      @apply hidden;
+    }
+    textarea {
+      @apply bg-gray-100;
+    }
+  }
+}
