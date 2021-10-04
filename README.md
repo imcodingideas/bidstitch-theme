@@ -21,6 +21,17 @@ yarn
 yarn build
 ```
 
+## Feature: TalkJS Chat
+
+Enables TalkJS chat integration, read:
+
+Add to wp-config.php (example):
+
+```
+define( 'TALKJS_APP_ID', 'app_id' );
+define( 'TALKJS_APP_SECRET', 'secret' );
+```
+
 # Development
 
 Add to wp-config.php

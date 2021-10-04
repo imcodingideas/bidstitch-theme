@@ -46,7 +46,8 @@ collect([
     'offers-for-woocommerce-notifications-page',
     'shipping-rates-editor',
     'new-product-form',
-    'elasticpress'
+    'elasticpress',
+    'user-chat'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(

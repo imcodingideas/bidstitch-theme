@@ -39,12 +39,9 @@
                   <span>{{ _e('View Product', 'sage') }}</span>
                   <span class="sr-only">, {{ $product->name }}</span>
                 </a>
-                @if ($product->message_button_data)
-                  <button
-                    class="btn btn--white text-xs text-center p-1 justify-center tracking-wider message__compose__button"
-                    data-message-receiver="{!! htmlspecialchars($product->message_button_data, ENT_QUOTES, 'UTF-8') !!}">
-                    {{ _e('Message Seller', 'sage') }}
-                  </button>
+                @if ($product->store_id)
+                  <x-user-chat-button receiver="{{ $product->store_id }}"
+                    class="btn btn--white text-xs text-center p-1 justify-center tracking-wider" />
                 @endif
               </div>
             </td>
