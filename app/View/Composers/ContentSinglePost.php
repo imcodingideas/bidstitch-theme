@@ -26,6 +26,7 @@ class ContentSinglePost extends Composer
             'avatar' => get_avatar(get_the_author_meta('ID'), 36),
             'author' => get_the_author(),
             'thumbnail' => $this->get_archive_thumbnail(),
+            'link' => get_permalink(),
         ];
     }
 
