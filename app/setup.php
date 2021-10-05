@@ -24,14 +24,23 @@ add_action('wp_enqueue_scripts', function () {
         'siteUrl' => get_option('home'),
         'restNonce' => wp_create_nonce('wp_rest'),
         'vendorUrl' => '',
+        'vendorListingUrl' => '',
         'shopUrl' => '',
     ];
 
-    // dokan store URL
     if (function_exists('dokan_get_option')) {
-        $slug = dokan_get_option('custom_store_url', 'dokan_general', 'store');
-        $url = home_url() . '/' . $slug;
-        $script_args['vendorUrl'] = $url;
+        // dokan store URL
+        $store_slug = dokan_get_option('custom_store_url', 'dokan_general', 'store');
+        if (!empty($store_slug)) {
+            $store_url = home_url() . '/' . $store_slug;
+            $script_args['vendorUrl'] = $store_url;
+        }
+
+        // dokan store listing url
+        $store_listing_page_id = dokan_get_option('store_listing', 'dokan_pages');
+        if (!empty($store_listing_page_id)) {
+            $script_args['vendorListingUrl'] = get_permalink($store_listing_page_id);
+        }
     }
 
     // woocommerce shop URL
