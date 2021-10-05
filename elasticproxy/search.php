@@ -82,11 +82,25 @@ function searchVendor($search)
         'http://localhost:9200/_search?pretty ',
         json_encode([
             'query' => [
-                'match_phrase_prefix' => [
-                    'meta.dokan_store_name.value.sortable' => [
-                        'query' => $search,
-                    ],
-                ],
+                'bool' => [
+                    'should' => [
+                        [
+                            'match' => [
+                                'meta.dokan_store_name.value' => [
+                                    'query' => $search,
+                                    'fuzziness' => 'AUTO'
+                                ]
+                            ],
+                        ],
+                        [
+                            'match_phrase_prefix' => [
+                                'meta.dokan_store_name.value' => [
+                                    'query' => $search,
+                                ],
+                            ],
+                        ]
+                    ]
+                ]
             ],
         ])
     );
