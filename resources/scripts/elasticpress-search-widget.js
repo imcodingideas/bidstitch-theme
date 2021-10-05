@@ -39,8 +39,8 @@ export default function () {
                 
                 switch(this.tab) {
                     case 'vendors':
-                        if (!bidstitchSettings.vendorUrl) return;
-                        url = new URL(bidstitchSettings.vendorUrl);
+                        if (!bidstitchSettings.vendorListingUrl) return;
+                        url = new URL(bidstitchSettings.vendorListingUrl);
 
                         url.searchParams.set('dokan_seller_search', this.search);
 
