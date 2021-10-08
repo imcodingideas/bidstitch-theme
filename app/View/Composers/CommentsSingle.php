@@ -44,7 +44,7 @@ class CommentsSingle extends Composer
     public function handle_comment_class($comment_data) {
         if (empty($comment_data)) return false;
 
-        $class_list = ['relative block'];
+        $class_list = ['relative block comment__item'];
 
         if (!empty($comment_data->args['has_children'])) {
             $class_list[] = 'parent';
