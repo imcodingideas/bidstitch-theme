@@ -232,3 +232,14 @@ add_action('woocommerce_checkout_order_processed', function($order_id) {
         }
     }
 });
+
+// add product comments after single produxt
+add_action('woocommerce_after_single_product', function() {
+    comments_template('/woocommerce/single-product-comments.php');
+});
+
+// prevent woocomemrce comment template from being loaded on product pages
+// this should be done manually
+add_action('init', function () {
+    remove_filter('comments_template', [\WC_Template_Loader::class, 'comments_template_loader']);
+});
