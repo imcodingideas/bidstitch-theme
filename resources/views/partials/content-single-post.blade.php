@@ -32,8 +32,8 @@
     <div class="prose">
       {!! the_content() !!}
     </div>
-    <div class="grid">
-      <div class="grid border-t space-y-4 items-center justify-center bg-gradient-to-r from-white via-gray-100 to-white py-6">  
+    <div class="grid space-y-8">
+      <div class="grid border-t border-b space-y-4 items-center justify-center bg-gradient-to-r from-white via-gray-100 to-white py-6">  
         <h3 class="uppercase font-bold text-sm text-center">{{ _e('Share this story:', 'e') }}</h3>
         <div class="flex justify-center space-x-4">
           <a href="https://twitter.com/intent/tweet?text={!! urlencode($title) !!}&url={!! urlencode($link) !!}" target="_blank" rel="noopener noreferrer" class="btn btn--sm btn--white space-x-2">

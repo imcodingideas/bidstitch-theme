@@ -47,7 +47,8 @@ collect([
     'shipping-rates-editor',
     'new-product-form',
     'elasticpress',
-    'user-chat'
+    'user-chat',
+    'comments'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(

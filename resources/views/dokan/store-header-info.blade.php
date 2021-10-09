@@ -12,9 +12,9 @@
     <p class="vendorshophandle">{{ $vendor_name }}</p>
   @endif
 
-  <div class="dokan-store-rating mb-show dokan-store-rating-mb ml-6">
+  {{-- <div class="dokan-store-rating mb-show dokan-store-rating-mb ml-6">
     {!! $store_rating !!}
-  </div>
+  </div> --}}
   <div class="hidden items-center md:flex space-x-4">
     @if (is_user_logged_in())
       @php dokan_follow_store_get_template( 'follow-button', $args_btn_follow ) @endphp
