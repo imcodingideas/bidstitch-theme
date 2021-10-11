@@ -38,6 +38,7 @@ collect([
     'acf',
     'dokan',
     'dokan-custom-functions',
+    'dokan-nav-menu',
     'onboarding-setup-wizard',
     'clean-dashboard',
     'offers-for-woocommerce-dokan',
