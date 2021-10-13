@@ -74,55 +74,11 @@ class DokanNavMenu {
 	 * Output the links
 	 */
 	public function nav_menu_links() {
-        $endpoints = $this->get_dokan_nav_endpoints();
-        if (empty($endpoints)) return;
+		$view_args = [
+			'endpoints' => $this->get_dokan_nav_endpoints(),
+			'store_url' => $this->store_url,
+		];
 
-		?>
-		<div id="posttype-dokan-endpoints" class="posttypediv">
-			<div id="tabs-panel-dokan-endpoints" class="tabs-panel tabs-panel-active">
-				<ul id="dokan-endpoints-checklist" class="categorychecklist form-no-clear">
-					<?php
-					$i = -1;
-					foreach ($endpoints as $key => $value) :
-                        $title = $value['title'];
-                        $url = $value['url'];
-
-                        // set view store endpoint url to dokan store url
-                        if ($key == 'view-store') {
-                            $url = $this->store_url;
-                        }
-
-						?>
-						<li>
-							<label class="menu-item-title">
-								<input type="checkbox" class="menu-item-checkbox" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-object-id]" value="<?php echo esc_attr($i); ?>" /> <?php echo esc_html($title); ?>
-							</label>
-                            <input type="hidden" class="menu-item-xfn" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-xfn]" value="">
-                            <input type="hidden" class="menu-item-attr-title" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-attr-title]" value="">
-                            <input type="hidden" class="menu-item-target" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-target]" value="">
-                            <input type="hidden" class="menu-item-parent-id" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-parent-id]" value="0">
-                            <input type="hidden" class="menu-item-db-id" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-db-id]" value="0">
-							<input type="hidden" class="menu-item-type" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-type]" value="custom">
-							<input type="hidden" class="menu-item-title" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-title]" value="<?php echo esc_attr($title); ?>" />
-							<input type="hidden" class="menu-item-url" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-url]" value="<?php echo esc_url($url); ?>" />
-							<input type="hidden" class="menu-item-classes" name="menu-item[<?php echo esc_attr($i); ?>][menu-item-classes]"/>
-						</li>
-						<?php
-						$i--;
-					endforeach;
-					?>
-				</ul>
-			</div>
-			<p class="button-controls">
-				<span class="list-controls">
-					<a href="<?php echo esc_url(admin_url('nav-menus.php?page-tab=all&selectall=1#posttype-dokan-endpoints')); ?>" class="select-all"><?php esc_html_e('Select all', 'sage'); ?></a>
-				</span>
-				<span class="add-to-menu">
-					<button type="submit" class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e('Add to menu', 'sage'); ?>" name="add-post-type-menu-item" id="submit-posttype-dokan-endpoints"><?php esc_html_e('Add to menu', 'sage'); ?></button>
-					<span class="spinner"></span>
-				</span>
-			</p>
-		</div>
-		<?php
+		echo \Roots\view('dokan.admin.nav-menu', $view_args)->render();
 	}
 }
