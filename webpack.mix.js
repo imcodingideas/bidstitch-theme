@@ -14,7 +14,7 @@ require('@tinypixelco/laravel-mix-wp-blocks');
 
 mix
   .setPublicPath('./public')
-  .browserSync('https://bidstitchnew.localhost');
+  .browserSync('http://localhost');
 
 mix
   .sass('resources/styles/app.scss', 'styles')
