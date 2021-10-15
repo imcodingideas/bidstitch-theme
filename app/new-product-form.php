@@ -157,6 +157,7 @@ function saveproductdata($product_id, $postdata)
 
 // Set default stock for new buy it now listings
 add_action('dokan_new_product_added', 'save_stock_data', 10, 2);
+add_action('dokan_add_new_auction_product', 'save_stock_data', 10, 2);
 function save_stock_data($product_id, $postdata) {
     if (
         !isset($postdata['_manage_stock']) 
@@ -179,6 +180,18 @@ function save_stock_data($product_id, $postdata) {
             $product_id,
             '_stock',
             '1'
+        );
+    }
+
+    if (
+        !isset($postdata['_stock_status'])
+        || isset($postdata['_stock_status']) && empty($postdata['_stock_status'])
+    ) {
+        // set stock to status to instock
+        update_post_meta(
+            $product_id,
+            '_stock_status',
+            'instock'
         );
     }
 }
