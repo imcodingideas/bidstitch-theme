@@ -145,7 +145,6 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                                         }
                                                         ?>
                                                 </ul>
-                                                <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="">
                                             </div>
                                         </div>
                                     </div> <!-- .product-gallery -->

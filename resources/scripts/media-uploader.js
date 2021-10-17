@@ -3,12 +3,16 @@ import * as FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import * as FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
 import * as FilePondPluginFileValidateSize from 'filepond-plugin-image-transform';
 import * as FilePondPluginImageEdit from 'filepond-plugin-file-validate-type';
+import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
+import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
 
 /**
  *
  * @var mediaUploaderData
  * @param mediaUploaderData.process_url: string
  * @param mediaUploaderData.revert_url: string
+ * @param mediaUploaderData.load_url: string
+ * @param mediaUploaderData.fetch_url: string
  *
  */
 
@@ -16,11 +20,14 @@ class MediaUploader {
     fileUploadInput;
     $fileUploadInput;
     fileUploadPond;
+    loadedFiles;
     $hiddenInput;
 
     constructor(fileUploadInput) {
         this.fileUploadInput = fileUploadInput;
         this.$fileUploadInput = $(fileUploadInput);
+        const loadedFiles = this.$fileUploadInput.data('files');
+        this.loadedFiles = (loadedFiles.length) ? loadedFiles : [];
 
         this.register();
         this.attachHandler();
@@ -39,7 +46,8 @@ class MediaUploader {
             FilePondPluginImagePreview,
             FilePondPluginImageExifOrientation,
             FilePondPluginFileValidateSize,
-            FilePondPluginImageEdit
+            FilePondPluginImageEdit,
+            FilePondPluginFilePoster
         );
 
         FilePond.setOptions({
@@ -49,6 +57,10 @@ class MediaUploader {
                 },
                 revert: {
                     url: mediaUploaderData.revert_url,
+                },
+                load: {
+                    url: mediaUploaderData.load_url,
+                    method: 'POST'
                 }
             }
         });
@@ -69,11 +81,12 @@ class MediaUploader {
         this.createInput();
 
         const options = {
-            credits: false
+            credits: false,
+            files: this.loadedFiles
         }
 
         const labelIdle = this.$fileUploadInput.data('labelIdle');
-        if(labelIdle) {
+        if (labelIdle) {
             options.labelIdle = `<span class='filepond--label-action'>${labelIdle}</span>`
         }
 
@@ -82,9 +95,17 @@ class MediaUploader {
             options
         );
 
-        this.fileUploadPond.on('processfiles', () => {
+        this.fileUploadPond.on('updatefiles', () => {
             this.updateFileList();
         })
+
+        this.fileUploadPond.on('init', () => {
+            this.updateFileList();
+        })
+
+        this.fileUploadPond.on('processfiles', () => {
+            this.updateFileList();
+        });
     }
 
     createInput() {
@@ -103,10 +124,11 @@ class MediaUploader {
         })
         this.$hiddenInput.val(fileIds.join(','));
     }
+
 }
 
-(function($) {
-    $(document).ready(function() {
+(function ($) {
+    $(document).ready(function () {
         $("input.filepond").each((index, fileUploadInput) => {
             new MediaUploader(fileUploadInput);
         })

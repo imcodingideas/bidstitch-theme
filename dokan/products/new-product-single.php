@@ -300,65 +300,41 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                 <div class="content-half-part featured-image">
 
                                     <div class="dokan-feat-image-upload dokan-new-product-featured-img">
-                                        <?php
-                                        $wrap_class        = ' dokan-hide';
-                                        $instruction_class = '';
-                                        $feat_image_id     = 0;
 
-                                        if ( has_post_thumbnail( $post_id ) ) {
-                                            $wrap_class        = '';
-                                            $instruction_class = ' dokan-hide';
-                                            $feat_image_id     = get_post_thumbnail_id( $post_id );
-                                        }
-                                        ?>
+                                        <div class="filepond-container">
+                                            <?php
+                                            $featured_image_urls = [];
+                                            if(!empty($feat_image_id)) $featured_image_urls[] = $feat_image_id;
 
-                                        <div class="instruction-inside<?php echo esc_attr( $instruction_class ); ?>">
-                                            <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="<?php echo esc_attr( $feat_image_id ); ?>">
-
-                                            <i class="fa fa-cloud-upload"></i>
-                                            <a href="#" class="dokan-feat-image-btn btn btn-sm"><?php esc_html_e( 'Upload a product cover image', 'dokan-lite' ); ?></a>
+                                            ?>
+                                            <input type="file"
+                                                   class="filepond"
+                                                   name="filepond_feat_image_id"
+                                                   multiple="false"
+                                                   data-files="<?php echo esc_js(json_encode(\App\buildFileData($featured_image_urls))); ?>"
+                                                   data-allow-reorder="true"
+                                                   data-max-file-size="3MB"
+                                                   data-labelIdle="<?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?>">
                                         </div>
 
-                                        <div class="image-wrap<?php echo esc_attr( $wrap_class ); ?>">
-                                            <a class="close dokan-remove-feat-image">&times;</a>
-                                            <?php if ( $feat_image_id ) { ?>
-                                                <?php echo get_the_post_thumbnail( $post_id, apply_filters( 'single_product_large_thumbnail_size', 'shop_single' ), array( 'height' => '', 'width' => '' ) ); ?>
-                                            <?php } else { ?>
-                                                <img height="" width="" src="" alt="">
-                                            <?php } ?>
-                                        </div>
                                     </div><!-- .dokan-feat-image-upload -->
 
                                         <div class="dokan-product-gallery">
                                             <div class="dokan-side-body" id="dokan-product-images">
-                                                <div id="product_images_container">
-                                                    <ul class="product_images dokan-clearfix">
-                                                        <?php
-                                                        $product_images = get_post_meta( $post_id, '_product_image_gallery', true );
-                                                        $gallery = explode( ',', $product_images );
 
-                                                        if ( $gallery ) {
-                                                            foreach ($gallery as $image_id) {
-                                                                if ( empty( $image_id ) ) {
-                                                                    continue;
-                                                                }
-
-                                                                $attachment_image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
-                                                                ?>
-                                                                <li class="image" data-attachment_id="<?php echo esc_attr( $image_id ); ?>">
-                                                                    <img src="<?php echo esc_url( $attachment_image[0] ); ?>" alt="">
-                                                                    <a href="#" class="action-delete" title="<?php esc_attr_e( 'Delete image', 'dokan-lite' ); ?>">&times;</a>
-                                                                </li>
-                                                                <?php
-                                                            }
-                                                        }
-                                                        ?>
-                                                        <li class="add-image add-product-images tips" data-title="<?php esc_html_e( 'Add gallery image', 'dokan-lite' ); ?>">
-                                                            <a href="#" class="add-product-images"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                                        </li>
-                                                    </ul>
-
-                                                    <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="<?php echo esc_attr( $product_images ); ?>">
+                                                <div class="filepond-container">
+                                                    <?php
+                                                    $product_images = get_post_meta( $post_id, '_product_image_gallery', true );
+                                                    $gallery = explode( ',', $product_images );
+                                                    ?>
+                                                    <input type="file"
+                                                           class="filepond"
+                                                           name="filepond_product_image_gallery"
+                                                           multiple="true"
+                                                           data-files="<?php echo esc_js(json_encode(\App\buildFileData($gallery))); ?>"
+                                                           data-allow-reorder="true"
+                                                           data-max-file-size="3MB"
+                                                           data-labelIdle="<?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?>">
                                                 </div>
                                             </div>
                                         </div> <!-- .product-gallery -->
@@ -380,7 +356,7 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                     <?php echo \Roots\view('dokan.product-fields.length', [ 'post'=>$post ])->render(); ?>
                                     <?php echo \Roots\view('dokan.product-fields.stitching', [ 'post'=>$post ])->render(); ?>
                                 </div>
-                            </div> 
+                            </div>
 
                             <?php // change ?>
                             <div class="mt-6">

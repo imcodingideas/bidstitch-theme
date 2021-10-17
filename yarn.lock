@@ -3918,6 +3918,11 @@ file-uri-to-path@1.0.0:
   resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
   integrity sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==
 
+filepond-plugin-file-poster@^2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/filepond-plugin-file-poster/-/filepond-plugin-file-poster-2.4.4.tgz#04d93db73713066beba7a20c5770b74897ab702b"
+  integrity sha512-scR7H07Ms6eUmJ1UeLlxSdZHM6r67SYQAdGc+bt5A6PB9fvho+qui7MnrS/emAwyaTmkUeq+ijumBMYn6Ny9fQ==
+
 filepond-plugin-file-validate-type@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/filepond-plugin-file-validate-type/-/filepond-plugin-file-validate-type-1.2.6.tgz#5a03e04fb8f70f0df37ff9a285d3d2343cdc55f2"
