@@ -99,22 +99,26 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
 
                             <div class="product-edit-container dokan-clearfix">
                                 <div class="content-half-part featured-image">
-                                    <div class="featured-image">
-                                        <div class="dokan-feat-image-upload">
-                                            <div class="instruction-inside <?php echo esc_attr( $hide_instruction ); ?>">
-                                                <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="<?php echo esc_attr( $posted_img ); ?>">
-                                                <i class="fa fa-cloud-upload"></i>
-                                                <a href="#" class="dokan-feat-image-btn dokan-btn"><?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?></a>
-                                            </div>
 
-                                            <div class="image-wrap <?php echo esc_attr( $hide_img_wrap ); ?>">
-                                                <a class="close dokan-remove-feat-image">&times;</a>
-                                                    <img src="<?php echo esc_url( $posted_img_url ); ?>" alt="">
-                                            </div>
-                                        </div>
+                                    <div class="dokan-feat-image-upload filepond-container">
+                                        <input type="file"
+                                               class="filepond"
+                                               name="filepond_feat_image_id"
+                                               multiple="false"
+                                               data-allow-reorder="true"
+                                               data-max-file-size="3MB"
+                                               data-labelIdle="<?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?>"
+                                               data-max-files="3">
                                     </div>
 
-                                    <div class="dokan-product-gallery">
+                                    <div class="dokan-product-gallery filepond-container">
+                                        <input type="file"
+                                               class="filepond"
+                                               name="filepond_product_image_gallery"
+                                               multiple="true"
+                                               data-allow-reorder="true"
+                                               data-max-file-size="3MB"
+                                               data-labelIdle="<?php esc_html_e( 'Upload image gallery', 'dokan-lite' ); ?>">
                                         <div class="dokan-side-body" id="dokan-product-images">
                                             <div id="product_images_container">
                                                 <ul class="product_images dokan-clearfix">
@@ -140,9 +144,6 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                                             }
                                                         }
                                                         ?>
-                                                    <li class="add-image add-product-images tips" data-title="<?php esc_attr_e( 'Add gallery image', 'dokan-lite' ); ?>">
-                                                        <a href="#" class="add-product-images"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                                    </li>
                                                 </ul>
                                                 <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="">
                                             </div>
@@ -231,7 +232,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     <?php echo \Roots\view('dokan.product-fields.length', [ 'post'=>null ])->render(); ?>
                                     <?php echo \Roots\view('dokan.product-fields.stitching', [ 'post'=>null ])->render(); ?>
                                 </div>
-                            </div> 
+                            </div>
 
                             <?php // change ?>
                             <div class="mt-6">

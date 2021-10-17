@@ -49,7 +49,8 @@ collect([
     'new-product-form',
     'elasticpress',
     'user-chat',
-    'comments'
+    'comments',
+    'media-uploader'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(

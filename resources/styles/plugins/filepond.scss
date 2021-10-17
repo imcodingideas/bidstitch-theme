@@ -1,0 +1,32 @@
+@import "~filepond/dist/filepond.min.css";
+@import "~filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+
+$primary_color: #edf0f4;
+
+.filepond-container {
+    width: auto !important; //Resetting hard width and height;
+    height: auto !important;
+    border: 0 !important; //To disable all possible borders from another elements;
+    outline: 1px dashed #dddddd;
+    background-color: $primary_color;
+
+    .filepond {
+
+        &--root {
+            margin-bottom: 0;
+        }
+
+        &--panel-root {
+            background-color: $primary_color;
+        }
+
+        &--drop-label {
+            cursor: pointer;
+        }
+
+        &--item {
+            margin-bottom: 5px !important;
+        }
+    }
+}
+
