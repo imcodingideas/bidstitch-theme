@@ -27,7 +27,7 @@ class MediaUploader {
         this.fileUploadInput = fileUploadInput;
         this.$fileUploadInput = $(fileUploadInput);
         const loadedFiles = this.$fileUploadInput.data('files');
-        this.loadedFiles = (loadedFiles.length) ? loadedFiles : [];
+        this.loadedFiles = (loadedFiles) ? loadedFiles : [];
 
         this.register();
         this.attachHandler();
@@ -85,7 +85,7 @@ class MediaUploader {
             files: this.loadedFiles
         }
 
-        const labelIdle = this.$fileUploadInput.data('labelIdle');
+        const labelIdle = this.$fileUploadInput.attr('data-labelIdle');
         if (labelIdle) {
             options.labelIdle = `<span class='filepond--label-action'>${labelIdle}</span>`
         }
@@ -109,7 +109,7 @@ class MediaUploader {
     }
 
     createInput() {
-        this.$hiddenInput = $(`<input type="hidden1" name="${this.getFileUploadName()}" />`);
+        this.$hiddenInput = $(`<input type="hidden" name="${this.getFileUploadName()}" />`);
         this.$hiddenInput.insertAfter(this.$fileUploadInput);
     }
 

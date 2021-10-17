@@ -271,7 +271,6 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                     <?php do_action( 'dokan_product_edit_after_pricing', $post, $post_id ); ?>
 
 
-
                                     <?php // change ?>
                                     <div class="dokan-form-group hidden">
                                         <label for="product_tag" class="form-label"><?php esc_html_e( 'Tags', 'dokan-lite' ); ?></label>
@@ -303,9 +302,9 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
 
                                         <div class="filepond-container">
                                             <?php
+                                            $feat_image_id = get_post_thumbnail_id($post_id);
                                             $featured_image_urls = [];
                                             if(!empty($feat_image_id)) $featured_image_urls[] = $feat_image_id;
-
                                             ?>
                                             <input type="file"
                                                    class="filepond"
@@ -325,7 +324,7 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                                 <div class="filepond-container">
                                                     <?php
                                                     $product_images = get_post_meta( $post_id, '_product_image_gallery', true );
-                                                    $gallery = explode( ',', $product_images );
+                                                    $gallery = (!empty($product_images)) ? explode( ',', $product_images ) : [];
                                                     ?>
                                                     <input type="file"
                                                            class="filepond"
@@ -334,7 +333,7 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                                            data-files="<?php echo esc_js(json_encode(\App\buildFileData($gallery))); ?>"
                                                            data-allow-reorder="true"
                                                            data-max-file-size="3MB"
-                                                           data-labelIdle="<?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?>">
+                                                           data-labelIdle="<?php esc_html_e( 'Upload Product Gallery', 'dokan-lite' ); ?>">
                                                 </div>
                                             </div>
                                         </div> <!-- .product-gallery -->

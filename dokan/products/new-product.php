@@ -112,42 +112,23 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     </div>
 
                                     <div class="dokan-product-gallery filepond-container">
+                                        <?php
+                                        $gallery = [];
+                                        if ( isset( $post_data['product_image_gallery'] ) ) {
+                                            $product_images = $post_data['product_image_gallery']; // WPCS: CSRF ok, input var ok.
+                                            $gallery = explode( ',', $product_images );
+                                        }
+                                        ?>
                                         <input type="file"
                                                class="filepond"
                                                name="filepond_product_image_gallery"
                                                multiple="true"
+                                               data-files="<?php echo esc_js(json_encode(\App\buildFileData($gallery))); ?>"
                                                data-allow-reorder="true"
                                                data-max-file-size="3MB"
-                                               data-labelIdle="<?php esc_html_e( 'Upload image gallery', 'dokan-lite' ); ?>">
-                                        <div class="dokan-side-body" id="dokan-product-images">
-                                            <div id="product_images_container">
-                                                <ul class="product_images dokan-clearfix">
-                                                    <?php
-                                                        if ( isset( $post_data['product_image_gallery'] ) ) { // WPCS: CSRF ok, input var ok.
-                                                            $product_images = $post_data['product_image_gallery']; // WPCS: CSRF ok, input var ok.
-                                                            $gallery        = explode( ',', $product_images );
+                                               data-labelIdle="<?php esc_html_e( 'Upload Product Gallery', 'dokan-lite' ); ?>">
+                                    </div>
 
-                                                            if ( $gallery ) {
-                                                                foreach ( $gallery as $image_id ) {
-                                                                    if ( empty( $image_id ) ) {
-                                                                        continue;
-                                                                    }
-
-                                                                    $attachment_image = wp_get_attachment_image_src( $image_id, 'thumbnail' );
-                                                                    ?>
-                                                                    <li class="image" data-attachment_id="<?php echo esc_attr( $image_id ); ?>">
-                                                                        <img src="<?php echo esc_url( $attachment_image[0] ); ?>" alt="">
-                                                                        <a href="#" class="action-delete" title="<?php esc_attr_e( 'Delete image', 'dokan-lite' ); ?>">&times;</a>
-                                                                    </li>
-                                                                    <?php
-                                                                }
-                                                            }
-                                                        }
-                                                        ?>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> <!-- .product-gallery -->
                                     <?php do_action( 'dokan_product_gallery_image_count' ); ?>
                                 </div>
 

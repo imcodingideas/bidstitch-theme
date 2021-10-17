@@ -150,7 +150,6 @@ function buildFileData($ids)
                 'metadata' => (object)array(
                     'poster' => wp_get_attachment_url($id),
                 ),
-                'test' => wp_prepare_attachment_for_js($id)
             )
         );
     }
