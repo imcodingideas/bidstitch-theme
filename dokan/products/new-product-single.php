@@ -298,45 +298,35 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
 
                                 <div class="content-half-part featured-image">
 
-                                    <div class="dokan-feat-image-upload dokan-new-product-featured-img">
 
-                                        <div class="filepond-container">
+                                    <?php
+                                    $feat_image_id = get_post_thumbnail_id($post_id);
+                                    $featured_image_urls = [];
+                                    if (!empty($feat_image_id)) $featured_image_urls[] = $feat_image_id;
+                                    get_template_part('resources/views/components/media-uploader', null, array(
+                                        'name' => 'feat_image_id',
+                                        'files' => $featured_image_urls,
+                                        'multiple' => 'false',
+                                        'max_file_size' => '3MB',
+                                        'labelIdle' => esc_html__('Upload Product Image', 'dokan-lite')
+                                    ));
+                                    ?>
+
+                                    <div class="dokan-product-gallery">
+                                        <div class="dokan-side-body" id="dokan-product-images">
                                             <?php
-                                            $feat_image_id = get_post_thumbnail_id($post_id);
-                                            $featured_image_urls = [];
-                                            if(!empty($feat_image_id)) $featured_image_urls[] = $feat_image_id;
+                                            $product_images = get_post_meta($post_id, '_product_image_gallery', true);
+                                            $gallery = (!empty($product_images)) ? explode(',', $product_images) : [];
+                                            get_template_part('resources/views/components/media-uploader', null, array(
+                                                'name' => 'product_image_gallery',
+                                                'files' => $gallery,
+                                                'multiple' => 'true',
+                                                'max_file_size' => '3MB',
+                                                'labelIdle' => esc_html__('Upload Product Gallery', 'dokan-lite')
+                                            ));
                                             ?>
-                                            <input type="file"
-                                                   class="filepond"
-                                                   name="filepond_feat_image_id"
-                                                   multiple="false"
-                                                   data-files="<?php echo esc_js(json_encode(\App\buildFileData($featured_image_urls))); ?>"
-                                                   data-allow-reorder="true"
-                                                   data-max-file-size="3MB"
-                                                   data-labelIdle="<?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?>">
                                         </div>
-
-                                    </div><!-- .dokan-feat-image-upload -->
-
-                                        <div class="dokan-product-gallery">
-                                            <div class="dokan-side-body" id="dokan-product-images">
-
-                                                <div class="filepond-container">
-                                                    <?php
-                                                    $product_images = get_post_meta( $post_id, '_product_image_gallery', true );
-                                                    $gallery = (!empty($product_images)) ? explode( ',', $product_images ) : [];
-                                                    ?>
-                                                    <input type="file"
-                                                           class="filepond"
-                                                           name="filepond_product_image_gallery"
-                                                           multiple="true"
-                                                           data-files="<?php echo esc_js(json_encode(\App\buildFileData($gallery))); ?>"
-                                                           data-allow-reorder="true"
-                                                           data-max-file-size="3MB"
-                                                           data-labelIdle="<?php esc_html_e( 'Upload Product Gallery', 'dokan-lite' ); ?>">
-                                                </div>
-                                            </div>
-                                        </div> <!-- .product-gallery -->
+                                    </div> <!-- .product-gallery -->
 
                                     <?php do_action( 'dokan_product_gallery_image_count' );?>
 

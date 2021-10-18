@@ -100,33 +100,32 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                             <div class="product-edit-container dokan-clearfix">
                                 <div class="content-half-part featured-image">
 
-                                    <div class="dokan-feat-image-upload filepond-container">
-                                        <input type="file"
-                                               class="filepond"
-                                               name="filepond_feat_image_id"
-                                               multiple="false"
-                                               data-allow-reorder="true"
-                                               data-max-file-size="3MB"
-                                               data-labelIdle="<?php esc_html_e( 'Upload Product Image', 'dokan-lite' ); ?>"
-                                               data-max-files="3">
-                                    </div>
+                                    <?php
+                                    $featured_image_urls = (!empty($posted_img_url)) ? [$posted_img_url] : [];
+                                    get_template_part('resources/views/components/media-uploader', null, array(
+                                        'name' => 'feat_image_id',
+                                        'files' => $featured_image_urls,
+                                        'multiple' => 'false',
+                                        'max_file_size' => '3MB',
+                                        'labelIdle' => esc_html__('Upload Product Image', 'dokan-lite')
+                                    ));
+                                    ?>
 
-                                    <div class="dokan-product-gallery filepond-container">
+                                    <div class="dokan-product-gallery">
                                         <?php
                                         $gallery = [];
                                         if ( isset( $post_data['product_image_gallery'] ) ) {
                                             $product_images = $post_data['product_image_gallery']; // WPCS: CSRF ok, input var ok.
                                             $gallery = explode( ',', $product_images );
                                         }
+                                        get_template_part('resources/views/components/media-uploader', null, array(
+                                            'name' => 'product_image_gallery',
+                                            'files' => $gallery,
+                                            'multiple' => 'true',
+                                            'max_file_size' => '3MB',
+                                            'labelIdle' => esc_html__('Upload Product Gallery', 'dokan-lite')
+                                        ));
                                         ?>
-                                        <input type="file"
-                                               class="filepond"
-                                               name="filepond_product_image_gallery"
-                                               multiple="true"
-                                               data-files="<?php echo esc_js(json_encode(\App\buildFileData($gallery))); ?>"
-                                               data-allow-reorder="true"
-                                               data-max-file-size="3MB"
-                                               data-labelIdle="<?php esc_html_e( 'Upload Product Gallery', 'dokan-lite' ); ?>">
                                     </div>
 
                                     <?php do_action( 'dokan_product_gallery_image_count' ); ?>

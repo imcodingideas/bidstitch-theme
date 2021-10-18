@@ -6,6 +6,7 @@ $primary_color: #edf0f4;
 .filepond-container {
     width: auto !important; //Resetting hard width and height;
     height: auto !important;
+    margin: 0 0 15px;
     border: 0 !important; //To disable all possible borders from another elements;
     outline: 1px dashed #dddddd;
     background-color: $primary_color;

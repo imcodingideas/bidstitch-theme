@@ -51,33 +51,23 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
 
                         <div class="product-edit-container dokan-clearfix">
                             <div class="content-half-part featured-image">
-                                <div class="featured-image">
-                                    <div class="dokan-feat-image-upload">
-                                        <div class="instruction-inside">
-                                            <input type="hidden" name="feat_image_id" class="dokan-feat-image-id" value="0">
-                                            <i class="fa fa-cloud-upload"></i>
-                                            <a href="#" class="dokan-feat-image-btn dokan-btn"><?php _e( 'Upload Product Image', 'dokan' ); ?></a>
-                                        </div>
+                                <?php
+                                get_template_part('resources/views/components/media-uploader', null, array(
+                                    'name' => 'feat_image_id',
+                                    'multiple' => 'false',
+                                    'max_file_size' => '3MB',
+                                    'labelIdle' => esc_html__('Upload Product Image', 'dokan-lite')
+                                ));
+                                ?>
 
-                                        <div class="image-wrap dokan-hide">
-                                            <a class="close dokan-remove-feat-image">&times;</a>
-                                                <img src="" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="dokan-product-gallery">
-                                    <div class="dokan-side-body" id="dokan-product-images">
-                                        <div id="product_images_container">
-                                            <ul class="product_images dokan-clearfix">
-                                                <li class="add-image add-product-images tips" data-title="<?php _e( 'Add gallery image', 'dokan' ); ?>">
-                                                    <a href="#" class="add-product-images"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                                </li>
-                                            </ul>
-                                            <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="">
-                                        </div>
-                                    </div>
-                                </div> <!-- .product-gallery -->
+                                <?php
+                                get_template_part('resources/views/components/media-uploader', null, array(
+                                    'name' => 'product_image_gallery',
+                                    'multiple' => 'true',
+                                    'max_file_size' => '3MB',
+                                    'labelIdle' => esc_html__('Upload Product Gallery', 'dokan-lite')
+                                ));
+                                ?>
                             </div>
 
                             <div class="content-half-part dokan-product-meta">
