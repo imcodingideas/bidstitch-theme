@@ -51,6 +51,7 @@ class MediaUploader {
         );
 
         FilePond.setOptions({
+            allowReorder: true,
             server: {
                 process: {
                     url: mediaUploaderData.process_url,
@@ -62,6 +63,9 @@ class MediaUploader {
                     url: mediaUploaderData.load_url,
                     method: 'POST'
                 }
+            },
+            onreorderfiles : (files) => {
+                this.updateFileList(files);
             }
         });
     }
@@ -106,6 +110,7 @@ class MediaUploader {
         this.fileUploadPond.on('processfiles', () => {
             this.updateFileList();
         });
+
     }
 
     createInput() {
@@ -117,8 +122,8 @@ class MediaUploader {
         return this.$fileUploadInput.attr('name').replace('filepond_', '');
     }
 
-    updateFileList() {
-        const files = this.fileUploadPond.getFiles();
+    updateFileList(files) {
+        if(!files) files = this.fileUploadPond.getFiles();
         const fileIds = files.map((pondFile) => {
             return pondFile.serverId;
         })
