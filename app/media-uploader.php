@@ -77,6 +77,14 @@ add_action('wp_ajax_bidstitch_process_file_upload', function () {
 
     $file_key = sanitize_text_field(array_key_first($_FILES));
 
+    $allowed_extensions = apply_filters(
+        'bidstitch_allowed_extensions',
+        array('image/jpeg', 'image/jpg', 'image/png'),
+        $file_key
+    );
+
+    if(!in_array($_FILES[$file_key]['type'], $allowed_extensions)) wp_send_json_error(esc_html__('Disallowed file type.', 'bidstitch'), 400);
+
     add_filter('intermediate_image_sizes', function () {
         return apply_filters('bidstitch_allowed_upload_sizes', array(
             'woocommerce_thumbnail',

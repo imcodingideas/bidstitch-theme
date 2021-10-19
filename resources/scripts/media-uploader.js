@@ -4,6 +4,7 @@ import * as FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-
 import * as FilePondPluginFileValidateSize from 'filepond-plugin-image-transform';
 import * as FilePondPluginImageEdit from 'filepond-plugin-file-validate-type';
 import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
 
 /**
@@ -47,10 +48,12 @@ class MediaUploader {
             FilePondPluginImageExifOrientation,
             FilePondPluginFileValidateSize,
             FilePondPluginImageEdit,
-            FilePondPluginFilePoster
+            FilePondPluginFilePoster,
+            FilePondPluginFileValidateType
         );
 
         FilePond.setOptions({
+            checkValidity: true,
             allowReorder: true,
             server: {
                 process: {
@@ -85,8 +88,10 @@ class MediaUploader {
         this.createInput();
 
         const options = {
+            allowFileTypeValidation: true,
             credits: false,
-            files: this.loadedFiles
+            files: this.loadedFiles,
+            acceptedFileTypes: ['image/png', 'image/jpeg', 'image/jpg'],
         }
 
         const labelIdle = this.$fileUploadInput.attr('data-labelIdle');
