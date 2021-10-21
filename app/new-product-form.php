@@ -142,11 +142,11 @@ function saveproductdata($product_id, $postdata)
 
     // category and subcategory
     if (!empty($postdata['product_cat']) && !empty($postdata['product_cat_sub'])) {
-        $categories = [ 
-                $postdata['product_cat'], 
-                $postdata['product_cat_sub'] 
+        $categories = [
+                $postdata['product_cat'],
+                $postdata['product_cat_sub']
             ];
-        
+
         wp_set_post_terms(
             $product_id,
             $categories,
@@ -160,8 +160,8 @@ add_action('dokan_new_product_added', 'save_stock_data', 10, 2);
 add_action('dokan_add_new_auction_product', 'save_stock_data', 10, 2);
 function save_stock_data($product_id, $postdata) {
     if (
-        !isset($postdata['_manage_stock']) 
-        || isset($postdata['_manage_stock']) && empty($postdata['_manage_stock']) 
+        !isset($postdata['_manage_stock'])
+        || isset($postdata['_manage_stock']) && empty($postdata['_manage_stock'])
     ) {
         // enable stock management
         update_post_meta(
@@ -172,8 +172,8 @@ function save_stock_data($product_id, $postdata) {
     }
 
     if (
-        !isset($postdata['_stock']) 
-        || isset($postdata['_stock']) && empty($postdata['_stock']) 
+        !isset($postdata['_stock'])
+        || isset($postdata['_stock']) && empty($postdata['_stock'])
     ) {
         // set stock to quantity to 1
         update_post_meta(
@@ -195,3 +195,35 @@ function save_stock_data($product_id, $postdata) {
         );
     }
 }
+
+// set _auction_dates_from field
+add_action('dokan_new_product_added', 'save_auction_dates_from_field', 10, 2);
+function save_auction_dates_from_field($product_id, $postdata)
+{
+    //set _auction_dates_from field with Current Time
+    update_post_meta($product_id, '_auction_dates_from', date_i18n('Y-m-d H:i'));
+}
+
+////Validate _auction_dates_to field
+//add_action('dokan_add_new_auction_product', 'validate_auction_dates_to_field', 10, 2);
+//function validate_auction_dates_to_field($product_id, $postdata)
+//{
+//    error_log(empty($postdata['_auction_dates_to']));
+//    //require _auction_dates_to field
+//    if (empty($postdata['_auction_dates_to'])) {
+//        return false;
+//    }
+//    //require format
+//    $dt = DateTime::createFromFormat("Y-m-d H:i", $postdata['_auction_dates_to']);
+//    if ($dt == false || array_sum($dt::getLastErrors())) {
+//        return false;
+//    }
+//    //check if _auction_dates_to is a date before the current datetime
+//    $local_date_now = date_i18n('Y-m-d H:i');
+//    if ($local_date_now > $dt) {
+//        return false;
+//    }
+//    return true;
+//}
+
+
