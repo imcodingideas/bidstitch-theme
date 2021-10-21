@@ -354,7 +354,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                 timeText: dokan.datepicker.time,
                 hourText: dokan.datepicker.hour,
                 minuteText: dokan.datepicker.minute,
-                minDate:0,
+                minDate: 0,
             });
 
             $('#_auction_automatic_relist').on( 'click', function(){

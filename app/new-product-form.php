@@ -204,26 +204,4 @@ function save_auction_dates_from_field($product_id, $postdata)
     update_post_meta($product_id, '_auction_dates_from', date_i18n('Y-m-d H:i'));
 }
 
-////Validate _auction_dates_to field
-//add_action('dokan_add_new_auction_product', 'validate_auction_dates_to_field', 10, 2);
-//function validate_auction_dates_to_field($product_id, $postdata)
-//{
-//    error_log(empty($postdata['_auction_dates_to']));
-//    //require _auction_dates_to field
-//    if (empty($postdata['_auction_dates_to'])) {
-//        return false;
-//    }
-//    //require format
-//    $dt = DateTime::createFromFormat("Y-m-d H:i", $postdata['_auction_dates_to']);
-//    if ($dt == false || array_sum($dt::getLastErrors())) {
-//        return false;
-//    }
-//    //check if _auction_dates_to is a date before the current datetime
-//    $local_date_now = date_i18n('Y-m-d H:i');
-//    if ($local_date_now > $dt) {
-//        return false;
-//    }
-//    return true;
-//}
-
 
