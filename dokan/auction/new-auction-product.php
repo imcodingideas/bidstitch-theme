@@ -1,4 +1,4 @@
-<?php 
+<?php
 // overwrites: dokan-pro/modules/simple-auction/templates/auction/new-auction-product.php
 // version:  3.3.3
 
@@ -130,7 +130,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                 <?php echo \Roots\view('dokan.product-fields.length', [ 'post'=>null ])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.stitching', [ 'post'=>null ])->render(); ?>
                             </div>
-                        </div> 
+                        </div>
 
                         <?php // change ?>
                         <div class="mt-6">
@@ -244,14 +244,14 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     <div class="content-half-part dokan-auction-dates-from">
                                         <label class="dokan-control-label form-label" for="_auction_dates_from"><?php _e( 'Auction Start date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_auction_dates_from" type="text" value="" style="width: 97%;" readonly>
+                                            <input required class="dokan-form-control" name="_auction_dates_from" id="_auction_dates_from" type="text" value="CURRENT TIME" style="width: 97%;" readonly>
                                         </div>
                                     </div>
 
                                     <div class="content-half-part dokan-auction-dates-to">
                                         <label class="dokan-control-label form-label" for="_auction_dates_to"><?php _e( 'Auction End date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_auction_dates_to" type="text" value="" readonly>
+                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_to" id="_auction_dates_to" value="" autocomplete="off">
                                         </div>
                                     </div>
 
@@ -303,7 +303,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                         <div class="dokan-form-group">
                             <input type="hidden" name="product-type" value="auction">
                             <?php wp_nonce_field( 'dokan_add_new_auction_product', 'dokan_add_new_auction_product_nonce' ); ?>
-                            <input type="submit" name="add_auction_product" class="dokan-btn dokan-btn-theme dokan-btn-lg dokan-right" value="<?php esc_attr_e( 'Add auction Product', 'dokan' ); ?>"/>
+                            <input type="submit" name="add_auction_product" class="dokan-btn dokan-btn-theme dokan-btn-lg dokan-right" value="<?php esc_attr_e( 'Add Auction Product', 'dokan' ); ?>"/>
                         </div>
 
                     </form>
@@ -353,7 +353,8 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                 closeText: dokan.datepicker.done,
                 timeText: dokan.datepicker.time,
                 hourText: dokan.datepicker.hour,
-                minuteText: dokan.datepicker.minute
+                minuteText: dokan.datepicker.minute,
+                minDate: 0,
             });
 
             $('#_auction_automatic_relist').on( 'click', function(){
