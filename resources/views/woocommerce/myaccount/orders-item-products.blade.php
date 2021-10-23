@@ -15,7 +15,7 @@
       @if ($products)
         @foreach ($products as $product)
           <tr>
-            <td class="py-6 pr-8">
+            <td class="py-6 pr-3 md:pr-8">
               <div class="flex items-center">
                 {!! $product->thumbnail !!}
                 <div>

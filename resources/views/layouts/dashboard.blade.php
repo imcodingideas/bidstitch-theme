@@ -21,7 +21,7 @@
                 @include('partials.dashboard-navigation')
               </div>
             </div>
-            <div class="w-full mx-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-full lg:mx-0 p-8">
+            <div class="w-full mx-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-full lg:mx-0 p-3 md:p-8">
               @yield('content')
             </div>
           </div>
