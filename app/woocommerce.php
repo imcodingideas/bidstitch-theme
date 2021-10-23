@@ -63,7 +63,7 @@ add_action(
         $store_info = dokan_get_store_info($vendor_id); // Get the store data
         $url = dokan_get_store_url($vendor_id);
         $store_name = $store_info['store_name'];
-        echo "<div class='store-wrapper'><a href='$url' class='link-to'><p class='name-store'>$store_name</p> </a></div>";
+        echo "<div class='store-wrapper'><a href='$url' class='link-to'><p class='name-store truncate'>$store_name</p> </a></div>";
     },
     10
 );
@@ -154,7 +154,7 @@ add_filter('woocommerce_available_payment_gateways', 'conditional_payment_gatewa
 function conditional_payment_gateways($available_gateway) {
     // If is admin, do not filter
     if (is_admin()) return $available_gateway;
-    
+
     // If stripe is not enabled, do not filter
     if (empty($available_gateway) || !isset($available_gateway['dokan-stripe-connect'])) return $available_gateway;
 
@@ -207,7 +207,7 @@ add_action('woocommerce_checkout_order_processed', function($order_id) {
         // if is not simple product, move on
         $product_type = $product->get_type();
         if (empty($product_type)) continue;
-        
+
         if ($product_type != 'simple') continue;
 
         // check if product creator is admin

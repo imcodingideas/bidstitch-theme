@@ -9,7 +9,7 @@
         </a>
         <div class="grid items-center">
           <a class="text-sm font-bold text-gray-900 truncate" href="{{ $product->url }}">
-            {{ $product->title }}
+            {!!  $product->title  !!}
           </a>
           <div class="text-sm font-medium text-gray-600">
             {{ $product->date }}

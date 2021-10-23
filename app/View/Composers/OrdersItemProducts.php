@@ -48,12 +48,12 @@ class OrdersItemProducts extends Composer
                 $store = dokan_get_store_info($vendor_id);
 
                 $payload['link'] = $product->get_permalink();
-                $payload['thumbnail'] = $product->get_image('thumbnail', ['class' => 'object-center object-cover rounded mr-6 order__product__img'], true);
+                $payload['thumbnail'] = $product->get_image('thumbnail', ['class' => 'object-center object-cover rounded mr-1 md:mr-6 order__product__img'], true);
                 $payload['store_name'] = $store['store_name'];
                 $payload['store_link'] = dokan_get_store_url($vendor_id);
                 $payload['store_id'] = $vendor_id;
             }
-    
+
             $products[] = (object) $payload;
         }
 
