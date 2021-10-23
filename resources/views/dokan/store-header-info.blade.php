@@ -10,6 +10,7 @@
       @endif
     </h1>
     <p class="vendorshophandle">{{ $vendor_name }}</p>
+
   @endif
 
   {{-- <div class="dokan-store-rating mb-show dokan-store-rating-mb ml-6">
