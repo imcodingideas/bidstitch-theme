@@ -1,33 +1,38 @@
 @import "~filepond/dist/filepond.min.css";
 @import "~filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+@import "~filepond-plugin-file-poster/dist/filepond-plugin-file-poster.min.css";
 
-$primary_color: #edf0f4;
 
 .filepond-container {
     width: auto !important; //Resetting hard width and height;
     height: auto !important;
-    margin: 0 0 15px;
     border: 0 !important; //To disable all possible borders from another elements;
     outline: 1px dashed #dddddd;
-    background-color: $primary_color;
+    @apply m-0 mb-4 bg-white;
 
     .filepond {
-
         &--root {
-            margin-bottom: 0;
+            @apply mb-0;
         }
 
         &--panel-root {
-            background-color: $primary_color;
+            @apply bg-white;
         }
 
         &--drop-label {
-            cursor: pointer;
+            @apply cursor-pointer;
         }
 
         &--item {
-            margin-bottom: 5px !important;
+            @apply mb-4 #{!important};
         }
+    }
+    .filepond--multi {
+        .filepond--item {
+            @screen md {
+                max-width:calc(50% - 2rem);
+            }
+        } 
     }
 }
 
