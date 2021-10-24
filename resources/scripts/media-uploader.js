@@ -1,11 +1,10 @@
 import * as FilePond from 'filepond';
-import * as FilePondPluginImagePreview from 'filepond-plugin-image-preview';
-import * as FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
-import * as FilePondPluginFileValidateSize from 'filepond-plugin-image-transform';
-import * as FilePondPluginImageEdit from 'filepond-plugin-file-validate-type';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 import FilePondPluginFilePoster from 'filepond-plugin-file-poster';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-import 'filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css';
+import FilepondPluginImageTransform from 'filepond-plugin-image-transform';
 
 /**
  *
@@ -47,9 +46,9 @@ class MediaUploader {
             FilePondPluginImagePreview,
             FilePondPluginImageExifOrientation,
             FilePondPluginFileValidateSize,
-            FilePondPluginImageEdit,
             FilePondPluginFilePoster,
-            FilePondPluginFileValidateType
+            FilePondPluginFileValidateType,
+            FilepondPluginImageTransform
         );
 
         FilePond.setOptions({
