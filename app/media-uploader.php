@@ -73,7 +73,11 @@ add_action('wp_ajax_bidstitch_process_file_upload', function () {
 
     if (!dokan_is_user_seller(get_current_user_id())) wp_send_json_error(esc_html__('Wrong permissions', 'bidstitch'), 400);
 
-    if (!isset($_FILES) || empty($_FILES)) wp_send_json_error(esc_html__('Please, upload file', 'bidstitch'), 400);
+    if (!isset($_FILES) || empty($_FILES)) wp_send_json_error(esc_html__('Please upload a file', 'bidstitch'), 400);
+    
+    // validate max file count
+    $max_file_count = 7;
+    if (count($_FILES) > $max_file_count) wp_send_json_error(esc_html__('Max number of files reached', 'bidstitch'), 400);
 
     $file_key = sanitize_text_field(array_key_first($_FILES));
 
@@ -84,6 +88,20 @@ add_action('wp_ajax_bidstitch_process_file_upload', function () {
     );
 
     if(!in_array($_FILES[$file_key]['type'], $allowed_extensions)) wp_send_json_error(esc_html__('Disallowed file type.', 'bidstitch'), 400);
+    
+    // validate max file size
+    if(!isset($_FILES[$file_key]['size'])) wp_send_json_error(esc_html__('Invalid file size', 'bidstitch'), 400);
+    
+    $mega_byte = 1048576;
+    $max_file_size = $mega_byte * 5;
+
+    $max_file_size = apply_filters(
+        'bidstitch_max_file_size',
+        $max_file_size,
+        $file_key
+    );
+
+    if($_FILES[$file_key]['size'] >= $max_file_size) wp_send_json_error(esc_html__('Invalid file size', 'bidstitch'), 400);
 
     add_filter('intermediate_image_sizes', function () {
         return apply_filters('bidstitch_allowed_upload_sizes', array(
@@ -142,26 +160,3 @@ add_action('wp_ajax_bidstitch_load_file_upload', function () {
     wp_send_json(wp_get_attachment_url($attachment_id));
 
 });
-
-function buildFileData($ids)
-{
-    $data = array();
-    foreach ($ids as $id) {
-        $file_path = get_attached_file($id);
-        $data[] = (object)array(
-            'source' => $id,
-            'options' => (object)array(
-                'type' => 'local',
-                'file' => (object)array(
-                    'name' => basename($file_path),
-                    'size' => filesize($file_path),
-                    'type' => get_post_mime_type($id)
-                ),
-                'metadata' => (object)array(
-                    'poster' => wp_get_attachment_url($id),
-                ),
-            )
-        );
-    }
-    return $data;
-}
