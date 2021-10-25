@@ -68,9 +68,16 @@ class DokanProductsListing extends Composer
             'tax_query' => [],
             'meta_query' => [
                 [
-                    'key' => '_stock_status',
-                    'value' => 'instock',
-                    'compare' => '='
+                    'relation' => 'OR',
+                    [
+                        'key' => '_stock_status',
+                        'value' => 'instock',
+                        'compare' => '='
+                    ],
+                    [
+                        'key' => '_stock_status',
+                        'compare' => 'NOT EXISTS'
+                    ]
                 ]
             ]
         ];
@@ -78,6 +85,7 @@ class DokanProductsListing extends Composer
         if ($is_auction) {
             $args['auction_archive'] = true;
             $args['show_past_auctions'] = true;
+            $args['show_future_auctions'] = true;
 
             $args['tax_query'][] = [
                 'taxonomy' => 'product_type', 
