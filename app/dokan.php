@@ -61,6 +61,12 @@ add_filter('dokan_get_dashboard_nav', function($items) {
             'icon' => '',
             'pos' => 60,
         ],
+        [
+            'title' => __('Subscription', 'sage'),
+            'url' => dokan_get_navigation_url('subscription'),
+            'icon' => '',
+            'pos' => 70,
+        ],
     ];
 
     return $items;
@@ -87,7 +93,7 @@ function bidstitch_withdraw_method_paypal($store_settings) {
     $view_args = [
         'email' => $email,
     ];
-    
+
     echo \Roots\view('dokan.withdraw-methods.paypal', $view_args)->render();
 }
 
