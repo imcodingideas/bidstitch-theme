@@ -244,7 +244,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                     <div class="content-half-part dokan-auction-dates-from">
                                         <label class="dokan-control-label form-label" for="_auction_dates_from"><?php _e( 'Auction Start date', 'dokan' ); ?></label>
                                         <div class="dokan-form-group">
-                                            <input required class="dokan-form-control auction-datepicker" name="_auction_dates_from" id="_auction_dates_from" type="text" value="" style="width: 97%;" readonly>
+                                            <input required class="dokan-form-control" name="_auction_dates_from" id="_auction_dates_from" type="text" value="CURRENT TIME" style="width: 97%;" readonly>
                                         </div>
                                     </div>
 
