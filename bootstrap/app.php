@@ -42,6 +42,8 @@ collect([
     'onboarding-setup-wizard',
     'clean-dashboard',
     'offers-for-woocommerce',
+    'offers-for-woocommerce-form',
+    'offers-for-woocommerce-form-ajax',
     'offers-for-woocommerce-dokan',
     'offers-for-woocommerce-notifications',
     'offers-for-woocommerce-notifications-ajax',
