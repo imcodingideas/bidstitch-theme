@@ -1,1 +1,2 @@
-<?php echo \Roots\view('dokan.offers.offers')->render();
+<?php 
+echo \Roots\view('dokan.offers.offers-view')->render();

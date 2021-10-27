@@ -20,84 +20,167 @@ class DokanOffersView extends Composer
      */
     public function with()
     {
+        $offer_query = $this->get_offer_query();
+
         return [
-            'pagination' => $this->pagination(),
-            'offer_groups' => $this->get_offer_groups(),
+            'pagination' => $this->pagination($offer_query),
+            'offer_groups' => $this->get_offer_groups($offer_query),
         ];
     }
 
-    public function get_offer_list() {
-        $offer_list = isset($this->data['offer_list']) ? $this->data['offer_list'] : false;
+    public function get_offer_args($vendor_id, $product_id) {
+        if (empty($vendor_id)) return false;
 
-        if (!$offer_list || empty($offer_list) || !is_array($offer_list)) return false;
+        $paged = get_query_var('paged');
 
-        return $offer_list;
-    }
+        $post_statuses = [
+            'publish', 'accepted-offer', 
+            'countered-offer', 'buyercountered-offer', 
+            'on-hold-offer', 'expired-offer', 
+            'declined-offer', 'completed-offer'
+        ];
 
-    public function get_controller() {
-        $controller = isset($this->data['ofw_dokan_controller']) ? $this->data['ofw_dokan_controller'] : false;
+        $query_args = [
+            'post_type' => 'woocommerce_offer',
+            'post_status' => $post_statuses,
+            'per_page' => apply_filters('ofw_dokan_table_post_per_page', 20),
+            'paged' => !empty($is_paged) ? $is_paged : 1,
+        ];
 
-        return $controller;
-    }
+        // check if should query by single product
+        if (!empty($product_id)) {
+            $query_args['meta_query'] = [
+                [
+                    'key' => 'offer_product_id',
+                    'value' => $product_id,
+                ]
+            ];
+        } else {
+            $product_query = dokan()->product->all([
+                'author' => $vendor_id,
+                'fields' => 'ids'
+            ]);
 
-    public function get_offer_actions($offer_id) {
-        if (!$offer_id || empty($offer_id)) return false;
+            if (empty($product_query->posts)) return false;
 
-        $controller = $this->get_controller();
-        if (!$controller) return false;
-
-        $actions = $controller->offer_row_actions($offer_id);
-        if (!$actions || empty($actions) || !is_array($actions)) return false;
-
-        $actions = apply_filters('bidstitch_vendors_offers_actions', $actions, $offer_id);
-
-        $payload = [];
-        
-        foreach($actions as $key => $row_action) {
-            $custom_attr = '';
-
-            if (!empty($row_action['custom']) && is_array($row_action['custom'])) {
-                foreach($row_action['custom'] as $ckey => $attr) {
-                    $custom_attr .= $ckey.'="'.$attr.'"';
-                }
-            }
-
-            $payload[] = (object) [
-                'custom_attr' => $custom_attr,
-                'link' => !empty($row_action['url']) ? $row_action['url'] : '',
-                'label' => !empty($row_action['label']) ? $row_action['label'] : '',
+            $query_args['meta_query'] = [
+                'relation' => 'AND',
+                [
+                    'key' => 'offer_product_id',
+                    'value' => $product_query->posts,
+                    'compare' => 'IN',
+                ]
             ];
         }
 
-        return $payload;
+        return apply_filters('ofw_dokan_vendor_offer_args', $query_args, $vendor_id);
+    }
+
+    public function get_offer_query() {
+        $vendor_id = get_current_user_id();
+        if (empty($vendor_id)) return false;
+
+        $is_vendor = dokan_is_user_seller($vendor_id);
+        if (!$is_vendor) return false;
+
+        $product_id = isset($_GET['product_id']) && !empty($_GET['product_id']) ? $_GET['product_id'] : '';
+
+        $query_args = $this->get_offer_args($vendor_id, $product_id);
+        if (empty($query_args)) return false;
+
+        $query_results = new \WP_Query($query_args);
+    
+        wp_reset_postdata();
+
+        if (empty($query_results)) return false;
+
+        return $query_results;
+    }
+
+    public function get_offer_actions($offer_id) {
+        if (empty($offer_id)) return false;
+
+        $offers_slug = 'woocommerce_offer';
+
+        $actions = [
+            (object) [
+                'label' => __('Accept', 'sage'),
+                'link' => dokan_get_navigation_url($offers_slug . '/accept/' . $offer_id),
+            ],
+            (object) [
+                'label' => __('Decline', 'sage'),
+                'link' => dokan_get_navigation_url($offers_slug . '/decline/' . $offer_id),
+            ],
+        ];
+
+        return $actions;
+    }
+
+    public function user_can_manage_offer($status) {
+        if (empty($status)) return false;
+
+        $actionable_status_list = [
+            'publish',
+            'buyercountered-offer',
+        ];
+
+        return in_array($status, $actionable_status_list);
+    }
+
+    public function get_offer_status_label($status) {
+        if (empty($status)) return false;
+
+        $offer_status = apply_filters('ofw_dokan_status', [
+            'publish' => __('Pending', 'sage'),
+            'accepted-offer' => __('Accepted', 'sage'),
+            'countered-offer' => __('Countered', 'sage'),
+            'declined-offer' => __('Declined', 'sage'),
+            'on-hold-offer' => __('On Hold', 'sage'),
+            'buyercountered-offer' => __('Buyer Countered', 'sage'),
+            'expired-offer' => __('Expired', 'sage'),
+            'completed-offer' => __('Completed', 'sage'),
+        ]);
+
+        if (!isset($offer_status[$status])) return false;
+        if (empty($offer_status[$status])) return false;
+
+        return $offer_status[$status];
     }
 
     public function get_offer_status($offer_id) {
-        if (!$offer_id || empty($offer_id)) return false;
+        if (empty($offer_id)) return false;
 
-        $controller = $this->get_controller();
-        if (!$controller) return '';
+        $status_value = get_post_status($offer_id);
+        if (empty($status_value)) return false;
 
-        $offer_status = $controller->offer_status(get_post_status($offer_id));
-        if (!$offer_status || empty($offer_status)) return '';
+        $status_label = $this->get_offer_status_label($status_value);
+        if (empty($status_label)) return false;
 
-        return $offer_status;
+        return (object) [
+            'label' => $status_label,
+            'value' => $status_value,
+        ];
     }
 
-    public function get_offer_groups() {
-        $offer_list = $this->get_offer_list();
-        if (!$offer_list) return false;
+    public function get_offer_groups($offer_query) {
+        if (empty($offer_query)) return false;
+        if (!isset($offer_query->posts)) return false;
+        if (empty($offer_query->posts)) return false;
+
+        $offer_list = $offer_query->posts;
 
         $offer_groups = [];
 
         foreach($offer_list as $offer) {
-            $offer_id = !empty($offer->ID) ? $offer->ID : false;
-            if (!$offer_id) continue;
+            if (!isset($offer->ID)) continue;
+            if (empty($offer->ID)) continue;
+
+            $offer_id =  $offer->ID;
 
             $product_id = get_post_meta($offer_id, 'orig_offer_product_id', true);
 
             $product = wc_get_product($product_id);
-            if (!$product || empty($product)) continue;
+            if (empty($product)) continue;
 
             $product_name = $product->get_name();
             $product_thumbnail = $product->get_image('medium', ['class' => 'object-center object-cover rounded'], true);
@@ -121,6 +204,8 @@ class DokanOffersView extends Composer
                 'amount' => !empty($offer_amount) ? $offer_amount : 0,
                 'status' => $offer_status,
                 'actions' => $offer_actions,
+                'id' => $offer_id,
+                'user_can_manage' => $this->user_can_manage_offer($offer_status->value),
             ];
 
             if (isset($offer_groups[$product_id])) {
@@ -133,6 +218,7 @@ class DokanOffersView extends Composer
                 'product_name' => $product_name,
                 'product_thumbnail' => $product_thumbnail,
                 'product_link' => $product_link,
+                'product_id' => $product_id,
                 'offers' => [$offer_item],
             ];
         }
@@ -141,25 +227,17 @@ class DokanOffersView extends Composer
     }
     
 
-    public function get_results() {
-        $results = isset($this->data['results']) ? $this->data['results'] : false;
-
-        return $results;
-    }
-
-    public function pagination() {
-        $results = $this->get_results();
-        if (!$results || empty($results) || !isset($results->max_num_pages)) return false;
+    public function pagination($offer_query) {
+        if (empty($offer_query)) return false;
+        if (!isset($offer_query->max_num_pages)) return false;
 
         $current_page = max(1, get_query_var('paged'));
 
-        // from plugin
-        // change
         $big = 999999999;
 
         $pagination_args = [
             'current' => $current_page,
-            'total' => $results->max_num_pages,
+            'total' => $offer_query->max_num_pages,
             'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
             'add_args' => false,
             'type' => 'array',
@@ -168,7 +246,7 @@ class DokanOffersView extends Composer
             'format' => '?paged=%#%',
         ];
 
-        $pagination_args = apply_filters('ofw_dokan_offers_pagination_args', $pagination_args, $current_page, $results->max_num_pages, $results);
+        $pagination_args = apply_filters('ofw_dokan_offers_pagination_args', $pagination_args, $current_page, $offer_query->max_num_pages, $offer_query);
 
         $links = paginate_links($pagination_args);
 
