@@ -18,7 +18,8 @@ import headerNotifications from './header-notifications';
 import notificationsPage from './notifications-page';
 import elasticpressSearchWidget from './elasticpress-search-widget';
 import vendorOnboardingForm from './vendor-onboarding-form';
-import userChat from './user-chat'
+import userChat from './user-chat';
+import offerForm from './offer-form';
 
 headerNavigation();
 dropdownNavigation();
@@ -37,6 +38,7 @@ notificationsPage();
 elasticpressSearchWidget();
 vendorOnboardingForm();
 userChat();
+offerForm();
 
 // load alpine at the end
 Alpine.start();
