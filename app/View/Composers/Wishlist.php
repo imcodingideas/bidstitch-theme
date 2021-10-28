@@ -28,14 +28,14 @@ class Wishlist extends Composer
             'show_stock_status' => get_option('yith_wcwl_stock_show') == 'yes',
             'show_remove_product' => get_option('yith_wcwl_show_remove', 'yes') == 'yes',
             'has_wishlist' => $this->has_wishlist(),
-            'items' => $this->getWishlistItems(),
+            'items' => $this->get_wishlist_items(),
         ];
     }
     /**
      * Data to be passed to view before rendering.
      * @return array
      */
-    protected function getWishlistItems():array
+    protected function get_wishlist_items():array
     {
         $wishlist_items = $this->data['wishlist_items'] ?? [];
         $payload = [];
