@@ -78,6 +78,13 @@
                 </div>
               </li>
             @endforeach
+            @if ($pagination)
+                <div class="pagination-wrap">
+                  <ul class="pagination mt-0 mb-0">
+                    <li>{!! $pagination !!}</li>
+                  </ul>
+                </div>
+            @endif
           @endif
         </ul>
       </section>
