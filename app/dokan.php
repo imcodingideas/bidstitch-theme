@@ -61,12 +61,6 @@ add_filter('dokan_get_dashboard_nav', function($items) {
             'icon' => '',
             'pos' => 60,
         ],
-        [
-            'title' => __('Subscription', 'sage'),
-            'url' => dokan_get_navigation_url('subscription'),
-            'icon' => '',
-            'pos' => 70,
-        ],
     ];
 
     return $items;
