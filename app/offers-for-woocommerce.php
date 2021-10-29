@@ -20,7 +20,7 @@ if (class_exists('Angelleye_Offers_For_Woocommerce')) {
         if (!isset($offer->post_type)) return false;
         if (empty($offer->post_type)) return false;
         if ($offer->post_type != 'woocommerce_offer') return false;
-     
+
         // check if offer author exists
         if (!isset($offer->post_author)) return false;
         if (empty($offer->post_author)) return false;
@@ -47,7 +47,7 @@ if (class_exists('Angelleye_Offers_For_Woocommerce')) {
         if (!isset($query->query_vars['post_type'])) return $query;
         if (empty($query->query_vars['post_type'])) return $query;
         if ($query->query_vars['post_type'] != 'product') return $query;
-    
+
         // if is checkout offer request, check if user can checkout offer
         $offer_id = (int) $query->query_vars['woocommerce-offer-id'];
         $user_can_checkout_offer = apply_filters('bidstitch_user_can_checkout_offer', true, $offer_id);
@@ -55,7 +55,7 @@ if (class_exists('Angelleye_Offers_For_Woocommerce')) {
         if (!$user_can_checkout_offer) {
             // if user cannot checkout offer, redirect
             $login_url = get_permalink(wc_get_page_id('myaccount'));
-            
+
             // if user is not logged in, redirect to checkout offer after login
             if (!is_user_logged_in()) {
                 global $wp;
@@ -81,10 +81,20 @@ if (class_exists('Angelleye_Offers_For_Woocommerce')) {
 
         // decode the login redirect
         $decoded_url = urldecode($_GET['login_redirect']);
-        
+
         // check if is valid internal redirect
         if (wp_validate_redirect($decoded_url)) return $decoded_url;
 
         return $redirect;
     }, 11, 2);
+
+    //remove default offer-for-woocommerce plugin's my-offer.php view
+    remove_action('woocommerce_account_offers_endpoint', array($offers_class_instance, 'ofw_my_offer_content'));
+
+    //add custom my-offer.php file.
+    add_action('woocommerce_account_offers_endpoint', 'render_custom_my_offer');
+    function render_custom_my_offer()
+    {
+        echo \Roots\view("woocommerce.myaccount.my-offers")->render();
+    }
 }
