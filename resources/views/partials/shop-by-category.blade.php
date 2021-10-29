@@ -10,7 +10,7 @@
         @if ($categories)
           @foreach ($categories as $category)
             <a href="{{ esc_url($category->link) }}"
-              class="relative w-full h-48 md:h-72 rounded-lg p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
+              class="relative w-full h-48 md:h-72 rounded-lg px-3 py-6 md:px-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
               <span aria-hidden="true" class="absolute inset-0">
                 @if ($category->thumbnail)
                   <img src="{{ esc_url($category->thumbnail) }}" alt="" class="w-full h-full object-center object-cover">
@@ -21,7 +21,7 @@
               <span aria-hidden="true"
                 class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-70"></span>
               <span
-                class="relative mt-auto text-center text-base font-bold text-white md:text-xl">{{ $category->name }}</span>
+                class="relative mt-auto text-center text-sm font-bold text-white md:text-xl">{{ $category->name }}</span>
             </a>
           @endforeach
         @endif

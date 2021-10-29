@@ -1,5 +1,5 @@
 @if (class_exists('woocommerce'))
-  <a href="{{ get_permalink(get_option('woocommerce_myaccount_page_id')) }}"
+  <a href="{{ (new \app\DokanNavMenu())->get_vendor_store_url() }}"
     class="flex px-4 -mr-4 h-full items-center account-link account-login"
     title="{{ _e('My account', 'woocommerce') }}">
     <span class="sr-only">Open user menu</span>
