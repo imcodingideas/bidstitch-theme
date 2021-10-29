@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $view_args = [
     'ofw_dokan_template' => $ofw_dokan_template,
@@ -9,3 +9,4 @@ $view_args = [
     'controller_type' => $controller_type
 ];
 echo \Roots\view('dokan.offers.offers-view', $view_args)->render();
+

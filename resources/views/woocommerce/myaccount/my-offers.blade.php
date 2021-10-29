@@ -2,9 +2,9 @@
   <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 md:text-3xl">{{ _e('Recent Offers', 'sage') }}</h1>
   @if ($offers)
     <div class="grid space-y-8">
-      <div class="grid bg-white rounded-lg shadow-sm overflow-hidden">
-        <div class="border-b border-t border-gray-200">
-          <table class="min-w-full divide-y divide-gray-200">
+      <div class="grid bg-white rounded-lg shadow-sm ">
+        <div class="border-b border-t border-gray-200 overflow-x-auto">
+          <table class="w-full divide-y divide-gray-200">
             <thead class="bg-gray-50 hidden md:table-header-group">
             <tr>
               <th class="px-6 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider text-left">
@@ -23,14 +23,14 @@
               <tr class="transition-colors bg-white hover:bg-gray-50 grid gap-y-4 p-4 md:table-row md:p-0">
                 {{-- Details --}}
                 <td class="whitespace-nowrap grid md:table-cell md:px-6 md:py-4">
-                  <div class="flex items-center">
+                  <div class="flex items-center max-w-md">
                     <span>{!! $offer['product_title'] !!}<span>
-{{--                      <div class="text-sm font-medium text-gray-600">--}}
-{{--                        {{ $offer->date }}--}}
-{{--                      </div>--}}
-{{--                      <div class="text-sm font-medium text-gray-600">--}}
-{{--                        {{ $offer->time }}--}}
-{{--                      </div>--}}
+                      <div class="text-sm font-medium text-gray-600">
+                        {{ $offer['offer_date'] }}
+                      </div>
+                      <div class="text-sm font-medium text-gray-600">
+                        {{ $offer['offer_time'] }}
+                      </div>
                   </div>
                 </td>
                 {{-- Price --}}
@@ -62,15 +62,9 @@
                 <td
                   class="whitespace-nowrap text-sm text-gray-500 text-right grid grid-cols-2 gap-x-2 gap-y-2 md:table-cell md:px-6 md:py-4 {{ !$offer['offer_action'] ? 'hidden' : '' }}">
                   <div class="grid grid-cols-2 gap-x-2 gap-y-2">
-{{--                    @if ($offer->actions)--}}
-{{--                      @foreach ($offer->actions as $action)--}}
-{{--                          <a class="btn btn--black text-xs p-1 justify-center" href="{!! esc_url($action->link) !!}"--}}
-{{--                            {{ esc_attr($action->custom_attr) }}>--}}
-{{--                            {{ $action->label }}--}}
-{{--                            --}}
-{{--                          </a>--}}
-{{--                        @endforeach--}}
-{{--                    @endif--}}
+                    @if ($offer['offer_action'])
+                      {!! $offer['offer_action'] !!}
+                    @endif
                   </div>
                 </td>
               </tr>
@@ -79,8 +73,19 @@
           </table>
         </div>
       </div>
+
+
     </div>
   @else
     <p class="text-base">{{ _e('No offers found', 'sage') }}</p>
   @endif
 </div>
+{{--@if ($pagination)--}}
+{{--  <div class="pagination-wrap">--}}
+{{--    <ul class="pagination mt-0 mb-0">--}}
+{{--      @foreach ($pagination as $link)--}}
+{{--        <li>{!! $link !!}</li>--}}
+{{--      @endforeach--}}
+{{--    </ul>--}}
+{{--  </div>--}}
+{{--@else--}}

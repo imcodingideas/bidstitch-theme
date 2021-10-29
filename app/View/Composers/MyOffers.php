@@ -33,9 +33,9 @@ class MyOffers extends Composer
             'post_status' => 'any'
         )));
         $payload = [];
-        foreach ($customer_offers as $customer_order) {
+        foreach ($customer_offers as $customer_offer) {
             $offer_args = array();
-            $post_id = $customer_order->ID;
+            $post_id = $customer_offer->ID;
             $offer_status = get_post_status($post_id);
             if (empty($offer_status)) {
                 continue;
@@ -106,6 +106,9 @@ class MyOffers extends Composer
             $val = ($val != '') ? $val : '0';
             $offer_amount = wc_price($val, array('currency' => $offer_currency));
 
+            $offer_date = get_the_date('F j, Y', $post_id);
+            $offer_time = get_the_date('g:i a', $post_id);
+
             switch ($post_status) {
                 case 'publish':
                     $offer_status = __('Pending', 'offers-for-woocommerce');
@@ -147,18 +150,18 @@ class MyOffers extends Composer
                     case 'countered-offer':
                         if (empty($payment_authorization)) {
                             $v = strpos($offer_args['product_url'], '?') ? '&' : '?';
-                            $offer_action = '<a class="button" href="' . $offer_args['product_url'] . $v . '__aewcoapi=1&woocommerce-offer-id=' . $offer_args['offer_id'] . '&woocommerce-offer-uid=' . $offer_args['offer_uid'] . '">Click to Pay</a>';
+                            $offer_action = '<a href="' . $offer_args['product_url'] . $v . '__aewcoapi=1&woocommerce-offer-id=' . $offer_args['offer_id'] . '&woocommerce-offer-uid=' . $offer_args['offer_uid'] . '" class="btn btn--black text-xs p-1 justify-center">Click to Pay</a>';
                         }
                         if (isset($offer_args['final_offer']) && $offer_args['final_offer'] == '1') {
                         } else {
                             $v = strpos($offer_args['product_url'], '?') ? '&' : '?';
-                            $offer_action = '<a class="button" href="' . $offer_args['product_url'] . $v . 'aewcobtn=1&offer-pid=' . $offer_args['offer_id'] . '&offer-uid=' . $offer_args['offer_uid'] . '">Click to Counter</a>';
+                            $offer_action = '<a href="' . $offer_args['product_url'] . $v . 'aewcobtn=1&offer-pid=' . $offer_args['offer_id'] . '&offer-uid=' . $offer_args['offer_uid'] . '" class="btn btn--black text-xs p-1 justify-center">Click to Counter</a>';
                         }
                         break;
                     case 'accepted-offer':
                         if (empty($payment_authorization)) {
                             $v = strpos($offer_args['product_url'], '?') ? '&' : '?';
-                            $offer_action = '<a class="button" href="' . $offer_args['product_url'] . $v . '__aewcoapi=1&woocommerce-offer-id=' . $offer_args['offer_id'] . '&woocommerce-offer-uid=' . $offer_args['offer_uid'] . '">Click to Pay</a>';
+                            $offer_action = '<a href="' . $offer_args['product_url'] . $v . '__aewcoapi=1&woocommerce-offer-id=' . $offer_args['offer_id'] . '&woocommerce-offer-uid=' . $offer_args['offer_uid'] . '" class="btn btn--black text-xs p-1 justify-center">Click to Pay</a>';
                         }
                         break;
                 }
@@ -166,10 +169,12 @@ class MyOffers extends Composer
             $payload[] = [
               'product_title' => $product_title,
               'offer_quantity' => $offer_quantity,
-              'offer_price_per' => wc_price($offer_price_per),
-              'offer_amount' => wc_price($offer_amount),
+              'offer_price_per' => $offer_price_per,
+              'offer_amount' => $offer_amount,
               'offer_status' => $offer_status,
               'offer_action' => $offer_action,
+              'offer_date' => $offer_date,
+              'offer_time' => $offer_time,
             ];
         }
         return $payload;
