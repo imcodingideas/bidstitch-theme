@@ -13,7 +13,9 @@ class MyOffers extends Composer
      */
     protected static $views = ['woocommerce.myaccount.my-offers'];
 
-    /**
+    private $wp_query;
+
+     /**
      * Data to be passed to view before rendering.
      *
      * @return array
@@ -22,16 +24,54 @@ class MyOffers extends Composer
     {
         return [
             'offers' => $this->get_customer_offers(),
+            'pagination' => $this->get_pagination(),
         ];
+    }
+    private function get_pagination()
+    {
+        return paginate_links(array(
+            'base'         => str_replace(999999999, '%#%', esc_url(get_pagenum_link(999999999))),
+            'total'        => $this->wp_query->max_num_pages,
+            'current'      => max(1, get_query_var('paged')),
+            'format'       => '?paged=%#%',
+            'show_all'     => false,
+            'type'         => 'plain',
+            'end_size'     => 2,
+            'mid_size'     => 1,
+            'prev_next'    => true,
+            'prev_text'    => 'Previous',
+            'next_text'    => 'Next',
+            'add_args'     => false,
+            'add_fragment' => '',
+        ));
+    }
+    /**
+     * Data to be passed to view before rendering.
+     * @return array
+     */
+    private function get_pagination_args(): array
+    {
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        $args = array(
+            'posts_per_page' => -1,
+            'author' => get_current_user_id(),
+            'post_type' => 'woocommerce_offer',
+            'post_status' => 'any',
+            'paged' => $paged
+        );
+        return $args;
+    }
+    private function make_offers_query()
+    {
+        $args = $this->get_pagination_args();
+        $this->wp_query = new \WP_Query(apply_filters('ofw_my_account_my_offers_query', $args));
     }
     private function get_customer_offers()
     {
-        $customer_offers = get_posts(apply_filters('ofw_my_account_my_offers_query', array(
-            'numberposts' => -1,
-            'author' => get_current_user_id(),
-            'post_type' => 'woocommerce_offer',
-            'post_status' => 'any'
-        )));
+        $this->make_offers_query();
+        $customer_offers = $this->wp_query->posts;
+
         $payload = [];
         foreach ($customer_offers as $customer_offer) {
             $offer_args = array();

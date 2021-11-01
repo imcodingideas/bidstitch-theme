@@ -38,7 +38,7 @@
                         <div class="grid items-center">
                           <div class="text-sm font-medium text-gray-600">
                             <span class="font-bold">{{ _e('From:', 'sage') }}</span>
-                            <span>{{ $offer->author }}<span>
+                            <span>{{ $offer->author }}</span>
                           </div>
                           <div class="text-sm font-medium text-gray-600">
                             {{ $offer->date }}

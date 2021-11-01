@@ -1,5 +1,15 @@
 {{-- The Template for displaying all single posts. --}}
 {{-- example: store/storename --}}
+
+@php
+  function nd_dosth_theme_setup() {
+
+        // Adds <title> tag support
+        add_theme_support( 'title-tag' );
+
+}
+add_action( 'after_setup_theme', 'nd_dosth_theme_setup');
+@endphp
 @php get_header('shop') @endphp
 
 <div class="dokan-store-wrap layout-{{ $layout }}">
@@ -35,7 +45,6 @@
       ]);
     @endphp
   @endif
-
 </div>
 @php do_action( 'woocommerce_after_main_content' ) @endphp
 @php get_footer( 'shop' ) @endphp

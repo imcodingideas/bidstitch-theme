@@ -24,13 +24,13 @@
                 {{-- Details --}}
                 <td class="whitespace-nowrap grid md:table-cell md:px-6 md:py-4">
                   <div class="flex items-center max-w-md">
-                    <span>{!! $offer['product_title'] !!}<span>
-                      <div class="text-sm font-medium text-gray-600">
-                        {{ $offer['offer_date'] }}
-                      </div>
-                      <div class="text-sm font-medium text-gray-600">
-                        {{ $offer['offer_time'] }}
-                      </div>
+                    <span>{!! $offer['product_title'] !!}</span>
+                  </div>
+                  <div class="text-sm font-medium text-gray-600">
+                    {{ $offer['offer_date'] }}
+                  </div>
+                  <div class="text-sm font-medium text-gray-600">
+                    {{ $offer['offer_time'] }}
                   </div>
                 </td>
                 {{-- Price --}}
@@ -74,18 +74,13 @@
         </div>
       </div>
 
-
     </div>
   @else
     <p class="text-base">{{ _e('No offers found', 'sage') }}</p>
   @endif
 </div>
-{{--@if ($pagination)--}}
-{{--  <div class="pagination-wrap">--}}
-{{--    <ul class="pagination mt-0 mb-0">--}}
-{{--      @foreach ($pagination as $link)--}}
-{{--        <li>{!! $link !!}</li>--}}
-{{--      @endforeach--}}
-{{--    </ul>--}}
-{{--  </div>--}}
-{{--@else--}}
+  <div class="pagination-wrap">
+    <ul class="pagination mt-0 mb-0">
+        <li>{!! $pagination !!}</li>
+    </ul>
+  </div>
