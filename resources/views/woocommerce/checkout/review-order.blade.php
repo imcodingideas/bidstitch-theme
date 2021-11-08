@@ -37,7 +37,6 @@ the readme will list any important changes.
             @endif
           </div>
         </div>
-
         <div class="col-span-5 text-right">
           {!! $product->subtotal !!}
         </div>
@@ -69,11 +68,77 @@ the readme will list any important changes.
         <div class="flex space-x-2 items-center">
           <dt class="text-gray-600">{{ _e('Discount', 'sage') }}</dt>
           <span
-            class="rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 tracking-wide">{{ $coupon->code }}</span>
+            class="rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 tracking-wide">{{ $coupon->get_code() }}</span>
         </div>
 
-        <dd class="flex space-x-1">{!! wc_cart_totals_coupon_html($coupon) !!}</dd>
+        {{-- Subscription Coupon --}}
+        @if ($product->subscription)
+          @switch($coupon->get_discount_type())
+
+            {{-- Trial Coupon --}}
+            @case('dokan_subscripion_stripe_trial')
+              @if (!empty($coupon->get_meta('dokan_stripe_trial_days')))
+                <dd class="flex space-x-1">
+                  <span>{!! $coupon->get_meta('dokan_stripe_trial_days') !!}</span>
+                  <span>{{ _e('Day Trial', 'sage') }}</span>
+                </dd>
+              @endif
+            @break
+            @default
+
+              {{-- Free Coupon --}}
+              @if (intval(WC()->cart->get_cart_contents_total()) == 0)
+                <dd class="flex space-x-1">
+                  <span>{{ _e('Free Lifetime', 'sage') }}</span>
+                </dd>
+
+                {{-- First Month Coupon --}}
+              @else
+                <dd class="flex space-x-1">
+                  <span>{!! wc_price(WC()->cart->get_coupon_discount_amount($coupon->get_code(), WC()->cart->display_cart_ex_tax)) !!}</span>
+                  <span>{{ _e('Off Month 1', 'sage') }}</span>
+                </dd>
+              @endif
+          @endswitch
+
+          {{-- Regular Product Coupon --}}
+        @else
+          <dd class="flex space-x-1">{!! wc_cart_totals_coupon_html($coupon) !!}</dd>
+        @endif
       </div>
+
+      {{-- Subscription Coupon Notices --}}
+      @if ($product->subscription)
+        <div class="flex space-x-4 text-sm justify-between">
+          <div class="flex space-x-2 items-center">
+            @switch($coupon->get_discount_type())
+
+              {{-- Subscription Trial Notice --}}
+              @case('dokan_subscripion_stripe_trial')
+                @if (!empty($coupon->get_meta('dokan_stripe_trial_days')))
+                  <dt class="text-gray-600">{{ _e('You will not be charged until after the trial', 'sage') }}</dt>
+                @endif
+              @break
+              @default
+
+                {{-- Subscription Comp Notice --}}
+                @if (intval(WC()->cart->get_cart_contents_total()) == 0)
+                  <dt class="text-gray-600">{{ _e('Free lifetime membership', 'sage') }}</dt>
+
+                  {{-- Subscription First Month Notice --}}
+                @else
+                  <dt class="text-gray-600">{{ _e('This discount applies to the first month', 'sage') }}</dt>
+                @endif
+            @endswitch
+          </div>
+
+          {{-- Remove Coupon --}}
+          <a href="{{ esc_url(add_query_arg('remove_coupon', urlencode($coupon->get_code()), defined('WOOCOMMERCE_CHECKOUT') ? wc_get_checkout_url() : wc_get_cart_url())) }}"
+            class="woocommerce-remove-coupon" data-coupon="{{ esc_attr($coupon->get_code()) }}">
+            {{ _e('[Remove]', 'sage') }}
+          </a>
+        </div>
+      @endif
     @endforeach
 
     {{-- Fees --}}
@@ -88,7 +153,8 @@ the readme will list any important changes.
     @if ($has_tax_totals)
       @if ($has_itemized_tax_totals)
         @foreach ($taxes as $code => $tax)
-          <div class="flex space-x-4 text-sm justify-between tax-rate tax-rate-{{ esc_attr(sanitize_title($code)) }}">
+          <div
+            class="flex space-x-4 text-sm justify-between tax-rate tax-rate-{{ esc_attr(sanitize_title($code)) }}">
             <dt class="text-gray-600">{{ $tax->label }}</dt>
             <dd class="flex flex-col items-end">{!! wp_kses_post($fee->formatted_amount) !!}</dd>
           </div>
