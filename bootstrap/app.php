@@ -38,6 +38,7 @@ collect([
     'acf',
     'dokan',
     'dokan-custom-functions',
+    'dokan-stripe-subscription',
     'dokan-nav-menu',
     'onboarding-setup-wizard',
     'clean-dashboard',

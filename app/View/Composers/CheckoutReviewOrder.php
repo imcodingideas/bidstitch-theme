@@ -105,10 +105,15 @@ class CheckoutReviewOrder extends Composer
             $is_visible = apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key);
             $in_stock = $cart_item['quantity'] > 0;
 
+            // check if is subscription product
+            $is_product_pack = $product->get_type() == 'product_pack';
+            $dokan_subscription = $is_product_pack ? dokan()->subscription->get($product->get_id()) : false;
+
             if ($product && $product->exists() && $in_stock && $is_visible) {
                 $payload[] = (object) [
                     'name' => apply_filters('woocommerce_cart_item_name', $product->get_name(), $cart_item, $cart_item_key),
                     'quantity' => $cart_item['quantity'],
+                    'subscription' => $dokan_subscription,
                     'subtotal' => apply_filters('woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal($product, $cart_item['quantity']), $cart_item, $cart_item_key),
                     'thumbnail' => $product->get_image('thumbnail', ['class' => 'object-center object-cover rounded w-16 h-16 bg-gray-50 shadow'], true),
                     'data' => $this->get_cart_item_data($cart_item),
