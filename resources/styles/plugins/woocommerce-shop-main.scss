@@ -5,22 +5,33 @@ body.woocommerce .main {
   .add_to_cart_button {
     display: none;
   }
-  // title
-  .woocommerce-loop-product__title {
-    font-weight: bold;
-    color: #333;
-    font-size: 0.9rem;
+
+  // single product
+  .product {
+    form.cart {
+      @apply my-0;
+    }
   }
 
-  // price
-  .woocommerce-Price-amount {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-    color: #111;
+  // loop
+  .products {
+    // price
+    .woocommerce-Price-amount {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      color: #111;
+    }
+    // title
+    .woocommerce-loop-product__title {
+      font-weight: bold;
+      color: #333;
+      font-size: 0.9rem;
+    }
   }
+
   // name
   .name-store {
     color: gray;
