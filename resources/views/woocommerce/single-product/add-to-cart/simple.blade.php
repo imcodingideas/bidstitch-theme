@@ -1,61 +1,30 @@
-<?php
-/**
- * Simple product add to cart
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/single-product/add-to-cart/simple.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.4.0
- */
+@if ($product->is_purchasable())
+  {!! wc_get_stock_html($product) !!}
 
-defined( 'ABSPATH' ) || exit;
+  @if ($product->is_in_stock())
+    <div class="grid space-y-4 my-6">
+      @php do_action('woocommerce_before_add_to_cart_form') @endphp
 
-global $product;
+      <form class="cart" action="{!! esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())) !!}" method="post" enctype='multipart/form-data'>
+        @php do_action('woocommerce_before_add_to_cart_button') @endphp
 
-if ( ! $product->is_purchasable() ) {
-	return;
-}
+        <div class="hidden">
+          @php do_action('woocommerce_before_add_to_cart_quantity') @endphp
 
-echo wc_get_stock_html( $product ); // WPCS: XSS ok.
+          {!! woocommerce_quantity_input($quantity_input_params) !!}
 
-if ( $product->is_in_stock() ) : ?>
+          @php do_action('woocommerce_after_add_to_cart_quantity') @endphp
+        </div>
 
-<div class="grid space-y-4 my-6">
-  <?php do_action('woocommerce_before_add_to_cart_form'); ?>
+        <button type="submit" name="add-to-cart" value="{!! esc_attr($product->get_id()) !!}"
+          class="btn btn--black flex font-bold justify-center py-2 text-lg uppercase w-full">{!! esc_html($product->single_add_to_cart_text()) !!}</button>
 
-  <form class="cart" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); ?>" method="post" enctype='multipart/form-data'>
-    <?php do_action('woocommerce_before_add_to_cart_button'); ?>
+        @php do_action('woocommerce_after_add_to_cart_button') @endphp
+      </form>
 
-    <div class="hidden">
-      <?php
-      do_action('woocommerce_before_add_to_cart_quantity');
-      
-      woocommerce_quantity_input([
-          'min_value' => apply_filters('woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product),
-          'max_value' => apply_filters('woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product),
-          'input_value' => isset($_POST['quantity']) ? wc_stock_amount(wp_unslash($_POST['quantity'])) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
-      ]);
-      
-      do_action('woocommerce_after_add_to_cart_quantity');
-      ?>
+      @php do_action('woocommerce_after_add_to_cart_form') @endphp
+
+      @include('woocommerce.single-product.add-to-cart.offer')
     </div>
-
-    <button type="submit" name="add-to-cart" value="<?php echo esc_attr($product->get_id()); ?>"
-      class="btn btn--black flex font-bold justify-center py-2 text-lg uppercase w-full"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
-
-    <?php do_action('woocommerce_after_add_to_cart_button'); ?>
-  </form>
-
-  <?php do_action('woocommerce_after_add_to_cart_form'); ?>
-
-  @include('woocommerce.single-product.add-to-cart.offer')
-</div>
-
-<?php endif; ?>
+  @endif
+@endif
