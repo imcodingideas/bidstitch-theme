@@ -23,7 +23,7 @@ class HeaderIcons extends Composer
     {
         return [
             'inbox' => get_field('link_page_chat_vendor', 'option'),
-            'favorites' => get_field('link_page_favorites', 'option'),
+            'favorites' => $this->get_wishlist_url(),
             'notifications' => get_field(
                 'link_page_all_notification',
                 'option'
@@ -31,5 +31,24 @@ class HeaderIcons extends Composer
             'cart_url' => wc_get_cart_url(),
             'cart_count' => WC()->cart->cart_contents_count,
         ];
+    }
+
+    public function get_wishlist_url() {
+        // check if wishlist is active
+        if (!class_exists('YITH_WCWL')) return '';
+
+        // get wishlist instance
+        $wishlist_instance = \YITH_WCWL::get_instance();
+
+        // check if wishlist instance exists
+        if (empty($wishlist_instance)) return '';
+
+        // wishlist url 
+        $wishlist_url = $wishlist_instance->get_wishlist_url();
+
+        // check if wishlist url exists
+        if (empty($wishlist_url)) return '';
+
+        return $wishlist_url;
     }
 }
