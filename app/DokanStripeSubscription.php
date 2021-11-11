@@ -8,6 +8,7 @@ use App\StripeWebhookHandler;
 use Stripe\Event;
 use WeDevs\DokanPro\Modules\Stripe\Helper as StripeHelper;
 use WeDevs\DokanPro\Modules\Subscription\Helper as SubscriptionHelper;
+use WC_Coupon;
 
 class DokanStripeSubscription {
     function __construct() {
@@ -72,10 +73,22 @@ class DokanStripeSubscription {
                 'description' => __('Stripe referral code tracking', 'sage'),
                 'desc_tip' => true,
             ]);
+
+            // enable coupon auto apply
+            woocommerce_wp_checkbox([
+                'id' => 'dokan_stripe_coupon_auto_apply_enable',
+                'label' => __('Auto apply', 'sage'),
+                'placeholder' => '',
+                'value' => $coupon ? $coupon->get_meta('dokan_stripe_coupon_auto_apply_enable') : 'no',
+                'description' => __('When checked, the coupon code will be automatically applied.', 'sage'),
+                'desc_tip' => true,
+            ]);
         }, 21, 2);
 
         // save the custom field value from Admin coupon settings pages
         add_action('woocommerce_coupon_options_save', function($post_id, $coupon) {
+            $coupon = new WC_Coupon($post_id);
+
             // check if trial days are set
             if (!isset($_POST['dokan_stripe_trial_days'])) {
                 $stripe_trial_days = '0';
@@ -94,8 +107,17 @@ class DokanStripeSubscription {
 
             $coupon->update_meta_data('dokan_stripe_referral_enable', $stripe_referral_enabled);
 
+            // check if auto apply is set
+            if (!isset($_POST['dokan_stripe_coupon_auto_apply_enable'])) {
+                $stripe_coupon_auto_apply_enabled = 'no';
+            } else {
+                $stripe_coupon_auto_apply_enabled = wc_clean($_POST['dokan_stripe_coupon_auto_apply_enable']);
+            }
+
+            $coupon->update_meta_data('dokan_stripe_coupon_auto_apply_enable', $stripe_coupon_auto_apply_enabled);
+
             $coupon->save();
-        }, 21, 2);
+        }, 11, 2);
 
         // add stripe subscription trial coupon type
         add_filter('woocommerce_coupon_discount_types', function($types) {
@@ -103,5 +125,64 @@ class DokanStripeSubscription {
 
             return $types;
         }, 21, 1);
+
+        // automatically apply coupon if stripe subscription product is in cart
+        add_action('woocommerce_before_checkout_form', function() {
+            // get cart items and check if product is subscription
+            foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+                // get product id
+                $product_id = $cart_item['product_id'];
+
+                // get product
+                $product = wc_get_product($product_id);
+
+                // check if product exists
+                if (empty($product)) break;
+
+                // check if product type is subscription
+                if ('product_pack' != $product->get_type()) break;
+
+                $auto_apply_coupons = get_posts([
+                    'post_type' => 'shop_coupon',
+                    'posts_per_page' => 1,
+                    'post_status' => 'publish',
+                    'meta_query' => [
+                        // check if auto apply is enabled
+                        [
+                            'key' => 'dokan_stripe_coupon_auto_apply_enable',
+                            'value' => 'yes'
+                        ],
+                        // check if coupon is attached to product
+                        [
+                            'key' => 'product_ids',
+                            'value' => (string) $product_id,
+                            'compare' => 'IN',
+                        ],              
+                    ]
+                ]);
+
+                // check if auto apply coupons exist
+                if (empty($auto_apply_coupons)) break;
+
+                // get target coupon post
+                $target_coupon_post = $auto_apply_coupons[0];
+
+                // get target coupon object
+                $target_coupon = new WC_Coupon($target_coupon_post->ID);
+
+                // get coupon code
+                $target_coupon_code = $target_coupon->get_code();
+
+                // check if coupon has already been applied
+                if (WC()->cart->has_discount($target_coupon_code)) break;
+
+                // check if coupon is valid
+                if (!$target_coupon->is_valid()) break;
+
+                // if coupon has not been applied, apply it
+                WC()->cart->apply_coupon($target_coupon_code);
+            }
+        }, 21);
+
     }
 }
