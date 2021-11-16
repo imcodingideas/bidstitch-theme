@@ -32,6 +32,31 @@ define( 'TALKJS_APP_ID', 'app_id' );
 define( 'TALKJS_APP_SECRET', 'secret' );
 ```
 
+## Feature: Facebook Conversion API
+
+Enables customer event tracking via the Facebook conversion API, read:
+
+Add to wp-config.php (example):
+
+```
+define( 'FB_ACCESS_TOKEN', 'access_token' );
+define( 'FB_PIXEL_ID', 'pixel_id' );
+```
+
+### Supported Events:
+
+WooCommerce
+- Purchase
+- Initiate Checkout
+- View Single Product
+- Add to Cart
+
+YITH WooCommerce Wishlist Premium
+- Add to Wishlist
+
+Dokan Pro
+- Subscription Creation
+
 # Development
 
 Add to wp-config.php
