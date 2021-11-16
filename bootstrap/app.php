@@ -54,7 +54,8 @@ collect([
     'elasticpress',
     'user-chat',
     'comments',
-    'media-uploader'
+    'media-uploader',
+    'facebook-events'
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(
