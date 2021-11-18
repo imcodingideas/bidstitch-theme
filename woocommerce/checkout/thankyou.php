@@ -1,0 +1,1 @@
+<?php echo \Roots\view('woocommerce.checkout.thankyou', ['order' => $order])->render();
