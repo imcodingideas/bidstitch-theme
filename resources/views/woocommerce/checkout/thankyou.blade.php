@@ -33,8 +33,15 @@ the readme will list any important changes.
             @endif
           </p>
         @else
-          <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
-            {{ _e('Thank you. Your order has been received.', 'sage') }}</p>
+          <div class="space-y-1">
+            <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
+              {{ _e('Thank you. Your order has been received.', 'sage') }}</p>
+
+            @if ($is_trial_subscription_order)
+              <h2 class="text-xl font-bold">{{ _e('Your card will not be charged during the trial period.', 'sage') }}
+              </h2>
+            @endif
+          </div>
 
           <ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
             <li class="woocommerce-order-overview__order order">
@@ -53,7 +60,12 @@ the readme will list any important changes.
             </li>
 
             <li class="woocommerce-order-overview__total total">
-              {{ _e('Total:', 'sage') }}
+              @if ($is_trial_subscription_order)
+                {{ _e('Total After Trial End:', 'sage') }}
+              @else
+                {{ _e('Total:', 'sage') }}
+              @endif
+
               <strong>{!! $order->get_formatted_order_total() !!}</strong>
             </li>
 
@@ -67,7 +79,14 @@ the readme will list any important changes.
         @endif
 
         @php do_action('woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id()) @endphp
-        @php do_action('woocommerce_thankyou', $order->get_id()) @endphp
+
+        <div class="space-y-1">
+          @if ($is_trial_subscription_order)
+            <h2 class="text-xl font-bold">{{ _e('Upcoming Payment Details (After Trial End)', 'sage') }}</h2>
+          @endif
+
+          @php do_action('woocommerce_thankyou', $order->get_id()) @endphp
+        </div>
       </div>
     @else
       <p>{{ _e('Thank you. Your order has been received.', 'sage') }}</p>
