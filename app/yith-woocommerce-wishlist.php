@@ -10,5 +10,7 @@ remove_shortcode('yith_wcwl_wishlist', ['YITH_WCWL_Shortcode', 'wishlist']);
 
 // replace wishlist shortcode
 add_shortcode('yith_wcwl_wishlist', function() {
+    ob_start();
     echo \Roots\view('woocommerce.myaccount.wishlist')->render();
+    return ob_get_clean();
 });
