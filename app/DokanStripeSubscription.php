@@ -137,7 +137,7 @@ class DokanStripeSubscription {
         // add discount calculation
         add_filter('woocommerce_coupon_get_discount_amount', function($discount, $discounting_amount, $cart_item, $single, $coupon) {
             if ($coupon->is_type('dokan_subscripion_stripe_trial')) {
-                $discount = round($coupon->get_amount() * $discounting_amount*100 / 10000, 2);
+                $discount = $discounting_amount;
             }
             return $discount;
         }, 10, 5);

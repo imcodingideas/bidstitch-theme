@@ -68,17 +68,14 @@
             <div class="flex w-full items-center justify-between space-x-2 text-sm leading-none">
               <span class="w-half">{{ $pack->title }}</span>
               <span class="text-right">
-                @if ($pack->original_price)
-                  <del class="pr-1">{!! $pack->original_price !!}</del>
-                @endif
                 @if ($pack->price)
                   <span>{!! $pack->price !!}</span>
+                  @if ($pack->is_recurring)
+                    <span>{{ $pack->recurring_label }}</span>
+                  @endif
                 @else
-                  {{ _e('Free', 'sage') }}
+                  {{ _e('Free Trial', 'sage') }}
                 @endif
-                @if (($pack->original_price || $pack->price) && $pack->is_recurring)
-                <span>{{ $pack->recurring_label }}</span>
-              @endif
               </span>
             </div>
           </label>
