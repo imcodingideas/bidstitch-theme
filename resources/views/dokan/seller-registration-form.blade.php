@@ -67,16 +67,16 @@
               {{ $loop->first ? 'checked="checked"' : '' }}>
             <div class="flex w-full items-center justify-between space-x-2 text-sm leading-none">
               <span class="w-half">{{ $pack->title }}</span>
-              @if ($pack->price)
-                <span class="text-right">
+              <span class="text-right">
+                @if ($pack->price)
                   <span>{!! $pack->price !!}</span>
                   @if ($pack->is_recurring)
                     <span>{{ $pack->recurring_label }}</span>
                   @endif
-                </span>
-              @else
-                <span class="text-right">{{ _e('Free', 'sage') }}</span>
-              @endif
+                @else
+                  {{ _e('Free Trial', 'sage') }}
+                @endif
+              </span>
             </div>
           </label>
         @endforeach
