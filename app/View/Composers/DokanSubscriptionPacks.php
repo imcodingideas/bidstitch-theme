@@ -6,8 +6,6 @@ use Roots\Acorn\View\Composer;
 
 use DokanPro\Modules\Subscription\Helper;
 
-use WC_Coupon;
-
 class DokanSubscriptionPacks extends Composer
 {
     /**
@@ -55,44 +53,11 @@ class DokanSubscriptionPacks extends Composer
         if (empty($posts)) return;
 
         $payload = [];
-        $post_ids = [];
-
-        foreach($posts as $post) {
-            $post_ids[] = $post->ID;
-        }
-
-        $auto_apply_coupons = get_posts([
-            'post_type' => 'shop_coupon',
-            'posts_per_page' => 1,
-            'post_status' => 'publish',
-            'meta_query' => [
-                // check if auto apply is enabled
-                [
-                    'key' => 'dokan_stripe_coupon_auto_apply_enable',
-                    'value' => 'yes'
-                ],
-                // check if coupon is attached to product
-                [
-                    'key' => 'product_ids',
-                    'value' => implode(',', $post_ids),
-                    'compare' => 'IN',
-                ],
-            ]
-        ]);
 
         foreach($posts as $post) {
             $pack = dokan()->subscription->get($post->ID);
 
-            $original_price = $price = $pack->get_price();
-
-            foreach ($auto_apply_coupons as $coupon_post) {
-                $coupon = new WC_Coupon($coupon_post->ID);
-
-                if (in_array($post->ID, $coupon->get_product_ids())) {
-                    $price -= $coupon->get_discount_amount($price);
-                }
-            }
-
+            $price = $pack->get_price();
             $is_recurring  = $pack->is_recurring();
             $recurring_interval = $pack->get_recurring_interval();
             $recurring_period = $pack->get_period_type();
@@ -101,8 +66,7 @@ class DokanSubscriptionPacks extends Composer
                 'id' => $post->ID,
                 'title' => $post->post_title,
                 'content' => esc_html($post->post_content),
-                'price' => $price > 0 ? wc_price($price) : '',
-                'original_price' => $original_price !== $price ? wc_price($original_price) : '',
+                'price' => $price > 0 ? wc_price($pack->get_price()) : '',
                 'is_recurring' => $is_recurring,
                 'recurring_label' => $is_recurring ? $this->get_recurring_label($recurring_interval, $recurring_period) : '',
             ];
