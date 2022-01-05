@@ -112,3 +112,17 @@ add_filter('dokan_stripe_display_save_payment_method_checkbox', 'bidstitch_strip
 
 // Remove vendor dashboard button on my account page
 remove_action('woocommerce_account_dashboard', 'dokan_set_go_to_vendor_dashboard_btn');
+
+// Remove "Untitled" from store page titles
+// NOTE: no post data is available inside this hook.
+add_filter('the_seo_framework_title_from_generation', function($title, $args) {
+    if ($args === null) {
+        $vendor = dokan()->vendor->get(get_query_var('author'));
+
+        if ($vendor && $title === the_seo_framework()->get_static_untitled_title()) {
+            $title = $vendor->get_shop_name();
+        }
+    }
+
+    return $title;
+}, 10, 2);
