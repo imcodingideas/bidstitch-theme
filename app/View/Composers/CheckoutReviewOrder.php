@@ -23,6 +23,7 @@ class CheckoutReviewOrder extends Composer
         return [
             'products' => $this->get_products(),
             'coupons' => $this->get_coupons(),
+            'has_free_subscription_coupon' => $this->has_free_subscription_coupon(),
             'fees' => $this->get_fees(),
             'has_tax_totals' => $this->has_tax_totals(),
             'has_itemized_tax_totals' => $this->has_itemized_tax_totals(),
@@ -44,7 +45,7 @@ class CheckoutReviewOrder extends Composer
         if ($cart_item['data']->is_type('variation') && is_array($cart_item['variation'])) {
             foreach ($cart_item['variation'] as $name => $value) {
                 $taxonomy = wc_attribute_taxonomy_name(str_replace('attribute_pa_', '', urldecode($name)));
-    
+
                 if (taxonomy_exists( $taxonomy)) {
                     // If this is a term slug, get the term's nice name.
                     $term = get_term_by('slug', $value, $taxonomy);
@@ -57,22 +58,22 @@ class CheckoutReviewOrder extends Composer
                     $value = apply_filters('woocommerce_variation_option_name', $value, null, $taxonomy, $cart_item['data']);
                     $label = wc_attribute_label(str_replace('attribute_', '', $name ), $cart_item['data']);
                 }
-    
+
                 // Check the nicename against the title.
                 if ('' === $value || wc_is_attribute_in_product_name($value, $cart_item['data']->get_name())) {
                     continue;
                 }
-    
+
                 $item_data[] = (object) [
                     'key' => $label,
                     'value' => $value,
                 ];
             }
         }
-    
+
         // Filter item data to allow 3rd parties to add more to the array.
         $item_data = apply_filters('woocommerce_get_item_data', $item_data, $cart_item);
-    
+
         // Format item data ready to display.
         foreach ($item_data as $key => $data) {
             // Set hidden to true to not display meta on cart.
@@ -86,12 +87,12 @@ class CheckoutReviewOrder extends Composer
 
             $item_data[$key] = (object) $item_data[$key];
         }
-    
+
         // Output flat or in list format.
         if (count($item_data) > 0) {
             return $item_data;
         }
-    
+
         return '';
     }
 
@@ -130,6 +131,16 @@ class CheckoutReviewOrder extends Composer
 
     public function get_coupons() {
         return WC()->cart->get_coupons();
+    }
+
+    public function has_free_subscription_coupon() {
+        foreach ($this->get_coupons() as $coupon) {
+            if ($coupon->get_discount_type() === 'dokan_subscripion_stripe_trial') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function has_tax_totals() {

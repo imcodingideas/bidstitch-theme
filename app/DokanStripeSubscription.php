@@ -126,22 +126,6 @@ class DokanStripeSubscription {
             return $types;
         }, 21, 1);
 
-        // ensure this coupon is valid for the appropriate product
-        add_filter('woocommerce_coupon_is_valid_for_product', function($valid, $product, $coupon, $values) {
-            if ($coupon->is_type('dokan_subscripion_stripe_trial') && in_array($product->get_id(), $coupon->get_product_ids())) {
-                $valid = true;
-            }
-            return $valid;
-        }, 10, 4);
-
-        // add discount calculation
-        add_filter('woocommerce_coupon_get_discount_amount', function($discount, $discounting_amount, $cart_item, $single, $coupon) {
-            if ($coupon->is_type('dokan_subscripion_stripe_trial')) {
-                $discount = $discounting_amount;
-            }
-            return $discount;
-        }, 10, 5);
-
         // automatically apply coupon if stripe subscription product is in cart
         add_action('woocommerce_before_checkout_form', function() {
             // get cart items and check if product is subscription
