@@ -79,8 +79,7 @@ the readme will list any important changes.
             @case('dokan_subscripion_stripe_trial')
               @if (!empty($coupon->get_meta('dokan_stripe_trial_days')))
                 <dd class="flex space-x-1">
-                  <span>{!! $coupon->get_meta('dokan_stripe_trial_days') !!}</span>
-                  <span>{{ _e('Day Trial', 'sage') }}</span>
+                  <span>{{ _e('Free Trial', 'sage') }}</span>
                 </dd>
               @endif
             @break
