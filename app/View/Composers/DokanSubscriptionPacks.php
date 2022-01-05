@@ -83,13 +83,11 @@ class DokanSubscriptionPacks extends Composer
         foreach($posts as $post) {
             $pack = dokan()->subscription->get($post->ID);
 
-            $original_price = $price = $pack->get_price();
-
             foreach ($auto_apply_coupons as $coupon_post) {
                 $coupon = new WC_Coupon($coupon_post->ID);
 
                 if (in_array($post->ID, $coupon->get_product_ids())) {
-                    $price -= $coupon->get_discount_amount($price);
+                    $price = 0;
                 }
             }
 
@@ -102,7 +100,6 @@ class DokanSubscriptionPacks extends Composer
                 'title' => $post->post_title,
                 'content' => esc_html($post->post_content),
                 'price' => $price > 0 ? wc_price($price) : '',
-                'original_price' => $original_price !== $price ? wc_price($original_price) : '',
                 'is_recurring' => $is_recurring,
                 'recurring_label' => $is_recurring ? $this->get_recurring_label($recurring_interval, $recurring_period) : '',
             ];
