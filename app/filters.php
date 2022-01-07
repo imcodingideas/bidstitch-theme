@@ -36,7 +36,7 @@ add_filter('pre_get_posts', function($q) {
 
         $tax_query = $q->get('tax_query');
         if (!is_array($tax_query)) $tax_query = [];
-        
+
         $tax_query[] = [
             'taxonomy' => 'category',
             'field' => 'slug',
@@ -46,7 +46,7 @@ add_filter('pre_get_posts', function($q) {
 
         $q->set('tax_query', $tax_query);
     }
-    
+
     return $q;
 }, 11, 1);
 
@@ -55,4 +55,19 @@ add_filter('excerpt_length', function($length) {
     if (is_admin()) return $length;
 
     return 32;
+});
+
+// Populate "Registration Form" select on events with GFs
+add_filter('acf/load_field/name=registration_form', function($field) {
+    if (class_exists('GFFormsModel')) {
+		$choices = [];
+
+		foreach (\GFFormsModel::get_forms() as $form) {
+			$choices[$form->id] = $form->title;
+		}
+
+		$field['choices'] = $choices;
+	}
+
+    return $field;
 });

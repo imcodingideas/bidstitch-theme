@@ -20,6 +20,7 @@ import elasticpressSearchWidget from './elasticpress-search-widget';
 import vendorOnboardingForm from './vendor-onboarding-form';
 import userChat from './user-chat';
 import offerForm from './offer-form';
+import eventRegistration from './event-registration';
 
 headerNavigation();
 dropdownNavigation();
@@ -39,6 +40,7 @@ elasticpressSearchWidget();
 vendorOnboardingForm();
 userChat();
 offerForm();
+eventRegistration();
 
 // load alpine at the end
 Alpine.start();
