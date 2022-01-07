@@ -79,8 +79,7 @@ the readme will list any important changes.
             @case('dokan_subscripion_stripe_trial')
               @if (!empty($coupon->get_meta('dokan_stripe_trial_days')))
                 <dd class="flex space-x-1">
-                  <span>{!! $coupon->get_meta('dokan_stripe_trial_days') !!}</span>
-                  <span>{{ _e('Day Trial', 'sage') }}</span>
+                  <span>{{ _e('Free Trial', 'sage') }}</span>
                 </dd>
               @endif
             @break
@@ -182,7 +181,13 @@ the readme will list any important changes.
 
     <div class="flex space-x-4 justify-between order-total text-sm">
       <dt>{{ _e('Total', 'sage') }}</dt>
-      <dd class="flex flex-col items-end">{!! wc_cart_totals_order_total_html() !!}</dd>
+      <dd class="flex flex-col items-end">
+        @if ($has_free_subscription_coupon)
+          <strong>{!! wc_price(0) !!}</strong>
+        @else
+          {!! wc_cart_totals_order_total_html(0) !!}
+        @endif
+      </dd>
     </div>
 
     @php do_action('woocommerce_review_order_after_order_total') @endphp

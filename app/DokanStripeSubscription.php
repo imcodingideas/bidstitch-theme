@@ -20,7 +20,7 @@ class DokanStripeSubscription {
 
         // check if stripe module is active
         if (!dokan_pro()->module->is_active('stripe')) return;
-        
+
         $this->handle_stripe_subscription();
         $this->handle_stripe_coupons();
     }
@@ -31,7 +31,7 @@ class DokanStripeSubscription {
 
         // remove existing process subscription process action
         remove_action('dokan_process_subscription_order', [$stripe_product_subscription_instance, 'process_subscription'], 10, 3);
-    
+
         // create new stripe product subscription instance
         $product_subscription = new ProductSubscription();
 
@@ -157,7 +157,7 @@ class DokanStripeSubscription {
                             'key' => 'product_ids',
                             'value' => (string) $product_id,
                             'compare' => 'IN',
-                        ],              
+                        ],
                     ]
                 ]);
 
