@@ -2,15 +2,15 @@
 // overwrites: dokan-pro/modules/simple-auction/templates/auction/new-auction-product.php
 // version:  3.3.3
 
-do_action( 'dokan_dashboard_wrap_start' );
+// do_action( 'dokan_dashboard_wrap_start' );
 
 use WeDevs\Dokan\Walkers\TaxonomyDropdown;
 
 ?>
 <div class="dokan-dashboard-wrap">
     <?php
-    do_action( 'dokan_dashboard_content_before' );
-    do_action( 'dokan_new_auction_product_content_before' );
+    // do_action( 'dokan_dashboard_content_before' );
+    // do_action( 'dokan_new_auction_product_content_before' );
     ?>
 
     <div class="dokan-dashboard-content space-y-2">
