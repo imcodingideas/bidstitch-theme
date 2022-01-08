@@ -20,10 +20,14 @@ class EventsPage extends Composer
      */
     public function with()
     {
+        $my_account_url = get_permalink(get_option('woocommerce_myaccount_page_id'));
+        $login_url = esc_url(add_query_arg('redirect_to', get_permalink(), $my_account_url));
+        $signup_url = esc_url($my_account_url.'#register');
+
         return [
             'loggedIn' => is_user_logged_in(),
-            'loginUrl' => esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))),
-            'signupUrl' => esc_url(get_permalink(get_option('woocommerce_myaccount_page_id')) . '#register'),
+            'loginUrl' => $login_url,
+            'signupUrl' => $signup_url,
             'events' => $this->get_events(),
         ];
     }
