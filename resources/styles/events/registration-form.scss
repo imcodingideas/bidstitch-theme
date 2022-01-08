@@ -1,0 +1,21 @@
+.event-registration-form {
+    .gform_wrapper {
+        legend {
+            @apply border-0 mb-0 pb-0;
+        }
+
+        label {
+            @apply block mb-0;
+        }
+
+        .ginput_container {
+            label {
+                @apply font-normal;
+            }
+        }
+
+        input {
+            @apply w-full;
+        }
+    }
+}
