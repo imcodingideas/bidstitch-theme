@@ -1,4 +1,4 @@
-<?php
+@php
 /**
  *  Dashboard Widget Template
  *
@@ -10,34 +10,22 @@
  *
  *  @package dokan
  */
-?>
+@endphp
 <div class="dashboard-widget big-counter">
     <ul class="list-inline">
          <li>
-            <div class="title"><?php esc_html_e( 'Sales', 'dokan-lite' ); ?></div>
-            <div class="count"><?php echo wp_kses_post( wc_price( $earning ) ); ?></div>
+            <div class="title">{{ esc_html( 'Sales', 'dokan-lite' ) }}</div>
+            <div class="count">{!! wp_kses_post( wc_price( $earning ) ) !!}</div>
         </li>
         <li>
-            <div class="title"><?php esc_html_e( 'Earning', 'dokan-lite' ); ?></div>
-            <div class="count"><?php echo wp_kses_post( dokan_get_seller_earnings( dokan_get_current_user_id() ) ); ?></div>
+            <div class="title">{{ esc_html( 'Earning', 'dokan-lite' ) }}</div>
+            <div class="count">{!! wp_kses_post( dokan_get_seller_earnings( dokan_get_current_user_id() ) ) !!}</div>
         </li>
         <li>
-            <div class="title"><?php esc_html_e( 'Order', 'dokan-lite' ); ?></div>
-            <div class="count">
-                <?php
-                $status = dokan_withdraw_get_active_order_status();
-                $total = 0;
-                foreach ( $status as $order_status ){
-                    if ( ! isset( $orders_count->$order_status ) ) {
-                        continue;
-                    }
-                    $total += $orders_count->$order_status;
-                }
-                echo esc_html( number_format_i18n( $total, 0 ) );
-                ?>
-            </div>
+            <div class="title">{{ esc_html( 'Order', 'dokan-lite' ) }}</div>
+            <div class="count">{{ esc_html( number_format_i18n( $total, 0 ) ) }}</div>
         </li>
 
-        <?php do_action( 'dokan_seller_dashboard_widget_counter' ); ?>
+        @php do_action( 'dokan_seller_dashboard_widget_counter' ) @endphp
     </ul>
 </div> <!-- .big-counter -->
