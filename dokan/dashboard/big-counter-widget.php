@@ -1,0 +1,1 @@
+<?php echo \Roots\view('dokan.dashboard.big-counter-widget')->render();
