@@ -14,7 +14,7 @@
                   {{ $event->title }}
                 </div>
                 <div>
-                  {{ $event->description }}
+                  {!! $event->description !!}
                 </div>
                 <div class="mt-2 sm:flex sm:justify-between">
                   <div class="sm:flex sm:space-x-2">
@@ -60,15 +60,15 @@
 
                     <div class="flex space-x-2 mt-5 sm:mt-6">
                       @if ($loggedIn)
-                        <button x-on:click="$refs.registrationForm.querySelector('form').submit()" type="button" class="flex-grow rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-lg">
+                        <button x-on:click="$refs.registrationForm.querySelector('form').submit()" type="button" class="flex-grow border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-lg">
                           Register
                         </button>
                       @else
-                        <a href="{{ $loginUrl }}" class="flex-grow rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white text-center hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-lg">
+                        <a href="{{ $loginUrl }}" class="flex-grow border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white text-center hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-lg">
                           Log In
                         </a>
                       @endif
-                      <button x-on:click="modalOpen = false" type="button" class="flex-grow rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-lg">
+                      <button x-on:click="modalOpen = false" type="button" class="flex-grow border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-lg">
                         Cancel
                       </button>
                     </div>
