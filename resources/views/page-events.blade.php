@@ -12,13 +12,16 @@
             <a x-on:click.prevent="modalOpen = true" href="#" class="block hover:bg-gray-50">
             @endif
               <div class="px-4 py-4 sm:px-6">
-                <div class="font-bold truncate">
+                <div class="font-bold truncate flex justify-between">
                   {{ $event->title }}
+                  @if ($event->allow_registration)
+                  <span class="flex-grow-0 bg-yellow-400 text-xs font-normal rounded-full py-1 px-3">Register now!</span>
+                  @endif
                 </div>
-                <div>
+                <div class="my-2">
                   {!! $event->description !!}
                 </div>
-                <div class="mt-2 sm:flex sm:justify-between">
+                <div class="sm:flex sm:justify-between">
                   <div class="sm:flex sm:space-x-2">
                     <p class="flex items-center text-sm text-gray-500">
                       <!-- Heroicon name: solid/calendar -->
