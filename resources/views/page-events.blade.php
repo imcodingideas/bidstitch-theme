@@ -8,7 +8,9 @@
       <ul role="list" class="divide-y divide-gray-200">
         @foreach ($events as $event)
           <li x-data="{ modalOpen: false }" x-init="$refs.registrationForm.querySelector('.gform_button').remove()">
+            @if ($event->allow_registration)
             <a x-on:click.prevent="modalOpen = true" href="#" class="block hover:bg-gray-50">
+            @endif
               <div class="px-4 py-4 sm:px-6">
                 <div class="font-bold truncate">
                   {{ $event->title }}
@@ -35,7 +37,9 @@
                   </div>
                 </div>
               </div>
+            @if ($event->allow_registration)
             </a>
+            @endif
 
             <div x-cloak x-show="modalOpen" class="bidstitch-event-modal">
               <div class="fixed z-40 inset-0 overflow-y-auto" role="dialog" aria-modal="true">

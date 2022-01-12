@@ -63,6 +63,7 @@ class EventsPage extends Composer
                 $date = get_field('date', $event);
                 $date_ymd = \DateTime::createFromFormat('m/d/Y', $date)->format('Y-m-d');
                 $location = get_field('location', $event);
+                $allow_registration = get_field('allow_registration', $event);
 
                 // Get relevant GF for this event & populate if possible
                 $form_id = get_field('registration_form', $event);
@@ -89,6 +90,7 @@ class EventsPage extends Composer
                     'date' => $date,
                     'date_ymd' => $date_ymd,
                     'location' => $location,
+                    'allow_registration' => $allow_registration,
                     'form' => $form,
                 ];
             }
