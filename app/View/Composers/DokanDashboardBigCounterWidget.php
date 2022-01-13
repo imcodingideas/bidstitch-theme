@@ -21,6 +21,7 @@ class DokanDashboardBigCounterWidget extends Composer
     public function with()
     {
         return [
+            'earning' => $this->data->earning,
             'total' => $this->get_total(),
         ];
     }
