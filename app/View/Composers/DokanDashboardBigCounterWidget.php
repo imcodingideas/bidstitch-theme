@@ -31,11 +31,11 @@ class DokanDashboardBigCounterWidget extends Composer
         $status = dokan_withdraw_get_active_order_status();
 
         foreach ($status as $order_status) {
-            if (! isset($orders_count->$order_status)) {
+            if (! isset($this->data->orders_count->$order_status)) {
                 continue;
             }
 
-            $total += $orders_count->$order_status;
+            $total += $this->data->orders_count->$order_status;
         }
 
         return $total;
