@@ -1,1 +1,1 @@
-<?php echo \Roots\view('dokan.dashboard.big-counter-widget', ['orders_count' => $orders_count])->render();
+<?php echo \Roots\view('dokan.dashboard.big-counter-widget', ['earning' => $earning, 'orders_count' => $orders_count])->render();
