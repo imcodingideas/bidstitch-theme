@@ -7,7 +7,7 @@
       <div class="profile-info-summery-wrapper dokan-clearfix">
         <div class="row py-12">
           <div class="lg:flex max-w-screen-xl mx-auto profile-info-summery relative row">
-            <div class="flex space-x-10">
+            <div class="flex flex-col sm:flex-row sm:space-x-10 space-y-4 sm:space-y-0">
               @include('dokan.store-header-head')
               @include('dokan.store-header-info')
             </div>
