@@ -261,7 +261,7 @@ add_action('template_redirect', function() {
     global $wp;
 
     if ($wp->request === 'shop' && isset($_GET['buying_formats']) && $_GET['buying_formats'] == 1) {
-        wp_redirect('/dashboard/new-auction-product/');
+        wp_redirect(dokan_get_navigation_url('new-auction-product'));
         exit();
     }
 });
