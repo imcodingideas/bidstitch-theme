@@ -31,12 +31,12 @@
       </p>
     @endif
   </div>
-  <div class="dokan-store-des">
+  <div class="dokan-store-des text-center sm:text-left">
     {{ $dokan_store_des }}
   </div>
 
   @if ($countryname)
-    <div class="dokan-store-address">
+    <div class="dokan-store-address text-center sm:text-left">
       <p class="dokan-store-address-label">{{ _e('Location', 'sage') }}</p>
       <p class="dokan-store-address-info"></i>
         {{ $countryname }}
