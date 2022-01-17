@@ -24,26 +24,19 @@ add_filter('acf/load_field/name=registration_form', function($field) {
 // Front-end event GFs get conditional field based on login
 function bidstitch_event_conditional_username($form)
 {
-    if (get_post_type() !== 'event') {
-        return $form;
-    }
-
-    foreach ($form['fields'] as $key => $field) {
-        if ($field->inputName === 'desired_username' && is_user_logged_in()) {
-            unset($form['fields'][$key]);
-            break;
+    if (get_post_type() == 'event') {
+        foreach ($form['fields'] as $key => $field) {
+            if ($field->inputName === 'desired_username' && is_user_logged_in()) {
+                unset($form['fields'][$key]);
+                break;
+            }
         }
     }
 
     return $form;
 }
-add_filter('gform_pre_render', function($form) {
-    return bidstitch_event_conditional_username($form);
-});
-
-add_filter('gform_pre_validation', function($form) {
-    return bidstitch_event_conditional_username($form);
-});
+add_filter('gform_pre_render', 'App\\bidstitch_event_conditional_username');
+add_filter('gform_pre_validation', 'App\\bidstitch_event_conditional_username');
 
 // Filter events archive query to only show future events
 add_filter('pre_get_posts', function($query) {
