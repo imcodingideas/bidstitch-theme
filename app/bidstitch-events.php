@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Theme filters.
+ * Theme filters for the event listing and detail pages.
  */
 
 namespace App;
@@ -59,6 +59,7 @@ add_filter('pre_get_posts', function($query) {
     $query->set('meta_type', 'DATETIME');
 });
 
+// Lose the "Archive:" <title> prefix for event listing
 add_filter('the_seo_framework_generated_archive_title', function($title) {
     if (is_post_type_archive('event')) {
         $title = preg_replace('/^Archives: /', '', $title);
