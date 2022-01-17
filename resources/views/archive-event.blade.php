@@ -16,8 +16,8 @@
       <div x-show="tab === 'partnered'">
         <h1 class="mb-6 text-xl text-center font-bold">BidStitch Partner Events</h1>
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-md">
-          <ul role="list" class="space-y-4 sm:space-y-0">
+        <div class="bg-white overflow-hidden sm:rounded-md">
+          <ul role="list" class="space-y-4">
             @foreach ($events['partnered'] as $event)
               <li>
                 @include('partials.archive-events-item')
