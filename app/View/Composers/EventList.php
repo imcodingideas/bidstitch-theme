@@ -40,7 +40,7 @@ class EventList extends Composer
 
             // Basic vars
             $title = get_the_title();
-            $description = get_the_content();
+            $description = get_the_excerpt();
             $date = get_field('date');
             $date_ymd = \DateTime::createFromFormat('m/d/Y', $date)->format('Y-m-d');
             $location = get_field('location');
