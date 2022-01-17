@@ -4,6 +4,10 @@
             @apply mb-4;
         }
 
+        .gfield_validation_message {
+            @apply text-sm text-red-600;
+        }
+
         legend {
             @apply border-0 mb-2 pb-0 capitalize;
         }

@@ -15,23 +15,21 @@
         </div>
     </div>
 
-    <div x-cloak x-show="modalOpen">
-        <div class="fixed z-40 inset-0 overflow-y-auto" role="dialog" aria-modal="true">
-            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                <!-- Background overlay, show/hide based on modal state. -->
-                <div x-on:click="modalOpen = false" class="fixed inset-0 bg-black bg-opacity-60 transition-opacity cursor-pointer" aria-hidden="true"></div>
-                <!-- This element is to trick the browser into centering the modal contents. -->
-                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                <!-- Modal panel, show/hide based on modal state. -->
-                <div class="inline-block align-bottom bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl w-full">
-                    <div class="flex justify-between items-center bg-gray-100 p-4">
-                        <h2 class="text-lg sm:text-2xl">Registration</h2>
-                        <button x-on:click="modalOpen = false" class="text-4xl">&#x2715;</button>
-                    </div>
+    <div x-cloak x-show="modalOpen" class="fixed z-40 inset-0 overflow-y-auto" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay, show/hide based on modal state. -->
+            <div x-on:click="modalOpen = false" class="fixed inset-0 bg-black bg-opacity-60 transition-opacity cursor-pointer" aria-hidden="true"></div>
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <!-- Modal panel, show/hide based on modal state. -->
+            <div class="inline-block align-bottom bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl w-full">
+                <div class="flex justify-between items-center bg-gray-100 p-4">
+                    <h2 class="text-lg sm:text-2xl">Registration</h2>
+                    <button x-on:click="modalOpen = false" class="text-4xl">&#x2715;</button>
+                </div>
 
-                    <div class="px-4 py-6 event-registration-form">
-                        {!! $form !!}
-                    </div>
+                <div class="px-4 py-6 event-registration-form">
+                    {!! $form !!}
                 </div>
             </div>
         </div>
