@@ -20,9 +20,7 @@ class EventDetail extends Composer
      */
     public function with()
     {
-        return [
-            'event' => $this->get_event(),
-        ];
+        return $this->get_event();
     }
 
     protected function get_event()
@@ -30,8 +28,9 @@ class EventDetail extends Composer
         // Basic vars
         $title = get_the_title();
         $description = get_the_content();
-        $date = get_field('date');
-        $date_ymd = \DateTime::createFromFormat('m/d/Y', $date)->format('Y-m-d');
+        $event_date = $date = get_field('date');
+        $date = \DateTime::createFromFormat('m/d/Y', $event_date)->format('F d Y');
+        $date_ymd = \DateTime::createFromFormat('m/d/Y', $event_date)->format('Y-m-d');
         $location = get_field('location');
         $bg_image = get_the_post_thumbnail_url();
 
@@ -53,7 +52,7 @@ class EventDetail extends Composer
 
         $form = gravity_form($form_id, false, false, false, $form_values, false, 1, false);
 
-        return (object)[
+        return [
             'title' => $title,
             'description' => $description,
             'date' => $date,

@@ -1,21 +1,38 @@
 .event-registration-form {
     .gform_wrapper {
         legend {
-            @apply border-0 mb-0 pb-0;
+            @apply border-0 mb-2 pb-0 capitalize;
         }
 
         label {
-            @apply block mb-0;
+            @apply block mb-2;
+        }
+
+        .gfield_required {
+            @apply ml-1 text-red-600;
         }
 
         .ginput_container {
-            label {
-                @apply font-normal;
+            &.has_first_name.has_last_name {
+                @apply sm:flex sm:justify-evenly sm:space-x-2;
+            }
+
+            .name_first,
+            .name_last {
+                @apply flex-grow;
+
+                label {
+                    @apply mt-1 text-gray-500 font-normal;
+                }
             }
         }
 
         input {
-            @apply w-full;
+            @apply w-full px-4 py-3 border-gray-200 focus:ring-2 focus:ring-black;
+
+            &.gform_button {
+                @apply sm:w-auto mt-4 border-0 justify-center;
+            }
         }
     }
 }

@@ -41,36 +41,6 @@
                 </div>
               </div>
             </div>
-
-            {{-- <div x-cloak x-show="modalOpen" class="bidstitch-event-modal">
-              <div class="fixed z-40 inset-0 overflow-y-auto" role="dialog" aria-modal="true">
-                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                  <!-- Background overlay, show/hide based on modal state. -->
-                  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
-                  <!-- This element is to trick the browser into centering the modal contents. -->
-                  <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                  <!-- Modal panel, show/hide based on modal state. -->
-                  <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl w-full sm:p-6">
-                    <div>
-                      <h1 class="mb-4 pb-1 text-2xl text-center border-b border-gray-300">{{ $event->title }}</h1>
-                    </div>
-
-                    <div x-ref="registrationForm" class="event-registration-form">
-                      {!! $event->form !!}
-                    </div>
-
-                    <div class="flex space-x-2 mt-5 sm:mt-6">
-                      <button x-on:click="$refs.registrationForm.querySelector('form').submit()" type="button" class="flex-grow border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-lg">
-                          Register
-                      </button>
-                      <button x-on:click="modalOpen = false" type="button" class="flex-grow border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-lg">
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> --}}
           </li>
         @endforeach
       </ul>
