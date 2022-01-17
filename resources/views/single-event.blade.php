@@ -1,4 +1,4 @@
-<div x-data="{ modalOpen: true }">
+<div x-data="{ modalOpen: false }">
     <div class="bg-center bg-cover bg-no-repeat" @if ($bg_image) style="background-image:url({{ $bg_image }})" @endif>
         <div class="h-screen flex justify-center items-center" style="background:radial-gradient(circle, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.35) 100%)">
             <div class="w-full sm:max-w-xl p-4 sm:p-0 font-event tracking-wide text-white text-center">

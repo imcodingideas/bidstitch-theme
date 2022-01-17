@@ -50,7 +50,7 @@ class EventDetail extends Composer
             $form_values = false;
         }
 
-        $form = gravity_form($form_id, false, false, false, $form_values, false, 1, false);
+        $form = gravity_form($form_id, false, false, false, $form_values, true, 1, false);
 
         return [
             'title' => $title,

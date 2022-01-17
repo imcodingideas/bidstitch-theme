@@ -1,5 +1,9 @@
 .event-registration-form {
     .gform_wrapper {
+        .gform_validation_errors {
+            @apply mb-4;
+        }
+
         legend {
             @apply border-0 mb-2 pb-0 capitalize;
         }
@@ -31,7 +35,15 @@
             @apply w-full px-4 py-3 border-gray-200 focus:ring-2 focus:ring-black;
 
             &.gform_button {
-                @apply sm:w-auto mt-4 border-0 justify-center;
+                @apply w-auto border-0 cursor-pointer;
+            }
+        }
+
+        .gform_footer {
+            @apply flex items-center pt-8 space-x-4;
+
+            .gform_ajax_spinner {
+                width: 30px;
             }
         }
     }
