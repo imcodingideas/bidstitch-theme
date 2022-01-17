@@ -1,15 +1,19 @@
 <div class="profile-info flex flex-col space-y-2">
   @if (!empty($shop_name) && 'default' !== $profile_layout)
-    <h1 class="store-name flex">
-      {{ $shop_name }}
-      @if (true || $founder == 'true')
-        <img class="w-5 ml-4" src="@asset('images/crown.svg')" alt="crown" />
-      @endif
-      @if (true || $igverified == 'true')
-        <img class="w-5 ml-4" src="@asset('images/instagram.svg')" alt="instagram" />
-      @endif
-    </h1>
-    <p class="vendorshophandle">{{ $vendor_name }}</p>
+    <div class="flex justify-center sm:justify-start">
+      <h1 class="store-name">
+        {{ $shop_name }}
+      </h1>
+      <div class="flex">
+        @if (true || $founder == 'true')
+          <img class="w-5 ml-4" src="@asset('images/crown.svg')" alt="crown" />
+        @endif
+        @if (true || $igverified == 'true')
+          <img class="w-5 ml-4" src="@asset('images/instagram.svg')" alt="instagram" />
+        @endif
+      </div>
+    </div>
+    <p class="vendorshophandle text-center sm:text-left">{{ $vendor_name }}</p>
   @endif
 
   {{-- <div class="dokan-store-rating mb-show dokan-store-rating-mb ml-6">
@@ -27,12 +31,12 @@
       </p>
     @endif
   </div>
-  <div class="dokan-store-des">
+  <div class="dokan-store-des text-center sm:text-left">
     {{ $dokan_store_des }}
   </div>
 
   @if ($countryname)
-    <div class="dokan-store-address">
+    <div class="dokan-store-address text-center sm:text-left">
       <p class="dokan-store-address-label">{{ _e('Location', 'sage') }}</p>
       <p class="dokan-store-address-info"></i>
         {{ $countryname }}
