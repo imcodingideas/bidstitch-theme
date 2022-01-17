@@ -33,7 +33,10 @@ class EventList extends Composer
     }
 
     protected function get_events() {
-        $events = [];
+        $events = [
+            'partnered' => [],
+            'external' => [],
+        ];
 
         while (have_posts()) {
             the_post();
@@ -48,8 +51,10 @@ class EventList extends Composer
             $link = $allow_registration ? get_permalink() : get_field('event_link');
             $bg_image = $allow_registration ? get_the_post_thumbnail_url(null, 'large') : false;
 
+            $key = $allow_registration ? 'partnered' : 'external';
+
             // Collate into event object
-            $events[] = (object)[
+            $events[$key][] = (object)[
                 'title' => $title,
                 'description' => $description,
                 'date' => $date,

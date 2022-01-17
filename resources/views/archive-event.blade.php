@@ -1,49 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-  @if ($events)
-    <h1 class="mb-4 text-xl text-center font-bold">Upcoming Events</h1>
+  @if ($events['partnered'] || $events['external'])
 
-    <div class="bg-white shadow overflow-hidden sm:rounded-md">
-      <ul role="list" class="divide-y divide-gray-200">
-        @foreach ($events as $event)
-          <li>
-            <div class="bg-center bg-cover bg-no-repeat" @if ($event->bg_image) style="background-image:url({{ $event->bg_image }})" @endif>
-              <div class="px-4 py-4 sm:px-6 @if ($event->bg_image) text-white bg-opacity-60 bg-black @endif">
-                <div class="font-bold truncate flex justify-between">
-                  {{ $event->title }}
-                </div>
-                <div class="my-2">
-                  {!! $event->description !!}
-                </div>
-                <div class="sm:flex sm:justify-between">
-                  <div class="sm:flex sm:space-x-2">
-                    <p class="flex items-center text-sm {{ $event->bg_image ? 'text-white' : 'text-gray-500' }}">
-                      <!-- Heroicon name: solid/calendar -->
-                      <svg class="flex-shrink-0 mr-1 h-5 w-5 {{ $event->bg_image ? 'text-white' : 'text-gray-400' }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
-                      </svg>
-                      <time datetime="{{ $event->date_ymd }}">{{ $event->date }}</time>
-                    </p>
-                    <p class="mt-2 flex items-center text-sm {{ $event->bg_image ? 'text-white' : 'text-gray-500' }} sm:mt-0 sm:ml-6">
-                      <!-- Heroicon name: solid/location-marker -->
-                      <svg class="flex-shrink-0 mr-1 h-5 w-5 {{ $event->bg_image ? 'text-white' : 'text-gray-400' }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                      </svg>
-                      {{ $event->location }}
-                    </p>
-                  </div>
-                  @if ($event->allow_registration)
-                    <a class="block mt-2 sm:mt-0 bg-yellow-400 text-black sm:text-sm text-center rounded-full py-1 px-3" target="_blank" href="{{ $event->link }}">Register now</a>
-                  @else
-                    <a class="block mt-2 sm:mt-0 bg-black text-white sm:text-sm text-center py-1 px-4" target="_blank" href="{{ $event->link }}">More Info</a>
-                  @endif
-                </div>
-              </div>
-            </div>
-          </li>
-        @endforeach
-      </ul>
+    <div x-data="{ tab: 'partnered' }">
+      <div class="mb-8 flex border-b border-gray-300">
+        <div x-on:click="tab = 'partnered'" class="w-1/2 sm:w-auto border border-gray-300 border-b-0 border-r-0 px-8 py-2 text-center cursor-pointer" :class="tab === 'partnered' ? '' : 'bg-gray-100 text-gray-500'">
+          BidStitch
+        </div>
+        <div x-on:click="tab = 'external'" class="w-1/2 sm:w-auto border border-gray-300 border-b-0 px-8 py-2 text-center cursor-pointer" :class="tab === 'external' ? '' : 'bg-gray-100 text-gray-500'">
+          Shoutouts
+        </div>
+      </div>
+
+      <div x-show="tab === 'partnered'">
+        <h1 class="mb-6 text-xl text-center font-bold">BidStitch Partner Events</h1>
+
+        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+          <ul role="list" class="space-y-4 sm:space-y-0">
+            @foreach ($events['partnered'] as $event)
+              <li>
+                @include('partials.archive-events-item')
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
+
+      <div x-cloak x-show="tab === 'external'">
+        <h1 class="mb-6 text-xl text-center font-bold">Other Events</h1>
+
+        <div class="bg-white shadow overflow-hidden sm:rounded-md">
+          <ul role="list" class="divide-y divide-gray-200">
+            @foreach ($events['external'] as $event)
+              <li>
+                @include('partials.archive-events-item')
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
     </div>
   @else
     <h1 class="text-xl text-center font-bold">No Upcoming Events</h1>
