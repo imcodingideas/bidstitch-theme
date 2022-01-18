@@ -7,8 +7,8 @@
                     <div class="uppercase text-lg sm:text-2xl">{{ $date }}</div>
                     <hr class="border-white flex-grow">
                 </div>
-                <div class="mb-4">{{ $location }}</div>
-                <h1 class="uppercase text-5xl sm:text-8xl leading-none header-logo">{{ $title }}</h1>
+                <div class="mb-4">{!! $location !!}</div>
+                <h1 class="uppercase text-5xl sm:text-8xl leading-none header-logo">{!! $title !!}</h1>
                 <div class="mt-4 mb-6 sm:text-xl">{!! $description !!}</div>
                 <button x-on:click.prevent="modalOpen = true" class="w-full sm:w-auto sm:px-8 py-4 bg-white text-black font-bold tracking-wider">Register Now</button>
             </div>
