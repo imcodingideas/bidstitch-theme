@@ -4,7 +4,9 @@
         <a target="_blank" href="{{ $event->link }}">{{ $event->title }}</a>
       </div>
       <div class="my-4 sm:my-2">
-        {!! $event->description !!}
+        <div class="event-description">
+          {!! $event->description !!}
+        </div>
       </div>
       <div class="sm:flex sm:justify-between">
         <div class="sm:flex sm:space-x-2">

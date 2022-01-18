@@ -42,12 +42,12 @@ class EventList extends Composer
             the_post();
 
             // Basic vars
+            $allow_registration = get_field('allow_registration');
             $title = get_the_title();
-            $description = get_the_content();
+            $description = $allow_registration ? get_the_excerpt() : get_the_content();
             $date = get_field('date');
             $date_ymd = \DateTime::createFromFormat('m/d/Y', $date)->format('Y-m-d');
             $location = get_field('location');
-            $allow_registration = get_field('allow_registration');
             $link = $allow_registration ? get_permalink() : get_field('event_link');
             $bg_image = $allow_registration ? get_the_post_thumbnail_url(null, 'large') : false;
 

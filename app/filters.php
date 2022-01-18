@@ -12,6 +12,10 @@ namespace App;
  * @return string
  */
 add_filter('excerpt_more', function () {
+    if (get_post_type() === 'event') {
+        return sprintf('&hellip; <a target="_blank" href="%s">%s</a>', get_permalink(), __('more', 'sage'));
+    }
+
     return sprintf(' &hellip; <a href="%s">%s</a>', get_permalink(), __('Continued', 'sage'));
 });
 
