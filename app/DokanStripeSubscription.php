@@ -96,7 +96,6 @@ class DokanStripeSubscription {
                 'subscription_id' => $subscription_id,
               ],
             ],
-            // TODO: figure out success/failure messages/redirects
             'success_url' => $success_url,
             'cancel_url' => $cancel_url,
         ]);
@@ -105,15 +104,15 @@ class DokanStripeSubscription {
         $stripe_js = <<<STRIPE_JS
             const stripe = Stripe('{$stripe->publishable_key}');
             const checkoutButton = document.getElementById('bidstitch-update-cc-button');
+            const errorMessage = document.querySelector('[data-bidstitch-stripe-cc-update-error]');
 
             checkoutButton.addEventListener('click', function() {
+                errorMessage.classList.add('hidden');
                 stripe.redirectToCheckout({
                     sessionId: '{$session->id}'
-                }).then(function (result) {
-                    console.log(result);
-                    // If `redirectToCheckout` fails due to a browser or network
-                    // error, display the localized error message to your customer
-                    // using `result.error.message`.
+                }).then(function(result) {
+                    errorMessage.innerText = result.error.message;
+                    errorMessage.classList.remove('hidden');
                 });
             });
         STRIPE_JS;

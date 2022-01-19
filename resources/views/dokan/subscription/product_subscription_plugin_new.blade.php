@@ -15,6 +15,7 @@
       @if ($stripe_button)
         <div class="-mt-8 mb-6">
           <button class="w-full sm:w-auto px-6 py-3 bg-black text-white" id="bidstitch-update-cc-button">Update Card Details</button>
+          <p data-bidstitch-stripe-cc-update-error class="mt-2 hidden text-sm text-red-600"></p>
         </div>
       @endif
     </div>
