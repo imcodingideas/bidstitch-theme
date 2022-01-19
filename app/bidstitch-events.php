@@ -45,18 +45,19 @@ add_filter('pre_get_posts', function($query) {
     }
 
     $query->set('meta_query', [
-        'relation' => 'AND',
+        'relation' => 'OR',
+        [
+            'key' => 'date_type',
+            'compare' => '=',
+            'value' => 'text',
+        ],
         [
             'key' => 'date',
             'compare' => '>',
             'value' => date('Y-m-d'),
-            'type' => 'DATETIME',
+            'type' => 'DATE',
         ],
     ]);
-    $query->set('order', 'ASC');
-    $query->set('orderby', 'meta_value');
-    $query->set('meta_key', 'date');
-    $query->set('meta_type', 'DATETIME');
 });
 
 // Lose the "Archive:" <title> prefix for event listing

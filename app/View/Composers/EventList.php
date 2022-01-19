@@ -33,10 +33,7 @@ class EventList extends Composer
     }
 
     protected function get_events() {
-        $events = [
-            'partnered' => [],
-            'external' => [],
-        ];
+        $all_events = [];
 
         while (have_posts()) {
             the_post();
@@ -45,18 +42,25 @@ class EventList extends Composer
             $allow_registration = get_field('allow_registration');
             $title = get_the_title();
             $description = $allow_registration ? get_the_excerpt() : get_the_content();
-            $date = get_field('date');
-            $date_ymd = \DateTime::createFromFormat('m/d/Y', $date)->format('Y-m-d');
             $location = get_field('location');
             $link = $allow_registration ? get_permalink() : get_field('event_link');
             $bg_image = $allow_registration ? get_the_post_thumbnail_url(null, 'large') : false;
 
-            $key = $allow_registration ? 'partnered' : 'external';
+            // Date / date info
+            $date_type = get_field('date_type');
+
+            if ($date_type === 'date') {
+                $date = get_field('date');
+                $date_ymd = \DateTime::createFromFormat('m/d/Y', $date)->format('Y-m-d');
+            } else {
+                $date = $date_ymd = get_field('date_info');
+            }
 
             // Collate into event object
-            $events[$key][] = (object)[
+            $all_events[] = (object)[
                 'title' => $title,
                 'description' => $description,
+                'date_type' => $date_type,
                 'date' => $date,
                 'date_ymd' => $date_ymd,
                 'location' => $location,
@@ -64,6 +68,36 @@ class EventList extends Composer
                 'link' => $link,
                 'bg_image' => $bg_image,
             ];
+        }
+
+        // Custom ordering to keep recurring events at the top
+        usort($all_events, function($a, $b) {
+            if ($a->date_type === 'text' && $b->date_type === 'date') {
+                return -1;
+            }
+
+            if ($a->date_type === 'text' && $b->date_type === 'text') {
+                return 0;
+            }
+
+            if ($a->date_type === 'date' && $b->date_type === 'text') {
+                return 1;
+            }
+
+            if ($a->date_type === 'date' && $b->date_type === 'date') {
+                return $a->date_ymd > $b->date_ymd;
+            }
+        });
+
+        // Segregate partnered from external
+        $events = [
+            'partnered' => [],
+            'external' => [],
+        ];
+
+        foreach ($all_events as $event) {
+            $key = $event->allow_registration ? 'partnered' : 'external';
+            $events[$key][] = $event;
         }
 
         return $events;

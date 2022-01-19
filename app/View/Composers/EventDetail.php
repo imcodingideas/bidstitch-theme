@@ -28,11 +28,19 @@ class EventDetail extends Composer
         // Basic vars
         $title = get_the_title();
         $description = get_the_content();
-        $event_date = $date = get_field('date');
-        $date = \DateTime::createFromFormat('m/d/Y', $event_date)->format('F d Y');
-        $date_ymd = \DateTime::createFromFormat('m/d/Y', $event_date)->format('Y-m-d');
         $location = get_field('location');
         $bg_image = get_the_post_thumbnail_url();
+
+        // Date / date info
+        $date_type = get_field('date_type');
+
+        if ($date_type === 'date') {
+            $event_date = get_field('date');
+            $date = \DateTime::createFromFormat('m/d/Y', $event_date)->format('F d Y');
+            $date_ymd = \DateTime::createFromFormat('m/d/Y', $event_date)->format('Y-m-d');
+        } else {
+            $date = $date_ymd = get_field('date_info');
+        }
 
         // Get relevant GF for this event & populate if possible
         $form_id = get_field('registration_form');
