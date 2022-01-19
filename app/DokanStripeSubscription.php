@@ -125,14 +125,22 @@ class DokanStripeSubscription {
     protected function stripe_set_payment_method() {
         $stripe = new StripeConnect();
         $stripe_client = new StripeClient($stripe->secret_key);
-        // Get setup intent from session
+
+        // Get session object
         $session = $stripe_client->checkout->sessions->retrieve($_GET['session_id'], []);
-        $setup_intent_id = $session->setup_intent;
-        $setup_intent = $stripe_client->setupIntents->retrieve($setup_intent_id, []);
-        // Update as this subscription's default
-        Subscription::update($setup_intent->metadata->subscription_id, [
-            'default_payment_method' => $setup_intent->payment_method,
-        ]);
+
+        if ($session) {
+            // Get seup intent
+            $setup_intent_id = $session->setup_intent;
+            $setup_intent = $stripe_client->setupIntents->retrieve($setup_intent_id, []);
+
+            if ($setup_intent) {
+                // Update as this subscription's default
+                Subscription::update($setup_intent->metadata->subscription_id, [
+                    'default_payment_method' => $setup_intent->payment_method,
+                ]);
+            }
+        }
     }
 
     function handle_stripe_coupons() {
