@@ -150,7 +150,7 @@ function bs_pre_get_posts($q) {
 
             $q->set('orderby', 'meta._auction_current_bid.long');
             $q->set('order', 'DESC');
-  
+
             break;
         case 'bid_asc':
             bs_set_post_type($q);
@@ -169,7 +169,7 @@ function bs_pre_get_posts($q) {
 
             $q->set('orderby', 'meta._auction_dates_to.datetime');
             $q->set('order', 'ASC');
-            
+
             break;
         case 'auction_started':
             bs_set_post_type($q);
@@ -191,7 +191,7 @@ function bs_pre_get_posts($q) {
 
             break;
     }
-    
+
 
     if (isset($q->query['show_past_auctions']) && $q->query['show_past_auctions'] == false) {
         bs_set_auction_past($q);
@@ -207,16 +207,26 @@ function bs_pre_get_posts($q) {
 // auction_arhive_pre_get_posts
 add_filter('pre_get_posts', function($q) {
     if (
-        isset($q->query['auction_arhive']) 
+        isset($q->query['auction_arhive'])
         || (
-            !isset($q->query['auction_arhive']) 
+            !isset($q->query['auction_arhive'])
             && (
                 isset($q->query['post_type'])
-                && $q->query['post_type'] == 'product' 
+                && $q->query['post_type'] == 'product'
                 && !$q->is_main_query()
-            ) 
+            )
         )
     ) {
         bs_pre_get_posts($q);
+    }
+});
+
+// Temporarily shut down auction listings
+add_action('template_redirect', function() {
+    global $wp;
+
+    if ($wp->request === 'shop' && isset($_GET['buying_formats']) && $_GET['buying_formats'] == 1) {
+        wp_redirect(dokan_get_navigation_url('new-auction-product'));
+        exit();
     }
 });
