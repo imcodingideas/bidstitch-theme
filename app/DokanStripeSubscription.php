@@ -6,6 +6,9 @@ use function Roots\asset;
 use App\ProductSubscription;
 use App\StripeWebhookHandler;
 use Stripe\Event;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
+use WeDevs\DokanPro\Modules\Stripe\StripeConnect;
 use WeDevs\DokanPro\Modules\Stripe\Helper as StripeHelper;
 use WeDevs\DokanPro\Modules\Subscription\Helper as SubscriptionHelper;
 use WC_Coupon;
@@ -22,6 +25,7 @@ class DokanStripeSubscription {
         if (!dokan_pro()->module->is_active('stripe')) return;
 
         $this->handle_stripe_subscription();
+        $this->handle_stripe_cc_update();
         $this->handle_stripe_coupons();
     }
 
@@ -37,6 +41,80 @@ class DokanStripeSubscription {
 
         // replace existing process subscription process action
         add_action('dokan_process_subscription_order', [$product_subscription, 'process_subscription'], 10, 3);
+    }
+
+    function handle_stripe_cc_update() {
+        add_action('dokan_load_custom_template', function($query_vars) {
+            if (!isset($query_vars['subscription'])) {
+                return $query_vars;
+            }
+
+            // TODO: retrieve successful session here??
+/*
+\Stripe\Stripe::setApiKey('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+\Stripe\Subscription::update(
+  $subscription_id,
+  [
+    'default_payment_method' => 'pm_1F0c9v2eZvKYlo2CJDeTrB4n',
+  ]
+);
+*/
+
+            $cancel_url = dokan_get_navigation_url('subscription');
+            $success_url = add_query_arg('session_id', '{CHECKOUT_SESSION_ID}', $cancel_url);
+
+            // Get user & system Stripe info
+            $user_id = get_current_user_id();
+            $customer_id_meta = get_user_meta($user_id, 'dokan_stripe_customer_id');
+            $subscription_id_meta = get_user_meta($user_id, '_stripe_subscription_id');
+
+            if (empty($customer_id_meta) || empty($subscription_id_meta)) {
+                return $query_vars;
+            }
+
+            $customer_id = $customer_id_meta[0];
+            $subscription_id = $subscription_id_meta[0];
+
+            // Set up Stripe session
+            $stripe = new StripeConnect();
+            Stripe::setApiKey($stripe->secret_key);
+
+            $session = Session::create([
+                'payment_method_types' => ['card'],
+                'mode' => 'setup',
+                'customer' => $customer_id,
+                'setup_intent_data' => [
+                  'metadata' => [
+                    'customer_id' => $customer_id,
+                    'subscription_id' => $subscription_id,
+                  ],
+                ],
+                // TODO: figure out success/failure messages/redirects
+                'success_url' => $success_url,
+                'cancel_url' => $cancel_url,
+            ]);
+
+            // Pull in Stripe JS
+            $stripe_js = <<<STRIPE_JS
+                const stripe = Stripe('{$stripe->publishable_key}');
+                const checkoutButton = document.getElementById('bidstitch-update-cc-button');
+
+                checkoutButton.addEventListener('click', function() {
+                    stripe.redirectToCheckout({
+                        sessionId: '{$session->id}'
+                    }).then(function (result) {
+                        console.log(result);
+                        // If `redirectToCheckout` fails due to a browser or network
+                        // error, display the localized error message to your customer
+                        // using `result.error.message`.
+                    });
+                });
+            STRIPE_JS;
+
+            wp_enqueue_script('stripe', 'https://js.stripe.com/v3/', [], [], true);
+            wp_add_inline_script('stripe', $stripe_js);
+        });
     }
 
     function handle_stripe_coupons() {

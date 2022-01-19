@@ -9,7 +9,15 @@
   @php do_action('dokan_subscription_content_inside_before') @endphp
 
   @if (dokan_is_seller_enabled(get_current_user_id()))
-    {!! do_shortcode('[dps_product_pack]') !!}
+    <div>
+      {!! do_shortcode('[dps_product_pack]') !!}
+
+      @if ($stripe_button)
+        <div class="-mt-8 mb-6">
+          <button class="w-full sm:w-auto px-6 py-3 bg-black text-white" id="bidstitch-update-cc-button">Update Card Details</button>
+        </div>
+      @endif
+    </div>
   @else
     {!! dokan_seller_not_enabled_notice() !!}
   @endif
