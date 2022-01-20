@@ -39,6 +39,6 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
 
     protected function display_success_message()
     {
-        return !empty($_GET['session_id']);
+        return !empty($_GET['status']) && $_GET['status'] === 'success';
     }
 }

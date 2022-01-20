@@ -14,12 +14,13 @@
 
       @if ($display_stripe_button)
         <div class="-mt-8 mb-6">
-          <button class="w-full sm:w-auto px-6 py-3 bg-black text-white" id="bidstitch-update-cc-button">Update Card Details</button>
-          <p data-bidstitch-stripe-cc-update-error class="mt-2 hidden text-sm text-red-600"></p>
+          <a class="inline-block w-full sm:w-auto px-6 py-3 bg-black text-white" href="/update-stripe-payment-details">Update Card Details</a>
         </div>
       @elseif ($display_success_message)
-        <div class="-mt-8 mb-6 inline-block px-6 py-3 border border-green-500 bg-green-100">
-          Your card details have been successfully updated for this subscription!
+        <div class="-mt-8 mb-6">
+          <div class="inline-block px-6 py-3 border border-green-500 bg-green-100">
+            Your card details have been successfully updated!
+          </div>
         </div>
       @endif
     </div>

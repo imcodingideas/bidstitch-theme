@@ -8,7 +8,6 @@ use App\StripeWebhookHandler;
 use Stripe\Event;
 use Stripe\Stripe;
 use Stripe\StripeClient;
-use Stripe\Subscription;
 use Stripe\Checkout\Session;
 use WeDevs\DokanPro\Modules\Stripe\Helper as StripeHelper;
 use WeDevs\DokanPro\Modules\Subscription\Helper as SubscriptionHelper;
@@ -45,29 +44,43 @@ class DokanStripeSubscription {
     }
 
     public function handle_stripe_cc_update() {
-        // Fire before loading subscriptions page
-        add_action('dokan_load_custom_template', [$this, 'handle_stripe_cc_update_process']);
-    }
+        // Add redirect page
+        add_action('init', function() {
+            add_rewrite_endpoint('update-stripe-payment-details', EP_ROOT);
+        });
 
-    public function handle_stripe_cc_update_process($query_vars) {
-        // Subscriptions page only
-        if (!isset($query_vars['subscription'])) {
+        add_filter('request', function($query_vars) {
+            if (isset($query_vars['update-stripe-payment-details'])) {
+                $query_vars['update-stripe-payment-details'] = true;
+            }
+
             return $query_vars;
-        }
+        });
 
-        // Set up a Stripe checkout session
-        $this->stripe_setup_checkout();
+        add_action('template_include', function($template) {
+            if (get_query_var('update-stripe-payment-details')) {
+                $this->stripe_checkout_redirect();
+            }
 
-        if (!empty($_GET['session_id'])) {
-            // Retrieve a Stripe checkout session & set payment method
-            $this->stripe_set_payment_method();
-        }
+            return $template;
+        });
+
+        // Add webhook handler
+        add_action('rest_api_init', function() {
+            register_rest_route('bidstitch/v1', '/stripe', [
+                'methods' => 'POST',
+                'callback' => [$this, 'stripe_set_payment_method'],
+                'permission_callback' => function() {
+                    return true;
+                }
+            ]);
+        });
     }
 
-    protected function stripe_setup_checkout() {
+    protected function stripe_checkout_redirect() {
         // Set up a Stripe checkout session
         $cancel_url = dokan_get_navigation_url('subscription');
-        $success_url = add_query_arg('session_id', '{CHECKOUT_SESSION_ID}', $cancel_url);
+        $success_url = add_query_arg('status', 'success', $cancel_url);
 
         // Get user & system Stripe info
         $user_id = get_current_user_id();
@@ -101,45 +114,33 @@ class DokanStripeSubscription {
             'cancel_url' => $cancel_url,
         ]);
 
-        // Pull in Stripe JS
-        $stripe_js = <<<STRIPE_JS
-            const stripe = Stripe('$publishable_key');
-            const checkoutButton = document.getElementById('bidstitch-update-cc-button');
-            const errorMessage = document.querySelector('[data-bidstitch-stripe-cc-update-error]');
-
-            checkoutButton.addEventListener('click', function() {
-                errorMessage.classList.add('hidden');
-                stripe.redirectToCheckout({
-                    sessionId: '{$session->id}'
-                }).then(function(result) {
-                    errorMessage.innerText = result.error.message;
-                    errorMessage.classList.remove('hidden');
-                });
-            });
-        STRIPE_JS;
-
-        wp_enqueue_script('stripe', 'https://js.stripe.com/v3/', [], [], true);
-        wp_add_inline_script('stripe', $stripe_js);
+        wp_redirect($session->url, 301);
+        exit();
     }
 
-    protected function stripe_set_payment_method() {
-        $secret_key = StripeHelper::get_secret_key();
-        $stripe_client = new StripeClient($secret_key);
+    public function stripe_set_payment_method($data) {
+        // Handle completed checkout & get Stripe setup intent
+        $event = $data->get_json_params();
 
-        // Get session object
-        $session = $stripe_client->checkout->sessions->retrieve($_GET['session_id'], []);
+        if ($event['type'] !== 'checkout.session.completed') {
+            return;
+        }
 
-        if ($session) {
-            // Get seup intent
-            $setup_intent_id = $session->setup_intent;
-            $setup_intent = $stripe_client->setupIntents->retrieve($setup_intent_id, []);
+        // Update default payment method
+        $stripe = new StripeClient(StripeHelper::get_secret_key());
+        $setup_intent_id = $event['data']['object']['setup_intent'];
+        $setup_intent = $stripe->setupIntents->retrieve($setup_intent_id, []);
+        $customer_id = $event['data']['object']['customer'];
+        $payment_method = $setup_intent->payment_method;
 
-            if ($setup_intent) {
-                // Update as this subscription's default
-                Subscription::update($setup_intent->metadata->subscription_id, [
-                    'default_payment_method' => $setup_intent->payment_method,
-                ]);
-            }
+        $result = $stripe->customers->update($customer_id, [
+            'invoice_settings' => [
+                'default_payment_method' => $payment_method,
+            ],
+        ]);
+
+        if (!$result) {
+            error_log("Failed to update payment method for Stripe customer $customer_id");
         }
     }
 
