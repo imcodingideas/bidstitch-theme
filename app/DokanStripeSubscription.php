@@ -10,7 +10,6 @@ use Stripe\Stripe;
 use Stripe\StripeClient;
 use Stripe\Subscription;
 use Stripe\Checkout\Session;
-use WeDevs\DokanPro\Modules\Stripe\StripeConnect;
 use WeDevs\DokanPro\Modules\Stripe\Helper as StripeHelper;
 use WeDevs\DokanPro\Modules\Subscription\Helper as SubscriptionHelper;
 use WC_Coupon;
@@ -83,8 +82,10 @@ class DokanStripeSubscription {
         $subscription_id = $subscription_id_meta[0];
 
         // Set up Stripe session
-        $stripe = new StripeConnect();
-        Stripe::setApiKey($stripe->secret_key);
+        $secret_key = StripeHelper::get_secret_key();
+        $publishable_key = StripeHelper::get_publishable_key();
+
+        Stripe::setApiKey($secret_key);
 
         $session = Session::create([
             'payment_method_types' => ['card'],
@@ -102,7 +103,7 @@ class DokanStripeSubscription {
 
         // Pull in Stripe JS
         $stripe_js = <<<STRIPE_JS
-            const stripe = Stripe('{$stripe->publishable_key}');
+            const stripe = Stripe('$publishable_key');
             const checkoutButton = document.getElementById('bidstitch-update-cc-button');
             const errorMessage = document.querySelector('[data-bidstitch-stripe-cc-update-error]');
 
@@ -122,8 +123,8 @@ class DokanStripeSubscription {
     }
 
     protected function stripe_set_payment_method() {
-        $stripe = new StripeConnect();
-        $stripe_client = new StripeClient($stripe->secret_key);
+        $secret_key = StripeHelper::get_secret_key();
+        $stripe_client = new StripeClient($secret_key);
 
         // Get session object
         $session = $stripe_client->checkout->sessions->retrieve($_GET['session_id'], []);
