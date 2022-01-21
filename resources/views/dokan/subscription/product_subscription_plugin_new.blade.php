@@ -23,7 +23,7 @@
 
           @if ($display_stripe_button)
             <div class="bg-white shadow-lg p-4 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              <p>Payment method: <span class="font-mono text-gray-700">XXXX-{{ $card_last_digits }}</span></p>
+              <p>Payment method: <span class="py-2 px-4 rounded-full font-mono bg-gray-200 text-gray-700 text-sm">XXXX-{{ $card_last_digits }}</span></p>
               <a class="inline-block w-full sm:w-auto px-6 py-3 bg-black text-white text-center" href="/update-stripe-payment-details">Update Card Details</a>
             </div>
           @endif
