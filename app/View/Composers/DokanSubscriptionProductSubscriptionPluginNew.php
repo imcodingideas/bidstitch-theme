@@ -29,16 +29,9 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
     public function compose(View $view)
     {
         $user_id = get_current_user_id();
-        $customer_id_meta = get_user_meta($user_id, 'dokan_stripe_customer_id');
-        $subscription_id_meta = get_user_meta($user_id, '_stripe_subscription_id');
-
-        $this->has_subscription = !empty($customer_id_meta) && !empty($subscription_id_meta);
-
-        if ($this->has_subscription) {
-            $this->customer_id = $customer_id_meta[0];
-            $this->subscription_id = $subscription_id_meta[0];
-        }
-
+        $this->customer_id = get_user_meta($user_id, 'dokan_stripe_customer_id', true);
+        $this->subscription_id = get_user_meta($user_id, '_stripe_subscription_id', true);
+        $this->has_subscription = !empty($this->customer_id) && !empty($this->subscription_id);
         parent::compose($view);
     }
 
@@ -62,14 +55,18 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
 
     protected function card_last_digits()
     {
-        $stripe = new StripeClient(StripeHelper::get_secret_key());
+        if ($this->has_subscription) {
+            $stripe = new StripeClient(StripeHelper::get_secret_key());
 
-        $payment_methods = $stripe->paymentMethods->all([
-            'customer' => $this->customer_id,
-            'type' => 'card',
-        ]);
+            $payment_methods = $stripe->paymentMethods->all([
+                'customer' => $this->customer_id,
+                'type' => 'card',
+            ]);
 
-        return $payment_methods->data[0]->card->last4;
+            return $payment_methods->data[0]->card->last4;
+        }
+
+        return null;
     }
 
     protected function display_stripe_button()

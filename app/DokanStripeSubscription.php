@@ -80,15 +80,12 @@ class DokanStripeSubscription {
     protected function stripe_checkout_redirect() {
         // Get user's Stripe info
         $user_id = get_current_user_id();
-        $customer_id_meta = get_user_meta($user_id, 'dokan_stripe_customer_id');
-        $subscription_id_meta = get_user_meta($user_id, '_stripe_subscription_id');
+        $customer_id = get_user_meta($user_id, 'dokan_stripe_customer_id', true);
+        $subscription_id = get_user_meta($user_id, '_stripe_subscription_id', true);
 
-        if (empty($customer_id_meta) || empty($subscription_id_meta)) {
+        if (empty($customer_id) || empty($subscription_id)) {
             return;
         }
-
-        $customer_id = $customer_id_meta[0];
-        $subscription_id = $subscription_id_meta[0];
 
         // Set up Stripe session
         Stripe::setApiKey(StripeHelper::get_secret_key());
