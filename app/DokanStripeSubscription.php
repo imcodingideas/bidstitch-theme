@@ -65,7 +65,7 @@ class DokanStripeSubscription {
             return $template;
         });
 
-        // Add webhook handler
+        // Add webhook handler - currently we only handle one
         add_action('rest_api_init', function() {
             register_rest_route('bidstitch/v1', '/stripe', [
                 'methods' => 'POST',
@@ -78,27 +78,23 @@ class DokanStripeSubscription {
     }
 
     protected function stripe_checkout_redirect() {
-        // Set up a Stripe checkout session
-        $cancel_url = dokan_get_navigation_url('subscription');
-        $success_url = add_query_arg('status', 'success', $cancel_url);
-
-        // Get user & system Stripe info
+        // Get user's Stripe info
         $user_id = get_current_user_id();
         $customer_id_meta = get_user_meta($user_id, 'dokan_stripe_customer_id');
         $subscription_id_meta = get_user_meta($user_id, '_stripe_subscription_id');
 
         if (empty($customer_id_meta) || empty($subscription_id_meta)) {
-            return $query_vars;
+            return;
         }
 
         $customer_id = $customer_id_meta[0];
         $subscription_id = $subscription_id_meta[0];
 
         // Set up Stripe session
-        $secret_key = StripeHelper::get_secret_key();
-        $publishable_key = StripeHelper::get_publishable_key();
+        Stripe::setApiKey(StripeHelper::get_secret_key());
 
-        Stripe::setApiKey($secret_key);
+        $cancel_url = dokan_get_navigation_url('subscription');
+        $success_url = add_query_arg('status', 'success', $cancel_url);
 
         $session = Session::create([
             'payment_method_types' => ['card'],
@@ -126,7 +122,9 @@ class DokanStripeSubscription {
             return;
         }
 
-        // Update default payment method
+        // Update default payment method for this customer ID.
+        // NOTE: using Subscription::update() fires customer.subscription.updated which is
+        // intercepted by Dokan and treated as if a new subscription has been purchased.
         $stripe = new StripeClient(StripeHelper::get_secret_key());
         $setup_intent_id = $event['data']['object']['setup_intent'];
         $setup_intent = $stripe->setupIntents->retrieve($setup_intent_id, []);
