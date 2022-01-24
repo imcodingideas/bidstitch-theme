@@ -243,3 +243,15 @@ add_action('woocommerce_after_single_product', function() {
 add_action('init', function () {
     remove_filter('comments_template', [\WC_Template_Loader::class, 'comments_template_loader']);
 });
+
+// For guest PayPal checkouts it asks for a new account password twice,
+// so we hide it / remove "required" on the initial form & only show on
+// the actual order-submit page.
+add_action('woocommerce_checkout_fields', function($fields) {
+    if (isset($fields['account']['account_password'])) {
+        $function_helper = new \WC_Gateway_PayPal_Express_Function_AngellEYE();
+        $fields['account']['account_password']['required'] = $function_helper->ec_is_express_checkout();
+    }
+
+    return $fields;
+});

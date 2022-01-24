@@ -39,6 +39,17 @@ the readme will list any important changes.
                 </div>
               </div>
 
+              @if ($user_can_register_account)
+                {{-- Account --}}
+                <div class="grid space-y-3">
+                  <h3 class="font-bold text-xl">{{ _e('Account details', 'sage') }}</h3>
+
+                  <div class="bg-white shadow rounded">
+                    @include('woocommerce.checkout.form-account')
+                  </div>
+                </div>
+              @endif
+
               {{-- Shipping --}}
               <div class="grid space-y-3">
                 <h3 class="font-bold text-xl">{{ _e('Shipping details', 'sage') }}</h3>
