@@ -243,3 +243,23 @@ add_action('woocommerce_after_single_product', function() {
 add_action('init', function () {
     remove_filter('comments_template', [\WC_Template_Loader::class, 'comments_template_loader']);
 });
+
+// Intercept Dokan's error message to append name of current vendor in cart
+// dokan-pro/includes/functions-wc.php line 1716
+add_action('woocommerce_add_error', function($message) {
+    if ($message === 'Sorry, you can\'t add more than one vendor\'s product in the cart.') {
+        $cart_items = WC()->cart->get_cart();
+
+        if (!empty($cart_items)) {
+            $vendor = dokan_get_vendor_by_product(current($cart_items)['product_id']);
+
+            if ($vendor) {
+                $store_url = dokan_get_store_url($vendor->id);
+                $store_name = dokan_get_store_info($vendor->id)['store_name'];
+                $message = sprintf('%s Current vendor: <a class="underline" href="%s">%s</a>', $message, $store_url, $store_name);
+            }
+        }
+    }
+
+    return $message;
+});
