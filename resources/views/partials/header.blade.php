@@ -22,13 +22,13 @@
           @endif
         @else
           <div class="flex items-center space-x-2 mr-4 lg:space-x-4 lg:mr-0">
-            <ul class="mt-2 mr-2">
-              @include('partials.cart-icon')
-            </ul>
             <a class="btn btn--black text-sm px-2 py-1 lg:px-3 lg:py-2"
               href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id')) . '#register') }}">{{ _e('Sign Up', 'sage') }}</a>
             <a class="btn btn--white text-sm hidden px-2 py-1 lg:px-3 lg:py-2 lg:flex"
               href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
+            <ul class="mx-2">
+              @include('partials.cart-icon')
+            </ul>
           </div>
         @endif
       </div>
