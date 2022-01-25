@@ -1,0 +1,17 @@
+.dokan-subscription-content {
+    .seller_subs_info {
+        .btn.btn-sm.btn-danger {
+            @apply inline-block w-full sm:w-auto mt-3 sm:mt-0 px-4 py-2 border-0 bg-black text-white text-center font-normal;
+        }
+    }
+
+    .pack_content_wrapper {
+        .product_pack_item {
+            @apply mr-0 w-full sm:max-w-xs;
+
+            .pack_price {
+                @apply left-auto leading-none;
+            }
+        }
+    }
+}
