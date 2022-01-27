@@ -46,7 +46,7 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
                 ]);
 
                 $this->card_last_digits = $payment_methods->data[0]->card->last4;
-            } catch (InvalidRequestException) {
+            } catch (InvalidRequestException $e) {
                 $this->card_last_digits = null;
                 $this->has_subscription = false;
             }
