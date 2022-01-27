@@ -5,6 +5,7 @@ namespace App\View\Composers;
 use Illuminate\View\View;
 use Roots\Acorn\View\Composer;
 use Stripe\StripeClient;
+use Stripe\Exception\InvalidRequestException;
 use WeDevs\DokanPro\Modules\Stripe\Helper as StripeHelper;
 
 class DokanSubscriptionProductSubscriptionPluginNew extends Composer
@@ -12,6 +13,7 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
     protected $customer_id;
     protected $subscription_id;
     protected $has_subscription;
+    protected $card_last_digits;
 
     /**
      * List of views served by this composer.
@@ -32,6 +34,24 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
         $this->customer_id = get_user_meta($user_id, 'dokan_stripe_customer_id', true);
         $this->subscription_id = get_user_meta($user_id, '_stripe_subscription_id', true);
         $this->has_subscription = !empty($this->customer_id) && !empty($this->subscription_id);
+
+        // Get current card number
+        if ($this->has_subscription) {
+            $stripe = new StripeClient(StripeHelper::get_secret_key());
+
+            try {
+                $payment_methods = $stripe->paymentMethods->all([
+                    'customer' => $this->customer_id,
+                    'type' => 'card',
+                ]);
+
+                $this->card_last_digits = $payment_methods->data[0]->card->last4;
+            } catch (InvalidRequestException) {
+                $this->card_last_digits = null;
+                $this->has_subscription = false;
+            }
+        }
+
         parent::compose($view);
     }
 
@@ -55,18 +75,7 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
 
     protected function card_last_digits()
     {
-        if ($this->has_subscription) {
-            $stripe = new StripeClient(StripeHelper::get_secret_key());
-
-            $payment_methods = $stripe->paymentMethods->all([
-                'customer' => $this->customer_id,
-                'type' => 'card',
-            ]);
-
-            return $payment_methods->data[0]->card->last4;
-        }
-
-        return null;
+        return $this->card_last_digits ?? null;
     }
 
     protected function display_stripe_button()
