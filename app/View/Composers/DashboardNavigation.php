@@ -93,7 +93,7 @@ class DashboardNavigation extends Composer
             if ($endpoint === 'dashboard') {
                 $target_endpoint = 'my-account';
             }
-            
+
             $item = (object) [
                 'label' => esc_html($label),
                 'url' => esc_url(wc_get_account_endpoint_url($endpoint)),
@@ -121,9 +121,14 @@ class DashboardNavigation extends Composer
             'target' => ''
         ];
 
-        
+
         // Messages
-        $messages_endpoint = dokan_get_navigation_url('inbox');
+        if (dokan_is_seller_enabled(get_current_user_id())) {
+            $messages_endpoint = get_field('link_page_chat_vendor', 'option');
+        } else {
+            $messages_endpoint = get_field('link_page_chat_customer', 'option');
+        }
+
         $items[] = (object) [
             'label' => __('Messages', 'sage'),
             'url' => esc_url($messages_endpoint),
