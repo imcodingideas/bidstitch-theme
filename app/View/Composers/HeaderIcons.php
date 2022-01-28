@@ -22,7 +22,7 @@ class HeaderIcons extends Composer
     public function with()
     {
         return [
-            'inbox' => get_field('link_page_chat_vendor', 'option'),
+            'inbox' => $this->get_inbox_url(),
             'favorites' => $this->get_wishlist_url(),
             'notifications' => get_field(
                 'link_page_all_notification',
@@ -31,6 +31,15 @@ class HeaderIcons extends Composer
             'cart_url' => wc_get_cart_url(),
             'cart_count' => WC()->cart->cart_contents_count,
         ];
+    }
+
+    protected function get_inbox_url()
+    {
+        if (dokan_is_seller_enabled(get_current_user_id())) {
+            return get_field('link_page_chat_vendor', 'option');
+        } else {
+            return get_field('link_page_chat_customer', 'option');
+        }
     }
 
     public function get_wishlist_url() {
@@ -43,7 +52,7 @@ class HeaderIcons extends Composer
         // check if wishlist instance exists
         if (empty($wishlist_instance)) return '';
 
-        // wishlist url 
+        // wishlist url
         $wishlist_url = $wishlist_instance->get_wishlist_url();
 
         // check if wishlist url exists
