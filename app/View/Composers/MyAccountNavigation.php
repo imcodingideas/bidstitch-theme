@@ -41,8 +41,17 @@ class MyAccountNavigation extends Composer
         if ($navigation->isEmpty()) {
             return;
         }
-        
+
         $payload = $navigation->toArray();
+
+        // Remove vendor items if not a vendor
+        if (!dokan_is_user_seller(get_current_user_id())) {
+            foreach ($payload as $key => $menu_item) {
+                if ($menu_item->slug === 'my-store') {
+                    unset($payload[$key]);
+                }
+            }
+        }
 
         // Logout
         $payload[] = (object) [
