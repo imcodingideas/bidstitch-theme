@@ -28,8 +28,6 @@ class HeaderIcons extends Composer
                 'link_page_all_notification',
                 'option'
             ),
-            'cart_url' => wc_get_cart_url(),
-            'cart_count' => WC()->cart->cart_contents_count,
         ];
     }
 
@@ -43,7 +41,7 @@ class HeaderIcons extends Composer
         // check if wishlist instance exists
         if (empty($wishlist_instance)) return '';
 
-        // wishlist url 
+        // wishlist url
         $wishlist_url = $wishlist_instance->get_wishlist_url();
 
         // check if wishlist url exists

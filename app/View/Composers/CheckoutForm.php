@@ -21,9 +21,17 @@ class CheckoutForm extends Composer
     public function with()
     {
         return [
+            'user_can_register_account' => $this->user_can_register_account(),
             'user_can_checkout' => $this->user_can_checkout(),
             'has_checkout_fields' => $this->has_checkout_fields(),
         ];
+    }
+
+    protected function user_can_register_account()
+    {
+        $function_helper = new \WC_Gateway_PayPal_Express_Function_AngellEYE();
+
+        return $function_helper->ec_is_express_checkout() && !is_user_logged_in();
     }
 
     public function has_checkout_fields() {
