@@ -140,6 +140,13 @@ class DokanStripeSubscription {
     }
 
     function handle_stripe_coupons() {
+        // Figure out what kind of coupon to add to cart
+        if (!headers_sent() && isset($_GET['bsref']) && $_GET['bsref'] === 'ad') {
+            setcookie('bidstitch_coupon_type', 'ad');
+        }
+
+        $coupon_type = $_COOKIE['bidstitch_coupon_type'] ?? 'default';
+
         // enqueue scripts
         add_action('admin_enqueue_scripts', function() {
             wp_enqueue_script(
@@ -227,7 +234,7 @@ class DokanStripeSubscription {
         }, 21, 1);
 
         // automatically apply coupon if stripe subscription product is in cart
-        add_action('woocommerce_before_checkout_form', function() {
+        add_action('woocommerce_before_checkout_form', function() use ($coupon_type) {
             // get cart items and check if product is subscription
             foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
                 // get product id
@@ -242,24 +249,47 @@ class DokanStripeSubscription {
                 // check if product type is subscription
                 if ('product_pack' != $product->get_type()) break;
 
-                $auto_apply_coupons = get_posts([
-                    'post_type' => 'shop_coupon',
-                    'posts_per_page' => 1,
-                    'post_status' => 'publish',
-                    'meta_query' => [
-                        // check if auto apply is enabled
-                        [
-                            'key' => 'dokan_stripe_coupon_auto_apply_enable',
-                            'value' => 'yes'
-                        ],
-                        // check if coupon is attached to product
-                        [
-                            'key' => 'product_ids',
-                            'value' => (string) $product_id,
-                            'compare' => 'IN',
-                        ],
-                    ]
-                ]);
+                // check which free coupon we're adding
+                if ($coupon_type === 'default') {
+                    $auto_apply_coupons = get_posts([
+                        'post_type' => 'shop_coupon',
+                        'posts_per_page' => 1,
+                        'post_status' => 'publish',
+                        'meta_query' => [
+                            // check if auto apply is enabled
+                            [
+                                'key' => 'dokan_stripe_coupon_auto_apply_enable',
+                                'value' => 'yes'
+                            ],
+                            // check if coupon is attached to product
+                            [
+                                'key' => 'product_ids',
+                                'value' => (string) $product_id,
+                                'compare' => 'IN',
+                            ],
+                        ]
+                    ]);
+                } else {
+                    $auto_apply_coupons = get_posts([
+                        'title' => 'ad',
+                        'post_type' => 'shop_coupon',
+                        'posts_per_page' => 1,
+                        'post_status' => 'publish',
+                        'meta_query' => [
+                            // auto apply is not enabled so check for title/type
+                            [
+                                'key' => 'discount_type',
+                                'value' => 'dokan_subscripion_stripe_trial'
+                            ],
+                            // check if coupon is attached to product
+                            [
+                                'key' => 'product_ids',
+                                'value' => (string) $product_id,
+                                'compare' => 'IN',
+                            ],
+                        ]
+                    ]);
+                }
 
                 // check if auto apply coupons exist
                 if (empty($auto_apply_coupons)) break;
@@ -281,6 +311,9 @@ class DokanStripeSubscription {
 
                 // if coupon has not been applied, apply it
                 WC()->cart->apply_coupon($target_coupon_code);
+
+                // remove "ad" coupon cookie
+                setcookie('bidstitch_coupon_type', 'ad', 1);
             }
         }, 21);
 
