@@ -26,6 +26,9 @@ module.exports = {
     },
     extend: {
       colors: {},
+      fontFamily: {
+        'event': ['Montserrat', 'sans-serif']
+      },
     },
   },
   variants: {

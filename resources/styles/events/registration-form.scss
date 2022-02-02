@@ -1,0 +1,54 @@
+.event-registration-form {
+    .gform_wrapper {
+        .gform_validation_errors {
+            @apply mb-4;
+        }
+
+        .gfield_validation_message {
+            @apply text-sm text-red-600;
+        }
+
+        legend {
+            @apply border-0 mb-2 pb-0 capitalize;
+        }
+
+        label {
+            @apply block mb-2;
+        }
+
+        .gfield_required {
+            @apply ml-1 text-red-600;
+        }
+
+        .ginput_container {
+            &.has_first_name.has_last_name {
+                @apply sm:flex sm:justify-evenly sm:space-x-2;
+            }
+
+            .name_first,
+            .name_last {
+                @apply flex-grow;
+
+                label {
+                    @apply mt-1 text-gray-500 font-normal;
+                }
+            }
+        }
+
+        input {
+            @apply w-full px-4 py-3 border border-gray-200 focus:ring-2 focus:ring-black;
+
+            &.gform_button {
+                @apply w-auto border-0 cursor-pointer;
+            }
+        }
+
+        .gform_footer {
+            @apply flex items-center pt-8 space-x-4;
+
+            .gform_ajax_spinner {
+                width: 30px;
+            }
+        }
+    }
+}

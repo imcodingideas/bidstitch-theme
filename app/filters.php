@@ -12,6 +12,10 @@ namespace App;
  * @return string
  */
 add_filter('excerpt_more', function () {
+    if (get_post_type() === 'event') {
+        return sprintf('&hellip; <a target="_blank" href="%s">%s</a>', get_permalink(), __('more', 'sage'));
+    }
+
     return sprintf(' &hellip; <a href="%s">%s</a>', get_permalink(), __('Continued', 'sage'));
 });
 
@@ -36,7 +40,7 @@ add_filter('pre_get_posts', function($q) {
 
         $tax_query = $q->get('tax_query');
         if (!is_array($tax_query)) $tax_query = [];
-        
+
         $tax_query[] = [
             'taxonomy' => 'category',
             'field' => 'slug',
@@ -46,7 +50,7 @@ add_filter('pre_get_posts', function($q) {
 
         $q->set('tax_query', $tax_query);
     }
-    
+
     return $q;
 }, 11, 1);
 

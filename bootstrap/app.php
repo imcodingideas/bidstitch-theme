@@ -55,7 +55,8 @@ collect([
     'user-chat',
     'comments',
     'media-uploader',
-    'facebook-events'
+    'facebook-events',
+    'bidstitch-events',
 ])->each(function ($file) {
     if (!locate_template($file = "app/{$file}.php", true, true)) {
         wp_die(

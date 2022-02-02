@@ -17,7 +17,13 @@
           <li class="h-full">
             <a href="{{ $item->url }}" target="{{ $item->target }}"
               class="h-full flex items-center text-sm font-bold relative uppercase {{ $item->classes ?? '' }} {{ $item->active ? 'active' : '' }}">
-              {{ $item->label }}
+              @if ($item->slug === 'events')
+                <span class="bg-yellow-400 rounded-full -ml-3 py-1 px-3">
+                  {{ $item->label }}
+                </span>
+              @else
+                {{ $item->label }}
+              @endif
             </a>
           </li>
         @endif
