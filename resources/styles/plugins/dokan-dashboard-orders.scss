@@ -1,0 +1,23 @@
+.dokan-dashboard-wrap {
+    .dokan-orders-content {
+        .dokan-orders-area {
+            ul.order-statuses-filter {
+                @apply p-3 bg-gray-300;
+
+                li {
+                    @apply border-gray-600;
+
+                    a {
+                        @apply text-gray-500;
+                    }
+
+                    &.active {
+                        a {
+                            @apply text-gray-800;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
