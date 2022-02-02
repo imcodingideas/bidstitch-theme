@@ -132,3 +132,8 @@ add_filter('the_seo_framework_title_from_generation', function($title, $args) {
 
     return $title;
 }, 10, 2);
+
+// Add reminder to vendors' emails to set their orders to complete once shipped
+add_action('woocommerce_email_after_order_table', function($order) {
+    echo \Roots\view('partials.vendor-new-order-completion-reminder', ['completed' => $order->status === 'completed'])->render();
+});
