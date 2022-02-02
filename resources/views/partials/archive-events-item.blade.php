@@ -1,7 +1,11 @@
 <div class="bg-center bg-cover bg-no-repeat" @if ($event->bg_image) style="background-image:url({{ $event->bg_image }})" @endif>
     <div class="px-4 py-4 sm:px-6 @if ($event->bg_image) text-white bg-opacity-60 bg-black @endif">
       <div class="font-bold text-lg truncate flex justify-between">
-        <a target="_blank" href="{!! $event->link !!}">{!! $event->title !!}</a>
+        @if ($event->link)
+          <a target="_blank" href="{!! $event->link !!}">{!! $event->title !!}</a>
+        @else
+          {!! $event->title !!}
+        @endif
       </div>
       <div class="my-4 sm:my-2">
         <div class="event-description">
@@ -25,9 +29,9 @@
             {{ $event->location }}
           </p>
         </div>
-        @if ($event->allow_registration)
+        @if ($event->type === 'partnered')
           <a class="block mt-4 sm:mt-0 bg-yellow-400 text-black sm:text-sm text-center rounded-full py-2 px-3" target="_blank" href="{!! $event->link !!}">Register now</a>
-        @else
+        @elseif ($event->link)
           <a class="block mt-4 sm:mt-0 bg-black text-white sm:text-sm text-center py-1 px-4" target="_blank" href="{!! $event->link !!}">More Info</a>
         @endif
       </div>

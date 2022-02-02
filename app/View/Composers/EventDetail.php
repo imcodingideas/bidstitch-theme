@@ -26,6 +26,8 @@ class EventDetail extends Composer
     protected function get_event()
     {
         // Basic vars
+        $event_type = get_field('event_type');
+        $allow_registration = get_field('allow_registration');
         $title = get_the_title();
         $description = get_the_content();
         $location = get_field('location');
@@ -43,22 +45,28 @@ class EventDetail extends Composer
         }
 
         // Get relevant GF for this event & populate if possible
-        $form_id = get_field('registration_form');
+        if ($allow_registration) {
+            $form_id = get_field('registration_form');
 
-        if (is_user_logged_in()) {
-            $user = wp_get_current_user();
+            if (is_user_logged_in()) {
+                $user = wp_get_current_user();
 
-            $form_values = [
-                'first_name' =>  $user->user_firstname,
-                'last_name' => $user->user_lastname,
-                'email' => $user->user_email,
-                'phone' => $user->billing_phone,
-            ];
+                $form_values = [
+                    'first_name' =>  $user->user_firstname,
+                    'last_name' => $user->user_lastname,
+                    'email' => $user->user_email,
+                    'phone' => $user->billing_phone,
+                ];
+            } else {
+                $form_values = false;
+            }
+
+            $form = gravity_form($form_id, false, false, false, $form_values, true, 1, false);
+            $link = null;
         } else {
-            $form_values = false;
+            $form = null;
+            $link = get_field('event_link');
         }
-
-        $form = gravity_form($form_id, false, false, false, $form_values, true, 1, false);
 
         return [
             'title' => $title,
@@ -68,6 +76,7 @@ class EventDetail extends Composer
             'location' => $location,
             'bg_image' => $bg_image,
             'form' => $form,
+            'link' => $link,
         ];
     }
 }

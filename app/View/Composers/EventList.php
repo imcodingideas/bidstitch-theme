@@ -39,12 +39,12 @@ class EventList extends Composer
             the_post();
 
             // Basic vars
-            $allow_registration = get_field('allow_registration');
+            $event_type = get_field('event_type');
             $title = get_the_title();
-            $description = $allow_registration ? get_the_excerpt() : get_the_content();
+            $description = $event_type === 'partnered' ? get_the_excerpt() : get_the_content();
             $location = get_field('location');
-            $link = $allow_registration ? get_permalink() : get_field('event_link');
-            $bg_image = $allow_registration ? get_the_post_thumbnail_url(null, 'large') : false;
+            $link = $event_type === 'partnered' ? get_permalink() : get_field('event_link');
+            $bg_image = $event_type === 'partnered' ? get_the_post_thumbnail_url(null, 'large') : false;
 
             // Date / date info
             $date_type = get_field('date_type');
@@ -58,13 +58,13 @@ class EventList extends Composer
 
             // Collate into event object
             $all_events[] = (object)[
+                'type' => $event_type,
                 'title' => $title,
                 'description' => $description,
                 'date_type' => $date_type,
                 'date' => $date,
                 'date_ymd' => $date_ymd,
                 'location' => $location,
-                'allow_registration' => $allow_registration,
                 'link' => $link,
                 'bg_image' => $bg_image,
             ];
@@ -96,8 +96,7 @@ class EventList extends Composer
         ];
 
         foreach ($all_events as $event) {
-            $key = $event->allow_registration ? 'partnered' : 'external';
-            $events[$key][] = $event;
+            $events[$event->type][] = $event;
         }
 
         return $events;
