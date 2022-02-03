@@ -142,7 +142,8 @@ class DokanStripeSubscription {
     function handle_stripe_coupons() {
         // Figure out what kind of coupon to add to cart
         if (!headers_sent() && isset($_GET['bsref']) && $_GET['bsref'] === 'ad') {
-            setcookie('bidstitch_coupon_type', 'ad');
+            setcookie('bidstitch_coupon_type', 'ad', 0, '/');
+            $_COOKIE['bidstitch_coupon_type'] = 'ad';
         }
 
         $coupon_type = $_COOKIE['bidstitch_coupon_type'] ?? 'default';
