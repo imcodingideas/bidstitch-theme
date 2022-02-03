@@ -73,10 +73,28 @@ add_filter('dokan_get_dashboard_nav', function($items) {
             'icon' => '',
             'pos' => 80,
         ],
+        [
+            'title' => __('Update Credit Card', 'sage'),
+            'url' => dokan_get_navigation_url('payment'),
+            'icon' => '',
+            'pos' => 90,
+        ],
     ];
 
     return $items;
 }, 21, 1);
+
+// Add a separate page for updating CC details
+add_filter('dokan_query_var_filter', function($query_vars) {
+    $query_vars['payment'] = 'payment';
+    return $query_vars;
+});
+
+add_action('dokan_load_custom_template', function($query_vars) {
+    if (isset($query_vars['payment'])) {
+        echo \Roots\view('dokan.vendor-payment-settings')->render();
+    }
+});
 
 // Override the dokan form field styling for payment methods
 function bidstitch_withdraw_method_paypal($store_settings) {
