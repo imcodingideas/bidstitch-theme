@@ -38,7 +38,7 @@ if ( $user_orders ) {
 
     <?php if ($has_incomplete): ?>
         <div class="my-4 dokan-alert dokan-alert-warning">
-            <strong>REMEMBER:</strong> Set your order's status to "complete" once you have shipped the item.
+            <strong>REMEMBER:</strong> Once you have shipped your items click the tick next to the order to set its status to "complete".
         </div>
     <?php endif; ?>
 
