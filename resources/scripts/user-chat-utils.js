@@ -19,7 +19,7 @@ export const getCurrentSession = () => {
     const { talkSession } = window;
 
     if (!talkSession) return false;
-    
+
     return talkSession;
 }
 
@@ -51,7 +51,7 @@ export const setPopupConversion = (conversation) => {
     const session = window.talkSession;
 
     if (!session) return;
-    
+
     const popupList = session.getPopups();
 
     // if no popups exist, then create one
@@ -63,7 +63,7 @@ export const setPopupConversion = (conversation) => {
     }
 
     // if there are multiple popups, remove them
-    // only 1 popup is needed. 
+    // only 1 popup is needed.
     // switch conversation instead of creating new popups
     if (popupList.length > 1) {
         popupList.forEach((popup, index) => {
@@ -86,7 +86,7 @@ export const setInboxConversation = (conversation) => {
     const inboxList = session.getInboxes();
 
     // If no inbox exists, then create one
-    // only 1 inbox is needed. 
+    // only 1 inbox is needed.
     // switch conversation instead of creating new inboxes
     if (inboxList.length === 0) {
         const targetInbox = session.createInbox();
@@ -144,9 +144,29 @@ export const createInitialPopup = () => {
     if (!session) return;
 
     session.unreads.on('change', function(unreadConversation) {
+        updateUnreadCount(unreadConversation);
+
         // if conversation has been read, don't open poopup
         if (!unreadConversation.read) return;
 
         setPopupConversion(unreadConversation.conversation);
     });
+}
+
+// show unread message count
+export const updateUnreadCount = unreadConversation => {
+    const inboxCountWrapper = document.getElementById('header-inbox-count-wrapper');
+    const inboxCount = document.getElementById('header-inbox-count');
+    const unread = unreadConversation.length;
+
+    if (!inboxCountWrapper || !inboxCount) {
+        return;
+    }
+
+    if (unread == 0) {
+        inboxCountWrapper.classList.add('hidden');
+    } else {
+        inboxCount.innerText = unread;
+        inboxCountWrapper.classList.remove('hidden');
+    }
 }
