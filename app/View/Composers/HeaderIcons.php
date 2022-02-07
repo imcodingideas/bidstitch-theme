@@ -22,13 +22,22 @@ class HeaderIcons extends Composer
     public function with()
     {
         return [
-            'inbox' => get_field('link_page_chat_vendor', 'option'),
+            'inbox' => $this->get_inbox_url(),
             'favorites' => $this->get_wishlist_url(),
             'notifications' => get_field(
                 'link_page_all_notification',
                 'option'
             ),
         ];
+    }
+
+    protected function get_inbox_url()
+    {
+        if (dokan_is_seller_enabled(get_current_user_id())) {
+            return get_field('link_page_chat_vendor', 'option');
+        } else {
+            return get_field('link_page_chat_customer', 'option');
+        }
     }
 
     public function get_wishlist_url() {

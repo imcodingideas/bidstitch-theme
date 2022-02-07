@@ -34,6 +34,10 @@ class UserChat {
         add_action('dokan_load_custom_template', [$this, 'dokan_load_inbox_template'], 22);
         add_action('dokan_after_store_tabs', [$this, 'dokan_render_live_chat_button'], 22);
 
+        // customer inbox page
+        add_action('init', [$this, 'customer_add_endpoint']);
+        add_action('woocommerce_account_customer-inbox_endpoint', [$this, 'customer_load_inbox_template']);
+
         // flush rewrite rules with woocommerce
         add_action('woocommerce_flush_rewrite_rules', [$this, 'flush_rewrite_rules'], 22);
     }
@@ -50,6 +54,14 @@ class UserChat {
         }
 
         return $urls;
+    }
+
+    function customer_add_endpoint() {
+        add_rewrite_endpoint('customer-inbox', EP_ROOT | EP_PAGES);
+    }
+
+    function customer_load_inbox_template() {
+        echo \Roots\view('dokan.user-chat.inbox')->render();
     }
 
     function dokan_add_endpoint($query_var) {
@@ -86,7 +98,7 @@ class UserChat {
             ]
         ]);
     }
-    
+
     function create_session($request) {
         $current_user_id = get_current_user_id();
         $receiver_data = $this->get_receiver_data($current_user_id, false);
