@@ -29,7 +29,7 @@ if ( $user_orders ) {
 
     $has_incomplete = false;
     foreach ( $user_orders as $order ) {
-        if ($order->status !== 'completed') {
+        if ($order->get_status() !== 'completed') {
             $has_incomplete = true;
             break;
         }
@@ -38,7 +38,7 @@ if ( $user_orders ) {
 
     <?php if ($has_incomplete): ?>
         <div class="my-4 dokan-alert dokan-alert-warning">
-            <strong>REMEMBER:</strong> Once you have shipped your items click the tick next to the order to set its status to "complete".
+            <strong>REMEMBER:</strong> Once you have shipped your items click the tick next to the order to set its status to "completed".
         </div>
     <?php endif; ?>
 
