@@ -109,7 +109,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                                 $gallery = explode( ',', $product_images );
                                             }
                                         @endphp
-                                        
+
                                         <div class="grid gap-4">
                                             <x-form-group>
                                                 <label class="font-bold uppercase">
@@ -123,7 +123,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                                     required
                                                 />
                                             </x-form-group>
-    
+
                                             <x-form-group>
                                                 <label class="font-bold uppercase">
                                                     {{ _e('Listing Images', 'sage') }}
@@ -209,7 +209,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                             </div>
 
                             <?php // change ?>
-                            <div class="md:flex w-full md:space-x-6 bg-white p-4 mt-6">
+                            <div class="md:flex w-full md:space-x-6 space-y-6 md:space-y-0 bg-white p-4 mt-6">
                                 <div class="flex-1 flex-col space-y-6">
                                     <?php echo \Roots\view('dokan.product-fields.category-subcategory-size', [ 'post'=>null ])->render(); ?>
                                     <?php echo \Roots\view('dokan.product-fields.color', [ 'post'=>null ])->render(); ?>
