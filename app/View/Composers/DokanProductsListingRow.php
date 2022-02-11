@@ -22,6 +22,7 @@ class DokanProductsListingRow extends Composer
     {
         return [
             'product' => $this->product(),
+            'sold_url' => $this->sold_url(),
             'edit_url' => $this->edit_url(),
             'delete_url' => $this->delete_url(),
         ];
@@ -29,6 +30,16 @@ class DokanProductsListingRow extends Composer
 
     function is_auction() {
         return isset($this->data['is_auction']) ? $this->data['is_auction'] : false;
+    }
+
+    protected function sold_url()
+    {
+        global $post;
+
+        $is_auction = $this->is_auction();
+        $sold_base_url = dokan_get_navigation_url($is_auction ? 'auction' : 'products');
+
+        return wp_nonce_url(add_query_arg(['action' => 'mark-sold', 'product_id' => $post->ID], $sold_base_url), 'mark-sold');
     }
 
     public function edit_url() {
@@ -44,7 +55,7 @@ class DokanProductsListingRow extends Composer
 
         $delete_base_url = dokan_get_navigation_url($is_auction ? 'auction' : 'products');
         $delete_action = $is_auction ? 'dokan-delete-auction-product' : 'dokan-delete-product';
-        
+
         return wp_nonce_url(add_query_arg(['action' => $delete_action, 'product_id' => $post->ID], $delete_base_url), $delete_action);
     }
 
@@ -67,10 +78,10 @@ class DokanProductsListingRow extends Composer
 
     function offers_enabled() {
         global $post;
-        
+
         return get_post_meta($post->ID, 'offers_for_woocommerce_enabled', true);
     }
-    
+
     // from plugin: offers-for-woocommerce/public/class-offers-for-woocommerce.php
     // ofw_get_highest_current_offer_data
     function highest_offer() {

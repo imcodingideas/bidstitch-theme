@@ -37,6 +37,16 @@
         </tr>
       </thead>
 
+      @if ($show_info_message)
+        <div class="my-4 dokan-alert dokan-alert-info">
+          Mark your items as "Sold" here if they have been sold on another platform.
+        </div>
+      @elseif ($show_sold_message)
+        <div class="my-4 dokan-alert dokan-alert-success">
+          Item marked as sold!
+        </div>
+      @endif
+
       <tbody class="bg-white divide-y divide-gray-200">
         @if ($products->have_posts())
           @while ($products->have_posts())
