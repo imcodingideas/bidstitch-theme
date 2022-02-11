@@ -306,18 +306,10 @@ add_action('template_redirect', function() {
             exit;
         }
 
-        update_post_meta(
-            $product_id,
-            '_stock',
-            '0'
-        );
+        // Mark product as out of stock
+        wc_update_product_stock($product_id, 0);
 
-        update_post_meta(
-            $product_id,
-            '_stock_status',
-            'outofstock'
-        );
-
+        // Redirect back with success message
         $redirect = apply_filters( 'dokan_add_new_product_redirect', dokan_get_navigation_url( 'products' ), '' );
 
         wp_redirect( add_query_arg( array( 'message' => 'marked_as_sold' ), $redirect ) );
