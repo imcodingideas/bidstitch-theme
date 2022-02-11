@@ -8,7 +8,7 @@ use Stripe\StripeClient;
 use Stripe\Exception\InvalidRequestException;
 use WeDevs\DokanPro\Modules\Stripe\Helper as StripeHelper;
 
-class DokanSubscriptionProductSubscriptionPluginNew extends Composer
+class DokanVendorPaymentSettings extends Composer
 {
     protected $customer_id;
     protected $subscription_id;
@@ -20,7 +20,7 @@ class DokanSubscriptionProductSubscriptionPluginNew extends Composer
      *
      * @var array
      */
-    protected static $views = ['dokan.subscription.product_subscription_plugin_new'];
+    protected static $views = ['dokan.vendor-payment-settings'];
 
     /**
      * Compose the view before rendering.
