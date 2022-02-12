@@ -1,6 +1,11 @@
 import 'jquery';
-// note: bidstitch_settings registered in app/setup.php 
+// note: bidstitch_settings registered in app/setup.php
 export default function () {
+  // Prevent double-submits
+  $('[data-disable-submit]').submit(function(e) {
+    $(this).find('[type="submit"]').click(e => e.preventDefault());
+  });
+
   if (!document.getElementById('new-product-form'))
     return;
 
