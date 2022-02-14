@@ -45,6 +45,10 @@
     </td>
     <td
       class="whitespace-nowrap text-sm text-gray-500 text-right grid grid-cols-2 gap-x-2 sm:table-cell sm:px-6 sm:py-4">
+      @if (current_user_can($is_auction ? 'dokan_delete_auction_product' : 'dokan_delete_product'))
+        <a onClick="return confirm('{{ _e('Are you sure you want to mark as sold?', 'sage') }}');"
+          class="btn btn--white btn--sm bg-green-600 hover:bg-green-600 text-white justify-center" href="{!! $sold_url !!}">{{ _e('Sold', 'sage') }}</a>
+      @endif
       @if (current_user_can($is_auction ? 'dokan_edit_auction_product' : 'dokan_edit_product'))
         <a class="btn btn--black btn--sm justify-center" href="{{ $edit_url }}">{{ _e('Edit', 'sage') }}</a>
       @endif

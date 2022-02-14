@@ -32,7 +32,7 @@
     @endif
   </div>
   <div class="dokan-store-des text-center sm:text-left">
-    {{ $dokan_store_des }}
+    {!! $dokan_store_des !!}
   </div>
 
   @if ($countryname)

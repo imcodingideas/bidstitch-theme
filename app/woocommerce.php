@@ -275,3 +275,44 @@ add_action('woocommerce_add_error', function($message) {
 
     return $message;
 });
+
+// Allow vendors to mark items as sold if sold on another platform.
+// This piggybakcs on the "delete product" permission.
+add_action('template_redirect', function() {
+    if (dokan_is_seller_dashboard() && isset($_GET['action']) && $_GET['action'] === 'mark-sold') {
+        // This code block is lifted and modified from dokan-lite/includes/Dashboard/Templates/Products.php
+        if ( ! dokan_is_user_seller( dokan_get_current_user_id() ) ) {
+            return;
+        }
+
+        if ( ! current_user_can( 'dokan_delete_product' ) ) {
+            return;
+        }
+
+        if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'mark-sold' ) ) {
+            wp_redirect( add_query_arg( array( 'message' => 'error' ), dokan_get_navigation_url( 'products' ) ) );
+            exit;
+        }
+
+        $product_id = isset( $_GET['product_id'] ) ? (int) wp_unslash( $_GET['product_id'] ) : 0;
+
+        if ( ! $product_id ) {
+            wp_redirect( add_query_arg( array( 'message' => 'error' ), dokan_get_navigation_url( 'products' ) ) );
+            exit;
+        }
+
+        if ( ! dokan_is_product_author( $product_id ) ) {
+            wp_redirect( add_query_arg( array( 'message' => 'error' ), dokan_get_navigation_url( 'products' ) ) );
+            exit;
+        }
+
+        // Mark product as out of stock
+        wc_update_product_stock($product_id, 0);
+
+        // Redirect back with success message
+        $redirect = apply_filters( 'dokan_add_new_product_redirect', dokan_get_navigation_url( 'products' ), '' );
+
+        wp_redirect( add_query_arg( array( 'message' => 'marked_as_sold' ), $redirect ) );
+        exit;
+    }
+});

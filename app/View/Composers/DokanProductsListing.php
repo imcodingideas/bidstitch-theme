@@ -21,8 +21,12 @@ class DokanProductsListing extends Composer
     public function with()
     {
         $product_query = $this->product_query();
+        $show_sold_message = isset($_GET['message']) && $_GET['message'] === 'marked_as_sold';
+        $show_info_message = $product_query->have_posts() && !$show_sold_message;
 
         return [
+            'show_info_message' => $show_info_message,
+            'show_sold_message' => $show_sold_message,
             'products' => $product_query,
             'pagination' => $this->pagination($product_query),
             'is_auction' => $this->is_auction(),
@@ -88,7 +92,7 @@ class DokanProductsListing extends Composer
             $args['show_future_auctions'] = true;
 
             $args['tax_query'][] = [
-                'taxonomy' => 'product_type', 
+                'taxonomy' => 'product_type',
                 'field' => 'slug',
                 'terms' => 'auction'
             ];
