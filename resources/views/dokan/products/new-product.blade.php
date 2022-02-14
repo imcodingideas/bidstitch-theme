@@ -95,7 +95,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                     }
                     if ( dokan_is_seller_enabled( get_current_user_id() ) ) { ?>
 
-                        <form class="dokan-form-container" method="post">
+                        <form data-disable-submit class="dokan-form-container" method="post">
 
                             <div class="product-edit-container dokan-clearfix">
                                 <div class="content-half-part featured-image">
