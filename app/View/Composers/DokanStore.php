@@ -30,7 +30,7 @@ class DokanStore extends Composer
         $products_by_store_user = $store_user->get_products();
         $post_counts = dokan_count_posts('product', get_query_var('author'));
         $count_product = $post_counts->publish;
-        $store_total_sales = $this->get_sold_items_count();
+        $store_total_sales = $this->get_sold_items_count($store_user->get_id());
 
         $catalog_orderby_options = apply_filters(
             'woocommerce_catalog_orderby',
@@ -78,10 +78,10 @@ class DokanStore extends Composer
         );
     }
 
-    protected function get_sold_items_count()
+    protected function get_sold_items_count($vendor_id)
     {
         $sold_products = wc_get_products([
-            'author' => get_current_user_id(),
+            'author' => $vendor_id,
             'stock_status' => 'outofstock',
             // don't pull any actual data, just count
             'paginate' => true,
