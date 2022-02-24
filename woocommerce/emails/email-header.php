@@ -35,13 +35,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
 				<tr>
 					<td align="center" valign="top">
-						<div id="template_header_image">
+						<!-- <div id="template_header_image">
 							<?php
 							if ( $img = get_option( 'woocommerce_email_header_image' ) ) {
 								echo '<p style="margin-top:0;"><img src="' . esc_url( $img ) . '" alt="' . get_bloginfo( 'name', 'display' ) . '" /></p>';
 							}
 							?>
-						</div>
+						</div> -->
 						<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_container">
 							<tr>
 								<td align="center" valign="top">
@@ -56,10 +56,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 											<td id='header_nav'>
 												<table>
 													<tr>
-														<td>Tops</td>
-														<td>Bottoms</td>
-														<td>Outerwear</td>
-														<td>Footwear</td>
+														<td><a href='https://bidstitch.com/category/tops/' style="text-decoration: none; font-weight: 600">Tops</a></td>
+														<td><a href='https://bidstitch.com/category/bottoms/' style="text-decoration: none; font-weight: 600">Bottoms</a></td>
+														<td><a href='https://bidstitch.com/category/outerwear/' style="text-decoration: none; font-weight: 600">Outerwear</a></td>
+														<td><a href='https://bidstitch.com/category/footwear/' style="text-decoration: none; font-weight: 600">Footwear</a></td>
 													</tr>
 												</table>
 											</td>

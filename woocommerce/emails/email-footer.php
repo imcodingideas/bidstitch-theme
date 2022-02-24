@@ -51,20 +51,20 @@ defined( 'ABSPATH' ) || exit;
 										<tr style='text-align: center'>
 											<table id='social_icons'>
 												<tr>
-													<td><i class="fa fa-twitter"></i></td>
-													<td><i class="fa fa-facebook"></i></td>
-													<td><i class="fa fa-instagram"></i></td>
+													<td><a href="https://www.instagram.com/bidstitch/"><i class="fa fa-twitter"></i></a></td>
+													<!-- <td><a href="https://bidstitch.com/#"><i class="fa fa-facebook"></i></a></td> -->
+													<td><a href="https://twitter.com/bidstitch"><i class="fa fa-instagram"></i></a></td>
 												</tr>
 											</table>
 										</tr>
-										<tr id='unsubscribe'>
+										<!--<tr id='unsubscribe'>
 											<td>
 												<p>No longer want to receive these emails? <a href='#'>Unsubscribe</a>.</p>
 												<p>
 													BIDSTITCH
 												</p>
 											</td>
-										</tr>
+										</tr>-->
 									</table>
 								</td>
 							</tr>
