@@ -1,6 +1,6 @@
 <div x-data="{ modalOpen: false }">
     <div class="bg-center bg-cover bg-no-repeat" @if ($bg_image) style="background-image:url({{ $bg_image }})" @endif>
-        <div class="h-screen flex justify-center items-center" style="background:radial-gradient(circle, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.35) 100%)">
+        <div class="min-h-screen flex justify-center items-center" style="background:radial-gradient(circle, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.35) 100%)">
             <div class="w-full sm:max-w-xl p-4 sm:p-0 font-event tracking-wide text-white text-center">
                 <div class="flex justify-evenly items-center space-x-4">
                     <hr class="border-white flex-grow">
