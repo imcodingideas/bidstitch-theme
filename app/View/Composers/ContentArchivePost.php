@@ -53,7 +53,7 @@ class ContentArchivePost extends Composer
         // show first category
         $categories = get_the_category();
         if (empty($categories)) return false;
-        
+
         return $categories[0]->name;
     }
 
@@ -75,7 +75,17 @@ class ContentArchivePost extends Composer
     }
 
     public function get_archive_thumbnail() {
-        if (!has_post_thumbnail()) return false;
+        if (!has_post_thumbnail()) {
+            $content = get_the_content();
+            $yt_embed = preg_match('/(\/embed\/|youtub\.be\/|\/watch\?v=)([\w-]{11})/', $content, $matches);
+
+            if (!$yt_embed || empty($matches[2])) {
+                return false;
+            }
+
+            $src = "https://i3.ytimg.com/vi/{$matches[2]}/hqdefault.jpg";
+            return '<img width="600" height="400" src="'.$src.'">';
+        }
 
         $size = $this->get_featured_status() ? 'large' : 'medium';
 

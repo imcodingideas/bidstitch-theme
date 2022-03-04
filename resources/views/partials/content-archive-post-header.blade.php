@@ -3,7 +3,7 @@
     <div class="flex">
       <span
         class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold bg-gray-100 text-gray-800 md:text-sm">
-        {{ $category }}
+        {!! $category !!}
       </span>
     </div>
   @endif
