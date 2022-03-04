@@ -36,10 +36,14 @@ class ArchiveSidebar extends Composer
     }
 
     public function get_parent_categories() {
+        // Exclude "Dealer Spotlight"
+        $dealer_spotlight = get_term_by('slug', 'dealer-spotlight', 'category');
+
         $query_args = [
             'taxonomy' => 'category',
             'hide_empty' => false,
-            'parent' => 0
+            'exclude' => $dealer_spotlight->term_id,
+            'parent' => 0,
         ];
 
         $term_list = get_terms($query_args);
@@ -55,7 +59,6 @@ class ArchiveSidebar extends Composer
                 'link' => get_permalink(get_option('page_for_posts')),
                 'active' => is_home(),
             ];
-    
         }
 
         $active_term_id = $this->get_active_term_id();
