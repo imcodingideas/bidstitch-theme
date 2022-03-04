@@ -41,7 +41,7 @@ class ArchiveSidebar extends Composer
 
         $query_args = [
             'taxonomy' => 'category',
-            'hide_empty' => false,
+            'hide_empty' => true,
             'exclude' => $dealer_spotlight->term_id,
             'parent' => 0,
         ];

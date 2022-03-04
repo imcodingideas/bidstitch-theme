@@ -15,7 +15,7 @@
         @foreach ($categories as $category)
           <a href="{{ esc_url($category->link) }}"
             class="flex justify-between space-x-2 transition-colors p-4 text-sm uppercase hover:bg-gray-50 {{ $category->active ? 'bg-gray-50' : '' }}">
-            <h3 class="text-sm uppercase">{{ $category->name }}</h3>
+            <h3 class="text-sm uppercase">{!! $category->name !!}</h3>
             <img class="w-2" src="@asset('images/chevron-right-solid.svg')" alt="chevron-right" />
           </a>
         @endforeach
