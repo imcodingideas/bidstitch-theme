@@ -9,10 +9,10 @@
     @apply max-w-screen-xl mx-auto px-4;
 
     .dokan-store-products-ordeby {
-      @apply text-center sm:text-left space-y-2 sm:space-y-0;
+      @apply text-center sm:text-left -space-x-1 sm:space-x-0 space-y-2 sm:space-y-0;
 
       .product-name-search {
-        @apply float-none sm:float-left;
+        @apply float-none sm:float-left w-48 sm:w-60;
       }
 
       .search-store-products {
