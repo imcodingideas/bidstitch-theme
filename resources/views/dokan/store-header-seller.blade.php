@@ -1,5 +1,5 @@
 <div class="row header-seller">
-  <p>{{ $count_product }} {{ _e('Listings', 'sage') }} | {{ $store_total_sales }} {{ _e($store_total_sales == 1 ? 'Sale' : 'Sales', 'sage') }}</p>
+  <p class="text-center sm:text-left">{{ $count_product }} {{ _e('Listings', 'sage') }} | {{ $store_total_sales }} {{ _e($store_total_sales == 1 ? 'Sale' : 'Sales', 'sage') }}</p>
   {{-- <form class="dokan-ordering-product ajaxfilterform" method="get">
     <select name="orderby" class="orderby" aria-label="{{ _e('Shop order', 'woocommerce') }}">
       @foreach ($catalog_orderby_options as $id => $name)

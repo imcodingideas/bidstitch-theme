@@ -6,7 +6,23 @@
   .header-seller,
   .seller-items,
   .dokan-store-products-filter-area {
-    @apply max-w-screen-xl mx-auto;
+    @apply max-w-screen-xl mx-auto px-4;
+
+    .dokan-store-products-ordeby {
+      @apply text-center sm:text-left space-y-2 sm:space-y-0;
+
+      .product-name-search {
+        @apply float-none sm:float-left;
+      }
+
+      .search-store-products {
+        @apply float-none sm:float-left;
+      }
+
+      .orderby-search {
+        @apply float-none sm:float-right;
+      }
+    }
   }
 }
 
@@ -246,7 +262,7 @@ li.dokan-share-btn-wrap .dokan-share-btn {
   margin:0;
 }
 .dokan-single-store .dokan-store-tabs ul li.dokan-store-follow-store-button-container {
-  margin:0; 
+  margin:0;
 }
 @media (max-width: 850px) {
   .dokan-store-custom-field {
