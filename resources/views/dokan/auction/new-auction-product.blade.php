@@ -95,7 +95,7 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
 
                                 <?php // change ?>
                                 <div class="mt-6">
-                                    <?php echo \Roots\view('dokan.product-fields.excerpt', [ 'post'=>null ])->render(); ?>
+                                    <?php echo \Roots\view('dokan.product-fields.description', ['post'=>null])->render(); ?>
                                 </div>
 
                                 <?php // change ?>
@@ -131,16 +131,11 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                 <?php echo \Roots\view('dokan.product-fields.color', [ 'post'=>null ])->render(); ?>
                             </div>
                             <div class="flex-1 flex-col space-y-6">
-                                <?php echo \Roots\view('dokan.product-fields.pit-to-pit', [ 'post'=>null ])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.tag-type', [ 'post'=>null ])->render(); ?>
+                                <?php echo \Roots\view('dokan.product-fields.pit-to-pit', [ 'post'=>null ])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.length', [ 'post'=>null ])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.stitching', [ 'post'=>null ])->render(); ?>
                             </div>
-                        </div>
-
-                        <?php // change ?>
-                        <div class="mt-6">
-                            <?php echo \Roots\view('dokan.product-fields.description', ['post'=>null])->render(); ?>
                         </div>
 
                         <?php // change ?>

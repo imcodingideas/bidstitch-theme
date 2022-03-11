@@ -173,7 +173,7 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
 
                                         <?php // change ?>
                                         <div class="mt-6">
-                                            <?php echo \Roots\view('dokan.product-fields.excerpt', [ 'post' => $post ])->render(); ?>
+                                            <?php echo \Roots\view('dokan.product-fields.description', ['post'=>null])->render(); ?>
                                         </div>
 
                                         <?php // change ?>
@@ -345,16 +345,11 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                     <?php echo \Roots\view('dokan.product-fields.color', [ 'post'=>$post ])->render(); ?>
                                 </div>
                                 <div class="flex-1 flex-col space-y-6">
-                                    <?php echo \Roots\view('dokan.product-fields.pit-to-pit', [ 'post'=>$post ])->render(); ?>
                                     <?php echo \Roots\view('dokan.product-fields.tag-type', [ 'post'=>$post ])->render(); ?>
+                                    <?php echo \Roots\view('dokan.product-fields.pit-to-pit', [ 'post'=>$post ])->render(); ?>
                                     <?php echo \Roots\view('dokan.product-fields.length', [ 'post'=>$post ])->render(); ?>
                                     <?php echo \Roots\view('dokan.product-fields.stitching', [ 'post'=>$post ])->render(); ?>
                                 </div>
-                            </div>
-
-                            <?php // change ?>
-                            <div class="mt-6">
-                                <?php echo \Roots\view('dokan.product-fields.description', ['post'=>$post])->render(); ?>
                             </div>
 
                             <?php // change: hide ?>
