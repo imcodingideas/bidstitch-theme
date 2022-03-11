@@ -28,7 +28,7 @@ class SingleProductShortDescription extends Composer
     public function get_short_description() {
         global $post;
 
-        $short_description = apply_filters('woocommerce_short_description', $post->post_excerpt);
+        $short_description = apply_filters('woocommerce_short_description', $post->post_excerpt ? $post->post_excerpt : $post->post_content);
         if (empty($short_description) || !$short_description) return false;
 
         return $short_description;
