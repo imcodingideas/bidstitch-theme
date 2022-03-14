@@ -4,7 +4,7 @@
       <p>{{ _e('Item Details', 'sage') }}</p>
     </div>
     <div class="single-product-accordion__tab-content hidden prose py-3">
-      {!! $content !!}
+      {!! wp_kses_post($content) !!}
     </div>
   </div>
 @endif

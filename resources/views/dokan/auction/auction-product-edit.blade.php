@@ -110,12 +110,12 @@ $visibility_options = dokan_get_product_visibility_options();
                                         $feat_image_id = get_post_thumbnail_id($post_id);
                                         $featured_image_urls = [];
 
-                                        if (!empty($feat_image_id)) $featured_image_urls[] = $feat_image_id;   
+                                        if (!empty($feat_image_id)) $featured_image_urls[] = $feat_image_id;
 
                                         $product_images = get_post_meta($post_id, '_product_image_gallery', true);
                                         $gallery = (!empty($product_images)) ? explode(',', $product_images) : [];
                                     @endphp
-                                    
+
                                     <div class="grid gap-4">
                                         <x-form-group>
                                             <label class="font-bold uppercase">
@@ -154,7 +154,11 @@ $visibility_options = dokan_get_product_visibility_options();
 
                                 <?php // change ?>
                                 <div class="mt-6">
-                                    <?php echo \Roots\view('dokan.product-fields.excerpt', ['post' => $post])->render(); ?>
+                                    <?php if (empty($post->post_excerpt)): ?>
+                                        <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                                    <?php else: ?>
+                                        <?php echo \Roots\view('dokan.product-fields.excerpt', ['post' => $post])->render(); ?>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="dokan-form-group dokan-auction-tags hidden">
@@ -193,17 +197,18 @@ $visibility_options = dokan_get_product_visibility_options();
                                 <?php echo \Roots\view('dokan.product-fields.color', ['post' => $post])->render(); ?>
                             </div>
                             <div class="flex-1 flex-col space-y-6">
-                                <?php echo \Roots\view('dokan.product-fields.pit-to-pit', ['post' => $post])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.tag-type', ['post' => $post])->render(); ?>
+                                <?php echo \Roots\view('dokan.product-fields.pit-to-pit', ['post' => $post])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.length', ['post' => $post])->render(); ?>
                                 <?php echo \Roots\view('dokan.product-fields.stitching', ['post' => $post])->render(); ?>
                             </div>
                         </div>
 
-                        <?php // change ?>
-                        <div class="mt-6">
-                            <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
-                        </div>
+                        <?php if (!empty($post->post_excerpt)): ?>
+                            <div class="mt-6">
+                                <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="product-edit-new-container">
                             <div class="dokan-edit-row dokan-auction-general-sections dokan-clearfix">
