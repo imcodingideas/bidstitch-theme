@@ -173,7 +173,11 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
 
                                         <?php // change ?>
                                         <div class="mt-6">
-                                            <?php echo \Roots\view('dokan.product-fields.description', ['post'=>null])->render(); ?>
+                                            <?php if (empty($post->post_excerpt)): ?>
+                                                <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                                            <?php else: ?>
+                                                <?php echo \Roots\view('dokan.product-fields.excerpt', ['post' => $post])->render(); ?>
+                                            <?php endif; ?>
                                         </div>
 
                                         <?php // change ?>
@@ -351,6 +355,12 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                     <?php echo \Roots\view('dokan.product-fields.stitching', [ 'post'=>$post ])->render(); ?>
                                 </div>
                             </div>
+
+                            <?php if (!empty($post->post_excerpt)): ?>
+                                <div class="mt-6">
+                                    <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                                </div>
+                            <?php endif; ?>
 
                             <?php // change: hide ?>
                             <div class="hidden">

@@ -154,7 +154,11 @@ $visibility_options = dokan_get_product_visibility_options();
 
                                 <?php // change ?>
                                 <div class="mt-6">
-                                    <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                                    <?php if (empty($post->post_excerpt)): ?>
+                                        <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                                    <?php else: ?>
+                                        <?php echo \Roots\view('dokan.product-fields.excerpt', ['post' => $post])->render(); ?>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="dokan-form-group dokan-auction-tags hidden">
@@ -199,6 +203,12 @@ $visibility_options = dokan_get_product_visibility_options();
                                 <?php echo \Roots\view('dokan.product-fields.stitching', ['post' => $post])->render(); ?>
                             </div>
                         </div>
+
+                        <?php if (!empty($post->post_excerpt)): ?>
+                            <div class="mt-6">
+                                <?php echo \Roots\view('dokan.product-fields.description', ['post' => $post])->render(); ?>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="product-edit-new-container">
                             <div class="dokan-edit-row dokan-auction-general-sections dokan-clearfix">
