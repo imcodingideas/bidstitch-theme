@@ -2,7 +2,7 @@
   <h1 class="header-logo text-5xl text-black leading-none tracking-wider">BIDSTITCH</h1>
 
   <div class="text-center">
-    <h2 class="text-lg font-bold text-gray-900">Thank You!</h2>
+    <h2 class="text-lg font-bold text-gray-900">You're in</h2>
     <p>Please show this page on entry</p>
   </div>
 
