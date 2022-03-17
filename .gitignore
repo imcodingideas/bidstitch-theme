@@ -2,6 +2,7 @@
 /vendor
 /public
 npm-debug.log
+yarn.lock
 yarn-error.log
 .DS_Store
 .vscode
