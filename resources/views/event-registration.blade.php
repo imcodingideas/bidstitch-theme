@@ -1,4 +1,7 @@
 <main id="main" class="main container py-8">
+  <div class="mb-6">
+    @include('woocommerce.notices')
+  </div>
   <h2 class="mb-4 text-center text-xl font-bold text-gray-900">Sign Up</h2>
   <form method="post" class="space-y-4 lg:space-y-6 register">
     <x-form-group>
