@@ -4,7 +4,7 @@ namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
 
-class EventDetail extends Composer
+class EventRegistration extends Composer
 {
     /**
      * List of views served by this composer.
