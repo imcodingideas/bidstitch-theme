@@ -6,8 +6,6 @@
 
 namespace App;
 
-use Roots\Acorn\Sage\ViewFinder;
-
 
 // Populate "Registration Form" select on events with GFs
 add_filter('acf/load_field/name=registration_form', function($field) {
@@ -74,14 +72,11 @@ add_filter('the_seo_framework_generated_archive_title', function($title) {
 
 // Create a separate simple signup page for eventgoers
 add_action('init', function() {
-    add_rewrite_endpoint('event-registration', EP_ROOT | EP_PAGE);
     add_rewrite_endpoint('event-registration-complete', EP_ROOT | EP_PAGE);
 });
 
 add_filter('request', function($query_vars) {
-    if (isset($query_vars['event-registration'])) {
-        $query_vars['event-registration'] = true;
-    } elseif (isset($query_vars['event-registration-complete'])) {
+    if (isset($query_vars['event-registration-complete'])) {
         $query_vars['event-registration-complete'] = true;
     }
 
@@ -89,20 +84,15 @@ add_filter('request', function($query_vars) {
 });
 
 add_action('template_redirect', function($template) {
-    if (get_query_var('event-registration') && is_user_logged_in()) {
-        wp_redirect(home_url('/event-registration-complete'));
-        exit();
-    } elseif (get_query_var('event-registration-complete') && !is_user_logged_in()) {
-        wp_redirect(home_url('/event-registration'));
+    if (get_query_var('event-registration-complete') && !isset($_GET['email'])) {
+        wp_redirect(home_url('/events'));
         exit();
     }
 });
 
 add_action('template_include', function($template) {
-    if (get_query_var('event-registration')) {
-        return locate_template('events/event-registration.php');
-    } elseif (get_query_var('event-registration-complete')) {
-        return locate_template('events/event-registration-complete.php');
+    if (get_query_var('event-registration-complete')) {
+        return locate_template('events/registration-complete.php');
     }
 
     return $template;

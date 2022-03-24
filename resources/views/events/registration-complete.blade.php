@@ -15,5 +15,5 @@
   </svg>
   <svg class="inline-block w-32 h-32 fill-current text-green-500"><use href="#icon-grin"></use></svg>
 
-  <p class="bg-gray-200 rounded-full py-1 px-3 text-xs text-gray-500">{{ $user->user_email }}</p>
+  <p class="bg-gray-200 rounded-full py-1 px-3 text-xs text-gray-500">{{ $email }}</p>
 </main>
