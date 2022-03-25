@@ -31,7 +31,7 @@
                 {!! $form !!}
             </div>
 
-            <p class="text-center text-xs text-gray-300">Your details will be used for contact tracing in accordance with local health guidelines &amp; will not be shared with any third parties.</p>
+            <p class="text-center text-xs text-gray-200">Your details will be used for contact tracing in accordance with local health guidelines &amp; will not be shared with any third parties.</p>
         </div>
     </div>
 </div>
