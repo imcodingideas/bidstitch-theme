@@ -3,14 +3,14 @@
         <div class="w-full space-y-6">
             @if ($main_logo)
                 <div class="flex justify-center">
-                    <img class="w-auto max-h-10 sm:max-h-16" src="{{ $main_logo }}">
+                    <img class="w-auto max-h-32" src="{{ $main_logo }}">
                 </div>
             @endif
 
             @if ($other_logos)
-                <div class="w-full flex justify-between items-center">
+                <div class="w-full flex justify-between sm:justify-around items-center">
                     @foreach ($other_logos as $logo)
-                        <img class="w-auto max-h-24 sm:max-h-32" src="{{ $logo }}">
+                        <img style="max-width: @if ($loop->first || $loop->last) 5rem @else 8rem @endif" class="h-auto" src="{{ $logo }}">
                     @endforeach
                 </div>
             @endif
