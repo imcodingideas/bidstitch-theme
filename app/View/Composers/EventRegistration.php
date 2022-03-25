@@ -21,6 +21,7 @@ class EventRegistration extends Composer
     public function with()
     {
         return [
+            'bg_image' => get_the_post_thumbnail_url(),
             'title' => get_the_title(),
             'content' => get_the_content(),
             'main_logo' => get_field('main_logo'),
