@@ -30,7 +30,13 @@
           </p>
         </div>
         @if ($event->type === 'partnered')
-          <a class="block mt-4 sm:mt-0 bg-yellow-400 text-black sm:text-sm text-center rounded-full py-2 px-3" target="_blank" href="{!! $event->link !!}">Register now</a>
+          <a class="block mt-4 sm:mt-0 bg-yellow-400 text-black sm:text-sm text-center rounded-full py-2 px-3" target="_blank" href="{!! $event->link !!}">
+            @if ($event->has_external_link || $event->has_form)
+              Register now
+            @else
+              More Info
+            @endif
+          </a>
         @elseif ($event->link)
           <a class="block mt-4 sm:mt-0 bg-black text-white sm:text-sm text-center py-1 px-4" target="_blank" href="{!! $event->link !!}">More Info</a>
         @endif
