@@ -5,7 +5,7 @@
         }
 
         .gfield_validation_message {
-            @apply text-sm text-red-600;
+            @apply inline-block px-2 py-1 bg-red-100 bg-opacity-80 text-xs text-red-600;
         }
 
         legend {
@@ -30,7 +30,7 @@
                 @apply flex-grow;
 
                 label {
-                    @apply mt-1 text-gray-500 font-normal;
+                    @apply mt-1 font-normal opacity-80;
                 }
             }
         }
@@ -44,7 +44,7 @@
         }
 
         .gform_footer {
-            @apply flex items-center pt-8 space-x-4;
+            @apply flex justify-center items-center pt-8 space-x-4;
 
             .gform_ajax_spinner {
                 width: 30px;
