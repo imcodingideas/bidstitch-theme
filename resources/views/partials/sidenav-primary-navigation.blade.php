@@ -32,6 +32,10 @@
               <span class="bg-yellow-400 rounded-full -ml-3 py-1 px-3">
                 {{ $item->label }}
               </span>
+            @elseif ($item->label === 'Merch')
+              <span class="bg-gray-200 rounded-full -ml-3 py-1 px-3">
+                {{ $item->label }}
+              </span>
             @else
               {{ $item->label }}
             @endif

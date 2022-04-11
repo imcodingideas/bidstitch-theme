@@ -153,6 +153,13 @@ function saveproductdata($product_id, $postdata)
             'product_cat'
         );
     }
+
+    // Allow admins to save as merch
+    if (get_current_user_id() == 1 && isset($postdata['add_to_merch']) && $postdata['add_to_merch'] === 'yes') {
+        wp_set_object_terms($product_id, 'merch', 'product_cat', true);
+    } else {
+        wp_remove_object_terms($product_id, 'merch', 'product_cat');
+    }
 }
 
 // Set default stock for new buy it now listings

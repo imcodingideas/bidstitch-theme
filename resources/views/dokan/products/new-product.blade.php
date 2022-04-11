@@ -208,6 +208,13 @@ use WeDevs\Dokan\Walkers\TaxonomyDropdown;
                                 </div>
                             </div>
 
+                            @if (get_current_user_id() == 1)
+                              <div>
+                                <input id="add-to-merch" type="checkbox" name="add_to_merch" value="yes">
+                                <label for="add-to-merch">Add as merch</label>
+                              </div>
+                            @endif
+
                             <?php // change ?>
                             <div class="md:flex w-full md:space-x-6 space-y-6 md:space-y-0 bg-white p-4 mt-6">
                                 <div class="flex-1 flex-col space-y-6">
