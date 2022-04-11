@@ -59,6 +59,15 @@ $product_type     = ( ! empty( $terms ) ) ? sanitize_title( current( $terms )->n
 $variations_class = ($product_type == 'simple' ) ? 'dokan-hide' : '';
 $_visibility      = ( version_compare( WC_VERSION, '2.7', '>' ) ) ? $product->get_catalog_visibility() : get_post_meta( $post_id, '_visibility', true );
 
+$is_merch = false;
+$product_cats = wp_get_object_terms( $post_id, 'product_cat' );
+foreach ($product_cats as $product_cat) {
+  if ($product_cat->slug === 'merch') {
+    $is_merch = true;
+    break;
+  }
+}
+
 if ( ! $from_shortcode ) {
     get_header();
 }
@@ -341,6 +350,13 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                     </div>
                                 </div><!-- .content-half-part -->
                             </div><!-- .dokan-form-top-area -->
+
+                            @if (get_current_user_id() == 1)
+                              <div>
+                                <input id="add-to-merch" type="checkbox" name="add_to_merch" value="yes" @php if ($is_merch) echo 'checked' @endphp>
+                                <label for="add-to-merch">Add as merch</label>
+                              </div>
+                            @endif
 
                             <?php // change ?>
                             <div class="md:flex w-full md:space-x-6 space-y-6 md:space-y-0 bg-white p-4 mt-6">
