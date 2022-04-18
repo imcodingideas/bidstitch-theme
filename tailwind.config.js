@@ -20,15 +20,29 @@ module.exports = {
         DEFAULT: '2rem',
       },
       screens: {
-        ...defaultTheme.screens,
-        '2xl': false,
-      }
+        sm: '600px',
+        md: '728px',
+        lg: '984px',
+        xl: '1337px',
+        '2xl': '1337px',
+      },
     },
     extend: {
-      colors: {},
+      colors: {
+        'newgray': '#686868',
+      },
       fontFamily: {
         'event': ['Montserrat', 'sans-serif']
       },
+    },
+    fontWeight: {
+      hairline: 100,
+      thin: 200,
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
     },
   },
   variants: {

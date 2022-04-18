@@ -1,11 +1,12 @@
 <div x-data="elasticpressSearchWidget()" class="w-full h-full">
 
   <form @submit="handleSubmit" role="search" class="relative w-full h-full grid" method="get" action="{{ esc_url(home_url('/')) }}" @click.away="hide=true">
-    <div class="relative w-full h-full flex items-center lg:border">
+    <div class="relative w-full h-full flex items-center rounded-lg border border-black">
+      <input @click="hide=false" x-model="search" @input.debounce.400ms="inputChanged" autocomplete="off" class="w-full w-48 p-0 border-0 ml-2 focus:ring-0 lg:p-2" name="s" class="" type="search" placeholder="Search" />
       <label class="flex pr-4 items-center justify-center h-full lg:p-2" for="elasticpress-search-widget__label">
         <img aria-hidden="true" focusable="false" class="flex opacity-60 w-5" src="@asset('images/search.svg')" alt="search"/>
       </label>
-      <input @click="hide=false" x-model="search" @input.debounce.400ms="inputChanged" autocomplete="off" class="w-full p-0 border-0 focus:ring-0 lg:p-2 lg:pl-0" name="s" class="" type="search" placeholder="Search for items or sellers" />
+      
     </div>
     <div class="absolute left-0 top-full w-full z-10 bg-white border mt-px lg:mt-0 lg:border-t-0 overflow-hidden" x-show="!hide" x-cloak>
         {{-- Navigation --}}

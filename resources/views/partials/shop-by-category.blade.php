@@ -1,28 +1,26 @@
 <section id="shop_by_category">
-  <div class="container py-8 lg:py-16">
-    <div class="grid space-y-8">
+  <div class="container py-8">
+    <div class="grid space-y-4">
       <div class="flex space-x-4 justify-between items-center">
-        <h3 class="text-xl md:text-3xl font-bold uppercase">{{ _e('Shop by Category', 'sage') }}</h3>
+        <h2 class="">{{ _e('Shop by Category', 'sage') }}</h2>
         <a class="hidden md:flex"
           href="{{ esc_url(wc_get_page_permalink('shop')) }}">{{ _e('Browse all categories', 'sage') }}</a>
       </div>
-      <div class="grid grid-cols-2 gap-x-3 gap-y-3 md:gap-y-6 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-6">
+      <div class="flex space-x-4">
         @if ($categories)
           @foreach ($categories as $category)
+          <div class="">
             <a href="{{ esc_url($category->link) }}"
-              class="relative w-full h-48 md:h-72 rounded-lg px-3 py-6 md:px-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto">
-              <span aria-hidden="true" class="absolute inset-0">
-                @if ($category->thumbnail)
-                  <img src="{{ esc_url($category->thumbnail) }}" alt="" class="w-full h-full object-center object-cover">
+              class="relative flex flex-col">
+              @if ($category->thumbnail)
+                  {{-- <img src="{{ esc_url($category->thumbnail) }}" alt="" class="w-full h-full object-center object-cover"> --}}
+                  <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/04/banner-pro-1.png" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg p-3">
                 @else
                   <span class="absolute bg-gray-200 h-full w-full p-8"></span>
                 @endif
-              </span>
-              <span aria-hidden="true"
-                class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-gray-800 opacity-70"></span>
-              <span
-                class="relative mt-auto text-center text-sm font-bold text-white md:text-xl">{{ $category->name }}</span>
+              <p class="relative mt-2 text-center text-base capitalize">{{ $category->name }}</p>
             </a>
+          </div>
           @endforeach
         @endif
       </div>

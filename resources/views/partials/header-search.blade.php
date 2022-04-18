@@ -12,5 +12,5 @@
       alt="search" />
   </label>
   <input id="search_input" class="w-full p-0 border-0 focus:ring-0 lg:p-2 lg:pl-0 lg:w-80" type="text"
-    placeholder="Search for items or sellers" />
+    placeholder="Search" />
 </form>
