@@ -10,6 +10,11 @@ if (function_exists('acf_add_options_page')) {
         'redirect' => false,
     ]);
     acf_add_options_sub_page([
+        'page_title' => 'Homepage Settings',
+        'menu_title' => 'Homepage Settings',
+        'parent_slug' => 'theme-general-settings',
+    ]);
+    acf_add_options_sub_page([
         'page_title' => 'Page Shop Setting',
         'menu_title' => 'Shop Setting',
         'parent_slug' => 'theme-general-settings',
