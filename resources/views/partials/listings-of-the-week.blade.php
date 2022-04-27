@@ -5,16 +5,16 @@
                 <h2 class="">{{ _e('Listings of the Week', 'sage') }}</h2>
             </div>
             <div class="flex space-x-4">
-                @for ($i = 0; $i < 6; $i++)
+                @foreach ($products as $product)
                     <div class="flex flex-col">
-                        <a href="{{ esc_url($category->link) }}" class="relative  mb-3">
-                            <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/07/il_fullxfull.3166335615_cew1-220x220.jpg" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg">
+                        <a href="{{ $product->link }}" class="relative mb-3">
+                            <img src="{{ $product->image_url }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg">
                         </a>
-                        <a href="#" class="mb-2 font-light"><p class="text-sm font-light text-newgray">beasyvintage</p></a>
-                        <a href="#" class="mb-2"><p class="relative text-base capitalize">90 Miami Dolphins Puffer</p></a>
-                        <p class="font-bold">$70.00</p>
+                        <p class="text-sm font-light text-newgray mb-2"><a href="{{ $product->vendor_link }}" class="font-light">{!! $product->vendor !!}</a></p>
+                        <p class="relative text-base capitalize mb-2"><a href="{{ $product->link }}">{!! $product->title !!}</a></p>
+                        <p class="font-bold">{!! $product->price !!}</p>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>

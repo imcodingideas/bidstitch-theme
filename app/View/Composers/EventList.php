@@ -66,6 +66,8 @@ class EventList extends Composer
                 'date_ymd' => $date_ymd,
                 'location' => $location,
                 'link' => $link,
+                'has_external_link' => (bool)get_field('event_link'),
+                'has_form' => (bool)get_field('registration_form'),
                 'bg_image' => $bg_image,
             ];
         }

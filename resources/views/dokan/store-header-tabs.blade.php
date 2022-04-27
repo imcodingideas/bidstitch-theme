@@ -1,6 +1,6 @@
 <div class="row max-w-screen-xl mx-auto dokan-store-tabs{{ $no_banner_class_tabs }}">
-  <div class="dokan-list-wapper">
-    <ul class="dokan-list-inline">
+  <div class="dokan-list-wapper px-4">
+    <ul class="dokan-list-inline justify-center sm:justify-start">
       {{-- <li><a href="{{ $dokan_get_store_url }}"
           class="{{ $dokan_get_store_url_class }}">{{ _e('Shop listings', 'dokan-lite') }}</a></li> --}}
       {{-- <li><a href="{{  $dokan_get_review_url }}" class="{{ $dokan_get_review_url_class }}">{{  _e('Reviews ', 'dokan-lite') }} ({{  count($all_comments) }}) </a></li> --}}
