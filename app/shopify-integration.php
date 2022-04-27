@@ -15,6 +15,7 @@ function export_to_shopify() {
 	$product_id = $_POST['product_id'];
     $post = get_post($product_id);
 
+    // Ensure this product belongs to the current user
     if (!$post || $post->post_author != get_current_user_id()) {
         wp_die();
     }
@@ -27,9 +28,9 @@ function export_to_shopify() {
 		'desc' => $product->get_description(),
 		'tags' => get_product_tags($product_id),
 		'images' => get_product_images($product_id),
-		// 'vendor' => '',
+		'vendor' => '',
 		'type' => $product->get_type(),
-		// 'category' => '',
+		'category' => '',
 	];
 
     $response = export_product((object)$product_data);
@@ -71,9 +72,15 @@ function export_product($product) {
     $api_secret = get_field('api_secret', $user_key);
     $access_token = get_field('access_token', $user_key);
 
-    Context::initialize($api_key, $api_secret, ['read_products', 'write_products'], $store_url, new FileSessionStorage(__DIR__.'/tmp/php_sessions'));
-	$client = new Rest($store_url, $access_token);
+    // Attempt setup
+    try {
+        Context::initialize($api_key, $api_secret, ['read_products', 'write_products'], $store_url, new FileSessionStorage(__DIR__.'/tmp/php_sessions'));
+	    $client = new Rest($store_url, $access_token);
+    } catch (Exception $e) {
+        return null;
+    }
 
+    // Send request
 	$args = [
 		'title' => $product->title,
 		'body_html' => $product->desc,
@@ -86,8 +93,10 @@ function export_product($product) {
 
 	$response = $client->post('products', ['product' => $args]);
 
-    // TODO: check for OK response
-    update_post_meta($product->id, '_bidstitch_exported_to_shopify', '1');
+    // If successful then update our product
+    if ($response->getStatusCode() == 201) {
+        update_post_meta($product->id, '_bidstitch_exported_to_shopify', '1');
+    }
 
 	return $response;
 }

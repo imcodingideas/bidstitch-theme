@@ -3,6 +3,7 @@ export default function () {
         return {
             productId: null,
             exported: null,
+            exporting: false,
 
             init(productId, exported) {
                 this.productId = productId;
@@ -10,27 +11,35 @@ export default function () {
             },
 
             exportProduct() {
+                if (this.exporting) {
+                    return;
+                }
+
                 let confirmMessage = this.exported ? 'This product has already been exported to Shopify. Export again?' : 'Export this product to Shopify?'
 
                 if (!confirm(confirmMessage)) {
                     return;
                 }
 
-                // TODO: pass fqdn
+                this.exporting = true;
+
+                const url = bidstitchSettings.ajaxUrl;
                 const formData = new FormData();
                 formData.append('action', 'shopify_export');
                 formData.append('product_id', this.productId);
 
-                fetch('/wp-admin/admin-ajax.php', {
+                fetch(url, {
                     method: 'POST',
                     body: formData,
                 })
-                .then(response => response.json())
-                // TODO: set this.exported = true
-                .then(data => console.log(data))
+                .then(response => {
+                    this.exported = response.ok;
+                    this.exporting = false;
+                })
                 .catch(err => {
                     console.log('Shopify export AJAX error');
                     alert('There was an error exporting your product, please try again later');
+                    this.exporting = false;
                 });
             },
         }
