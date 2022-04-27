@@ -54,7 +54,14 @@
       @endif
       @if (current_user_can($is_auction ? 'dokan_delete_auction_product' : 'dokan_delete_product'))
         <a onClick="return confirm('{{ _e('Are you sure you want to mark as sold?', 'sage') }}');"
-          class="btn btn--white btn--sm bg-green-600 hover:bg-green-600 text-white justify-center col-span-2" href="{!! $sold_url !!}">{{ _e('Sold', 'sage') }}</a>
+          class="btn btn--white btn--sm bg-green-600 hover:bg-green-600 text-white justify-center" href="{!! $sold_url !!}">{{ _e('Sold', 'sage') }}</a>
+      @endif
+      @if ($can_export_to_shopify)
+        {{-- TODO: dirty state spinner --}}
+        <div x-data="shopifyExportData()" x-init="init({{ $product->id }}, {{ $exported_to_shopify }})">
+          <a x-on:click.prevent="exportProduct"
+            class="btn btn--white btn--sm bg-blue-400 hover:bg-blue-400 text-white justify-center" href="#">Shopify</a>
+        </div>
       @endif
     </td>
   </tr>

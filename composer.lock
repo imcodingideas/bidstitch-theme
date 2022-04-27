@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d6cd8671177c0169b1e16154d8eb834b",
+    "content-hash": "c18b0f9ccd4843a702e6fd8e32d4d5bc",
     "packages": [
         {
             "name": "brick/math",
@@ -200,6 +200,63 @@
                 "source": "https://github.com/facebook/facebook-php-business-sdk/tree/12.0.1"
             },
             "time": "2021-10-25T22:58:14+00:00"
+        },
+        {
+            "name": "firebase/php-jwt",
+            "version": "v5.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "83b609028194aa042ea33b5af2d41a7427de80e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/83b609028194aa042ea33b5af2d41a7427de80e6",
+                "reference": "83b609028194aa042ea33b5af2d41a7427de80e6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.8 <=9"
+            },
+            "suggest": {
+                "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "keywords": [
+                "jwt",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/firebase/php-jwt/issues",
+                "source": "https://github.com/firebase/php-jwt/tree/v5.5.1"
+            },
+            "time": "2021-11-08T20:18:51+00:00"
         },
         {
             "name": "generoi/sage-woocommerce",
@@ -2696,6 +2753,68 @@
             "time": "2019-01-28T09:46:14+00:00"
         },
         {
+            "name": "shopify/shopify-api",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Shopify/shopify-php-api.git",
+                "reference": "0556edf274ceb83346533bd22b662d7622e58c66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Shopify/shopify-php-api/zipball/0556edf274ceb83346533bd22b662d7622e58c66",
+                "reference": "0556edf274ceb83346533bd22b662d7622e58c66",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/inflector": "^2.0",
+                "firebase/php-jwt": "^5.2",
+                "guzzlehttp/guzzle": "^7.0",
+                "php": "^7.4 || ^8.0 || ^8.1",
+                "psr/http-client": "^1.0",
+                "psr/log": "^1.1",
+                "ramsey/uuid": "^4.1"
+            },
+            "require-dev": {
+                "mikey179/vfsstream": "^1.6",
+                "phpunit/phpunit": "^9",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Shopify\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shopify Inc.",
+                    "email": "dev-tools-education@shopify.com"
+                }
+            ],
+            "description": "Shopify API Library for PHP",
+            "keywords": [
+                "Storefront API",
+                "admin api",
+                "app",
+                "graphql",
+                "jwt",
+                "node",
+                "rest",
+                "shopify",
+                "webhook"
+            ],
+            "support": {
+                "issues": "https://github.com/Shopify/shopify-php-api/issues",
+                "source": "https://github.com/Shopify/shopify-php-api/tree/v2.0.1"
+            },
+            "time": "2022-04-11T17:51:03+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v5.2.8",
             "source": {
@@ -4924,5 +5043,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
