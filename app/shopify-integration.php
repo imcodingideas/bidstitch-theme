@@ -28,9 +28,11 @@ function export_to_shopify() {
 		'desc' => $product->get_description(),
 		'tags' => get_product_tags($product_id),
 		'images' => get_product_images($product_id),
-		'vendor' => '',
 		'type' => $product->get_type(),
+		'vendor' => '',
 		'category' => '',
+        'variations' => [],
+        'attributes' => [],
 	];
 
     $response = export_product((object)$product_data);
@@ -40,7 +42,7 @@ function export_to_shopify() {
 
 function get_product_tags($product_id) {
 	$output = [];
-	$terms = wp_get_post_terms( $product_id, 'product_tag' );
+	$terms = wp_get_post_terms($product_id, 'product_tag');
 
 	if (count($terms) > 0) {
 		foreach ($terms as $term){
@@ -52,13 +54,21 @@ function get_product_tags($product_id) {
 }
 
 function get_product_images($product_id) {
+    // Populate images array
 	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($product_id), 'single-post-thumbnail');
-	$images = [$thumb[0]];
+	$image_urls = [$thumb[0]];
 	$product = new WC_Product($product_id);
     $attachment_ids = $product->get_gallery_image_ids();
 
     foreach ($attachment_ids as $attachment_id) {
-		$images[] = wp_get_attachment_url($attachment_id);
+		$image_urls[] = wp_get_attachment_url($attachment_id);
+    }
+
+    // Format for API
+    $images = [];
+
+    foreach ($image_urls as $image_url) {
+        $images[] = ['src' => $image_url];
     }
 
 	return $images;
@@ -87,6 +97,7 @@ function export_product($product) {
 		'vendor' => $product->vendor,
 		'product_type' => $product->category,
 		'tags' => $product->tags,
+        'images' => $product->images,
 		'variants' => $product->variations,
 		'options' => $product->attributes
 	];
