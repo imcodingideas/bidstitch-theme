@@ -29,6 +29,7 @@ function export_to_shopify() {
 		'tags' => get_product_tags($product_id),
 		'images' => get_product_images($product_id),
 		'type' => $product->get_type(),
+        'price' => number_format($product->get_price(), 2),
 		'vendor' => '',
 		'category' => '',
         'variations' => [],
@@ -91,7 +92,7 @@ function export_product($product) {
     }
 
     // Send request
-	$args = [
+	$product_args = [
 		'title' => $product->title,
 		'body_html' => $product->desc,
 		'vendor' => $product->vendor,
@@ -102,12 +103,23 @@ function export_product($product) {
 		'options' => $product->attributes
 	];
 
-	$response = $client->post('products', ['product' => $args]);
+	$create_response = $client->post('products', ['product' => $product_args]);
 
     // If successful then update our product
-    if ($response->getStatusCode() == 201) {
+    if ($create_response->getStatusCode() == 201) {
+        $body = $create_response->getDecodedBody();
+        $variant = $body['product']['variants'][0];
+
+        $variant_args = [
+            'id' => $variant['id'],
+            'price' => $product->price,
+        ];
+
+        // Update default variant to set the price
+        $update_response = $client->put("variants/{$variant['id']}", ['variant' => $variant_args]);
+
         update_post_meta($product->id, '_bidstitch_exported_to_shopify', '1');
     }
 
-	return $response;
+	return $create_response;
 }
