@@ -110,14 +110,31 @@ function export_product($product) {
         $body = $create_response->getDecodedBody();
         $variant = $body['product']['variants'][0];
 
+        // Update default variant to set the price
         $variant_args = [
             'id' => $variant['id'],
             'price' => $product->price,
+            'inventory_management' => 'shopify',
         ];
 
-        // Update default variant to set the price
         $update_response = $client->put("variants/{$variant['id']}", ['variant' => $variant_args]);
 
+        if ($update_response->getStatusCode() == 200) {
+            // Set the inventory to 1
+            $locations = $client->get('locations')->getDecodedBody();
+            $location_id = $locations['locations'][0]['id'];
+            $inventory_item_id = $variant['inventory_item_id'];
+
+            $inventory_args = [
+                'location_id' => $location_id,
+                'inventory_item_id' => $inventory_item_id,
+                'available' => 1,
+            ];
+
+            $client->post('inventory_levels/set', $inventory_args);
+        }
+
+        // Upate our product record
         update_post_meta($product->id, '_bidstitch_exported_to_shopify', '1');
     }
 
