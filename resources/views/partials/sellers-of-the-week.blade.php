@@ -1,10 +1,10 @@
-<section id="listings_of_the_week">
+<section id="sellers_of_the_week">
     <div class="container py-8">
         <div class="grid space-y-4">
             <div class="flex space-x-4 justify-between items-center">
                 <h2 class="">{{ _e('Sellers of the Week', 'sage') }}</h2>
             </div>
-            <div class="flex space-x-4">
+            <div class="grid grid-cols-1 gap-x-4 gap-y-6 md:gap-y-6 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-3">
                 @foreach ($vendors as $vendor)
                     <div class="flex flex-col border shadow-lg rounded-lg bg-white">
                         <div class="p-4 bg-gray-100 border">
