@@ -34,7 +34,7 @@ class ListingsOfTheWeek extends Composer
             'category' => $category->slug,
             'orderby' => 'date',
             'order' => 'ASC',
-            'limit' => 5,
+            'limit' => 6,
         ]);
 
         foreach ($wc_products as $wc_product) {
