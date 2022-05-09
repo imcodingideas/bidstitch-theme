@@ -6,10 +6,10 @@
         <a class="hidden md:flex"
           href="{{ esc_url(wc_get_page_permalink('shop')) }}">{{ _e('Browse all categories', 'sage') }}</a>
       </div>
-      <div class="flex space-x-4">
+      <div class="grid grid-cols-2 gap-x-3 gap-y-6 md:gap-y-6 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-6">
         @if ($categories)
           @foreach ($categories as $category)
-          <div class="">
+          <div class="sm:basis-1/2 basis-1/4">
             <a href="{{ esc_url($category->link) }}"
               class="relative flex flex-col">
               @if ($category->thumbnail)

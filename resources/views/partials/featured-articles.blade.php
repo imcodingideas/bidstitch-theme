@@ -4,7 +4,7 @@
             <div class="flex space-x-4 justify-between items-center">
                 <h2 class="">{{ _e('Featured Articles', 'sage') }}</h2>
             </div>
-            <div class="flex space-x-4">
+            <div class="grid grid-cols-2 gap-x-4 gap-y-3 md:gap-y-6 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-3">
                 @foreach ($articles as $article)
                     <div class="flex flex-col">
                         <a href="{{ $article->link }}" class="relative mb-3 border shadow-lg rounded-lg flex flex-col">
