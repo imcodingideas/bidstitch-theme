@@ -1,6 +1,6 @@
 @if ($navigation)
   <nav class="h-full hidden lg:flex">
-    <ul class="flex h-full space-x-8">
+    <ul class="flex h-full space-x-8 items-center">
       @foreach ($navigation as $item)
         @if ($item->children)
           <li class="h-full relative group navigation__dropdown">
