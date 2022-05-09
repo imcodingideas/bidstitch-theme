@@ -7,7 +7,7 @@
             <div class="grid grid-cols-2 gap-x-4 gap-y-6 md:gap-y-6 md:gap-x-6 lg:grid-cols-6 xl:grid-cols-6">
                 @foreach ($products as $product)
                     <div class="flex flex-col">
-                        <a href="{{ $product->link }}" class="relative mb-3">
+                        <a href="{{ $product->link }}" class="relative mb-3 aspect-w-1 aspect-h-1">
                             <img src="{{ $product->image_url }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg">
                         </a>
                         <p class="text-sm font-light text-newgray mb-2"><a href="{{ $product->vendor_link }}" class="font-light">{!! $product->vendor !!}</a></p>

@@ -13,7 +13,7 @@
                         <div class="flex space-x-4 p-4">
                             @foreach ($vendor->products as $product)
                                 <div class="flex flex-col">
-                                    <a href="{{ $product->link }}" class="relative  mb-3">
+                                    <a href="{{ $product->link }}" class="relative mb-3 aspect-w-1 aspect-h-1">
                                         <img src="{{ $product->image_url }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg">
                                     </a>
                                     <p class="relative mb-2 text-base capitalize"><a href="{{ $product->link }}">{!! $product->title !!}</a></p>

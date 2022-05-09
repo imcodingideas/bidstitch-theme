@@ -8,7 +8,9 @@
                 @foreach ($articles as $article)
                     <div class="flex flex-col">
                         <a href="{{ $article->link }}" class="relative mb-3 border shadow-lg rounded-lg flex flex-col">
-                            <img src="{{ $article->image_url }}" alt="" class="w-full h-full object-center object-cover">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <img src="{{ $article->image_url }}" alt="" class="w-full object-center object-cover">
+                            </div>
                             <div class="p-4 bg-white">
                                 <span class="text-gray font-light text-sm">{!! $article->category !!}</span>
                                 <h3 class="text-xl">{!! $article->title !!}</h3>
