@@ -13,8 +13,7 @@
             <a href="{{ esc_url($category->link) }}"
               class="relative flex flex-col">
               @if ($category->thumbnail)
-                  {{-- <img src="{{ esc_url($category->thumbnail) }}" alt="" class="w-full h-full object-center object-cover"> --}}
-                  <img src="https://bidstitchprod.s3.amazonaws.com/uploads/2021/04/banner-pro-1.png" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg p-3">
+                  <img src="{{ esc_url($category->thumbnail) }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg p-3">
                 @else
                   <span class="absolute bg-gray-200 h-full w-full p-8"></span>
                 @endif
