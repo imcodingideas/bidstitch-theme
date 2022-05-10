@@ -1,7 +1,7 @@
 <header class="sticky top-0 bg-white z-30">
   <div class="border-b">
     <div class="container flex justify-between items-center h-12 lg:h-20 lg:justify-start">
-      <h1 class="header-logo text-4xl lg:text-5xl text-black leading-none tracking-wide">
+      <h1 class="header-logo text-4xl lg:text-5xl text-black font-normal leading-none tracking-wide">
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
       <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0 w-full">
