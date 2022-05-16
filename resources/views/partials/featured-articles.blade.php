@@ -13,7 +13,7 @@
                             </div>
                             <div class="p-4 bg-white">
                                 <span class="text-gray font-light text-sm">{!! $article->category !!}</span>
-                                <h3 class="text-xl">{!! $article->title !!}</h3>
+                                <h3 class="sm:text-xl">{!! $article->title !!}</h3>
                             </div>
                         </a>
                     </div>
