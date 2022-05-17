@@ -1,3 +1,15 @@
+.slick-track {
+  display: flex !important;
+
+  .slick-slide {
+    height: inherit !important;
+
+    & > div {
+      height: 100%;
+    }
+  }
+}
+
 .home-slider__arrow {
   padding-top: 56.25%;
   @apply z-20 absolute -top-4 w-8 h-8 transform -translate-y-1/2 lg:top-1/2;
