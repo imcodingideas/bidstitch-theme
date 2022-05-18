@@ -306,8 +306,17 @@ add_action('template_redirect', function() {
             exit;
         }
 
-        // Mark product as out of stock
+        // Mark product as out of stock & draft, then nudge ElasticPress to reindex
         wc_update_product_stock($product_id, 0);
+
+        wp_update_post([
+            'ID' => $product_id,
+            'post_status' => 'draft',
+        ]);
+
+        if (function_exists('ep_sync_post')) {
+            ep_sync_post($product_id);
+        }
 
         // Redirect back with success message
         $redirect = apply_filters( 'dokan_add_new_product_redirect', dokan_get_navigation_url( 'products' ), '' );
