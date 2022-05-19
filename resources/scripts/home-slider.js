@@ -7,7 +7,7 @@ export default function () {
     const runSlick = () => {
       jQuery('.home-slider__slider').slick({
         autoplay: true,
-        speed: 3000,
+        speed: 1500,
         dots: false,
         arrows: false,
         infinite: true,
