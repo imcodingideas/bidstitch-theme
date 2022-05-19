@@ -42,5 +42,14 @@
       @include('partials.sidenav')
     </div>
   </div>
+  <div class="border-b lg:hidden">
+    <div class="flex items-center h-10">
+      <div class="h-full w-full flex items-center mobile-search-container">
+        @if (is_active_sidebar('sidebar-header'))
+          @php dynamic_sidebar('sidebar-header') @endphp
+        @endif
+      </div>
+    </div>
+  </div>
 </header>
 
