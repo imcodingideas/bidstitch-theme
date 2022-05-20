@@ -9,16 +9,16 @@
       <div class="grid grid-cols-2 gap-x-3 gap-y-6 md:gap-y-6 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-6">
         @if ($categories)
           @foreach ($categories as $category)
-          <div class="sm:basis-1/2 basis-1/4">
+          <div class="sm:basis-1/2 basis-1/4 flex flex-col">
             <a href="{{ esc_url($category->link) }}"
-              class="relative flex flex-col">
+              class="relative aspect-w-1 aspect-h-1">
               @if ($category->thumbnail)
                   <img src="{{ esc_url($category->thumbnail) }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg p-3">
                 @else
                   <span class="absolute bg-gray-200 h-full w-full p-8"></span>
                 @endif
-              <p class="relative mt-2 text-center text-base capitalize">{{ $category->name }}</p>
             </a>
+            <p class="relative mt-2 text-center text-base capitalize">{{ $category->name }}</p>
           </div>
           @endforeach
         @endif
