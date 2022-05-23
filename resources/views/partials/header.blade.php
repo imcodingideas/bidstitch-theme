@@ -38,8 +38,8 @@
             </ul>
           </div>
         @endif
+        @include('partials.sidenav')
       </div>
-      @include('partials.sidenav')
     </div>
   </div>
   <div class="border-b lg:hidden">
