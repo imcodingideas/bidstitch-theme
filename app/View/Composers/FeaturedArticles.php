@@ -30,7 +30,7 @@ class FeaturedArticles extends Composer
         $articles = [];
 
         $posts = get_posts([
-            'numberposts' => 3,
+            'numberposts' => 4,
         ]);
 
         foreach ($posts as $post) {
