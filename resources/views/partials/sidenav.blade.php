@@ -33,9 +33,9 @@
                   href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id')) . '#register') }}">{{ _e('Sign Up', 'sage') }}</a>
               </li>
             @endif
-            @if (has_nav_menu('header_navigation'))
+            {{-- @if (has_nav_menu('header_navigation'))
               @include('partials.sidenav-navigation')
-            @endif
+            @endif --}}
             @if (has_nav_menu('primary_navigation'))
               @include('partials.sidenav-primary-navigation')
             @endif

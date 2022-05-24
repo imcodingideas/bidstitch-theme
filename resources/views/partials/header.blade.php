@@ -1,15 +1,22 @@
 <header class="sticky top-0 bg-white z-30">
   <div class="border-b">
-    <div class="container flex justify-between items-center h-12 lg:h-20 lg:justify-start">
-      <h1 class="header-logo text-2xl lg:text-3xl text-black leading-none tracking-widest">
+    <div class="max-w-screen-xl mx-auto px-4 flex justify-between items-center h-12 lg:h-20">
+      <div class="flex justify-between items-center space-x-8">
+      <h1 class="header-logo text-4xl lg:text-5xl text-black font-normal leading-none tracking-wide">
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
-      <div class="hidden lg:max-w-md lg:flex lg:mx-8 lg:mr-0 w-full">
+      <div class="hidden lg:flex lg:h-full lg:justify-between px-5">
+        @if (has_nav_menu('primary_navigation'))
+          @include('partials.header-primary-navigation')
+        @endif
+      </div>
+      <div class="hidden lg:flex">
         @if (is_active_sidebar('sidebar-header'))
           @php dynamic_sidebar('sidebar-header') @endphp
         @endif
       </div>
-      <div class="h-full ml-auto flex">
+    </div>
+      <div class="h-full flex">
         @if (is_user_logged_in())
           <div class="mr-4">
             @include('partials.header-icons')
@@ -21,37 +28,28 @@
             </div>
           @endif
         @else
-          <div class="flex items-center space-x-2 mr-4 lg:space-x-4 lg:mr-0">
-            <a class="btn btn--black text-sm px-2 py-1 lg:px-3 lg:py-2"
+          <div class="flex items-center space-x-2 ml-4 mr-4 lg:space-x-4 lg:mr-0">
+            <a class="btn btn--black text-sm px-2 py-1 lg:px-3 lg:py-2 whitespace-nowrap"
               href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id')) . '#register') }}">{{ _e('Sign Up', 'sage') }}</a>
-            <a class="btn btn--white text-sm hidden px-2 py-1 lg:px-3 lg:py-2 lg:flex"
+            <a class="btn btn--white text-sm hidden px-2 py-1 lg:px-3 lg:py-2 lg:flex whitespace-nowrap"
               href="{{ esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))) }}">{{ _e('Log In', 'sage') }}</a>
             <ul class="mx-2">
               @include('partials.cart-icon')
             </ul>
           </div>
         @endif
+        @include('partials.sidenav')
       </div>
-      @include('partials.sidenav')
     </div>
   </div>
-  <div class="border-b">
-    <div class="container flex items-center h-10 lg:h-12">
-      <div class="h-full w-full">
-        <div class="h-full w-full flex items-center lg:hidden">
-          @if (is_active_sidebar('sidebar-header'))
-            @php dynamic_sidebar('sidebar-header') @endphp
-          @endif
-        </div>
-        <div class="hidden lg:flex lg:h-full lg:justify-between">
-          @if (has_nav_menu('primary_navigation'))
-            @include('partials.header-primary-navigation')
-          @endif
-          @if (has_nav_menu('header_navigation'))
-            @include('partials.header-navigation')
-          @endif
-        </div>
+  <div class="border-b lg:hidden">
+    <div class="flex items-center h-10">
+      <div class="h-full w-full flex items-center mobile-search-container">
+        @if (is_active_sidebar('sidebar-header'))
+          @php dynamic_sidebar('sidebar-header') @endphp
+        @endif
       </div>
     </div>
   </div>
 </header>
+

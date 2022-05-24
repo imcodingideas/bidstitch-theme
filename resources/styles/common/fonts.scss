@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;200;300;400;500;600;700;800&display=swap');
 
 @font-face {
   font-family: 'Volante';
@@ -7,8 +6,14 @@
   font-style: bold;
   src: url('../fonts/Volante-Bold.otf');
 }
+
+@font-face {
+  font-family: 'Druk Condensed';
+  src: url('../fonts/DrukCond-Super.otf');
+}
+
 .header-logo {
-  font-family: 'Volante';
+  font-family: 'Druk Condensed';
 }
 
 h1,
@@ -17,10 +22,20 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 600;
+}
+
+h2 {
+  font-size:1.5rem;
+}
+
+h2 {
+  font-size:1.5rem;
 }
 
 // TODO: move to tailwindcss
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 400;
 }

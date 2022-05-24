@@ -49,6 +49,7 @@ collect([
     'offers-for-woocommerce-notifications',
     'offers-for-woocommerce-notifications-ajax',
     'offers-for-woocommerce-notifications-page',
+    'sellers-of-the-week',
     'shipping-rates-editor',
     'new-product-form',
     'elasticpress',
