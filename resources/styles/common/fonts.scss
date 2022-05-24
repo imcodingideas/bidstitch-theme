@@ -6,8 +6,14 @@
   font-style: bold;
   src: url('../fonts/Volante-Bold.otf');
 }
+
+@font-face {
+  font-family: 'Druk Condensed';
+  src: url('../fonts/DrukCond-Super.otf');
+}
+
 .header-logo {
-  font-family: 'Volante';
+  font-family: 'Druk Condensed';
 }
 
 h1,

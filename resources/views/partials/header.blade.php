@@ -2,7 +2,7 @@
   <div class="border-b">
     <div class="max-w-screen-xl mx-auto px-4 flex justify-between items-center h-12 lg:h-20">
       <div class="flex justify-between items-center space-x-8">
-      <h1 class="header-logo text-2xl lg:text-3xl text-black leading-none tracking-widest">
+      <h1 class="header-logo text-4xl lg:text-5xl text-black font-normal leading-none tracking-wide">
         <a href="{{ home_url('/') }}" class="flex">{{ $siteName }}</a>
       </h1>
       <div class="hidden lg:flex lg:h-full lg:justify-between px-5">
