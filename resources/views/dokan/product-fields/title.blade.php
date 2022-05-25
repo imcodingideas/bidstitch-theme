@@ -10,5 +10,5 @@ if ($post) {
     {{ _e('Title', 'dokan-lite') }}
     <span class="text-red-500">(required)</span>
   </label>
-  <input required class="dokan-form-control" name="post_title" id="post-title" placeholder="{{ _e('Product name', 'dokan-lite') }}" value="{{ $post_title }}">
+  <input required class="dokan-form-control" name="post_title" id="post-title" placeholder="{{ _e('Product name', 'dokan-lite') }}" value="{{ $post_title }}" maxlength="120">
 </div>
