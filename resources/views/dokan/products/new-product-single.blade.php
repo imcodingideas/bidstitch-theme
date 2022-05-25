@@ -174,7 +174,7 @@ do_action( 'dokan_dashboard_wrap_before', $post, $post_id );
                                         <input type="hidden" name="dokan_product_id" id="dokan-edit-product-id" value="<?php echo esc_attr( $post_id ); ?>"/>
 
                                         <label for="post_title" class="form-label"><?php esc_html_e( 'Title', 'dokan-lite' ); ?></label>
-                                        <?php dokan_post_input_box( $post_id, 'post_title', array( 'placeholder' => __( 'Product name..', 'dokan-lite' ), 'value' => $post_title ) ); ?>
+                                        <input type="text" name="post_title" id="post_title" value="{!! $post_title !!}" class="dokan-form-control" placeholder="Product name..." maxlength="120">
                                         <div class="dokan-product-title-alert dokan-hide">
                                             <?php esc_html_e( 'Please enter product title!', 'dokan-lite' ); ?>
                                         </div>

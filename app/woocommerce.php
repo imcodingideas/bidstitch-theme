@@ -52,6 +52,16 @@ function custom_cart_button_text()
     return __('Buy it now -  ' . $currency_symbol . $price, 'woocommerce');
 }
 
+// Keep product title length down
+add_filter('the_title', function($title, $id) {
+    if (!is_singular(['product']) && get_post_type($id) === 'product' && strlen($title) > 80) {
+        $title = wordwrap($title, 80);
+        $title = substr($title, 0, strpos($title, "\n")) . '...';
+    }
+
+    return $title;
+}, 10, 2);
+
 // add shop name after title
 add_action(
     'woocommerce_shop_loop_item_title',
