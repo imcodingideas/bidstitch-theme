@@ -1,5 +1,7 @@
 <?php
 
+use WeDevs\DokanPro\Shipping\ShippingZone;
+
 add_action('init', function () {
     // remove dashboard nav
     remove_action('dokan_dashboard_content_before', [\WeDevs\Dokan\Dashboard\Templates\Main::class, 'dashboard_side_navigation']);
@@ -21,6 +23,61 @@ add_action('wp_enqueue_scripts', function() {
         wp_enqueue_style('dokan-follow-store', DOKAN_FOLLOW_STORE_ASSETS . '/css/follow-store' . $suffix . '.css', [], DOKAN_FOLLOW_STORE_VERSION);
     }
 }, 11);
+
+// Newly registered vendors get default shipping rates added
+add_action('dokan_new_seller_created', function($user_id, $dokan_settings) {
+    global $wpdb;
+
+    $costs = [
+        'USA' => 10,
+        'Canada' => 15,
+    ];
+
+    $zones = ShippingZone::get_zones();
+
+    foreach ($zones as $zone_id => $zone) {
+        if (isset($costs[$zone['zone_name']])) {
+            // NOTE: calling Shippingzone::add_shipping_methods() does not populate user_id
+            // since it relies on dokan_get_current_user_id() and the new user is not yet logged in
+            // $data = [
+            //     'zone_id'   => $zone_id,
+            //     'method_id' => 'flat_rate',
+            //     'settings'  => [
+            //         'title' => 'Flat Rate',
+            //         'cost' => $costs[$zone['zone_name']],
+            //         'description' => 'flat rate',
+            //         'tax_status' => 'none',
+            //     ],
+            // ];
+
+            // ShippingZone::add_shipping_methods($data);
+
+            $settings = [
+                'title' => 'Flat Rate',
+                'cost' => $costs[$zone['zone_name']],
+                'description' => 'flat rate',
+                'tax_status' => 'none',
+            ];
+
+            $result = $wpdb->insert(
+                "{$wpdb->prefix}dokan_shipping_zone_methods",
+                [
+                    'method_id' => 'flat_rate',
+                    'zone_id' => $zone_id,
+                    'seller_id' => $user_id,
+                    'is_enabled' => 1,
+                    'settings' => maybe_serialize($settings),
+                ], [
+                    '%s',
+                    '%d',
+                    '%d',
+                    '%d',
+                    '%s',
+                ]
+            );
+        }
+    }
+}, 99, 2);
 
 // update dashboard menu items
 add_filter('dokan_get_dashboard_nav', function($items) {
