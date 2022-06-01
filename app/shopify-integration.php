@@ -12,7 +12,7 @@ add_action('wp_ajax_shopify_export', 'App\\export_to_shopify');
 add_action('wp_ajax_nopriv_shopify_export', 'App\\export_to_shopify');
 
 function export_to_shopify() {
-	$product_id = $_POST['product_id'];
+    $product_id = $_POST['product_id'];
     $post = get_post($product_id);
 
     // Ensure this product belongs to the current user
@@ -20,49 +20,50 @@ function export_to_shopify() {
         wp_die();
     }
 
-	$product = wc_get_product($product_id);
+    $product = wc_get_product($product_id);
 
     $product_data = [
         'id' => $product_id,
-		'title' => $product->get_name(),
-		'desc' => $product->get_description(),
-		'tags' => get_product_tags($product_id),
-		'images' => get_product_images($product_id),
-		'type' => $product->get_type(),
+        'title' => $product->get_name(),
+        // For backwards compatibility with older products added before excerpt was dropped
+        'desc' => !empty($product->post->post_excerpt) ? $product->post->post_excerpt : $product->get_description(),
+        'tags' => get_product_tags($product_id),
+        'images' => get_product_images($product_id),
+        'type' => $product->get_type(),
         'price' => number_format($product->get_price(), 2),
-		'vendor' => '',
-		'category' => '',
+        'vendor' => '',
+        'category' => '',
         'variations' => [],
         'attributes' => [],
-	];
+    ];
 
     $response = export_product((object)$product_data);
 
-	wp_send_json(['Product' => $product_data, 'Response' => (array)$response]);
+    wp_send_json(['Product' => $product_data, 'Response' => (array)$response]);
 }
 
 function get_product_tags($product_id) {
-	$output = [];
-	$terms = wp_get_post_terms($product_id, 'product_tag');
+    $output = [];
+    $terms = wp_get_post_terms($product_id, 'product_tag');
 
-	if (count($terms) > 0) {
-		foreach ($terms as $term){
-			$output[] = $term->name;
-		}
-	}
+    if (count($terms) > 0) {
+        foreach ($terms as $term){
+            $output[] = $term->name;
+        }
+    }
 
-	return $output;
+    return $output;
 }
 
 function get_product_images($product_id) {
     // Populate images array
-	$thumb = wp_get_attachment_image_src(get_post_thumbnail_id($product_id), 'single-post-thumbnail');
-	$image_urls = [$thumb[0]];
-	$product = new WC_Product($product_id);
+    $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($product_id), 'single-post-thumbnail');
+    $image_urls = [$thumb[0]];
+    $product = new WC_Product($product_id);
     $attachment_ids = $product->get_gallery_image_ids();
 
     foreach ($attachment_ids as $attachment_id) {
-		$image_urls[] = wp_get_attachment_url($attachment_id);
+        $image_urls[] = wp_get_attachment_url($attachment_id);
     }
 
     // Format for API
@@ -72,7 +73,7 @@ function get_product_images($product_id) {
         $images[] = ['src' => $image_url];
     }
 
-	return $images;
+    return $images;
 }
 
 function export_product($product) {
@@ -86,24 +87,24 @@ function export_product($product) {
     // Attempt setup
     try {
         Context::initialize($api_key, $api_secret, ['read_products', 'write_products'], $store_url, new FileSessionStorage(__DIR__.'/tmp/php_sessions'));
-	    $client = new Rest($store_url, $access_token);
+        $client = new Rest($store_url, $access_token);
     } catch (Exception $e) {
         return null;
     }
 
     // Send request
-	$product_args = [
-		'title' => $product->title,
-		'body_html' => $product->desc,
-		'vendor' => $product->vendor,
-		'product_type' => $product->category,
-		'tags' => $product->tags,
+    $product_args = [
+        'title' => $product->title,
+        'body_html' => $product->desc,
+        'vendor' => $product->vendor,
+        'product_type' => $product->category,
+        'tags' => $product->tags,
         'images' => $product->images,
-		'variants' => $product->variations,
-		'options' => $product->attributes
-	];
+        'variants' => $product->variations,
+        'options' => $product->attributes
+    ];
 
-	$create_response = $client->post('products', ['product' => $product_args]);
+    $create_response = $client->post('products', ['product' => $product_args]);
 
     // If successful then update our product
     if ($create_response->getStatusCode() == 201) {
@@ -138,5 +139,5 @@ function export_product($product) {
         update_post_meta($product->id, '_bidstitch_exported_to_shopify', '1');
     }
 
-	return $create_response;
+    return $create_response;
 }
