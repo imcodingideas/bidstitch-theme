@@ -25,6 +25,8 @@ class DokanProductsListingRow extends Composer
             'sold_url' => $this->sold_url(),
             'edit_url' => $this->edit_url(),
             'delete_url' => $this->delete_url(),
+            'can_export_to_shopify' => $this->can_export_to_shopify(),
+            'exported_to_shopify' => $this->exported_to_shopify(),
         ];
     }
 
@@ -117,6 +119,31 @@ class DokanProductsListingRow extends Composer
         return $starting_bid ? wc_price(wc_format_decimal(wc_clean($starting_bid))) : false;
     }
 
+    protected function can_export_to_shopify()
+    {
+        global $post;
+
+        $user_id = get_current_user_id();
+
+        if ($post->post_author != $user_id) {
+            return false;
+        }
+
+        $user_key = 'user_' . $user_id;
+        $store_url = get_field('store_url', $user_key);
+        $api_key = get_field('api_key', $user_key);
+        $api_secret = get_field('api_secret', $user_key);
+        $access_token = get_field('access_token', $user_key);
+
+        return $store_url && $api_key && $api_secret && $access_token;
+    }
+
+    protected function exported_to_shopify()
+    {
+        global $post;
+        return (int)get_post_meta($post->ID, '_bidstitch_exported_to_shopify');
+    }
+
     public function product() {
         global $post;
 
@@ -126,6 +153,7 @@ class DokanProductsListingRow extends Composer
         $is_auction = $this->is_auction();
 
         return (object) [
+            'id' => $post->ID,
             'title' => get_the_title(),
             'thumbnail' => $this->thumbnail($product),
             'url' => esc_url($product->get_permalink($product->get_id())),
