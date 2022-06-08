@@ -50,6 +50,7 @@ class SellersOfTheWeek extends Composer
         $wc_products = wc_get_products([
             'type' => 'simple',
             'author' => $vendor_id,
+            'stock_status' => 'instock',
             'orderby' => 'date',
             'order' => 'DESC',
             'limit' => 2,

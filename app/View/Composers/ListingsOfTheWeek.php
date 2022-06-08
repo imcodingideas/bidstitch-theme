@@ -32,6 +32,7 @@ class ListingsOfTheWeek extends Composer
         $wc_products = wc_get_products([
             'type' => 'simple',
             'category' => $category->slug,
+            'stock_status' => 'instock',
             'orderby' => 'date',
             'order' => 'ASC',
             'limit' => 6,
