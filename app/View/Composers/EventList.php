@@ -43,7 +43,8 @@ class EventList extends Composer
             $title = get_the_title();
             $description = $event_type === 'partnered' ? get_the_excerpt() : get_the_content();
             $location = get_field('location');
-            $link = $event_type === 'partnered' ? get_permalink() : get_field('event_link');
+            // $link = $event_type === 'partnered' ? get_permalink() : get_field('event_link');
+            $link = get_field('event_link');
             $bg_image = $event_type === 'partnered' ? get_the_post_thumbnail_url(null, 'large') : false;
 
             // Date / date info
