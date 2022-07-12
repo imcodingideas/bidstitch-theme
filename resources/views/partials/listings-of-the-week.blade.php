@@ -8,11 +8,15 @@
                 @foreach ($products as $product)
                     <div class="flex flex-col">
                         <a href="{{ $product->link }}" class="relative mb-3 aspect-w-1 aspect-h-1">
-                            <img src="{{ $product->image_url }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg">
+                            <img src="{{ $product->image_url }}" alt="" class="w-full h-full object-center object-cover border shadow-lg rounded-lg @if (! $product->in_stock) opacity-50 @endif">
                         </a>
                         <p class="text-sm font-light text-newgray mb-2"><a href="{{ $product->vendor_link }}" class="font-light">{!! $product->vendor !!}</a></p>
                         <p class="relative text-base capitalize mb-2"><a href="{{ $product->link }}">{!! $product->title !!}</a></p>
-                        <p class="font-bold">{!! $product->price !!}</p>
+                        @if ($product->in_stock)
+                          <p class="font-bold">{!! $product->price !!}</p>
+                        @else
+                          <p class="font-bold">Sold</p>
+                        @endif
                     </div>
                 @endforeach
             </div>
