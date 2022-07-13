@@ -28,12 +28,14 @@ class ListingsOfTheWeek extends Composer
     protected function get_products()
     {
         $products = [];
-        $category = get_field('listings_of_the_week_category', 'option');
+        // $category = get_field('listings_of_the_week_category', 'option');
         $wc_products = wc_get_products([
             'type' => 'simple',
-            'category' => $category->slug,
+            // 'category' => $category->slug,
+            // 'stock_status' => 'instock',
             'orderby' => 'date',
             'order' => 'ASC',
+            'featured_product' => '1',
             'limit' => 6,
         ]);
 

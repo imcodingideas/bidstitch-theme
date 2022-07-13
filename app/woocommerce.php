@@ -384,3 +384,15 @@ function bidstitch_feature_product($request) {
 
     update_post_meta($product_id, '_bidstitch_featured_product', (int)$featured);
 }
+
+// Filter WC query to fetch featured
+add_filter('woocommerce_product_data_store_cpt_get_products_query', function ($query, $query_vars) {
+    if (! empty($query_vars['featured_product'])) {
+        $query['meta_query'][] = [
+            'key' => '_bidstitch_featured_product',
+            'value' => esc_attr($query_vars['featured_product']),
+        ];
+    }
+
+    return $query;
+}, 10, 2);
