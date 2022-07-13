@@ -28,13 +28,14 @@ class ListingsOfTheWeek extends Composer
     protected function get_products()
     {
         $products = [];
-        $category = get_field('listings_of_the_week_category', 'option');
+        // $category = get_field('listings_of_the_week_category', 'option');
         $wc_products = wc_get_products([
             'type' => 'simple',
-            'category' => $category->slug,
-            'stock_status' => 'instock',
+            // 'category' => $category->slug,
+            // 'stock_status' => 'instock',
             'orderby' => 'date',
             'order' => 'ASC',
+            'featured_product' => '1',
             'limit' => 6,
         ]);
 
@@ -51,6 +52,7 @@ class ListingsOfTheWeek extends Composer
                 'vendor' => $store_name,
                 'vendor_link' => esc_url($store_url),
                 'price' => $wc_product->get_price_html(),
+                'in_stock' => $wc_product->is_in_stock(),
             ];
         }
 

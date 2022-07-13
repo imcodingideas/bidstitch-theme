@@ -27,3 +27,11 @@ if (class_exists('YITH_WCWL_Shortcode')) {
   // plugin: yith-woocommerce-wishlist-premium
   echo YITH_WCWL_Shortcode::add_to_wishlist([]);
 }
+
+global $product;
+if (get_current_user_id() == 1) {
+?>
+<div class="sm:inline-block mt-4">
+    <?php echo \Roots\view('woocommerce.featured-product', ['product_id' => $product->get_id()])->render(); ?>
+</div>
+<?php }
