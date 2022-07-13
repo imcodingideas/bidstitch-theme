@@ -335,3 +335,52 @@ add_action('template_redirect', function() {
         exit;
     }
 });
+
+// Add nonce for AJAX "featured" URL
+add_action('wp_enqueue_scripts', function() {
+    $nonce = wp_create_nonce('wp_rest');
+    wp_register_script('bidstitch-product-feature-script', false);
+    wp_enqueue_script('bidstitch-product-feature-script');
+    wp_add_inline_script('bidstitch-product-feature-script', "bidstitchFeaturedSettings = { nonce: '$nonce' }");
+});
+
+
+// Add REST endpoint for featuring products
+add_action('rest_api_init', function() {
+    register_rest_route('bidstitch/v1', '/feature-product', [
+        'methods' => 'POST',
+        'callback' => 'bidstitch_feature_product',
+        'args' => [
+            'product_id' => [
+                'validate_callback' => function($product_id, $request, $key) {
+                    // Check this is a valid upcoming auction product
+                    if (!is_numeric($product_id)) {
+                        return false;
+                    }
+
+                    $product = wc_get_product($product_id);
+
+                    if (!$product) {
+                        return false;
+                    }
+
+                    return true;
+                },
+            ],
+        ],
+        'permission_callback' => '__return_true',
+    ]);
+});
+
+// Set product featured meta
+function bidstitch_feature_product($request) {
+    if (get_current_user_id() != 1) {
+        return;
+    }
+
+    $params = $request->get_params();
+    $product_id = $params['product_id'];
+    $featured = $params['featured'];
+
+    update_post_meta($product_id, '_bidstitch_featured_product', (int)$featured);
+}

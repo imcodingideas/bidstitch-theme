@@ -21,6 +21,7 @@ import vendorOnboardingForm from './vendor-onboarding-form';
 import userChat from './user-chat';
 import offerForm from './offer-form';
 import shopifyExport from './shopify-export';
+import featuredProducts from './featured-products';
 
 headerNavigation();
 dropdownNavigation();
@@ -41,6 +42,7 @@ vendorOnboardingForm();
 userChat();
 offerForm();
 shopifyExport();
+featuredProducts();
 
 // load alpine at the end
 Alpine.start();
