@@ -29,17 +29,27 @@ class ListingsOfTheWeek extends Composer
     {
         $products = [];
         // $category = get_field('listings_of_the_week_category', 'option');
-        $wc_products = wc_get_products([
-            'type' => 'simple',
-            // 'category' => $category->slug,
-            // 'stock_status' => 'instock',
+        // $wc_products = wc_get_products([
+        //     'type' => 'simple',
+        //     // 'category' => $category->slug,
+        //     // 'stock_status' => 'instock',
+        //     'orderby' => 'date',
+        //     'order' => 'ASC',
+        //     'featured_product' => '1',
+        //     'limit' => 6,
+        // ]);
+        $posts = get_posts([
+            'numberposts' => 6,
+            'post_type' => 'product',
+            'meta_key' => '_bidstitch_featured_product',
+            'meta_value' => '1',
             'orderby' => 'date',
             'order' => 'ASC',
-            'featured_product' => '1',
-            'limit' => 6,
         ]);
 
-        foreach ($wc_products as $wc_product) {
+        // foreach ($wc_products as $wc_product) {
+        foreach ($posts as $post) {
+            $wc_product = wc_get_product($post->ID);
             $vendor_id = get_post_field('post_author', $wc_product->get_id());
             $store_info = dokan_get_store_info($vendor_id);
             $store_url = dokan_get_store_url($vendor_id);
