@@ -31,6 +31,7 @@ add_filter('ep_prepare_meta_allowed_protected_keys', function($meta_keys){
         '_auction_relist_not_paid_time',
         '_auction_relist_duration',
         '_regular_price',
+        '_bidstitch_featured_product',
     ];
 
     $payload = array_merge($additional_keys, $meta_keys);
