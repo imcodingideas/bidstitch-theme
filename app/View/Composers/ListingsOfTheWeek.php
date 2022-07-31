@@ -29,11 +29,11 @@ class ListingsOfTheWeek extends Composer
     {
         // Manual query to bypass ES
         global $wpdb;
-        $rows = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_bidstitch_featured_product' AND meta_value != 0 ORDER BY meta_value, post_id LIMIT 6");
+        $rows = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_bidstitch_featured_product' AND meta_value != 0 ORDER BY meta_value DESC, post_id ASC LIMIT 6");
 
         $products = [];
 
-        foreach ($rows as $row) {
+        foreach (array_reverse($rows) as $row) {
             $wc_product = wc_get_product($row->post_id);
             $vendor_id = get_post_field('post_author', $wc_product->get_id());
             $store_info = dokan_get_store_info($vendor_id);
