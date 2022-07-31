@@ -27,19 +27,14 @@ class ListingsOfTheWeek extends Composer
 
     protected function get_products()
     {
-        $products = [];
-        // $category = get_field('listings_of_the_week_category', 'option');
-        $wc_products = wc_get_products([
-            'type' => 'simple',
-            // 'category' => $category->slug,
-            // 'stock_status' => 'instock',
-            'orderby' => 'date',
-            'order' => 'ASC',
-            'featured_product' => '1',
-            'limit' => 6,
-        ]);
+        // Manual query to bypass ES
+        global $wpdb;
+        $rows = $wpdb->get_results("SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_bidstitch_featured_product' AND meta_value != 0 ORDER BY meta_value, post_id LIMIT 6");
 
-        foreach ($wc_products as $wc_product) {
+        $products = [];
+
+        foreach ($rows as $row) {
+            $wc_product = wc_get_product($row->post_id);
             $vendor_id = get_post_field('post_author', $wc_product->get_id());
             $store_info = dokan_get_store_info($vendor_id);
             $store_url = dokan_get_store_url($vendor_id);
